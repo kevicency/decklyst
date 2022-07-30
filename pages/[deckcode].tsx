@@ -88,6 +88,10 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
         </div>
       ) : (
         <div className="px-4 my-4">
+          <Head>
+            <title>{`Invalid Deckcode | Duelyst Share`}</title>
+            <meta property="og:description" content={'Invalid deckcode.'} />
+          </Head>
           <p className="text-red-500">Error: {error}</p>
         </div>
       )}
