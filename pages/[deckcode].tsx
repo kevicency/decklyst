@@ -8,7 +8,7 @@ type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const lineAsciiManaCurve = (deck: DeckData) =>
   deck.manaCurve
-    .map(({ _, rel }) => {
+    .map(({ rel }) => {
       if (rel === 1) return '█'
       if (rel >= 0.82) return '▇'
       if (rel >= 0.66) return '▆'
