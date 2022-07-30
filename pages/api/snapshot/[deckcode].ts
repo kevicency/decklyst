@@ -7,16 +7,13 @@ import puppeteer from 'puppeteer'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { origin } = absoluteUrl(req)
   const deckcode = req.query.deckcode as string | undefined
+  const deckcodeUrl = `${origin}/${encodeURIComponent(deckcode ?? '')}`
 
   if (!validateDeckcode(deckcode)) {
     return res.status(404).send('')
   }
 
-  const deckcodeUrl = `${origin}/${encodeURIComponent(deckcode)}`
-
-  console.log(deckcodeUrl)
-
-  const browser = await puppeteer.launch()
+  const browser = await launchPuppeteer()
   const page = await browser.newPage()
   await page.goto(deckcodeUrl)
   await page.emulateMediaType('screen')
@@ -34,4 +31,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.send(imageBuffer)
 
   await browser.close()
+}
+
+async function launchPuppeteer() {
+  if (process.env.VERCEL) {
+    const chrome = require('chrome-aws-lambda')
+    return await puppeteer.launch({
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless,
+    })
+  } else {
+    return await puppeteer.launch()
+  }
 }
