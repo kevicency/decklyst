@@ -1,5 +1,5 @@
-import { CardData, cardData, cardDataById } from '../data/cards'
-import { groupBy, max, slice, sortBy, sumBy } from 'lodash'
+import { CardData, cardDataById } from '../data/cards'
+import { groupBy, max, sortBy, sumBy } from 'lodash'
 import { CardType, Faction } from '../data/types'
 
 type CardOccurence = CardData & {
@@ -19,12 +19,12 @@ export type DeckData = {
   manaCurve: { abs: number; rel: number }[]
 }
 
-const deckcodeRegex = /^(\[(.*)])((?:[A-Za-z\d+]{4})*(?:[A-Za-z\d+]{3}=|[A-Za-z\d+]{2}==)?)$/
+const deckcodeRegex = /^(\[(.*)])((?:[A-Za-z\d+]{4})+(?:[A-Za-z\d+]{3}=|[A-Za-z\d+]{2}==)?)$/
 
 export const validateDeckcode = (deckcode?: string): deckcode is string =>
   deckcodeRegex.test(deckcode ?? '')
 
-export const parseDeckcode = (deckcode: string): DeckData => {
+export const parseDeckcode = (deckcode: string): DeckData | null => {
   const [, , title, base64] = deckcode.match(deckcodeRegex)!
   const csv = atob(base64)
   const allCards = csv
@@ -38,7 +38,12 @@ export const parseDeckcode = (deckcode: string): DeckData => {
     CardType,
     CardOccurence[]
   >
-  const general = cardGroups['GENERAL'][0]
+  const general = cardGroups['GENERAL']?.[0]
+
+  if (!general) {
+    return null
+  }
+
   const minions = sortBy(cardGroups['MINION'], ['cost', 'id'])
   const spells = sortBy(cardGroups['SPELL'], ['cost', 'id'])
   const artifacts = sortBy(cardGroups['ARTIFACT'], ['cost', 'id'])

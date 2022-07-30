@@ -41,6 +41,7 @@ const lineArtifacts = (deck: DeckData) =>
 const DeckHead: FC<{ deck: DeckData }> = ({ deck }) => (
   <Head>
     <title>{`${deck.title} | Duelyst Share`}</title>
+    <meta property="og:site_name" content="Duelyst Share" />
     <meta property="og:title" content={`${deck.title} | ${startCase(deck.faction)}`} />
     <meta
       property="og:description"
@@ -98,12 +99,14 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
           value={deckcode}
         />
       </div>
-      <div className="mt-2 px-4">
-        <div className={'text-xl mb-1'}>Deck Image</div>
-        <a href={`/${deckcode}.png`} className="text-blue-500">
-          Link
-        </a>
-      </div>
+      {deck && (
+        <div className="mt-2 px-4">
+          <div className={'text-xl mb-1'}>Deck Image</div>
+          <a href={`/${deckcode}.png`} className="text-blue-500">
+            Link
+          </a>
+        </div>
+      )}
     </div>
   )
 }
