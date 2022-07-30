@@ -2,7 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { validateDeckcode } from '../../../lib/deckcode'
 import absoluteUrl from 'next-absolute-url'
-import puppeteer from 'puppeteer'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { origin } = absoluteUrl(req)
@@ -13,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(404).send('')
   }
 
-  const browser = await launchPuppeteer()
+  const { browser } = await launchPuppeteer()
   const page = await browser.newPage()
   await page.goto(deckcodeUrl)
   await page.emulateMediaType('screen')
@@ -36,12 +35,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 async function launchPuppeteer() {
   if (process.env.VERCEL) {
     const chrome = require('chrome-aws-lambda')
-    return await puppeteer.launch({
+    const puppeteer = require('puppeteer-core')
+    const browser = await puppeteer.launch({
       args: chrome.args,
       executablePath: await chrome.executablePath,
       headless: chrome.headless,
     })
+    return { puppeteer, browser }
   } else {
-    return await puppeteer.launch()
+    const puppeteer = require('puppeteer')
+    const browser = await puppeteer.launch()
+    return { puppeteer, browser }
   }
 }

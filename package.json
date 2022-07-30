@@ -22,6 +22,7 @@
     "next": "12.2.3",
     "next-absolute-url": "1.2.2",
     "puppeteer": "15.5.0",
+    "puppeteer-core": "15.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
