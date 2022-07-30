@@ -22,9 +22,9 @@ const lineAsciiManaCurve = (deck: DeckData) =>
     .join(' ')
 const lineCardCounts = (deck: DeckData) =>
   [
-    `Minions: ${deck.cards.minions.length}`,
-    `Spells: ${deck.cards.spells.length}`,
-    `Artifacts: ${deck.cards.artifacts.length}`,
+    `M: ${deck.cards.minions.length}`,
+    `S: ${deck.cards.spells.length}`,
+    `A: ${deck.cards.artifacts.length}`,
     `${deck.size}/40`,
   ].join(' | ')
 const lineMinions = (deck: DeckData) =>
@@ -44,8 +44,7 @@ const DeckHead: FC<{ deck: DeckData }> = ({ deck }) => (
     <meta
       property="og:description"
       content={[
-        lineAsciiManaCurve(deck),
-        lineCardCounts(deck),
+        lineCardCounts(deck) + ' ' + lineAsciiManaCurve(deck),
         lineMinions(deck),
         lineSpells(deck),
         lineArtifacts(deck),
