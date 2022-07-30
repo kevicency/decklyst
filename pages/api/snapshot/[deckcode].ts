@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { CardData, cardData } from '../../../data/cards'
-import { parseDeckcode, validateDeckcode, DeckData } from '../../../lib/deckcode'
+import { validateDeckcode } from '../../../lib/deckcode'
 import absoluteUrl from 'next-absolute-url'
 import puppeteer from 'puppeteer'
 
