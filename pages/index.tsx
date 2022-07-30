@@ -11,6 +11,7 @@ const Home: NextPage = () => {
   const [deckcode, setDeckcode] = useState<string | null>(null)
 
   const valid = deckcode && validateDeckcode(deckcode)
+  const invalid = !valid
   const touched = deckcode !== null
 
   const handleKeydown: KeyboardEventHandler<HTMLInputElement> = async (e) => {
@@ -34,14 +35,14 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
         <link type="application/json+oembed" href="/oembed.json" />
       </Head>
-      <div className="w-max-[48rem] mx-auto flex flex-col">
+      <div className="w-[48rem] mx-auto flex flex-col">
         <h1 className={'text-5xl text-center py-6 text-slate-100'}>Duelyst Share</h1>
         <div className="flex flex-col flex-1 mt-2 items-center">
           <input
             className={cx(
               'px-4 py-6 flex-1 w-full bg-slate-800 border-2 border-slate-800 text-xl',
               {
-                'border-red-500': touched && !valid,
+                'border-red-500': touched && invalid,
               },
             )}
             placeholder="Enter deckcode"
@@ -50,11 +51,11 @@ const Home: NextPage = () => {
             onKeyDown={handleKeydown}
           />
           <div className="mt-1 text-red-500">
-            {valid ? <span>&nbsp;</span> : 'Invalid deckcode'}
+            {touched && invalid ? 'Invalid deckcode' : <span>&nbsp;</span>}
           </div>
-          <div className={'mt-4'}>
+          <div className={'mt-2'}>
             <button
-              disabled={!valid}
+              disabled={invalid}
               className={
                 'bg-blue-500 hover:bg-blue-700 disabled:bg-slate-800 text-white font-bold py-3 px-5 rounded text-xl'
               }
