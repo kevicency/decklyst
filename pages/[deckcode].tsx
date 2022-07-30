@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { GetServerSidePropsContext } from 'next/types'
 import { DeckData, parseDeckcode, validateDeckcode } from '../lib/deckcode'
 import Head from 'next/head'
+import { startCase } from 'lodash'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -39,12 +40,12 @@ const lineArtifacts = (deck: DeckData) =>
 
 const DeckHead: FC<{ deck: DeckData }> = ({ deck }) => (
   <Head>
-    <title>{deck.title} | Duelyst Share</title>
-    <meta property="og:title" content={deck.title} />
+    <title>{`${deck.title} | Duelyst Share`}</title>
+    <meta property="og:title" content={`${deck.title} | ${startCase(deck.faction)}`} />
     <meta
       property="og:description"
       content={[
-        lineCardCounts(deck) + ' ' + lineAsciiManaCurve(deck),
+        lineCardCounts(deck) + ' | ' + lineAsciiManaCurve(deck),
         lineMinions(deck),
         lineSpells(deck),
         lineArtifacts(deck),
@@ -56,17 +57,53 @@ const DeckHead: FC<{ deck: DeckData }> = ({ deck }) => (
   </Head>
 )
 
-const DeckcodePage: FC<Props> = ({ deckcode, deck, error }) => {
-  return deck ? (
-    <div>
-      <DeckHead deck={deck} />
-      <code style={{ whiteSpace: 'break-spaces' }}>{JSON.stringify(deck, null, 2)}</code>
-      <p>Deckcode: {deckcode}</p>
-    </div>
-  ) : (
-    <div>
-      <p>Error: {error}</p>
-      <p>Deckcode: {deckcode}</p>
+const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
+  return (
+    <div className="w-[48rem] mx-auto">
+      {deck ? (
+        <div className="pb-2" id="snap">
+          <DeckHead deck={deck} />
+          <div className="flex items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/assets/generals/${deck.general.id}_hex@2x.png`}
+              alt={deck.general.title}
+              className="w-24 mt-[-12px]"
+            />
+            <h1 className="text-2xl">
+              {deck.title} | {startCase(deck.faction)}
+            </h1>
+          </div>
+          <p className="mt-2 px-4 whitespace-pre-line">
+            {[
+              lineCardCounts(deck) + ' | ' + lineAsciiManaCurve(deck),
+              lineMinions(deck),
+              lineSpells(deck),
+              lineArtifacts(deck),
+            ]
+              .map((line) => `➤ ${line}`)
+              .join('\n')}
+          </p>
+        </div>
+      ) : (
+        <div className="px-4 my-4">
+          <p className="text-red-500">Error: {error}</p>
+        </div>
+      )}
+      <div className="mt-2 px-4">
+        <div className={'text-xl mb-1'}>Deckcode</div>
+        <input
+          readOnly={true}
+          className={'w-full border-2 bg-slate-800 border-slate-600'}
+          value={deckcode}
+        />
+      </div>
+      <div className="mt-2 px-4">
+        <div className={'text-xl mb-1'}>Deck Image</div>
+        <a href={`/${deckcode}.png`} className="text-blue-500">
+          Link
+        </a>
+      </div>
     </div>
   )
 }
@@ -79,4 +116,4 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   return { props }
 }
 
-export default DeckcodePage
+export default DeckPage
