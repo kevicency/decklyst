@@ -41,12 +41,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
         <link type="application/json+oembed" href="/oembed.json" />
       </Head>
-      <div className="w-[48rem] mx-auto flex flex-col">
-        <h1 className={'text-5xl text-center py-6 text-slate-100'}>Duelyst Share</h1>
-        <div className="flex flex-col flex-1 mt-2 items-center">
+      <div className="w-[48rem] mx-auto flex flex-col mt-8">
+        <div className="flex flex-col flex-1 mt-2 items-center px-4">
           <input
             className={cx(
-              'px-4 py-6 flex-1 w-full bg-slate-800 border-2 border-slate-800 text-xl',
+              'px-4 py-6 flex-1 w-full bg-slate-800 border-2 border-slate-600 text-xl',
               {
                 'border-red-500': touched && invalid,
               },
