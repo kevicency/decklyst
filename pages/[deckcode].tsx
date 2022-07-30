@@ -23,9 +23,9 @@ const lineAsciiManaCurve = (deck: DeckData) =>
     .join(' ')
 const lineCardCounts = (deck: DeckData) =>
   [
-    `M: ${deck.cards.minions.length}`,
-    `S: ${deck.cards.spells.length}`,
-    `A: ${deck.cards.artifacts.length}`,
+    `M: ${deck.minionCount}`,
+    `S: ${deck.spellCount}`,
+    `A: ${deck.artifactCount}`,
     `${deck.size}/40`,
   ].join(' | ')
 const lineMinions = (deck: DeckData) =>
