@@ -8,7 +8,7 @@ type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const lineAsciiManaCurve = (deck: DeckData) =>
   deck.manaCurve
-    .map(({ abs, rel }) => {
+    .map(({ _, rel }) => {
       if (rel === 1) return '█'
       if (rel >= 0.82) return '▇'
       if (rel >= 0.66) return '▆'
@@ -61,7 +61,7 @@ const DeckcodePage: FC<Props> = ({ deckcode, deck, error }) => {
   return deck ? (
     <div>
       <DeckHead deck={deck} />
-      <code style={{ 'white-space': 'break-spaces' }}>{JSON.stringify(deck, null, 2)}</code>
+      <code style={{ whiteSpace: 'break-spaces' }}>{JSON.stringify(deck, null, 2)}</code>
       <p>Deckcode: {deckcode}</p>
     </div>
   ) : (
