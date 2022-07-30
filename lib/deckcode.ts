@@ -69,8 +69,8 @@ export const parseDeckcode = (deckcode: string): DeckData | null => {
       artifacts,
     },
     minionCount: sumBy(minions, (card) => card.count),
-    spellCount: sumBy(minions, (card) => card.count),
-    artifactCount: sumBy(minions, (card) => card.count),
+    spellCount: sumBy(spells, (card) => card.count),
+    artifactCount: sumBy(artifacts, (card) => card.count),
     manaCurve: manaCurve.map((count) => ({ abs: count, rel: count / manaCurveMax })),
   }
 }
