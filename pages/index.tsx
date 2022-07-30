@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { KeyboardEventHandler, useEffect, useRef, useState } from 'react'
-import { validateDeckcode } from '../lib/deckcode'
+import { normalizeDeckcode, validateDeckcode } from '../lib/deckcode'
 import cx from 'classnames'
 import { useRouter } from 'next/router'
 
@@ -60,7 +60,7 @@ const Home: NextPage = () => {
             )}
             placeholder="Enter deckcode"
             value={deckcode ?? ''}
-            onChange={(ev) => setDeckcode(ev.target.value)}
+            onChange={(ev) => setDeckcode(normalizeDeckcode(ev.target.value) ?? '')}
             onKeyDown={handleKeydown}
           />
           <div className="mt-1 text-red-500">

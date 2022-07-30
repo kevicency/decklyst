@@ -24,6 +24,8 @@ export type DeckData = {
 
 const deckcodeRegex = /^(\[(.*)])((?:[A-Za-z\d+]{4})+(?:[A-Za-z\d+]{3}=|[A-Za-z\d+]{2}==)?)$/
 
+export const normalizeDeckcode = (deckcode?: string) => (deckcode ? deckcode.trim() : undefined)
+
 export const validateDeckcode = (deckcode?: string): deckcode is string =>
   deckcodeRegex.test(deckcode ?? '')
 
