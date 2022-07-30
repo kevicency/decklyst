@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { KeyboardEventHandler, useState } from 'react'
+import { KeyboardEventHandler, useEffect, useRef, useState } from 'react'
 import { validateDeckcode } from '../lib/deckcode'
 import cx from 'classnames'
 import { useRouter } from 'next/router'
@@ -10,6 +10,13 @@ const Home: NextPage = () => {
   const router = useRouter()
   const [deckcode, setDeckcode] = useState<string | null>(null)
   const [navigating, setNavigating] = useState(false)
+  const inputElement = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (inputElement.current) {
+      inputElement.current.focus()
+    }
+  }, [])
 
   const valid = deckcode && validateDeckcode(deckcode)
   const invalid = !valid
@@ -44,6 +51,7 @@ const Home: NextPage = () => {
       <div className="w-[48rem] mx-auto flex flex-col mt-8">
         <div className="flex flex-col flex-1 mt-2 items-center px-4">
           <input
+            ref={inputElement}
             className={cx(
               'px-4 py-6 flex-1 w-full bg-slate-800 border-2 border-slate-600 text-xl',
               {
