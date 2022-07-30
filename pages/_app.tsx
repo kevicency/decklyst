@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Layout } from './components/layout'
+import { Layout } from '../components/layout'
 
 const queryClient = new QueryClient()
 
