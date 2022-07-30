@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 const Home: NextPage = () => {
   const router = useRouter()
   const [deckcode, setDeckcode] = useState<string | null>(null)
+  const [navigating, setNavigating] = useState(false)
 
   const valid = deckcode && validateDeckcode(deckcode)
   const invalid = !valid
@@ -21,8 +22,13 @@ const Home: NextPage = () => {
     }
   }
 
-  const navigateToDeckcode = async () => {
-    await router.push(`/[deckcode]`, `/${encodeURIComponent(deckcode!)}`)
+  const navigateToDeckcode = () => {
+    if (!navigating) {
+      setNavigating(true)
+      router
+        .push(`/[deckcode]`, `/${encodeURIComponent(deckcode!)}`)
+        .then(() => setNavigating(false))
+    }
   }
 
   return (
@@ -55,7 +61,7 @@ const Home: NextPage = () => {
           </div>
           <div className={'mt-2'}>
             <button
-              disabled={invalid}
+              disabled={invalid || navigating}
               className={
                 'bg-blue-500 hover:bg-blue-700 disabled:bg-slate-800 text-white font-bold py-3 px-5 rounded text-xl'
               }

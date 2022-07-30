@@ -60,7 +60,7 @@ const DeckHead: FC<{ deck: DeckData }> = ({ deck }) => (
 
 const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
   return (
-    <div className="w-[48rem] mx-auto">
+    <div className="w-[48rem] mx-auto py-8">
       {deck ? (
         <div className="pb-2" id="snap">
           <DeckHead deck={deck} />
