@@ -101,9 +101,13 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
       </div>
       {deck && (
         <div className="mt-2 px-4">
-          <div className={'text-xl mb-1'}>Deck Image</div>
-          <a href={`/${deckcode}.png`} className="text-blue-500">
-            Link
+          <div className={'text-xl mb-1'}>Links</div>
+          <a href={`/${deckcode}`} className="text-blue-500 hover:underline">
+            Share
+          </a>
+          <br />
+          <a href={`/${deckcode}.png`} className="text-blue-500 hover:underline">
+            Image
           </a>
         </div>
       )}
