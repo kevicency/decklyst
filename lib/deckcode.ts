@@ -26,7 +26,7 @@ export const validateDeckcode = (deckcode?: string): deckcode is string =>
 
 export const parseDeckcode = (deckcode: string): DeckData | null => {
   const [, , title, base64] = deckcode.match(deckcodeRegex)!
-  const csv = atob(base64)
+  const csv = Buffer.from(base64, 'base64').toString()
   const allCards = csv
     .split(',')
     .map((pair) => pair.split(':'))
