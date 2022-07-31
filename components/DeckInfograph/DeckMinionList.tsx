@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { CardOccurence } from '../../lib/deckcode'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import { UnitSpriteData } from '../../lib/sprite'
 
 export const DeckMinionList = () => {
   const {
@@ -30,35 +31,12 @@ export const MinionCard: FC<{ card: CardOccurence }> = ({ card }) => (
   </div>
 )
 
-export interface SpriteData {
-  frameWidth: number
-  frameHeight: number
-  frameDuration: number
-  extraX: number
-  extraY: number
-  lists: AnimationLists
-}
-
-export interface AnimationLists {
-  hit: Point[]
-  death: Point[]
-  breathing: Point[]
-  idle: Point[]
-  attack: Point[]
-  run: Point[]
-}
-
-export interface Point {
-  x: number
-  y: number
-}
-
 const MinionCardSprite: FC<{ spriteName: string }> = ({ spriteName }) => {
   const spriteSheetUrl = `https://alpha.duelyst2.com/resources/units/${spriteName}.png`
   // const spriteSheetUrl = `/assets/spritesheets/${spriteName}.png`
-  const spriteDataUrl = `/assets/spritesheets/${spriteName}.plist.json`
+  const spriteDataUrl = `/assets/spritesheets/units/${spriteName}.plist.json`
 
-  const { data, isSuccess } = useQuery<SpriteData>(['sprite-data', spriteName], async () =>
+  const { data, isSuccess } = useQuery<UnitSpriteData>(['sprite-data', spriteName], async () =>
     axios.get(spriteDataUrl).then((res) => res.data),
   )
 
@@ -72,7 +50,7 @@ const MinionCardSprite: FC<{ spriteName: string }> = ({ spriteName }) => {
       style={{
         visibility: isSuccess ? 'visible' : 'hidden',
         backgroundImage: `url(${spriteSheetUrl})`,
-        backgroundSize: '512px 1024px',
+        backgroundSize: 'auto auto',
         backgroundRepeat: 'no-repeat',
         width: `${width}px`,
         height: `${height}px`,

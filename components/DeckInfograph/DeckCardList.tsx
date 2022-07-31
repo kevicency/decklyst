@@ -23,6 +23,7 @@ export const DeckCardList = () => {
         'grid-cols-4': cols.length === 4,
         'grid-cols-5': cols.length === 5,
         'grid-cols-6': cols.length === 6,
+        'grid-cols-7': cols.length === 7,
       })}
     >
       {cols.map((col, i) => (

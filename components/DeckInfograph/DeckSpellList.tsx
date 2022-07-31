@@ -1,9 +1,9 @@
 import { useDeck } from './useDeck'
-import { SmallCardList } from './SmallCardList'
+import { IconCardList } from './IconCardList'
 
 export const DeckSpellList = () => {
   const {
     cards: { spells },
   } = useDeck()
-  return <SmallCardList cards={spells} />
+  return <IconCardList cards={spells} />
 }
