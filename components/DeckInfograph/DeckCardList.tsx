@@ -1,7 +1,7 @@
 import { useDeck } from './useDeck'
 import { chunk, flatMap } from 'lodash'
 import cx from 'classnames'
-import { FC } from 'react'
+import { ManaIcon } from './ManaIcon'
 
 export const DeckCardList = () => {
   const {
@@ -42,8 +42,3 @@ export const DeckCardList = () => {
     </div>
   )
 }
-export const ManaIcon: FC<{ mana: number }> = ({ mana }) => (
-  <div className="hexagon bg-mana text-slate-900">
-    <span className="inline-block w-6 text-center text-sm font-bold">{mana}</span>
-  </div>
-)

@@ -5,15 +5,15 @@ export const DeckTitle = () => {
   const { general, title, faction } = useDeck()
   return (
     <div className="flex">
-      <div className="w-24 mt-[-12px] ml-[-18px] flex-shrink-0">
+      <div className="w-28 mt-[-32px] ml-[-12px] flex-shrink-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`/assets/generals/${general.id}_hex@2x.png`}
           alt={general.title}
-          className="w-24"
+          className="w-full"
         />
       </div>
-      <div className="flex flex-col flex-1 justify-center">
+      <div className="flex flex-col flex-1 justify-center ml-2">
         <div className="font-bold text-3xl mb-2 ">{title}</div>
         <div className={`text-xl text-${faction}`}>{startCase(faction)}</div>
       </div>
