@@ -13,7 +13,7 @@ export const DeckTitle = () => {
           className="w-24"
         />
       </div>
-      <div className="flex flex-col flex-1 justify-around">
+      <div className="flex flex-col flex-1 justify-center">
         <div className="font-bold text-3xl mb-2 ">{title}</div>
         <div className={`text-xl text-${faction}`}>{startCase(faction)}</div>
       </div>

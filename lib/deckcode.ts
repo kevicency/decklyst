@@ -2,7 +2,7 @@ import { CardData, cardDataById } from '../data/cards'
 import { groupBy, max, sortBy, sumBy } from 'lodash'
 import { CardType, Faction } from '../data/types'
 
-type CardOccurence = CardData & {
+export type CardOccurence = CardData & {
   count: number
 }
 

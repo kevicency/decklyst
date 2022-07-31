@@ -9,10 +9,10 @@ type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
   return (
-    <div className="w-[48rem] mx-auto my-8">
+    <div className="w-[64rem] mx-auto my-8">
+      <DeckMetadata deck={deck} />
       {deck ? (
-        <div className="pb-2" id="snap">
-          <DeckMetadata deck={deck} />
+        <div className="p-6 bg-slate-900" id="snap">
           <DeckInfograph deck={deck} />
         </div>
       ) : (
@@ -20,7 +20,7 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
           <p className="text-red-500">Error: {error}</p>
         </div>
       )}
-      <div className="mt-2 px-4">
+      <div className="mt-8 px-4">
         <div className={'text-xl mb-1'}>Deckcode</div>
         <input
           readOnly={true}
