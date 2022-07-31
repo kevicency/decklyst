@@ -27,6 +27,8 @@ const ManaCurveBar: FC<{ entry: ManaCurveEntry; mana: number; faction: Faction }
         &nbsp;
       </div>
     </div>
-    <div className="border-t-2 border-slate-200 bg-slate-700 h-[26px]">{mana}</div>
+    <div className="border-t-2 border-slate-200 bg-slate-700 h-[26px]">
+      {mana === 9 ? '9+' : mana}
+    </div>
   </div>
 )

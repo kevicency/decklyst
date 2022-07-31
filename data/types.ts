@@ -14,14 +14,22 @@ export interface CardData {
   faction: Faction
   type: CardType
   cost: number
+  spriteName?: string | null
 }
 
-export const lyonar = (id: number, title: string, cost: number, type: CardType): CardData => ({
+export const lyonar = (
+  id: number,
+  title: string,
+  cost: number,
+  type: CardType,
+  spriteName?: string,
+): CardData => ({
   id,
   title,
   faction: 'lyonar',
   cost,
   type,
+  spriteName: spriteName ?? null,
 })
 export const songhai = (id: number, title: string, cost: number, type: CardType): CardData => ({
   id,

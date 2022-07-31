@@ -7,6 +7,12 @@
     display: inline-block;
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
   }
+
+  .sprite {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    image-rendering: pixelated;
+  }
 }
 
 html,
