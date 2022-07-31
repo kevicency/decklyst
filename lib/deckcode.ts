@@ -29,7 +29,7 @@ export type DeckData = {
   manaCurve: ManaCurveEntry[]
 }
 
-const deckcodeRegex = /^(\[(.*)])((?:[A-Za-z\d+]{4})+(?:[A-Za-z\d+]{3}=|[A-Za-z\d+]{2}==)?)$/
+const deckcodeRegex = /^(\[(.*)])?((?:[A-Za-z\d+]{4})+(?:[A-Za-z\d+]{3}=|[A-Za-z\d+]{2}==)?)$/
 
 export const normalizeDeckcode = (deckcode?: string) => (deckcode ? deckcode.trim() : undefined)
 
@@ -37,7 +37,8 @@ export const validateDeckcode = (deckcode?: string): deckcode is string =>
   deckcodeRegex.test(deckcode ?? '')
 
 export const parseDeckcode = (deckcode: string): DeckData | null => {
-  const [, , title, base64] = deckcode.match(deckcodeRegex)!
+  const [, , maybeTitle, base64] = deckcode.match(deckcodeRegex)!
+  const title = maybeTitle ?? 'Untitled'
   const csv = Buffer.from(base64, 'base64').toString()
   const allCards = csv
     .split(',')

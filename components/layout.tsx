@@ -1,13 +1,15 @@
 import { FC } from 'react'
 import Link from 'next/link'
+import { DeckcodeSearch } from './DeckcodeSearch'
 
-export const Layout: FC<{ children: any }> = ({ children }) => (
+export const Layout: FC<{ children: any; showSearch?: boolean }> = ({ children, showSearch }) => (
   <div className="flex flex-col">
-    <div className="flex flex-col items-center justify-center bg-slate-800 h-12">
-      <div className={'w-[48rem] mx-auto px-4'}>
-        <span className={'text-white hover:text-blue-400 text-xl'}>
+    <div className="flex items-center bg-slate-800 h-16">
+      <div className="content-container flex justify-between">
+        <span className={'text-white hover:text-blue-400 text-4xl'}>
           <Link href={'/'}>Duelyst Share</Link>
         </span>
+        {showSearch && <DeckcodeSearch />}
       </div>
     </div>
     <div className="flex-1">{children}</div>
