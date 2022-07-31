@@ -4,6 +4,7 @@ import { GetServerSidePropsContext } from 'next/types'
 import { DeckData, parseDeckcode, validateDeckcode } from '../lib/deckcode'
 import Head from 'next/head'
 import { startCase } from 'lodash'
+import { DeckInfograph } from '../components/DeckInfograph'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -23,10 +24,10 @@ const lineAsciiManaCurve = (deck: DeckData) =>
     .join(' ')
 const lineCardCounts = (deck: DeckData) =>
   [
-    `M: ${deck.minionCount}`,
-    `S: ${deck.spellCount}`,
-    `A: ${deck.artifactCount}`,
-    `${deck.size}/40`,
+    `M: ${deck.counts.minions}`,
+    `S: ${deck.counts.spells}`,
+    `A: ${deck.counts.artifacts}`,
+    `${deck.counts.total}/40`,
   ].join(' | ')
 const lineMinions = (deck: DeckData) =>
   'Minions: ' +
@@ -63,6 +64,7 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
     <div className="w-[48rem] mx-auto my-8">
       {deck ? (
         <div className="pb-2" id="snap">
+          <DeckInfograph deck={deck} />
           <DeckHead deck={deck} />
           <div className="flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -110,7 +112,7 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
             Share
           </a>
           <br />
-          <a href={`/${deckcode}.png`} className="text-blue-500 hover:underline">
+          <a href={`/${deckcode}.png`} className="text-blue-500 hover:underline ">
             Image
           </a>
         </div>

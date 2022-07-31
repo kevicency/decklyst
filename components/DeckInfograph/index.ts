@@ -1,0 +1,1 @@
+export { DeckInfograph } from './DeckInfograph'

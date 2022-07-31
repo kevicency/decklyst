@@ -6,9 +6,13 @@ type CardOccurence = CardData & {
   count: number
 }
 
+export type ManaCurveEntry = {
+  abs: number
+  rel: number
+}
+
 export type DeckData = {
   title: string
-  size: number
   faction: Faction
   general: CardData
   cards: {
@@ -16,10 +20,13 @@ export type DeckData = {
     spells: CardOccurence[]
     artifacts: CardOccurence[]
   }
-  manaCurve: { abs: number; rel: number }[]
-  minionCount: number
-  spellCount: number
-  artifactCount: number
+  counts: {
+    total: number
+    minions: number
+    spells: number
+    artifacts: number
+  }
+  manaCurve: ManaCurveEntry[]
 }
 
 const deckcodeRegex = /^(\[(.*)])((?:[A-Za-z\d+]{4})+(?:[A-Za-z\d+]{3}=|[A-Za-z\d+]{2}==)?)$/
@@ -62,7 +69,6 @@ export const parseDeckcode = (deckcode: string): DeckData | null => {
 
   return {
     title,
-    size,
     faction: general.faction,
     general,
     cards: {
@@ -70,9 +76,12 @@ export const parseDeckcode = (deckcode: string): DeckData | null => {
       spells,
       artifacts,
     },
-    minionCount: sumBy(minions, (card) => card.count),
-    spellCount: sumBy(spells, (card) => card.count),
-    artifactCount: sumBy(artifacts, (card) => card.count),
+    counts: {
+      total: size,
+      minions: sumBy(minions, (card) => card.count),
+      spells: sumBy(spells, (card) => card.count),
+      artifacts: sumBy(artifacts, (card) => card.count),
+    },
     manaCurve: manaCurve.map((count) => ({ abs: count, rel: count / manaCurveMax })),
   }
 }

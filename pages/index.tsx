@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { KeyboardEventHandler, useEffect, useRef, useState } from 'react'
 import { normalizeDeckcode, validateDeckcode } from '../lib/deckcode'
 import cx from 'classnames'
@@ -39,7 +38,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Duelyst Share</title>
         <meta name="description" content="Share Duelyst 2 deck codes" />
