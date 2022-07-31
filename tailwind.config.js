@@ -21,7 +21,8 @@ module.exports = {
   plugins: [],
   safelist: [
     {
-      pattern: /text-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,
+      pattern: /(text|bg)-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,
+      variants: ['hover'],
     },
   ],
 }
