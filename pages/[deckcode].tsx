@@ -8,8 +8,19 @@ import { DeckMetadata } from '../components/DeckMetadata'
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
+  const copyDeckcode = async () => {
+    if (deckcode) {
+      await navigator.clipboard.writeText(deckcode)
+    }
+  }
+  const copyImageUrl = async () => {
+    if (deckcode) {
+      await navigator.clipboard.writeText(`${window.location.origin}/${deckcode}.png`)
+    }
+  }
+
   return (
-    <div className="w-[64rem] mx-auto my-8">
+    <div className="content-container">
       <DeckMetadata deck={deck} />
       {deck ? (
         <div className="p-6 bg-slate-900" id="snap">
@@ -20,23 +31,26 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
           <p className="text-red-500">Error: {error}</p>
         </div>
       )}
-      <div className="mt-8 px-4">
-        <div className={'text-xl mb-1'}>Deckcode</div>
-        <input
-          readOnly={true}
-          className={'w-full border-2 bg-slate-800 border-slate-600'}
-          value={deckcode}
-        />
-      </div>
       {deck && (
-        <div className="mt-2 px-4">
-          <div className={'text-xl mb-1'}>Links</div>
-          <a href={`/${deckcode}`} className="text-blue-500 hover:underline">
-            Share
-          </a>
-          <br />
-          <a href={`/${deckcode}.png`} className="text-blue-500 hover:underline ">
-            Image
+        <div className="mt-4 grid grid-cols-3 auto-cols-auto gap-4">
+          <button
+            className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
+            onClick={copyDeckcode}
+          >
+            Copy deckcode
+          </button>
+          <button
+            className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
+            onClick={copyImageUrl}
+          >
+            Copy image link
+          </button>
+          <a
+            className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
+            href={`/${deckcode}.png`}
+            download={`${deckcode}.png`}
+          >
+            Download as image
           </a>
         </div>
       )}

@@ -33,7 +33,7 @@ export const MinionCard: FC<{ card: CardOccurence }> = ({ card }) => (
 
 const MinionCardSprite: FC<{ spriteName: string }> = ({ spriteName }) => {
   const spriteSheetUrl = `https://alpha.duelyst2.com/resources/units/${spriteName}.png`
-  // const spriteSheetUrl = `/assets/spritesheets/${spriteName}.png`
+  // const spriteSheetUrl = `/assets/spritesheets/units/${spriteName}.png`
   const spriteDataUrl = `/assets/spritesheets/units/${spriteName}.plist.json`
 
   const { data, isSuccess } = useQuery<UnitSpriteData>(['sprite-data', spriteName], async () =>

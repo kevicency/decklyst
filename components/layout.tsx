@@ -12,6 +12,6 @@ export const Layout: FC<{ children: any; showSearch?: boolean }> = ({ children, 
         {showSearch && <DeckcodeSearch />}
       </div>
     </div>
-    <div className="flex-1">{children}</div>
+    <div className="flex-1 mt-8">{children}</div>
   </div>
 )

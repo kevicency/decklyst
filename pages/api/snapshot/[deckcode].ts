@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const selector = '#snap'
   await page.waitForSelector(selector)
-  await new Promise((resolve) => setTimeout(resolve, 10))
+  await new Promise((resolve) => setTimeout(resolve, 1500))
   const content = await page.$(selector)
   const imageBuffer = await content!.screenshot({ omitBackground: true })
 
@@ -40,11 +40,14 @@ async function launchPuppeteer() {
       args: chrome.args,
       executablePath: await chrome.executablePath,
       headless: chrome.headless,
+      defaultViewport: { width: 1280, height: 1080 },
     })
     return { puppeteer, browser }
   } else {
     const puppeteer = require('puppeteer')
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({
+      defaultViewport: { width: 1280, height: 1080 },
+    })
     return { puppeteer, browser }
   }
 }
