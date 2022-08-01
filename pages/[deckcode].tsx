@@ -118,7 +118,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const props = { deckcode, deck, error: deck === null ? 'Invalid deckcode' : null }
 
   const client = createTRPCClient<ServerRouter>({
-    url: 'http://localhost:3000/api/trpc',
+    url: process.env.NEXT_PUBLIC_SITE_URL + '/api/trpc',
   })
 
   if (deckcode) {
