@@ -3,11 +3,12 @@ import { CardOccurence } from '../../lib/deckcode'
 import { useQuery } from '@tanstack/react-query'
 import { IconSpriteData } from '../../lib/sprite'
 import axios from 'axios'
+import cx from 'classnames'
 
 export const IconCardList: FC<{ cards: CardOccurence[] }> = ({ cards }) => {
   return (
     <div
-      className="bg-slate-800 h-24 grid"
+      className={cx('bg-slate-800 grid', { 'h-12': cards.length })}
       style={{ gridTemplateColumns: `repeat(${cards.length}, minmax(0, 1fr))` }}
     >
       {cards.map((card) => (

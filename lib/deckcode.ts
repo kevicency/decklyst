@@ -12,6 +12,7 @@ export type ManaCurveEntry = {
 }
 
 export type DeckData = {
+  deckcode: string
   title: string
   faction: Faction
   general: CardData
@@ -69,6 +70,7 @@ export const parseDeckcode = (deckcode: string): DeckData | null => {
   const manaCurveMax = max(manaCurve)
 
   return {
+    deckcode,
     title,
     faction: general.faction,
     general,

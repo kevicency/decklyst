@@ -26,6 +26,8 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
     }
   }
 
+  const handleFocus = () => inputElement.current?.select()
+
   const navigateToDeckcode = () => {
     if (!navigating) {
       setNavigating(true)
@@ -47,6 +49,7 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
         value={deckcode ?? ''}
         onChange={(ev) => setDeckcode(normalizeDeckcode(ev.target.value) ?? '')}
         onKeyDown={handleKeydown}
+        onFocus={handleFocus}
       />
       <button
         disabled={invalid || navigating}
