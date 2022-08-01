@@ -111,17 +111,15 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
 }
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { deckcode, snap } = context.query as { deckcode: string | undefined; snap: any }
-
-  console.log({ deckcode, snap })
+  const { deckcode, snapshot } = context.query as { deckcode: string | undefined; snapshot: any }
   const deck = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
   const props = { deckcode, deck, error: deck === null ? 'Invalid deckcode' : null }
 
-  const client = createTRPCClient<ServerRouter>({
-    url: `${siteUrl}/api/trpc`,
-  })
+  if (deckcode && !+snapshot) {
+    const client = createTRPCClient<ServerRouter>({
+      url: `${siteUrl}/api/trpc`,
+    })
 
-  if (deckcode) {
     await client.mutation('ensureDeck', { deckcode })
   }
 
