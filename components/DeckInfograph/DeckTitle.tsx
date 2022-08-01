@@ -5,7 +5,7 @@ export const DeckTitle = () => {
   const { general, title, faction } = useDeck()
   return (
     <div className="flex">
-      <div className="w-28 mt-[-32px] ml-[-12px] flex-shrink-0">
+      <div className="w-32 mt-[-32px] ml-[-32px] flex-shrink-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`/assets/generals/${general.id}_hex@2x.png`}
