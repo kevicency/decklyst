@@ -1,6 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { DeckData, normalizeDeckcode, parseDeckcode, validateDeckcode } from '../../../lib/deckcode'
+import {
+  DeckData,
+  normalizeDeckcode,
+  parseDeckcode,
+  validateDeckcode,
+} from '../../../common/deckcode'
 
 export default function handler(
   req: NextApiRequest,

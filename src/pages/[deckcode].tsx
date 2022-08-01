@@ -1,13 +1,13 @@
-import { InferGetServerSidePropsType } from 'next'
-import { FC, MouseEventHandler, useState } from 'react'
-import { GetServerSidePropsContext } from 'next/types'
-import { parseDeckcode, validateDeckcode } from '../lib/deckcode'
-import { DeckInfograph } from '../components/DeckInfograph'
-import { DeckMetadata } from '../components/DeckMetadata'
+import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
+import { deckImageUrl, siteUrl } from '@/common/urls'
+import { DeckInfograph } from '@/components/DeckInfograph'
+import { DeckMetadata } from '@/components/DeckMetadata'
+import { ServerRouter } from '@/server/router'
 import { createTRPCClient } from '@trpc/client'
-import { ServerRouter } from '../server/router'
+import { InferGetServerSidePropsType } from 'next'
+import { GetServerSidePropsContext } from 'next/types'
+import { FC, MouseEventHandler, useState } from 'react'
 import { useQuery } from 'react-query'
-import { deckImageUrl, siteUrl } from '../lib/urls'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 

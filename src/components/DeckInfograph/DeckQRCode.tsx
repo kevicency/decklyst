@@ -1,6 +1,6 @@
-import { useDeck } from './useDeck'
-import { useEffect, useState } from 'react'
 import { QRCodeCanvas } from 'qrcode.react'
+import { useEffect, useState } from 'react'
+import { useDeck } from './useDeck'
 
 export const DeckQRCode = () => {
   const { deckcode } = useDeck()

@@ -1,14 +1,14 @@
 import { FC } from 'react'
-import { DeckData } from '../../lib/deckcode'
-import { DeckContext } from './useDeck'
-import { DeckTitle } from './DeckTitle'
+import { DeckData } from '../../common/deckcode'
+import { DeckArtifactList } from './DeckArtifactList'
+import { DeckCardList } from './DeckCardList'
 import { DeckCountsAlt } from './DeckCounts'
 import { DeckManaCurve } from './DeckManaCurve'
-import { DeckCardList } from './DeckCardList'
 import { DeckMinionList } from './DeckMinionList'
-import { DeckSpellList } from './DeckSpellList'
-import { DeckArtifactList } from './DeckArtifactList'
 import { DeckQRCode } from './DeckQRCode'
+import { DeckSpellList } from './DeckSpellList'
+import { DeckTitle } from './DeckTitle'
+import { DeckContext } from './useDeck'
 
 export const DeckInfograph: FC<{ deck: DeckData }> = ({ deck }) => {
   return (

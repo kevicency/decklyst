@@ -1,12 +1,12 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { Layout } from '../components/layout'
-import { useRouter } from 'next/router'
+import { siteUrl } from '@/common/urls'
+import { Layout } from '@/components/layout'
+import { ServerRouter } from '@/server/router'
 import { withTRPC } from '@trpc/next'
-import { ServerRouter } from '../server/router'
+import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import superjson from 'superjson'
-import { siteUrl } from '../lib/urls'
+import '../styles/globals.css'
 
 const queryClient = new QueryClient()
 

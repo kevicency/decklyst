@@ -1,7 +1,7 @@
+import cx from 'classnames'
 import { useRouter } from 'next/router'
 import { FC, KeyboardEventHandler, useEffect, useRef, useState } from 'react'
-import { normalizeDeckcode, validateDeckcode } from '../lib/deckcode'
-import cx from 'classnames'
+import { normalizeDeckcode, validateDeckcode } from '../common/deckcode'
 
 export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
   const inputElement = useRef<HTMLInputElement>(null)

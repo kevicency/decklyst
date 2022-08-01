@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import { CardOccurence } from '../../lib/deckcode'
-import { useQuery } from 'react-query'
-import { IconSpriteData } from '../../lib/sprite'
 import axios from 'axios'
 import cx from 'classnames'
+import { FC } from 'react'
+import { useQuery } from 'react-query'
+import { CardOccurence } from '../../common/deckcode'
+import { IconSpriteData } from '../../common/sprite'
 
 export const IconCardList: FC<{ cards: CardOccurence[] }> = ({ cards }) => {
   return (

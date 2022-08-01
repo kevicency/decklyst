@@ -1,6 +1,6 @@
+import { PrismaClient } from '@prisma/client'
 import * as trpc from '@trpc/server'
 import * as trpcNext from '@trpc/server/adapters/next'
-import { PrismaClient } from '@prisma/client'
 
 let prisma: PrismaClient | undefined = undefined
 

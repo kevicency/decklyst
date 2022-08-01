@@ -1,6 +1,6 @@
+import { DeckcodeSearch } from '@/components/DeckcodeSearch'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { DeckcodeSearch } from '../components/DeckcodeSearch'
 
 const Home: NextPage = () => {
   return (
@@ -10,8 +10,8 @@ const Home: NextPage = () => {
         <meta name="description" content="Share Duelyst 2 deck codes" />
         <meta property="og:site_name" content="Duelyst Share" />
         <meta property="og:title" content="Duelyst Share" />
-        <link rel="icon" href="/favicon.ico" />
-        <link type="application/json+oembed" href="/oembed.json" />
+        <link rel="icon" href="/public/favicon.ico" />
+        <link type="application/json+oembed" href="/public/oembed.json" />
       </Head>
       <div className="content-container flex justify-center items-center h-32">
         <DeckcodeSearch big />

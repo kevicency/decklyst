@@ -1,5 +1,5 @@
-import { CardData, cardDataById } from '../data/cards'
 import { groupBy, max, sortBy, sumBy } from 'lodash'
+import { CardData, cardDataById } from '../data/cards'
 import { CardType, Faction } from '../data/types'
 
 export type CardOccurence = CardData & {

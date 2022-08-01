@@ -1,9 +1,9 @@
-import { useDeck } from './useDeck'
-import { FC } from 'react'
-import { CardOccurence } from '../../lib/deckcode'
-import { useQuery } from 'react-query'
 import axios from 'axios'
-import { UnitSpriteData } from '../../lib/sprite'
+import { FC } from 'react'
+import { useQuery } from 'react-query'
+import { CardOccurence } from '../../common/deckcode'
+import { UnitSpriteData } from '../../common/sprite'
+import { useDeck } from './useDeck'
 
 export const DeckMinionList = () => {
   const {

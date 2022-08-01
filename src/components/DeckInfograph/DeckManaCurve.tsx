@@ -1,8 +1,8 @@
-import { useDeck } from './useDeck'
 import { FC } from 'react'
-import { ManaCurveEntry } from '../../lib/deckcode'
+import { ManaCurveEntry } from '../../common/deckcode'
 import { Faction } from '../../data/types'
 import { ManaIcon } from './ManaIcon'
+import { useDeck } from './useDeck'
 
 export const DeckManaCurve = () => {
   const { faction, manaCurve } = useDeck()
