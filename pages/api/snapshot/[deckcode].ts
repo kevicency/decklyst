@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (!imageBuffer) {
     const blob = await fetch(renderUrl).then((response) => response.blob())
-    const imageBuffer = Buffer.from(await blob.arrayBuffer())
+    imageBuffer = Buffer.from(await blob.arrayBuffer())
     await client.mutation('upsertDeckImage', { imageBytes: imageBuffer, deckcode })
   }
 
