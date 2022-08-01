@@ -1,7 +1,7 @@
 import { useDeck } from './useDeck'
 import { FC } from 'react'
 import { CardOccurence } from '../../lib/deckcode'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import axios from 'axios'
 import { UnitSpriteData } from '../../lib/sprite'
 

@@ -4,10 +4,33 @@ import { GetServerSidePropsContext } from 'next/types'
 import { parseDeckcode, validateDeckcode } from '../lib/deckcode'
 import { DeckInfograph } from '../components/DeckInfograph'
 import { DeckMetadata } from '../components/DeckMetadata'
+import { createTRPCClient } from '@trpc/client'
+import { ServerRouter } from '../server/router'
+import { useQuery } from 'react-query'
+import { deckImageUrl } from '../lib/urls'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
+  const { data: deckImageDataUri, isSuccess: isImageGenerated } = useQuery(
+    ['deck-image', deckcode],
+    async () => {
+      const blob = await fetch(deckImageUrl(deckcode!, true)).then((res) => res.blob())
+      const reader = new FileReader()
+
+      return await new Promise<string>((resolve) => {
+        reader.readAsDataURL(blob)
+        reader.onloadend = () => {
+          resolve(reader.result as string)
+        }
+      })
+    },
+    {
+      enabled: Boolean(deckcode),
+      staleTime: Infinity,
+    },
+  )
+
   const [isDownloading, setIsDownloading] = useState(false)
   const copyDeckcode = async () => {
     if (deckcode) {
@@ -16,7 +39,7 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
   }
   const copyImageUrl = async () => {
     if (deckcode) {
-      await navigator.clipboard.writeText(`${window.location.origin}/${deckcode}.png`)
+      await navigator.clipboard.writeText(deckImageUrl(deckcode))
     }
   }
 
@@ -32,6 +55,10 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
       setIsDownloading(false)
     }, 5000)
   }
+
+  const imageFilename = deck
+    ? `${deck.title}_${deck.faction}_${deck.deckcodePruned}.png`
+    : `${deckcode}.png`
 
   return (
     <div className="content-container">
@@ -59,14 +86,24 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
           >
             Copy image link
           </button>
-          <a
-            className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
-            href={isDownloading ? '#' : `/${deckcode}.png`}
-            download={isDownloading ? undefined : `${deckcode}.png`}
-            onClick={downloadImageInterceptor}
-          >
-            Download as image
-          </a>
+          {isImageGenerated ? (
+            <a
+              className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
+              href={deckImageDataUri}
+              download={imageFilename}
+            >
+              Download as image
+            </a>
+          ) : (
+            <a
+              className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
+              href={isDownloading ? '#' : deckImageUrl(deckcode!, true)}
+              download={isDownloading ? undefined : imageFilename}
+              onClick={downloadImageInterceptor}
+            >
+              Download as image
+            </a>
+          )}
         </div>
       )}
     </div>
@@ -74,9 +111,19 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
 }
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { deckcode } = context.query as { deckcode: string | undefined }
+  const { deckcode, snap } = context.query as { deckcode: string | undefined; snap: any }
+
+  console.log({ deckcode, snap })
   const deck = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
   const props = { deckcode, deck, error: deck === null ? 'Invalid deckcode' : null }
+
+  const client = createTRPCClient<ServerRouter>({
+    url: 'http://localhost:3000/api/trpc',
+  })
+
+  if (deckcode) {
+    await client.mutation('ensureDeck', { deckcode })
+  }
 
   return { props }
 }

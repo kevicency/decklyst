@@ -2,34 +2,44 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { normalizeDeckcode, validateDeckcode } from '../../../lib/deckcode'
 import absoluteUrl from 'next-absolute-url'
+import { createContext } from '../../../server/context'
+import { serverRouter } from '../../../server/router'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { origin } = absoluteUrl(req)
   const deckcode = normalizeDeckcode(req.query.deckcode as string | undefined)
-  const deckcodeUrl = `${origin}/${encodeURIComponent(deckcode ?? '')}`
+  const deckcodeUrl = `${origin}/${encodeURIComponent(deckcode ?? '')}?snapshot=1`
 
   if (!validateDeckcode(deckcode)) {
     return res.status(404).send('')
   }
 
-  const { browser } = await launchPuppeteer()
-  const page = await browser.newPage()
-  await page.goto(deckcodeUrl)
-  await page.emulateMediaType('screen')
+  const ctx = await createContext()
+  const client = serverRouter.createCaller(ctx)
 
-  const selector = '#snap'
-  await page.waitForSelector(selector)
-  await new Promise((resolve) => setTimeout(resolve, 1500))
-  const content = await page.$(selector)
-  const imageBuffer = await content!.screenshot({ omitBackground: true })
+  const deck = await client.mutation('ensureDeck', { deckcode })
+  let imageBuffer = deck?.image
 
-  await page.close()
-  await browser.close()
+  if (!imageBuffer) {
+    const { browser } = await launchPuppeteer()
+    const page = await browser.newPage()
+    await page.goto(deckcodeUrl)
+    await page.emulateMediaType('screen')
+
+    const selector = '#snap'
+    await page.waitForSelector(selector)
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const content = await page.$(selector)
+    imageBuffer = await content!.screenshot({ omitBackground: true })
+
+    await page.close()
+    await browser.close()
+
+    await client.mutation('upsertDeckImage', { imageBytes: imageBuffer!, deckcode })
+  }
 
   res.setHeader('Content-Type', 'image/png')
   res.send(imageBuffer)
-
-  await browser.close()
 }
 
 async function launchPuppeteer() {
@@ -46,6 +56,8 @@ async function launchPuppeteer() {
   } else {
     const puppeteer = require('puppeteer')
     const browser = await puppeteer.launch({
+      args: ['--disable-setuid-sandbox', '--no-sandbox', '--no-zygote'],
+      executablePath: '/usr/local/bin/chromium',
       defaultViewport: { width: 1280, height: 1080 },
     })
     return { puppeteer, browser }

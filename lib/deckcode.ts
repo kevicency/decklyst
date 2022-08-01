@@ -13,6 +13,7 @@ export type ManaCurveEntry = {
 
 export type DeckData = {
   deckcode: string
+  deckcodePruned: string
   title: string
   faction: Faction
   general: CardData
@@ -71,6 +72,7 @@ export const parseDeckcode = (deckcode: string): DeckData | null => {
 
   return {
     deckcode,
+    deckcodePruned: base64,
     title,
     faction: general.faction,
     general,
