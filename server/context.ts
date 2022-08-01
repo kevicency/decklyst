@@ -2,10 +2,14 @@ import * as trpc from '@trpc/server'
 import * as trpcNext from '@trpc/server/adapters/next'
 import { PrismaClient } from '@prisma/client'
 
-export async function createContext(_opts?: trpcNext.CreateNextContextOptions) {
-  const prisma = new PrismaClient()
+let prisma: PrismaClient | undefined = undefined
 
-  return { prisma }
+export async function createContext(_opts?: trpcNext.CreateNextContextOptions) {
+  if (process.env.VERCEL) {
+    prisma ??= new PrismaClient()
+  }
+
+  return { prisma: prisma ?? new PrismaClient() }
 }
 
 export type Context = trpc.inferAsyncReturnType<typeof createContext>
