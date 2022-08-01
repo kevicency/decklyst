@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { withTRPC } from '@trpc/next'
 import { ServerRouter } from '../server/router'
 import superjson from 'superjson'
+import { siteUrl } from '../lib/urls'
 
 const queryClient = new QueryClient()
 
@@ -37,9 +38,7 @@ export default withTRPC<ServerRouter>({
 
     // The server needs to know your app's full url
     // On render.com you can use `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${process.env.PORT}/api/trpc`
-    const url = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}/api/trpc`
-      : 'http://localhost:3000/api/trpc'
+    const url = `${siteUrl}/api/trpc`
 
     return {
       transformer: superjson, // optional - adds superjson serialization

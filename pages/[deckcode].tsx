@@ -7,7 +7,7 @@ import { DeckMetadata } from '../components/DeckMetadata'
 import { createTRPCClient } from '@trpc/client'
 import { ServerRouter } from '../server/router'
 import { useQuery } from 'react-query'
-import { deckImageUrl } from '../lib/urls'
+import { deckImageUrl, siteUrl } from '../lib/urls'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -118,7 +118,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const props = { deckcode, deck, error: deck === null ? 'Invalid deckcode' : null }
 
   const client = createTRPCClient<ServerRouter>({
-    url: process.env.NEXT_PUBLIC_SITE_URL + '/api/trpc',
+    url: `${siteUrl}/api/trpc`,
   })
 
   if (deckcode) {
