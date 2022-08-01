@@ -1,4 +1,7 @@
+const colors = require('tailwindcss/colors')
+
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -15,6 +18,11 @@ module.exports = {
         vanar: '#2ba3db',
         neutral: '#ffffff',
         mana: '#2ba9d8',
+        common: colors.slate['100'],
+        basic: colors.slate['100'],
+        rare: '#396cfd',
+        epic: '#bf20e1',
+        legendary: '#e39f28',
       },
     },
   },
@@ -22,6 +30,10 @@ module.exports = {
   safelist: [
     {
       pattern: /(text|bg)-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,
+      variants: ['hover'],
+    },
+    {
+      pattern: /(text)-(common|basic|rare|epic|legendary)/,
       variants: ['hover'],
     },
   ],

@@ -12,7 +12,7 @@ import { DeckArtifactList } from './DeckArtifactList'
 export const DeckInfograph: FC<{ deck: DeckData }> = ({ deck }) => {
   return (
     <DeckContext.Provider value={deck}>
-      <div className="grid auto-rows-auto gap-6">
+      <div className="grid auto-rows-auto gap-6 text-slate-100">
         <div className="grid grid-cols-3 gap-4">
           <DeckTitle />
           <DeckCounts />

@@ -15,7 +15,7 @@ export interface CardData {
   faction: Faction
   type: CardType
   cost: number
-  rarity?: Rarity
+  rarity: Rarity
   spriteName?: string | null
 }
 
