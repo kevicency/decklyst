@@ -8,7 +8,7 @@ import cx from 'classnames'
 export const IconCardList: FC<{ cards: CardOccurence[] }> = ({ cards }) => {
   return (
     <div
-      className={cx('bg-slate-800 grid', { 'h-12': cards.length })}
+      className={cx('bg-slate-800 grid', cards.length && 'h-24 mt-6')}
       style={{ gridTemplateColumns: `repeat(${cards.length}, minmax(0, 1fr))` }}
     >
       {cards.map((card) => (
