@@ -1,5 +1,5 @@
 import { InferGetServerSidePropsType } from 'next'
-import { FC } from 'react'
+import { FC, MouseEventHandler, useState } from 'react'
 import { GetServerSidePropsContext } from 'next/types'
 import { parseDeckcode, validateDeckcode } from '../lib/deckcode'
 import { DeckInfograph } from '../components/DeckInfograph'
@@ -8,6 +8,7 @@ import { DeckMetadata } from '../components/DeckMetadata'
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
+  const [isDownloading, setIsDownloading] = useState(false)
   const copyDeckcode = async () => {
     if (deckcode) {
       await navigator.clipboard.writeText(deckcode)
@@ -17,6 +18,19 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
     if (deckcode) {
       await navigator.clipboard.writeText(`${window.location.origin}/${deckcode}.png`)
     }
+  }
+
+  const downloadImageInterceptor: MouseEventHandler = (ev) => {
+    if (isDownloading) {
+      return ev.preventDefault()
+    }
+
+    setTimeout(() => {
+      setIsDownloading(true)
+    }, 0)
+    setTimeout(() => {
+      setIsDownloading(false)
+    }, 5000)
   }
 
   return (
@@ -47,8 +61,9 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
           </button>
           <a
             className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
-            href={`/${deckcode}.png`}
-            download={`${deckcode}.png`}
+            href={isDownloading ? '#' : `/${deckcode}.png`}
+            download={isDownloading ? undefined : `${deckcode}.png`}
+            onClick={downloadImageInterceptor}
           >
             Download as image
           </a>
