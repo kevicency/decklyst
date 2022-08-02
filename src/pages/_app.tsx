@@ -37,7 +37,7 @@ export default withTRPC<ServerRouter>({
     ctx?.res?.setHeader('Cache-Control', `s-maxage=1, stale-while-revalidate=${ONE_DAY_SECONDS}`)
 
     // The server needs to know your app's full url
-    // On render.com you can use `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${process.env.PORT}/api/trpc`
+    // On render.com you can use `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${process.env.PORT}/api/server`
     const url = `${siteUrl}/api/trpc`
 
     return {

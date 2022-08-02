@@ -32,7 +32,7 @@ export const DeckCardList = () => {
           {col.cards.map((card) => (
             <div key={card.id} className="mt-2 flex items-center">
               <ManaIcon mana={card.cost} />
-              <span className="ml-2 flex-1 truncate text-sm">
+              <span className="ml-2 flex-1 truncate text-sm mt-[-1px]">
                 {card.count} x{' '}
                 <span className={`text-${card.rarity.toLowerCase()}`}>{card.title}</span>
               </span>

@@ -1,6 +1,6 @@
+import { ManaCurveEntry } from '@/common/deckcode'
+import { Faction } from '@/data/types'
 import { FC } from 'react'
-import { ManaCurveEntry } from '../../common/deckcode'
-import { Faction } from '../../data/types'
 import { ManaIcon } from './ManaIcon'
 import { useDeck } from './useDeck'
 
@@ -29,7 +29,7 @@ const ManaCurveBar: FC<{ entry: ManaCurveEntry; mana: number; faction: Faction }
       </div>
     </div>
     <div className="border-t-2 border-slate-200 h-[26px]">
-      <ManaIcon mana={mana === 9 ? '9+' : mana} />
+      <ManaIcon mana={mana === 9 ? '9+' : mana} className="mt-1" />
     </div>
   </div>
 )
