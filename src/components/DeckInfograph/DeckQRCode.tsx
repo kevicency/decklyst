@@ -3,17 +3,24 @@ import { useEffect, useState } from 'react'
 import { useDeck } from './useDeck'
 
 export const DeckQRCode = () => {
-  const { deckcode } = useDeck()
+  const { deckcode, shortid } = useDeck()
   const [qrValue, setQrValue] = useState('')
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setQrValue(`${window.location.origin}/${deckcode}`)
+      setQrValue(`${window.location.origin}/${shortid ?? deckcode}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div key={qrValue}>
-      <QRCodeCanvas key={qrValue} size={110} value={qrValue} bgColor="#0f172a" fgColor="#475569" />
+      <QRCodeCanvas
+        className="rotate-90"
+        key={qrValue}
+        size={110}
+        value={qrValue}
+        bgColor="#0f172a"
+        fgColor="#475569"
+      />
     </div>
   )
 }
