@@ -1,7 +1,7 @@
-import { useDeck } from './useDeck'
-import { chunk, flatMap } from 'lodash'
 import cx from 'classnames'
+import { chunk, flatMap } from 'lodash'
 import { ManaIcon } from './ManaIcon'
+import { useDeck } from './useDeck'
 
 export const DeckCardList = () => {
   const {

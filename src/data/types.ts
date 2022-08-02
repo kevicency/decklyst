@@ -19,8 +19,7 @@ export interface CardData {
   spriteName?: string | null
 }
 
-const normalizeSpriteName = (name: string | undefined | null): string | null =>
-  name ? name.replace('d2_', '') : null
+const normalizeSpriteName = (name: string | undefined | null): string | null => (name ? name : null)
 
 export const card = (
   faction: Faction,

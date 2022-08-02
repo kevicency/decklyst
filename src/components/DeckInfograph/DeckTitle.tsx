@@ -1,5 +1,5 @@
-import { useDeck } from './useDeck'
 import { startCase } from 'lodash'
+import { useDeck } from './useDeck'
 
 export const DeckTitle = () => {
   const { general, title, faction } = useDeck()

@@ -1,5 +1,5 @@
-import { useDeck } from './useDeck'
 import { IconCardList } from './IconCardList'
+import { useDeck } from './useDeck'
 
 export const DeckArtifactList = () => {
   const {

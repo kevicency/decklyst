@@ -1,9 +1,9 @@
+import { CardOccurence } from '@/common/deckcode'
+import { IconSpriteData } from '@/common/sprite'
 import axios from 'axios'
 import cx from 'classnames'
 import { FC } from 'react'
 import { useQuery } from 'react-query'
-import { CardOccurence } from '../../common/deckcode'
-import { IconSpriteData } from '../../common/sprite'
 
 export const IconCardList: FC<{ cards: CardOccurence[] }> = ({ cards }) => {
   return (
@@ -29,7 +29,7 @@ export const IconCard: FC<{ card: CardOccurence }> = ({ card }) => (
 const IconCardSprite: FC<{ spriteName: string }> = ({ spriteName }) => {
   const spriteSheetUrl = `https://alpha.duelyst2.com/resources/icons/${spriteName}.png`
   // const spriteSheetUrl = `/assets/spritesheets/${spriteName}.png`
-  const spriteDataUrl = `/assets/spritesheets/icons/${spriteName}.plist.json`
+  const spriteDataUrl = `/assets/spritesheets/icons/${spriteName.replace('d2_', '')}.plist.json`
 
   const { data, isSuccess } = useQuery<IconSpriteData>(['sprite-data', spriteName], async () =>
     axios.get(spriteDataUrl).then((res) => res.data),
