@@ -14,6 +14,7 @@ model Deck {
   id         Int      @id @default(autoincrement())
   deckcode   String   @unique
   image      Bytes?
+  imageVersion String @default("0")
   createdAt  DateTime @default(now())
   
   

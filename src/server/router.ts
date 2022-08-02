@@ -3,6 +3,8 @@ import { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
+const IMAGE_VERSION = '0' // TODO: use git commit hash?
+
 export const serverRouter = trpc
   .router<Context>()
   .query('getDeck', {
@@ -13,17 +15,16 @@ export const serverRouter = trpc
       return await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
     },
   })
-  .query('getDeckImageDataUrl', {
+  .query('getDeckImage', {
     input: z.object({
       deckcode: z.string(),
     }),
     resolve: async ({ input, ctx }) => {
-      const mime = 'image/png'
-      const encoding = 'base64'
       const deck = await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
-      if (!deck?.image) return null
-      const buffer = deck.image as Buffer
-      return `data:${mime};${encoding},${buffer.toString('base64')}`
+      if (deck?.imageVersion !== IMAGE_VERSION) {
+        return null
+      }
+      return deck.image
     },
   })
   .mutation('ensureDeck', {
@@ -47,10 +48,11 @@ export const serverRouter = trpc
       imageBytes: z.instanceof(Buffer),
     }),
     resolve: async ({ input, ctx }) => {
+      const update = { image: input.imageBytes, imageVersion: IMAGE_VERSION }
       await ctx.prisma.deck.upsert({
         where: { deckcode: input.deckcode },
-        update: { image: input.imageBytes },
-        create: { deckcode: input.deckcode, image: input.imageBytes },
+        update,
+        create: { deckcode: input.deckcode, ...update },
       })
     },
   })

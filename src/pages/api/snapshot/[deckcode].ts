@@ -17,10 +17,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const ctx = await createContext()
   const client = serverRouter.createCaller(ctx)
 
-  const deck = await client.mutation('ensureDeck', { deckcode })
-  let imageBuffer = deck?.image
+  let imageBuffer = await client.query('getDeckImage', { deckcode })
 
-  if (!imageBuffer) {
+  if (imageBuffer == null) {
     const blob = await fetch(renderUrl).then((response) => response.blob())
     imageBuffer = Buffer.from(await blob.arrayBuffer())
     await client.mutation('upsertDeckImage', { imageBytes: imageBuffer, deckcode })
