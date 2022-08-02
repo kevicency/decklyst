@@ -8,23 +8,18 @@ import absoluteUrl from 'next-absolute-url'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { origin } = absoluteUrl(req)
   const deckcode = normalizeDeckcode(req.query.deckcode as string | undefined)
-  const renderUrl = `${origin}/api/render/${encodeURIComponent(deckcode ?? '')}`
 
   if (!validateDeckcode(deckcode)) {
     return res.status(404).send('')
   }
 
-  const ctx = await createContext()
-  const client = serverRouter.createCaller(ctx)
+  const client = serverRouter.createCaller(await createContext())
 
-  let imageBuffer = await client.query('getDeckImage', { deckcode })
+  let image = await client.query('getDeckImage', { deckcode })
 
-  if (imageBuffer == null) {
-    const blob = await fetch(renderUrl).then((response) => response.blob())
-    imageBuffer = Buffer.from(await blob.arrayBuffer())
-    await client.mutation('upsertDeckImage', { imageBytes: imageBuffer, deckcode })
+  if (image == null) {
+    image = await client.mutation('renderDeckImage', { deckcode, origin })
   }
 
-  res.setHeader('Content-Type', 'image/png')
-  res.send(imageBuffer)
+  res.setHeader('Content-Type', 'image/png').send(image)
 }

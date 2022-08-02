@@ -20,11 +20,24 @@ export const serverRouter = trpc
       deckcode: z.string(),
     }),
     resolve: async ({ input, ctx }) => {
-      const deck = await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
-      if (deck?.imageVersion !== IMAGE_VERSION) {
-        return null
+      let run = 0
+
+      while (run < 5) {
+        const deck = await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
+        const image = deck?.imageVersion === IMAGE_VERSION ? deck?.image ?? null : null
+
+        if (image) return image
+
+        if (deck?.imageRendering) {
+          await new Promise((resolve) => setTimeout(resolve, 500))
+        } else {
+          return null
+        }
+
+        run += 1
       }
-      return deck.image
+
+      return null
     },
   })
   .mutation('ensureDeck', {
@@ -42,18 +55,36 @@ export const serverRouter = trpc
       )
     },
   })
-  .mutation('upsertDeckImage', {
+  .mutation('renderDeckImage', {
     input: z.object({
       deckcode: z.string(),
-      imageBytes: z.instanceof(Buffer),
+      origin: z.string(), // TODO: use env variable?
     }),
-    resolve: async ({ input, ctx }) => {
-      const update = { image: input.imageBytes, imageVersion: IMAGE_VERSION }
+    resolve: async ({ input: { deckcode, origin }, ctx }) => {
       await ctx.prisma.deck.upsert({
-        where: { deckcode: input.deckcode },
-        update,
-        create: { deckcode: input.deckcode, ...update },
+        where: { deckcode },
+        update: { imageRendering: true },
+        create: { deckcode, imageRendering: true },
       })
+
+      try {
+        const renderUrl = `${origin}/api/render/${encodeURIComponent(deckcode ?? '')}`
+        const blob = await fetch(renderUrl).then((response) => response.blob())
+        const image = Buffer.from(await blob.arrayBuffer())
+
+        await ctx.prisma.deck.update({
+          where: { deckcode },
+          data: { deckcode, image, imageVersion: IMAGE_VERSION, imageRendering: false },
+        })
+        return image
+      } catch (e) {
+        await ctx.prisma.deck.update({
+          where: { deckcode },
+          data: { deckcode, imageRendering: false },
+        })
+      }
+
+      return null
     },
   })
 
