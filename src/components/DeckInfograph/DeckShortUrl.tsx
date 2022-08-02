@@ -1,4 +1,3 @@
-import { siteUrl } from '@/common/urls'
 import { useDeck } from '@/components/DeckInfograph/useDeck'
 
 export const DeckShortUrl = () => {
@@ -6,8 +5,8 @@ export const DeckShortUrl = () => {
 
   return shortid ? (
     <div className="flex text-slate-500 items-end">
-      <span>{siteUrl.replace(/https?:\/\//, '')}/</span>
-      <span className={`text-${faction} text-xl font-mono`}>{shortid}</span>
+      <span>duelyst-share.vercel.app/</span>
+      <span className={`text-${faction} text-lg font-mono`}>{shortid}</span>
     </div>
   ) : null
 }
