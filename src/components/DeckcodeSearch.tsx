@@ -1,8 +1,8 @@
+import { normalizeDeckcode, validateDeckcode } from '@/common/deckcode'
 import cx from 'classnames'
 import { useRouter } from 'next/router'
 import type { FC, KeyboardEventHandler } from 'react'
 import { useEffect, useRef, useState } from 'react'
-import { normalizeDeckcode, validateDeckcode } from '../common/deckcode'
 
 export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
   const inputElement = useRef<HTMLInputElement>(null)
@@ -10,7 +10,7 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
   const [deckcode, setDeckcode] = useState<string | null>(null)
   const [navigating, setNavigating] = useState(false)
 
-  const valid = deckcode && validateDeckcode(deckcode)
+  const valid = deckcode && (deckcode.length < 8 || validateDeckcode(deckcode))
   const invalid = !valid
   const touched = deckcode !== null
 
@@ -46,7 +46,7 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
           'border-red-500': touched && invalid,
           'text-xl': big,
         })}
-        placeholder="Enter deckcode"
+        placeholder="Enter deckcode or shortid"
         value={deckcode ?? ''}
         onChange={(ev) => setDeckcode(normalizeDeckcode(ev.target.value) ?? '')}
         onKeyDown={handleKeydown}

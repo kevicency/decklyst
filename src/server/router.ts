@@ -1,9 +1,28 @@
+import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
 import * as trpc from '@trpc/server'
+import { difference } from 'lodash'
+import { nanoid } from 'nanoid'
 import { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
 const IMAGE_VERSION = '0' // TODO: use git commit hash?
+
+const generateShortid = async (ctx: Context, size = 3): Promise<string> => {
+  const candidates = new Array(15).fill(0).map(() => nanoid(size))
+  const taken = await ctx.prisma.deck.findMany({
+    select: { shortid: true },
+    where: {
+      shortid: { in: candidates },
+    },
+  })
+  const shortid = difference(
+    candidates,
+    taken.map((d) => d.shortid),
+  )[0]
+
+  return shortid ?? (await generateShortid(ctx, size + 1))
+}
 
 export const serverRouter = trpc
   .router<Context>()
@@ -42,17 +61,26 @@ export const serverRouter = trpc
   })
   .mutation('ensureDeck', {
     input: z.object({
-      deckcode: z.string(),
+      deckcodeOrShortid: z.string(),
     }),
-    resolve: async ({ input, ctx }) => {
-      const deck = await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
+    resolve: async ({ input: { deckcodeOrShortid }, ctx }) => {
+      const deck = await ctx.prisma.deck.findFirst({
+        select: { shortid: true, deckcode: true },
+        where: { OR: [{ deckcode: deckcodeOrShortid }, { shortid: deckcodeOrShortid }] },
+      })
 
-      return (
-        deck ??
-        (await ctx.prisma.deck.create({
-          data: { deckcode: input.deckcode },
-        }))
-      )
+      if (deck) return deck
+
+      const parsedDeck = validateDeckcode(deckcodeOrShortid)
+        ? parseDeckcode(deckcodeOrShortid)
+        : null
+
+      if (parsedDeck === null) return null
+
+      const shortid = await generateShortid(ctx)
+      return await ctx.prisma.deck.create({
+        data: { deckcode: parsedDeck.deckcode, shortid },
+      })
     },
   })
   .mutation('renderDeckImage', {
@@ -61,10 +89,11 @@ export const serverRouter = trpc
       origin: z.string(), // TODO: use env variable?
     }),
     resolve: async ({ input: { deckcode, origin }, ctx }) => {
+      const shortid = await generateShortid(ctx)
       await ctx.prisma.deck.upsert({
         where: { deckcode },
         update: { imageRendering: true },
-        create: { deckcode, imageRendering: true },
+        create: { deckcode, shortid, imageRendering: true },
       })
 
       try {

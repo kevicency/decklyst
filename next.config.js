@@ -8,6 +8,10 @@ const nextConfig = {
         source: '/:deckcode.png',
         destination: '/api/snapshot/:deckcode',
       },
+      {
+        source: '/i/:deckcode.png',
+        destination: '/api/snapshot/:deckcode',
+      },
     ]
   },
 }

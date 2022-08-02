@@ -12,6 +12,7 @@ datasource db {
 
 model Deck {
   id         Int      @id @default(autoincrement())
+  shortid    String   @unique 
   deckcode   String   @unique
   image      Bytes?
   imageVersion String @default("0")

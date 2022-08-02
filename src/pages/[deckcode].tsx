@@ -15,7 +15,8 @@ import { useQuery } from 'react-query'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
+const DeckPage: FC<Props> = ({ deck, error }) => {
+  const deckcode = deck?.deckcode ?? null
   const imageUrl = deckImageUrl(deckcode ?? '', true)
   const imageFilename = deck
     ? `${deck.title}_${deck.faction}_${deck.deckcodePruned}.png`
@@ -55,9 +56,7 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
     <div className="content-container">
       <DeckMetadata deck={deck} />
       {deck ? (
-        <div className="p-6 bg-slate-900" id="snap">
-          <DeckInfograph deck={deck} />
-        </div>
+        <DeckInfograph deck={deck} />
       ) : (
         <div className="px-4 my-4">
           <p className="text-red-500">Error: {error}</p>
@@ -100,17 +99,30 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
 }
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { deckcode, snapshot } = context.query as { deckcode: string | undefined; snapshot: any }
-  const deck = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
-  const props = { deckcode, deck, error: deck === null ? 'Invalid deckcode' : null }
+  const { deckcode: deckcodeOrShortid, snapshot } = context.query as {
+    deckcode: string | undefined
+    snapshot: any
+  }
+  let deckcode = deckcodeOrShortid
+  let shortid = null
 
-  if (deckcode && !+snapshot) {
+  if (!+snapshot && deckcodeOrShortid) {
     const client = createTRPCClient<ServerRouter>({
       url: `${siteUrl}/api/trpc`,
     })
 
-    await client.mutation('ensureDeck', { deckcode })
+    const deck = await client.mutation('ensureDeck', { deckcodeOrShortid })
+
+    if (deck) {
+      deckcode = deck.deckcode
+      shortid = deck.shortid
+    }
   }
+  const deckData = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
+  const props = {
+    deck: deckData ? { ...deckData, shortid } : null,
+    error: deckData ? null : 'Invalid deckcode',
+  } // TODO: 404 redirect?
 
   return { props }
 }
