@@ -2,20 +2,28 @@ import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
 import { deckImageUrl, siteUrl } from '@/common/urls'
 import { DeckInfograph } from '@/components/DeckInfograph'
 import { DeckMetadata } from '@/components/DeckMetadata'
+import { OneTimeButton } from '@/components/OneTimeButton'
 import { ServerRouter } from '@/server/router'
 import { createTRPCClient } from '@trpc/client'
 import { InferGetServerSidePropsType } from 'next'
 import { GetServerSidePropsContext } from 'next/types'
-import { FC, MouseEventHandler, useState } from 'react'
+import React, { FC } from 'react'
+import { IoCodeWorking } from 'react-icons/io5'
+import { MdDone, MdDownload, MdDownloadDone, MdLink } from 'react-icons/md'
 import { useQuery } from 'react-query'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
-  const { data: deckImageDataUri, isSuccess: isImageGenerated } = useQuery(
+  const imageUrl = deckImageUrl(deckcode ?? '', true)
+  const imageFilename = deck
+    ? `${deck.title}_${deck.faction}_${deck.deckcodePruned}.png`
+    : `${deckcode}.png`
+
+  const { data: imageDataUri, isSuccess: isImageGenerated } = useQuery(
     ['deck-image', deckcode],
     async () => {
-      const blob = await fetch(deckImageUrl(deckcode!, true)).then((res) => res.blob())
+      const blob = await fetch(imageUrl).then((res) => res.blob())
       const reader = new FileReader()
 
       return await new Promise<string>((resolve) => {
@@ -31,7 +39,6 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
     },
   )
 
-  const [isDownloading, setIsDownloading] = useState(false)
   const copyDeckcode = async () => {
     if (deckcode) {
       await navigator.clipboard.writeText(deckcode)
@@ -42,23 +49,6 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
       await navigator.clipboard.writeText(deckImageUrl(deckcode))
     }
   }
-
-  const downloadImageInterceptor: MouseEventHandler = (ev) => {
-    if (isDownloading) {
-      return ev.preventDefault()
-    }
-
-    setTimeout(() => {
-      setIsDownloading(true)
-    }, 0)
-    setTimeout(() => {
-      setIsDownloading(false)
-    }, 5000)
-  }
-
-  const imageFilename = deck
-    ? `${deck.title}_${deck.faction}_${deck.deckcodePruned}.png`
-    : `${deckcode}.png`
 
   return (
     <div className="content-container">
@@ -74,36 +64,34 @@ const DeckPage: FC<Props> = ({ deckcode, deck, error }) => {
       )}
       {deck && (
         <div className="mt-4 grid grid-cols-3 auto-cols-auto gap-4">
-          <button
-            className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
-            onClick={copyDeckcode}
-          >
-            Copy deckcode
-          </button>
-          <button
-            className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
-            onClick={copyImageUrl}
-          >
-            Copy image link
-          </button>
-          {isImageGenerated ? (
-            <a
-              className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
-              href={deckImageDataUri}
-              download={imageFilename}
-            >
-              Download as image
-            </a>
-          ) : (
-            <a
-              className="bg-slate-600 hover:bg-blue-600 text-white font-bold px-6 py-4 text-xl text-center"
-              href={isDownloading ? '#' : deckImageUrl(deckcode!, true)}
-              download={isDownloading ? undefined : imageFilename}
-              onClick={downloadImageInterceptor}
-            >
-              Download as image
-            </a>
-          )}
+          <OneTimeButton onClick={copyDeckcode} timeout={2500}>
+            {(copied) => (
+              <>
+                {copied ? <MdDone className="mr-2" /> : <IoCodeWorking className="mr-2" />}
+                Copy deckcode
+              </>
+            )}
+          </OneTimeButton>
+          <OneTimeButton onClick={copyImageUrl} timeout={2500}>
+            {(copied) => (
+              <>
+                {copied ? <MdDone className="mr-2" /> : <MdLink className="mr-2" />}
+                Copy image url
+              </>
+            )}
+          </OneTimeButton>
+          <OneTimeButton href={isImageGenerated ? imageDataUri : imageUrl} download={imageFilename}>
+            {(isDownloading) => (
+              <>
+                {isDownloading ? (
+                  <MdDownloadDone className="mr-2" />
+                ) : (
+                  <MdDownload className="mr-2" />
+                )}
+                Download image
+              </>
+            )}
+          </OneTimeButton>
         </div>
       )}
     </div>

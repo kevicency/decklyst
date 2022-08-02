@@ -7,12 +7,6 @@
     display: inline-block;
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
   }
-
-  .sprite {
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    image-rendering: pixelated;
-  }
 }
 
 @layer base {
@@ -21,6 +15,24 @@
     max-width: 68rem;
     padding: 0 2rem;
     @apply mx-auto;
+  }
+}
+
+@layer components {
+  .sprite {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    image-rendering: pixelated;
+  }
+
+  .btn {
+    @apply flex items-center justify-center;
+    @apply bg-slate-600 hover:bg-blue-600;
+    @apply text-white;
+  }
+
+  .btn--large {
+    @apply font-bold px-6 py-4 text-xl;
   }
 }
 
@@ -46,6 +58,6 @@ html {
 }
 
 body {
-  color: white;
   background: black;
+  color: white;
 }
