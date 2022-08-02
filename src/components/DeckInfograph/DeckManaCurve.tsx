@@ -1,6 +1,6 @@
-import { ManaCurveEntry } from '@/common/deckcode'
-import { Faction } from '@/data/types'
-import { FC } from 'react'
+import type { ManaCurveEntry } from '@/common/deckcode'
+import type { Faction } from '@/data/cards'
+import type { FC } from 'react'
 import { ManaIcon } from './ManaIcon'
 import { useDeck } from './useDeck'
 

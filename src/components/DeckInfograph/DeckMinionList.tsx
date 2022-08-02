@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { useQuery } from 'react-query'
-import { CardOccurence } from '../../common/deckcode'
-import { UnitSpriteData } from '../../common/sprite'
+import type { CardOccurrence } from '../../common/deckcode'
+import type { UnitSpriteData } from '../../common/sprite'
 import { useDeck } from './useDeck'
 
 export const DeckMinionList = () => {
@@ -22,7 +22,7 @@ export const DeckMinionList = () => {
     </div>
   )
 }
-export const MinionCard: FC<{ card: CardOccurence }> = ({ card }) => (
+export const MinionCard: FC<{ card: CardOccurrence }> = ({ card }) => (
   <div className="flex flex-col">
     <div className="flex flex-1 relative">
       {card.spriteName && <MinionCardSprite spriteName={card.spriteName} />}

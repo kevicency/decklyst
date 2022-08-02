@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 export const ManaIcon: FC<{ mana: number | string; className?: string }> = ({
   mana,

@@ -1,5 +1,6 @@
 import cx from 'classnames'
-import React, { FC, MouseEventHandler, useState } from 'react'
+import type { FC, MouseEventHandler } from 'react'
+import React, { useState } from 'react'
 
 export const OneTimeButton: FC<{
   onClick?: MouseEventHandler

@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import { useRouter } from 'next/router'
-import { FC, KeyboardEventHandler, useEffect, useRef, useState } from 'react'
+import type { FC, KeyboardEventHandler } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { normalizeDeckcode, validateDeckcode } from '../common/deckcode'
 
 export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {

@@ -1,6 +1,25 @@
-import { abyssian, CardData, lyonar, magmar, neutral, songhai, vanar, vetruvian } from './types'
+import { abyssian, lyonar, magmar, neutral, songhai, vanar, vetruvian } from './utils'
 
-export type { CardData } from './types'
+export type Faction =
+  | 'lyonar'
+  | 'songhai'
+  | 'vetruvian'
+  | 'abyssian'
+  | 'magmar'
+  | 'vanar'
+  | 'neutral'
+export type CardType = 'GENERAL' | 'MINION' | 'SPELL' | 'ARTIFACT'
+export type Rarity = 'BASIC' | 'COMMON' | 'RARE' | 'EPIC' | 'LEGENDARY'
+
+export interface CardData {
+  id: number
+  title: string
+  faction: Faction
+  type: CardType
+  cost: number
+  rarity: Rarity
+  spriteName?: string | null
+}
 
 export const lyonarCardData: CardData[] = [
   lyonar(60, 'Argeon Highmayne', 0, 'GENERAL', 'BASIC', 'f1_general'),

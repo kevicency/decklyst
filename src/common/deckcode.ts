@@ -1,8 +1,8 @@
+import type { CardData, CardType, Faction } from '@/data/cards'
+import { cardDataById } from '@/data/cards'
 import { groupBy, max, sortBy, sumBy } from 'lodash'
-import { CardData, cardDataById } from '../data/cards'
-import { CardType, Faction } from '../data/types'
 
-export type CardOccurence = CardData & {
+export type CardOccurrence = CardData & {
   count: number
 }
 
@@ -18,9 +18,9 @@ export type DeckData = {
   faction: Faction
   general: CardData
   cards: {
-    minions: CardOccurence[]
-    spells: CardOccurence[]
-    artifacts: CardOccurence[]
+    minions: CardOccurrence[]
+    spells: CardOccurrence[]
+    artifacts: CardOccurrence[]
   }
   counts: {
     total: number
@@ -51,7 +51,7 @@ export const parseDeckcode = (deckcode: string): DeckData | null => {
   const size = sumBy(allCards, (card) => card.count)
   const cardGroups = groupBy(allCards, (card) => card.type) as unknown as Record<
     CardType,
-    CardOccurence[]
+    CardOccurrence[]
   >
   const general = cardGroups['GENERAL']?.[0]
 

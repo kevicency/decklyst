@@ -1,7 +1,7 @@
-import { DeckData } from '@/common/deckcode'
+import type { DeckData } from '@/common/deckcode'
 import { startCase } from 'lodash'
 import Head from 'next/head'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 const lineAsciiManaCurve = (deck: DeckData) =>
   deck.manaCurve

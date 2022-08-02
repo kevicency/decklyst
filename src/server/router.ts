@@ -1,7 +1,7 @@
 import * as trpc from '@trpc/server'
 import { Buffer } from 'node:buffer'
 import { z } from 'zod'
-import { Context } from './context'
+import type { Context } from './context'
 
 export const serverRouter = trpc
   .router<Context>()

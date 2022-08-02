@@ -1,23 +1,4 @@
-export type Faction =
-  | 'lyonar'
-  | 'songhai'
-  | 'vetruvian'
-  | 'abyssian'
-  | 'magmar'
-  | 'vanar'
-  | 'neutral'
-export type CardType = 'GENERAL' | 'MINION' | 'SPELL' | 'ARTIFACT'
-export type Rarity = 'BASIC' | 'COMMON' | 'RARE' | 'EPIC' | 'LEGENDARY'
-
-export interface CardData {
-  id: number
-  title: string
-  faction: Faction
-  type: CardType
-  cost: number
-  rarity: Rarity
-  spriteName?: string | null
-}
+import type { CardData, CardType, Faction, Rarity } from '@/data/cards'
 
 const normalizeSpriteName = (name: string | undefined | null): string | null => (name ? name : null)
 

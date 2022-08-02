@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { Faction } from '../../data/types'
+import type { Faction } from '@/data/cards'
+import type { FC } from 'react'
 import { useDeck } from './useDeck'
 
 const CardCount: FC<{ faction: Faction; label: string; count: number }> = ({

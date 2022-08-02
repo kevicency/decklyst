@@ -1,6 +1,6 @@
 import { siteUrl } from '@/common/urls'
 import { Layout } from '@/components/Layout'
-import { ServerRouter } from '@/server/router'
+import type { ServerRouter } from '@/server/router'
 import { withTRPC } from '@trpc/next'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'

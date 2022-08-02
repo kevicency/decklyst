@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { DeckData } from '../../common/deckcode'
+import type { FC } from 'react'
+import type { DeckData } from '../../common/deckcode'
 import { DeckArtifactList } from './DeckArtifactList'
 import { DeckCardList } from './DeckCardList'
 import { DeckCountsAlt } from './DeckCounts'

@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { normalizeDeckcode, validateDeckcode } from '@/common/deckcode'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import absoluteUrl from 'next-absolute-url'
-import { normalizeDeckcode, validateDeckcode } from '../../../common/deckcode'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { origin } = absoluteUrl(req)

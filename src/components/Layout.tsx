@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { DeckcodeSearch } from './DeckcodeSearch'
 
 export const Layout: FC<{ children: any; showSearch?: boolean }> = ({ children, showSearch }) => (
