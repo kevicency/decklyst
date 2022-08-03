@@ -28,7 +28,7 @@ const DeckPage: FC<Props> = ({ deck, error }) => {
       let dataUri = ''
       let retries = 0
 
-      while (!/^data:image\/png;base64,/.test(dataUri) && retries++ < 3) {
+      while (retries++ < 3) {
         const blob = await fetch(imageUrl).then((res) => res.blob())
         const reader = new FileReader()
 
@@ -38,6 +38,11 @@ const DeckPage: FC<Props> = ({ deck, error }) => {
             resolve(reader.result as string)
           }
         })
+        if (/^data:image\/png;base64,/.test(dataUri)) {
+          return dataUri
+        } else {
+          await new Promise((resolve) => setTimeout(resolve, 250))
+        }
       }
       return Promise.reject('image generation failed')
     },
