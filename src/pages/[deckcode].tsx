@@ -134,7 +134,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const deckData = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
   const props = {
     deck: deckData ? { ...deckData, shortid } : null,
-    error: deckData ? null : 'Invalid deckcode',
+    error: deckData ? null : 'Invalid deckcode: ' + deckcodeOrShortid,
     snapshot: +snapshot,
   } // TODO: 404 redirect?
 

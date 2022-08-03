@@ -103,13 +103,16 @@ export const serverRouter = trpc
     input: z.object({
       deckcode: z.string(),
     }),
-    resolve: async ({ input: { deckcode }, ctx }) => {
-      const shortid = await generateShortid(ctx)
-      await ctx.prisma.deck.upsert({
+    resolve: async ({ input, ctx }) => {
+      const { shortid, deckcode } = await ctx.prisma.deck.upsert({
         select: { shortid: true, deckcode: true },
-        where: { deckcode },
+        where: { deckcode: input.deckcode },
         update: { imageRendering: true },
-        create: { deckcode, shortid, imageRendering: true },
+        create: {
+          deckcode: input.deckcode,
+          shortid: await generateShortid(ctx),
+          imageRendering: true,
+        },
       })
 
       try {
