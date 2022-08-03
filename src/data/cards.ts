@@ -114,7 +114,7 @@ export const vetruvianCardData: CardData[] = [
   vetruvian(20441, 'Cosmic Flesh', 2, 'SPELL', 'BASIC', 'icon_f3_d2_cosmicflesh'),
   vetruvian(268, 'Dunecaster', 2, 'MINION', 'COMMON', 'f3_orbweaver'),
   vetruvian(271, 'Ethereal Obelysk', 2, 'MINION', 'BASIC', 'f3_obelyskredsand'),
-  vetruvian(271, 'Imperial Mechanyst', 2, 'MINION', 'RARE', 'f3_palacetrinketeer'),
+  vetruvian(275, 'Imperial Mechanyst', 2, 'MINION', 'RARE', 'f3_palacetrinketeer'),
   vetruvian(269, 'Orb Weaver', 2, 'MINION', 'COMMON', 'f3_dunecaster'),
   vetruvian(270, 'Pyromancer', 2, 'MINION', 'BASIC', 'f3_pyromancer'),
   vetruvian(20451, "Rasha's Curse", 2, 'SPELL', 'EPIC', 'icon_f3_d2_rashascurse'),
