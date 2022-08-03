@@ -106,7 +106,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   let deckcode = deckcodeOrShortid
   let shortid = null
 
-  if (!+snapshot && deckcodeOrShortid) {
+  if (deckcodeOrShortid) {
     const client = createTRPCClient<ServerRouter>({
       url: `${siteUrl}/api/trpc`,
     })
@@ -114,6 +114,8 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const deck = +snapshot
       ? await client.query('resolveDeck', { deckcodeOrShortid })
       : await client.mutation('ensureDeck', { deckcodeOrShortid })
+
+    console.log('deck', deck)
 
     if (deck) {
       deckcode = deck.deckcode

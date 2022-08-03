@@ -91,6 +91,7 @@ export const serverRouter = trpc
 
       const shortid = await generateShortid(ctx)
       return await ctx.prisma.deck.create({
+        select: { shortid: true, deckcode: true },
         data: { deckcode: parsedDeck.deckcode, shortid },
       })
     },
