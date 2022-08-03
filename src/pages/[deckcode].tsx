@@ -111,7 +111,9 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       url: `${siteUrl}/api/trpc`,
     })
 
-    const deck = await client.mutation('ensureDeck', { deckcodeOrShortid })
+    const deck = +snapshot
+      ? await client.query('resolveDeck', { deckcodeOrShortid })
+      : await client.mutation('ensureDeck', { deckcodeOrShortid })
 
     if (deck) {
       deckcode = deck.deckcode

@@ -7,7 +7,7 @@ import { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
-const IMAGE_VERSION = '2' // TODO: use git commit hash?
+const IMAGE_VERSION = '2.1' // TODO: use git commit hash?
 
 const generateShortid = async (ctx: Context, size = 3): Promise<string> => {
   const candidates = new Array(15).fill(0).map(() => nanoid(size))
@@ -33,6 +33,17 @@ export const serverRouter = trpc
     }),
     resolve: async ({ input, ctx }) => {
       return await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
+    },
+  })
+  .query('resolveDeck', {
+    input: z.object({
+      deckcodeOrShortid: z.string(),
+    }),
+    resolve: async ({ input: { deckcodeOrShortid }, ctx }) => {
+      return await ctx.prisma.deck.findFirst({
+        select: { shortid: true, deckcode: true },
+        where: { OR: [{ deckcode: deckcodeOrShortid }, { shortid: deckcodeOrShortid }] },
+      })
     },
   })
   .query('getDeckImage', {
