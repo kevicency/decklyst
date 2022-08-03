@@ -1,12 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { normalizeDeckcode, validateDeckcode } from '@/common/deckcode'
+import { siteUrl } from '@/common/urls'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import absoluteUrl from 'next-absolute-url'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { origin } = absoluteUrl(req)
   const deckcode = normalizeDeckcode(req.query.deckcode as string | undefined)
-  const deckcodeUrl = `${origin}/${encodeURIComponent(deckcode ?? '')}?snapshot=1`
+  const deckcodeUrl = `${siteUrl}/${encodeURIComponent(deckcode ?? '')}?snapshot=1`
 
   if (!validateDeckcode(deckcode)) {
     return res.status(404).send('')

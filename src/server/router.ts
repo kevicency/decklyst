@@ -1,4 +1,5 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
+import { siteUrl } from '@/common/urls'
 import * as trpc from '@trpc/server'
 import { difference } from 'lodash'
 import { nanoid } from 'nanoid'
@@ -97,7 +98,7 @@ export const serverRouter = trpc
       })
 
       try {
-        const renderUrl = `${origin}/api/render/${encodeURIComponent(deckcode ?? '')}`
+        const renderUrl = `${siteUrl}/api/render/${encodeURIComponent(deckcode ?? '')}`
         const blob = await fetch(renderUrl).then((response) => response.blob())
         const image = Buffer.from(await blob.arrayBuffer())
 

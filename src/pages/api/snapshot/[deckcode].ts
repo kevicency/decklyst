@@ -3,10 +3,8 @@ import { normalizeDeckcode, validateDeckcode } from '@/common/deckcode'
 import { createContext } from '@/server/context'
 import { serverRouter } from '@/server/router'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import absoluteUrl from 'next-absolute-url'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { origin } = absoluteUrl(req)
   const deckcode = normalizeDeckcode(req.query.deckcode as string | undefined)
 
   if (!validateDeckcode(deckcode)) {
