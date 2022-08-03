@@ -12,7 +12,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "prebuild": "prisma generate",
-    "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy"
+    "migrate:prod": "dotenv -e .env.migrations -- prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "4.1.1",

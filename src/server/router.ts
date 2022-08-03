@@ -6,7 +6,7 @@ import { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
-const IMAGE_VERSION = '0' // TODO: use git commit hash?
+const IMAGE_VERSION = '1' // TODO: use git commit hash?
 
 const generateShortid = async (ctx: Context, size = 3): Promise<string> => {
   const candidates = new Array(15).fill(0).map(() => nanoid(size))
@@ -41,7 +41,7 @@ export const serverRouter = trpc
     resolve: async ({ input, ctx }) => {
       let run = 0
 
-      while (run < 5) {
+      while (run < 10) {
         const deck = await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
         const image = deck?.imageVersion === IMAGE_VERSION ? deck?.image ?? null : null
 

@@ -1,3 +1,4 @@
+import { siteUrl } from '@/common/urls'
 import { QRCodeCanvas } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 import { useDeck } from './useDeck'
@@ -7,7 +8,7 @@ export const DeckQRCode = () => {
   const [qrValue, setQrValue] = useState('')
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setQrValue(`${window.location.origin}/${shortid ?? deckcode}`)
+      setQrValue(`${siteUrl}/${shortid ?? deckcode}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
