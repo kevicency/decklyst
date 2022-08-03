@@ -15,7 +15,7 @@ import { useQuery } from 'react-query'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const DeckPage: FC<Props> = ({ deck, error }) => {
+const DeckPage: FC<Props> = ({ deck, error, snapshot }) => {
   const deckcode = deck?.deckcode ?? null
   const imageUrl = deckImageUrl(deckcode ?? '', true)
   const imageFilename = deck
@@ -47,7 +47,7 @@ const DeckPage: FC<Props> = ({ deck, error }) => {
       return Promise.reject('image generation failed')
     },
     {
-      enabled: Boolean(deckcode),
+      enabled: Boolean(deckcode) && !snapshot,
       staleTime: Infinity,
     },
   )
@@ -126,8 +126,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       ? await client.query('resolveDeck', { deckcodeOrShortid })
       : await client.mutation('ensureDeck', { deckcodeOrShortid })
 
-    console.log('deck', deck)
-
     if (deck) {
       deckcode = deck.deckcode
       shortid = deck.shortid
@@ -137,6 +135,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const props = {
     deck: deckData ? { ...deckData, shortid } : null,
     error: deckData ? null : 'Invalid deckcode',
+    snapshot: +snapshot,
   } // TODO: 404 redirect?
 
   return { props }

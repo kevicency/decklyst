@@ -113,12 +113,11 @@ export const serverRouter = trpc
       })
 
       try {
-        const renderUrl =
-          process.env.USE_URLBOX_RENDER === 'true'
-            ? getUrlboxRenderUrl(shortid)
-            : `${siteUrl}/api/render/${encodeURIComponent(deckcode ?? '')}`
-
-        const blob = await fetch(renderUrl).then((response) => response.blob())
+        const renderUrls = [`${siteUrl}/api/render/${encodeURIComponent(deckcode ?? '')}`].concat(
+          process.env.USE_URLBOX_RENDER === 'true' ? getUrlboxRenderUrl(shortid) : [],
+        )
+        const response = await Promise.race(renderUrls.map((renderUrl) => fetch(renderUrl)))
+        const blob = await response.blob()
         const image = Buffer.from(await blob.arrayBuffer())
 
         await ctx.prisma.deck.update({
@@ -142,6 +141,6 @@ const getUrlboxRenderUrl = (shortid: string) => {
 
   return `https://api.urlbox.io/v1/28RW9V9y8LD2ni5y/png?url=${encodeURIComponent(
     url,
-  )}&selector=%23snap&wait_timeout=3500&wait_until=mostrequestsfinished`
+  )}&selector=%23snap&wait_timeout=3000&wait_until=domloaded`
 }
 export type ServerRouter = typeof serverRouter
