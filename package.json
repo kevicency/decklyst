@@ -38,6 +38,7 @@
     "react-icons": "4.4.0",
     "react-query": "3",
     "superjson": "1.9.1",
+    "typeface-roboto": "1.1.13",
     "zod": "3.17.10"
   },
   "devDependencies": {

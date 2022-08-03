@@ -7,6 +7,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import superjson from 'superjson'
+import 'typeface-roboto'
 import '../styles/globals.css'
 
 const queryClient = new QueryClient()

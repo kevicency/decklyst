@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 
@@ -23,6 +24,9 @@ module.exports = {
         rare: '#396cfd',
         epic: '#bf20e1',
         legendary: '#e39f28',
+      },
+      fontFamily: {
+        mono: ['Roboto', ...defaultTheme.fontFamily.mono],
       },
     },
   },
