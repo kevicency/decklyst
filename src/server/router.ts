@@ -1,5 +1,5 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
-import { siteUrl } from '@/common/urls'
+import { deckShortUrl, siteUrl } from '@/common/urls'
 import * as trpc from '@trpc/server'
 import { difference } from 'lodash'
 import { customAlphabet } from 'nanoid'
@@ -106,13 +106,18 @@ export const serverRouter = trpc
     resolve: async ({ input: { deckcode }, ctx }) => {
       const shortid = await generateShortid(ctx)
       await ctx.prisma.deck.upsert({
+        select: { shortid: true, deckcode: true },
         where: { deckcode },
         update: { imageRendering: true },
         create: { deckcode, shortid, imageRendering: true },
       })
 
       try {
-        const renderUrl = `${siteUrl}/api/render/${encodeURIComponent(deckcode ?? '')}`
+        const renderUrl =
+          process.env.USE_URLBOX_RENDER === 'true'
+            ? getUrlboxRenderUrl(shortid)
+            : `${siteUrl}/api/render/${encodeURIComponent(deckcode ?? '')}`
+
         const blob = await fetch(renderUrl).then((response) => response.blob())
         const image = Buffer.from(await blob.arrayBuffer())
 
@@ -132,4 +137,11 @@ export const serverRouter = trpc
     },
   })
 
+const getUrlboxRenderUrl = (shortid: string) => {
+  const url = deckShortUrl(shortid) + '?snapshot=1'
+
+  return `https://api.urlbox.io/v1/28RW9V9y8LD2ni5y/png?url=${encodeURIComponent(
+    url,
+  )}&selector=%23snap&wait_timeout=3500&wait_until=mostrequestsfinished`
+}
 export type ServerRouter = typeof serverRouter
