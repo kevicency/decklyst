@@ -1,6 +1,5 @@
 import type { CardOccurrence } from '@/common/deckcode'
 import type { IconSpriteData } from '@/common/sprite'
-import axios from 'axios'
 import cx from 'classnames'
 import type { FC } from 'react'
 import { useQuery } from 'react-query'
@@ -32,7 +31,7 @@ const IconCardSprite: FC<{ spriteName: string }> = ({ spriteName }) => {
   const spriteDataUrl = `/assets/spritesheets/icons/${spriteName.replace('d2_', '')}.plist.json`
 
   const { data, isSuccess } = useQuery<IconSpriteData>(['sprite-data', spriteName], async () =>
-    axios.get(spriteDataUrl).then((res) => res.data),
+    fetch(spriteDataUrl).then((res) => res.json()),
   )
 
   const width = data?.frameWidth ?? 0

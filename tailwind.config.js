@@ -26,7 +26,7 @@ module.exports = {
         legendary: '#e39f28',
       },
       fontFamily: {
-        mono: ['Roboto', ...defaultTheme.fontFamily.mono],
+        mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono],
       },
     },
   },

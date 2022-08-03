@@ -1,8 +1,7 @@
-import axios from 'axios'
+import type { CardOccurrence } from '@/common/deckcode'
+import type { UnitSpriteData } from '@/common/sprite'
 import type { FC } from 'react'
 import { useQuery } from 'react-query'
-import type { CardOccurrence } from '../../common/deckcode'
-import type { UnitSpriteData } from '../../common/sprite'
 import { useDeck } from './useDeck'
 
 export const DeckMinionList = () => {
@@ -37,7 +36,7 @@ const MinionCardSprite: FC<{ spriteName: string }> = ({ spriteName }) => {
   const spriteDataUrl = `/assets/spritesheets/units/${spriteName}.plist.json`
 
   const { data, isSuccess } = useQuery<UnitSpriteData>(['sprite-data', spriteName], async () =>
-    axios.get(spriteDataUrl).then((res) => res.data),
+    fetch(spriteDataUrl).then((res) => res.json()),
   )
 
   const width = data?.frameWidth ?? 0

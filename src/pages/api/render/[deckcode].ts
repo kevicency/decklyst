@@ -1,7 +1,7 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { normalizeDeckcode, validateDeckcode } from '@/common/deckcode'
 import { siteUrl } from '@/common/urls'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import puppeteer from 'puppeteer-core'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const deckcode = normalizeDeckcode(req.query.deckcode as string | undefined)
@@ -32,7 +32,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 async function launchPuppeteer() {
   if (process.env.VERCEL) {
     const chrome = require('chrome-aws-lambda')
-    const puppeteer = require('puppeteer-core')
     const browser = await puppeteer.launch({
       args: chrome.args,
       executablePath: await chrome.executablePath,
@@ -41,7 +40,6 @@ async function launchPuppeteer() {
     })
     return { puppeteer, browser }
   } else {
-    const puppeteer = require('puppeteer')
     const browser = await puppeteer.launch({
       args: ['--disable-setuid-sandbox', '--no-sandbox', '--no-zygote'],
       executablePath: '/usr/local/bin/chromium',
