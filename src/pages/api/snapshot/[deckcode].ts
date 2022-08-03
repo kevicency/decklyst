@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let image = await client.query('getDeckImage', { deckcode })
 
   if (image == null) {
-    image = await client.mutation('renderDeckImage', { deckcode, origin })
+    image = await client.mutation('renderDeckImage', { deckcode })
   }
 
   res.setHeader('Content-Type', 'image/png').send(image)

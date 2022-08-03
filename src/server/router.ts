@@ -7,7 +7,7 @@ import { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
-const IMAGE_VERSION = '1' // TODO: use git commit hash?
+const IMAGE_VERSION = '2' // TODO: use git commit hash?
 
 const generateShortid = async (ctx: Context, size = 3): Promise<string> => {
   const candidates = new Array(15).fill(0).map(() => nanoid(size))
@@ -87,9 +87,8 @@ export const serverRouter = trpc
   .mutation('renderDeckImage', {
     input: z.object({
       deckcode: z.string(),
-      origin: z.string(), // TODO: use env variable?
     }),
-    resolve: async ({ input: { deckcode, origin }, ctx }) => {
+    resolve: async ({ input: { deckcode }, ctx }) => {
       const shortid = await generateShortid(ctx)
       await ctx.prisma.deck.upsert({
         where: { deckcode },
