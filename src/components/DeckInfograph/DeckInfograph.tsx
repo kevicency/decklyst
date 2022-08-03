@@ -17,7 +17,7 @@ export const DeckInfograph: FC<{ deck: Deck }> = ({ deck }) => {
       <div className="p-6 pb-2 bg-slate-900 relative" id="snap">
         <div className="grid auto-rows-auto gap-6 text-slate-100">
           <div
-            className="grid gap-4"
+            className="grid gap-4 lg:gap-6"
             style={{
               gridTemplateColumns: 'minmax(0, 1.5fr)  minmax(0, 0.5fr) minmax(0, 1fr) auto',
             }}

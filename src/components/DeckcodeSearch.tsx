@@ -3,6 +3,7 @@ import cx from 'classnames'
 import { useRouter } from 'next/router'
 import type { FC, KeyboardEventHandler } from 'react'
 import { useEffect, useRef, useState } from 'react'
+import { MdSearch } from 'react-icons/md'
 
 export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
   const inputElement = useRef<HTMLInputElement>(null)
@@ -12,7 +13,7 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
 
   const valid = deckcode && (deckcode.length < 8 || validateDeckcode(deckcode))
   const invalid = !valid
-  const touched = deckcode !== null
+  const touched = !!deckcode
 
   useEffect(() => {
     if (inputElement.current && big) {
@@ -54,12 +55,12 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
       />
       <button
         disabled={invalid || navigating}
-        className={
-          'bg-slate-600 hover:bg-blue-600 disabled:bg-slate-800 disabled:text-slate-600 text-white font-bold px-4 text-xl'
-        }
+        className={cx('btn disabled:bg-slate-800 disabled:text-slate-600 px-2', {
+          'px-6 text-xl': big,
+        })}
         onClick={navigateToDeckcode}
       >
-        Go
+        <MdSearch size={big ? 32 : 24} />
       </button>
     </div>
   )

@@ -3,6 +3,7 @@ import { Layout } from '@/components/Layout'
 import type { ServerRouter } from '@/server/router'
 import { withTRPC } from '@trpc/next'
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import superjson from 'superjson'
@@ -15,6 +16,14 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Layout showSearch={router.route !== '/'}>
+        <Head>
+          <title>Duelyst Share</title>
+          <meta name="description" content="Share Duelyst 2 deck codes" />
+          <meta property="og:site_name" content="Duelyst Share" />
+          <meta property="og:title" content="Duelyst Share" />
+          <link rel="icon" href="/public/favicon.ico" />
+          <link type="application/json+oembed" href="/public/oembed.json" />
+        </Head>
         <Component {...pageProps} />
       </Layout>
     </QueryClientProvider>

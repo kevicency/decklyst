@@ -13,7 +13,7 @@
   .content-container {
     width: 100%;
     max-width: 68rem;
-    padding: 0 2rem;
+    @apply px-4 lg:px-8;
     @apply mx-auto;
   }
 }
@@ -27,7 +27,7 @@
 
   .btn {
     @apply flex items-center justify-center;
-    @apply bg-slate-600 hover:bg-blue-600;
+    @apply bg-slate-700 hover:bg-sky-600;
     @apply text-white;
   }
 
@@ -58,6 +58,6 @@ html {
 }
 
 body {
-  background: black;
-  color: white;
+  @apply bg-zinc-900;
+  @apply text-slate-50;
 }

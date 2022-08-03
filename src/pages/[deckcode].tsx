@@ -1,11 +1,11 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
 import { deckImageUrl, siteUrl } from '@/common/urls'
 import { DeckInfograph } from '@/components/DeckInfograph'
+import type { Deck } from '@/components/DeckInfograph/useDeck'
 import { DeckMetadata } from '@/components/DeckMetadata'
 import { OneTimeButton } from '@/components/OneTimeButton'
 import type { ServerRouter } from '@/server/router'
 import { createTRPCClient } from '@trpc/client'
-import type { InferGetServerSidePropsType } from 'next'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
 import React from 'react'
@@ -13,9 +13,9 @@ import { IoCodeWorking } from 'react-icons/io5'
 import { MdDone, MdDownload, MdDownloadDone, MdLink } from 'react-icons/md'
 import { useQuery } from 'react-query'
 
-type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+type Props = { deck?: Deck; snapshot: boolean }
 
-const DeckPage: FC<Props> = ({ deck, error, snapshot }) => {
+const DeckPage: FC<Props> = ({ deck, snapshot }) => {
   const deckcode = deck?.deckcode ?? null
   const imageUrl = deckImageUrl(deckcode ?? '', true)
   const imageFilename = deck
@@ -63,48 +63,42 @@ const DeckPage: FC<Props> = ({ deck, error, snapshot }) => {
     }
   }
 
+  if (!deck) return null
+
   return (
-    <div className="content-container">
+    <div className="content-container mt-8">
       <DeckMetadata deck={deck} />
-      {deck ? (
-        <DeckInfograph deck={deck} />
-      ) : (
-        <div className="px-4 my-4">
-          <p className="text-red-500">Error: {error}</p>
-        </div>
-      )}
-      {deck && (
-        <div className="mt-4 grid grid-cols-3 auto-cols-auto gap-4">
-          <OneTimeButton onClick={copyDeckcode} timeout={2500}>
-            {(copied) => (
-              <>
-                {copied ? <MdDone className="mr-2" /> : <IoCodeWorking className="mr-2" />}
-                Copy deckcode
-              </>
-            )}
-          </OneTimeButton>
-          <OneTimeButton onClick={copyImageUrl} timeout={2500}>
-            {(copied) => (
-              <>
-                {copied ? <MdDone className="mr-2" /> : <MdLink className="mr-2" />}
-                Copy image url
-              </>
-            )}
-          </OneTimeButton>
-          <OneTimeButton href={isImageGenerated ? imageDataUri : imageUrl} download={imageFilename}>
-            {(isDownloading) => (
-              <>
-                {isDownloading ? (
-                  <MdDownloadDone className="mr-2" />
-                ) : (
-                  <MdDownload className="mr-2" />
-                )}
-                Download image
-              </>
-            )}
-          </OneTimeButton>
-        </div>
-      )}
+      <DeckInfograph deck={deck} />
+      <div className="mt-6 grid grid-cols-3 auto-cols-auto gap-4">
+        <OneTimeButton onClick={copyDeckcode} timeout={2500}>
+          {(copied) => (
+            <>
+              {copied ? <MdDone className="mr-2" /> : <IoCodeWorking className="mr-2" />}
+              Copy deckcode
+            </>
+          )}
+        </OneTimeButton>
+        <OneTimeButton onClick={copyImageUrl} timeout={2500}>
+          {(copied) => (
+            <>
+              {copied ? <MdDone className="mr-2" /> : <MdLink className="mr-2" />}
+              Copy image url
+            </>
+          )}
+        </OneTimeButton>
+        <OneTimeButton href={isImageGenerated ? imageDataUri : imageUrl} download={imageFilename}>
+          {(isDownloading) => (
+            <>
+              {isDownloading ? (
+                <MdDownloadDone className="mr-2" />
+              ) : (
+                <MdDownload className="mr-2" />
+              )}
+              Download image
+            </>
+          )}
+        </OneTimeButton>
+      </div>
     </div>
   )
 }
@@ -132,13 +126,17 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     }
   }
   const deckData = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
-  const props = {
-    deck: deckData ? { ...deckData, shortid } : null,
-    error: deckData ? null : 'Invalid deckcode: ' + deckcodeOrShortid,
-    snapshot: +snapshot,
-  } // TODO: 404 redirect?
 
-  return { props }
+  if (!deckData) {
+    return { notFound: true }
+  }
+
+  return {
+    props: {
+      deck: { ...deckData, shortid },
+      snapshot: +snapshot,
+    },
+  }
 }
 
 export default DeckPage
