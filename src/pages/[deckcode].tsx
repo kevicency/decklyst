@@ -25,15 +25,20 @@ const DeckPage: FC<Props> = ({ deck, error }) => {
   const { data: imageDataUri, isSuccess: isImageGenerated } = useQuery(
     ['deck-image', deckcode],
     async () => {
-      const blob = await fetch(imageUrl).then((res) => res.blob())
-      const reader = new FileReader()
+      let dataUri = ''
 
-      return await new Promise<string>((resolve) => {
-        reader.readAsDataURL(blob)
-        reader.onloadend = () => {
-          resolve(reader.result as string)
-        }
-      })
+      while (/^data:image\/png;base64,/.test(dataUri)) {
+        const blob = await fetch(imageUrl).then((res) => res.blob())
+        const reader = new FileReader()
+
+        dataUri = await new Promise<string>((resolve) => {
+          reader.readAsDataURL(blob)
+          reader.onloadend = () => {
+            resolve(reader.result as string)
+          }
+        })
+      }
+      return dataUri
     },
     {
       enabled: Boolean(deckcode),

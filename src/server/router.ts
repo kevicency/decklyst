@@ -2,12 +2,15 @@ import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
 import { siteUrl } from '@/common/urls'
 import * as trpc from '@trpc/server'
 import { difference } from 'lodash'
-import { nanoid } from 'nanoid'
+import { customAlphabet } from 'nanoid'
 import { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
 const IMAGE_VERSION = '2.1' // TODO: use git commit hash?
+
+const alphabet = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz'
+const nanoid = customAlphabet(alphabet, 3)
 
 const generateShortid = async (ctx: Context, size = 3): Promise<string> => {
   const candidates = new Array(15).fill(0).map(() => nanoid(size))
