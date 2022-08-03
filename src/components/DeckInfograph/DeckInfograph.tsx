@@ -14,7 +14,7 @@ import { DeckContext } from './useDeck'
 export const DeckInfograph: FC<{ deck: Deck }> = ({ deck }) => {
   return (
     <DeckContext.Provider value={deck}>
-      <div className="p-6 bg-slate-900 relative" id="snap">
+      <div className="p-6 pb-2 bg-slate-900 relative" id="snap">
         <div className="grid auto-rows-auto gap-6 text-slate-100">
           <div
             className="grid gap-4"
@@ -40,7 +40,7 @@ export const DeckInfograph: FC<{ deck: Deck }> = ({ deck }) => {
           </div>
           <DeckCardList />
         </div>
-        <div className="flex justify-end -mt-2 -mb-4 -mr-2">
+        <div className="flex justify-end mt-1 -mr-2">
           <DeckShortUrl />
         </div>
       </div>
