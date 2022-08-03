@@ -1,15 +1,17 @@
-import { normalizeDeckcode, validateDeckcode } from '@/common/deckcode'
-import { siteUrl } from '@/common/urls'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import puppeteer from 'puppeteer-core'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const deckcode = normalizeDeckcode(req.query.deckcode as string | undefined)
-  const deckcodeUrl = `${siteUrl}/${encodeURIComponent(deckcode ?? '')}?snapshot=1`
+const env = {
+  vercelUrl: process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL,
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  vercelEnv: process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.VERCEL_ENV,
+}
 
-  if (!validateDeckcode(deckcode)) {
-    return res.status(404).send('')
-  }
+export const siteUrl = env.vercelEnv === 'preview' ? `https://${env.vercelUrl}` : env.siteUrl
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const deckcode = ((req.query.deckcode as string | undefined) ?? '').trim()
+  const deckcodeUrl = `${siteUrl}/${encodeURIComponent(deckcode)}?snapshot=1`
 
   const { browser } = await launchPuppeteer()
   const page = await browser.newPage()
