@@ -26,8 +26,9 @@ const DeckPage: FC<Props> = ({ deck, error }) => {
     ['deck-image', deckcode],
     async () => {
       let dataUri = ''
+      let retries = 0
 
-      while (!/^data:image\/png;base64,/.test(dataUri)) {
+      while (!/^data:image\/png;base64,/.test(dataUri) && retries++ < 3) {
         const blob = await fetch(imageUrl).then((res) => res.blob())
         const reader = new FileReader()
 
@@ -38,7 +39,7 @@ const DeckPage: FC<Props> = ({ deck, error }) => {
           }
         })
       }
-      return dataUri
+      return Promise.reject('image generation failed')
     },
     {
       enabled: Boolean(deckcode),
