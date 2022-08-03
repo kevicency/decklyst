@@ -27,7 +27,7 @@ const DeckPage: FC<Props> = ({ deck, error }) => {
     async () => {
       let dataUri = ''
 
-      while (/^data:image\/png;base64,/.test(dataUri)) {
+      while (!/^data:image\/png;base64,/.test(dataUri)) {
         const blob = await fetch(imageUrl).then((res) => res.blob())
         const reader = new FileReader()
 
