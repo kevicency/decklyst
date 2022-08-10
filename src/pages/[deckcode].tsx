@@ -117,8 +117,8 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     })
 
     const deck = +snapshot
-      ? await client.query('resolveDeck', { deckcodeOrShortid })
-      : await client.mutation('ensureDeck', { deckcodeOrShortid })
+      ? await client.query('resolveDeckcodeOrShortid', { deckcodeOrShortid })
+      : await client.mutation('ensureDeckcodeOrShortid', { deckcodeOrShortid })
 
     if (deck) {
       deckcode = deck.deckcode

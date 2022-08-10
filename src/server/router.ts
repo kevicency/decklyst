@@ -1,31 +1,10 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
+import { generateShortid } from '@/server/shortid'
 import * as trpc from '@trpc/server'
-import { difference } from 'lodash'
-import { customAlphabet } from 'nanoid'
-import { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
 const IMAGE_VERSION = '2.1' // TODO: use git commit hash?
-
-const alphabet = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz'
-const nanoid = customAlphabet(alphabet, 3)
-
-const generateShortid = async (ctx: Context, size = 3): Promise<string> => {
-  const candidates = new Array(15).fill(0).map(() => nanoid(size))
-  const taken = await ctx.prisma.deck.findMany({
-    select: { shortid: true },
-    where: {
-      shortid: { in: candidates },
-    },
-  })
-  const shortid = difference(
-    candidates,
-    taken.map((d) => d.shortid),
-  )[0]
-
-  return shortid ?? (await generateShortid(ctx, size + 1))
-}
 
 export const serverRouter = trpc
   .router<Context>()
@@ -33,21 +12,9 @@ export const serverRouter = trpc
     input: z.object({
       deckcode: z.string(),
     }),
-    resolve: async ({ input, ctx }) => {
-      return await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
-    },
+    resolve: async ({ input, ctx }) => await ctx.deck.getByDeckcode(input.deckcode),
   })
-  .query('resolveDeck', {
-    input: z.object({
-      deckcodeOrShortid: z.string(),
-    }),
-    resolve: async ({ input: { deckcodeOrShortid }, ctx }) => {
-      return await ctx.prisma.deck.findFirst({
-        select: { shortid: true, deckcode: true },
-        where: { OR: [{ deckcode: deckcodeOrShortid }, { shortid: deckcodeOrShortid }] },
-      })
-    },
-  })
+
   .query('getDeckImage', {
     input: z.object({
       deckcode: z.string(),
@@ -56,7 +23,7 @@ export const serverRouter = trpc
       let run = 0
 
       while (run < 10) {
-        const deck = await ctx.prisma.deck.findUnique({ where: { deckcode: input.deckcode } })
+        const deck = await ctx.deck.findUnique({ where: { deckcode: input.deckcode } })
         const image = deck?.imageVersion === IMAGE_VERSION ? deck?.image ?? null : null
 
         if (image) return image
@@ -73,15 +40,20 @@ export const serverRouter = trpc
       return null
     },
   })
-  .mutation('ensureDeck', {
+  .query('resolveDeckcodeOrShortid', {
     input: z.object({
       deckcodeOrShortid: z.string(),
     }),
     resolve: async ({ input: { deckcodeOrShortid }, ctx }) => {
-      const deck = await ctx.prisma.deck.findFirst({
-        select: { shortid: true, deckcode: true },
-        where: { OR: [{ deckcode: deckcodeOrShortid }, { shortid: deckcodeOrShortid }] },
-      })
+      return await ctx.deck.resolveDeckcodeOrShortid(deckcodeOrShortid)
+    },
+  })
+  .mutation('ensureDeckcodeOrShortid', {
+    input: z.object({
+      deckcodeOrShortid: z.string(),
+    }),
+    resolve: async ({ input: { deckcodeOrShortid }, ctx }) => {
+      const deck = ctx.deck.resolveDeckcodeOrShortid(deckcodeOrShortid)
 
       if (deck) return deck
 
@@ -92,7 +64,7 @@ export const serverRouter = trpc
       if (parsedDeck === null) return null
 
       const shortid = await generateShortid(ctx)
-      return await ctx.prisma.deck.create({
+      return await ctx.deck.create({
         select: { shortid: true, deckcode: true },
         data: { deckcode: parsedDeck.deckcode, shortid },
       })
@@ -103,7 +75,7 @@ export const serverRouter = trpc
       deckcode: z.string(),
     }),
     resolve: async ({ input, ctx }) => {
-      const { deckcode } = await ctx.prisma.deck.upsert({
+      const { deckcode } = await ctx.deck.upsert({
         select: { shortid: true, deckcode: true },
         where: { deckcode: input.deckcode },
         update: { imageRendering: true },
@@ -114,32 +86,23 @@ export const serverRouter = trpc
         },
       })
 
+      let image: Buffer | null = null
       try {
-        const renderUrl = getAzureRenderUrl(deckcode)
-        const response = await fetch(renderUrl, { method: 'POST' })
-        const blob = await response.blob()
-        const image = Buffer.from(await blob.arrayBuffer())
-
-        await ctx.prisma.deck.update({
-          where: { deckcode },
-          data: { deckcode, image, imageVersion: IMAGE_VERSION, imageRendering: false },
-        })
-        return image
+        image = await ctx.deck.render(deckcode)
       } catch (e) {
-        await ctx.prisma.deck.update({
-          where: { deckcode },
-          data: { deckcode, imageRendering: false },
-        })
+        console.error(e)
       }
 
-      return null
+      await ctx.deck.update({
+        where: { deckcode },
+        data: Object.assign(
+          { imageRendering: false },
+          image ? { image, imageVersion: IMAGE_VERSION } : {},
+        ),
+      })
+
+      return image
     },
   })
-
-const getAzureRenderUrl = (deckcode: string) => {
-  return `https://duelyst-deck-renderer.azurewebsites.net/api/render?deckcode=${encodeURIComponent(
-    deckcode,
-  )}`
-}
 
 export type ServerRouter = typeof serverRouter
