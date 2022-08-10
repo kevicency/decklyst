@@ -1,5 +1,4 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
-import { deckShortUrl, siteUrl } from '@/common/urls'
 import * as trpc from '@trpc/server'
 import { difference } from 'lodash'
 import { customAlphabet } from 'nanoid'
@@ -104,7 +103,7 @@ export const serverRouter = trpc
       deckcode: z.string(),
     }),
     resolve: async ({ input, ctx }) => {
-      const { shortid, deckcode } = await ctx.prisma.deck.upsert({
+      const { deckcode } = await ctx.prisma.deck.upsert({
         select: { shortid: true, deckcode: true },
         where: { deckcode: input.deckcode },
         update: { imageRendering: true },
@@ -116,10 +115,9 @@ export const serverRouter = trpc
       })
 
       try {
-        const renderUrls = [`${siteUrl}/api/render/${encodeURIComponent(deckcode ?? '')}`].concat(
-          process.env.USE_URLBOX_RENDER === 'true' ? getUrlboxRenderUrl(shortid) : [],
-        )
-        const response = await Promise.race(renderUrls.map((renderUrl) => fetch(renderUrl)))
+        const renderUrl = getAzureRenderUrl(deckcode)
+        console.log('renderUrl', renderUrl)
+        const response = await fetch(renderUrl, { method: 'POST' })
         const blob = await response.blob()
         const image = Buffer.from(await blob.arrayBuffer())
 
@@ -139,11 +137,10 @@ export const serverRouter = trpc
     },
   })
 
-const getUrlboxRenderUrl = (shortid: string) => {
-  const url = deckShortUrl(shortid) + '?snapshot=1'
-
-  return `https://api.urlbox.io/v1/28RW9V9y8LD2ni5y/png?url=${encodeURIComponent(
-    url,
-  )}&selector=%23snap&wait_timeout=3000&wait_until=domloaded`
+const getAzureRenderUrl = (deckcode: string) => {
+  return `https://duelyst-deck-renderer.azurewebsites.net/api/render?deckcode=${encodeURIComponent(
+    deckcode,
+  )}`
 }
+
 export type ServerRouter = typeof serverRouter
