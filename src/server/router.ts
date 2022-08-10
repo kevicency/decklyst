@@ -116,7 +116,6 @@ export const serverRouter = trpc
 
       try {
         const renderUrl = getAzureRenderUrl(deckcode)
-        console.log('renderUrl', renderUrl)
         const response = await fetch(renderUrl, { method: 'POST' })
         const blob = await response.blob()
         const image = Buffer.from(await blob.arrayBuffer())
