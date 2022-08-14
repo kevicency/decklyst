@@ -33,7 +33,7 @@ module.exports = {
   plugins: [require('tailwindcss-animate')],
   safelist: [
     {
-      pattern: /(text|bg)-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,
+      pattern: /(text|bg|border)-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,
       variants: ['hover'],
     },
     {

@@ -1,35 +1,40 @@
+import { parseDeckcode } from '@/common/deckcode'
 import { DeckcodeSearch } from '@/components/DeckcodeSearch'
-import type { NextPage } from 'next'
+import type { Deck } from '@/components/DeckInfograph/useDeck'
+import { RecentDecks } from '@/components/RecentDecks'
+import { createSsrClient } from '@/server'
+import type { InferGetServerSidePropsType, NextPage } from 'next'
+import type { GetServerSidePropsContext } from 'next/types'
 
-// type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const Home: NextPage<{ decks: any }> = ({ decks }) => {
+const Home: NextPage<Props> = ({ decks }) => {
   return (
-    <div className="content-container flex flex-1   pb-8">
-      <div className="flex flex-col flex-1 mt-[16%]">
+    <div className="content-container flex flex-col justify-around flex-1 pb-8">
+      <div className="flex flex-col">
         <h1 className="text-5xl text-center mt-8 mb-12">Duelyst Share</h1>
-        <div className="flex-1 px-24">
+        <div className="flex px-48">
           <DeckcodeSearch big />
         </div>
       </div>
-      {/*<ul>*/}
-      {/*  {decks?.map((deck, i) => (*/}
-      {/*    <li key={deck?.deckcode ?? i}>{deck?.deckcode ?? null}</li>*/}
-      {/*  ))}*/}
-      {/*</ul>*/}
+      <RecentDecks decks={decks} className="mt-16" />
     </div>
   )
 }
 
-// export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-//   const client = await createSsrClient()
-//   const deckcodes = await client.query('recentDeckcodes')
-//
-//   return {
-//     props: {
-//       decks: deckcodes.map(parseDeckcode),
-//     },
-//   }
-// }
+export const getServerSideProps = async (_context: GetServerSidePropsContext) => {
+  const client = await createSsrClient()
+  const deckinfos = await client.query('recentDeckinfos')
+  const decks: Deck[] = deckinfos.map(({ deckcode, sharecode }) => ({
+    sharecode,
+    ...parseDeckcode(deckcode)!,
+  }))
+
+  return {
+    props: {
+      decks,
+    },
+  }
+}
 
 export default Home
