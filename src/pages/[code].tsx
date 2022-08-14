@@ -103,25 +103,24 @@ const DeckPage: FC<Props> = ({ deck, snapshot }) => {
 }
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { deckcode: deckcodeOrShortid, snapshot } = context.query as {
-    deckcode: string | undefined
+  const { code, snapshot } = context.query as {
+    code: string | undefined
     snapshot: any
   }
-  let deckcode = deckcodeOrShortid
-  let shortid = null
+  let deckcode = code
+  let sharecode = null
 
-  if (deckcodeOrShortid) {
+  if (code) {
     const client = await createSsrClient()
 
     const deck = +snapshot
-      ? await client.query('resolveDeckcodeOrShortid', { deckcodeOrShortid })
-      : await client.mutation('ensureDeckcodeOrShortid', { deckcodeOrShortid })
+      ? await client.query('getDeckinfo', { code })
+      : await client.mutation('ensureDeckinfo', { code })
 
-    if (deck) {
-      deckcode = deck.deckcode
-      shortid = deck.shortid
-    }
+    deckcode = deck?.deckcode ?? deckcode
+    sharecode = deck?.sharecode ?? sharecode
   }
+
   const deckData = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
 
   if (!deckData) {
@@ -130,7 +129,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   return {
     props: {
-      deck: { ...deckData, shortid },
+      deck: { ...deckData, sharecode },
       snapshot: +snapshot,
     },
   }

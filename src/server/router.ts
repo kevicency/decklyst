@@ -1,120 +1,90 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
-import { generateShortid } from '@/server/shortid'
+import { DECK_IMAGE_VERSION } from '@/server/model/deckimage'
 import * as trpc from '@trpc/server'
+import { differenceInMilliseconds } from 'date-fns'
+import { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
-const IMAGE_VERSION = '2.1' // TODO: use git commit hash?
-
 export const serverRouter = trpc
   .router<Context>()
-  .query('getDeck', {
+
+  .query('getDeckinfo', {
     input: z.object({
-      deckcode: z.string(),
+      code: z.string(),
     }),
-    resolve: async ({ input, ctx }) => await ctx.deck.getByDeckcode(input.deckcode),
+    resolve: async ({ input, ctx }) => await ctx.deckinfo.findByCode(input.code),
+  })
+  .mutation('ensureDeckinfo', {
+    input: z.object({
+      code: z.string(),
+    }),
+    resolve: async ({ input: { code }, ctx }) => {
+      const deckinfo = await ctx.deckinfo.findByCode(code)
+
+      if (deckinfo) return deckinfo
+
+      const parsedDeck = validateDeckcode(code) ? parseDeckcode(code) : null
+
+      if (parsedDeck === null) return null
+
+      return await ctx.deckinfo.createForDeck(parsedDeck)
+    },
   })
 
-  .query('getDeckImage', {
+  .query('recentDeckinfos', {
+    input: z.number().gt(0).optional(),
+    resolve: async ({ input: count, ctx }) => {
+      return await ctx.deckinfo.recent(count ?? 3)
+    },
+  })
+
+  .query('getDeckimage', {
     input: z.object({
       deckcode: z.string(),
+      timeout: z.number().optional(),
     }),
-    resolve: async ({ input, ctx }) => {
-      let run = 0
+    resolve: async ({ input: { deckcode, timeout }, ctx }) => {
+      let isRendering = true
 
-      while (run < 10) {
-        const deck = await ctx.deck.findUnique({ where: { deckcode: input.deckcode } })
+      while (isRendering) {
+        const deckimage = await ctx.deckimage.findByDeckcode(deckcode)
 
-        if (deck == null) return null
+        if (deckimage == null) return null
+        if (deckimage.bytes && deckimage.version === DECK_IMAGE_VERSION) return deckimage.bytes
 
-        const image = deck.imageVersion === IMAGE_VERSION ? deck.image : null
-
-        if (image) return image
-
-        if (deck.imageRenderStart && BigInt(Date.now()) - deck.imageRenderStart < 5000) {
-          await new Promise((resolve) => setTimeout(resolve, 500))
-        } else {
-          return null
-        }
-
-        run += 1
+        isRendering =
+          deckimage.renderedAt !== null &&
+          differenceInMilliseconds(new Date(), deckimage.renderedAt) < (timeout ?? 5000)
       }
 
       return null
     },
   })
-  .query('resolveDeckcodeOrShortid', {
-    input: z.object({
-      deckcodeOrShortid: z.string(),
-    }),
-    resolve: async ({ input: { deckcodeOrShortid }, ctx }) => {
-      return await ctx.deck.resolveDeckcodeOrShortid(deckcodeOrShortid)
-    },
-  })
-  .query('recentDeckcodes', {
-    input: z.number().gt(0).optional(),
-    resolve: async ({ input: count, ctx }) => {
-      const result = await ctx.deck.findMany({
-        select: { deckcode: true },
-        orderBy: { createdAt: 'desc' },
-        take: count ?? 3,
-      })
-      return result.map((x) => x.deckcode)
-    },
-  })
-  .mutation('ensureDeckcodeOrShortid', {
-    input: z.object({
-      deckcodeOrShortid: z.string(),
-    }),
-    resolve: async ({ input: { deckcodeOrShortid }, ctx }) => {
-      const deck = ctx.deck.resolveDeckcodeOrShortid(deckcodeOrShortid)
-
-      if (deck) return deck
-
-      const parsedDeck = validateDeckcode(deckcodeOrShortid)
-        ? parseDeckcode(deckcodeOrShortid)
-        : null
-
-      if (parsedDeck === null) return null
-
-      const shortid = await generateShortid(ctx)
-      return await ctx.deck.create({
-        select: { shortid: true, deckcode: true },
-        data: { deckcode: parsedDeck.deckcode, shortid },
-      })
-    },
-  })
-  .mutation('renderDeckImage', {
+  .mutation('renderDeckimage', {
     input: z.object({
       deckcode: z.string(),
     }),
-    resolve: async ({ input, ctx }) => {
-      const { deckcode } = await ctx.deck.upsert({
-        select: { shortid: true, deckcode: true },
-        where: { deckcode: input.deckcode },
-        update: { imageRenderStart: Date.now() },
-        create: {
-          deckcode: input.deckcode,
-          shortid: await generateShortid(ctx),
-          imageRenderStart: Date.now(),
-        },
-      })
+    resolve: async ({ input: { deckcode }, ctx }) => {
+      await ctx.deckimage.startRendering(deckcode)
 
       let image: Buffer | null = null
       try {
-        image = await ctx.deck.render(deckcode)
+        const query = `deckcode=${encodeURIComponent(deckcode)}`
+        const response = await fetch(
+          `https://duelyst-deck-renderer.azurewebsites.net/api/render?${query}`,
+          { method: 'POST' },
+        )
+
+        if (response.ok) {
+          const blob = await response.blob()
+          image = Buffer.from(await blob.arrayBuffer())
+        }
       } catch (e) {
         console.error(e)
       }
-      await ctx.deck.update({
-        where: { deckcode },
-        data: Object.assign(
-          { imageRenderStart: 0 },
-          image ? { image, imageVersion: IMAGE_VERSION } : { image: null, imageVersion: '0' },
-        ),
-      })
 
-      return image
+      return await ctx.deckimage.finishRendering(deckcode, image)
     },
   })
 

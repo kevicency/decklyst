@@ -12,5 +12,5 @@ export const deckUrl = (deckcode: string, relative = false) =>
 export const deckImageUrl = (deckcode: string, relative = false) =>
   `${deckUrl(deckcode, relative)}.png`
 
-export const deckShortUrl = (shortId: string, relative = false) =>
-  `${relative ? '' : siteUrl}/${encodeURIComponent(shortId)}`
+export const deckShareUrl = (sharecode: string, relative = false) =>
+  `${relative ? '' : siteUrl}/${encodeURIComponent(sharecode)}`

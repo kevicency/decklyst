@@ -1,4 +1,4 @@
-import { DeckShortUrl } from '@/components/DeckInfograph/DeckShortUrl'
+import { DeckShareUrl } from '@/components/DeckInfograph/DeckShareUrl'
 import type { FC } from 'react'
 import { DeckArtifactList } from './DeckArtifactList'
 import { DeckCardList } from './DeckCardList'
@@ -41,7 +41,7 @@ export const DeckInfograph: FC<{ deck: Deck }> = ({ deck }) => {
           <DeckCardList />
         </div>
         <div className="flex justify-end mt-1 -mr-2">
-          <DeckShortUrl />
+          <DeckShareUrl />
         </div>
       </div>
     </DeckContext.Provider>

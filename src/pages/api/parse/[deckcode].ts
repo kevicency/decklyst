@@ -13,6 +13,6 @@ export default function handler(
   if (deckData) {
     res.status(200).json(deckData)
   } else {
-    res.status(400).json({ error: 'Invalid deckcode provided' })
+    res.status(400).json({ error: 'invalid deckcode' })
   }
 }

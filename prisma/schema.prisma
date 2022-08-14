@@ -10,15 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Deck {
-  id         Int      @id @default(autoincrement())
-  shortid    String   @unique 
-  deckcode   String   @unique
-  image      Bytes?
-  imageVersion String @default("0")
-  imageRenderStart BigInt @default(0)
-  createdAt  DateTime @default(now())
-  
-  
-  @@map("deck")
-}   
+model Deckinfo {
+  id        Int        @id @default(autoincrement())
+  sharecode String     @unique
+  deckcode  String     @unique
+  createdAt DateTime   @default(now())
+
+  @@map("deckinfo")
+}
+
+model Deckimage {
+  id         Int       @id @default(autoincrement())
+  deckcode   String    @unique
+  version    String?
+  bytes      Bytes?
+  renderedAt DateTime?
+
+  @@map("deckimage")
+}

@@ -8,15 +8,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const deckcode = normalizeDeckcode(req.query.deckcode as string | undefined)
 
   if (!validateDeckcode(deckcode)) {
-    return res.status(404).send('')
+    return res.status(400).send('invalid deckcode')
   }
 
   const client = serverRouter.createCaller(await createContext())
 
-  let image = await client.query('getDeckImage', { deckcode })
-
+  let image = await client.query('getDeckimage', { deckcode, timeout: 4000 })
   if (image == null) {
-    image = await client.mutation('renderDeckImage', { deckcode })
+    image = await client.mutation('renderDeckimage', { deckcode })
   }
 
   res.setHeader('Content-Type', 'image/png').send(image)

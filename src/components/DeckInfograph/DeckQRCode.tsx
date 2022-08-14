@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 import { useDeck } from './useDeck'
 
 export const DeckQRCode = () => {
-  const { deckcode, shortid } = useDeck()
+  const { deckcode, sharecode } = useDeck()
   const [qrValue, setQrValue] = useState('')
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setQrValue(`${siteUrl}/${shortid ?? deckcode}`)
+      setQrValue(`${siteUrl}/${sharecode ?? deckcode}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
