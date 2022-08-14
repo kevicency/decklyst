@@ -16,7 +16,7 @@ model Deck {
   deckcode   String   @unique
   image      Bytes?
   imageVersion String @default("0")
-  imageRendering Boolean @default(false)
+  imageRenderStart BigInt @default(0)
   createdAt  DateTime @default(now())
   
   

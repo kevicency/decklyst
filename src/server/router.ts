@@ -24,11 +24,14 @@ export const serverRouter = trpc
 
       while (run < 10) {
         const deck = await ctx.deck.findUnique({ where: { deckcode: input.deckcode } })
-        const image = deck?.imageVersion === IMAGE_VERSION ? deck?.image ?? null : null
+
+        if (deck == null) return null
+
+        const image = deck.imageVersion === IMAGE_VERSION ? deck.image : null
 
         if (image) return image
 
-        if (deck?.imageRendering) {
+        if (deck.imageRenderStart && Date.now() - deck.imageRenderStart < 5000) {
           await new Promise((resolve) => setTimeout(resolve, 500))
         } else {
           return null
@@ -89,11 +92,11 @@ export const serverRouter = trpc
       const { deckcode } = await ctx.deck.upsert({
         select: { shortid: true, deckcode: true },
         where: { deckcode: input.deckcode },
-        update: { imageRendering: true },
+        update: { imageRenderStart: Date.now() },
         create: {
           deckcode: input.deckcode,
           shortid: await generateShortid(ctx),
-          imageRendering: true,
+          imageRenderStart: Date.now(),
         },
       })
 
@@ -107,8 +110,8 @@ export const serverRouter = trpc
       await ctx.deck.update({
         where: { deckcode },
         data: Object.assign(
-          { imageRendering: false },
-          image ? { image, imageVersion: IMAGE_VERSION } : {},
+          { imageRenderStart: 0 },
+          image ? { image, imageVersion: IMAGE_VERSION } : { image: null, imageVersion: '0' },
         ),
       })
 
