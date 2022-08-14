@@ -11,17 +11,19 @@ import React from 'react'
 import { IoCodeWorking } from 'react-icons/io5'
 import { MdDone, MdDownload, MdDownloadDone, MdLink } from 'react-icons/md'
 import { useQuery } from 'react-query'
+import { BounceLoader } from 'react-spinners'
+import colors from 'tailwindcss/colors'
 
-type Props = { deck?: Deck; snapshot: boolean }
+type Props = { deck?: Deck; snapshot: boolean; imageDataUri?: string | null }
 
-const DeckPage: FC<Props> = ({ deck, snapshot }) => {
+const DeckPage: FC<Props> = ({ deck, snapshot, imageDataUri: ssrImageDataUri }) => {
   const deckcode = deck?.deckcode ?? null
   const imageUrl = deckImageUrl(deckcode ?? '', true)
   const imageFilename = deck
     ? `${deck.title}_${deck.faction}_${deck.deckcodePruned}.png`
     : `${deckcode}.png`
 
-  const { data: imageDataUri, isSuccess: isImageGenerated } = useQuery(
+  const { data: fetchedImageDataUri } = useQuery(
     ['deck-image', deckcode],
     async () => {
       let dataUri = ''
@@ -46,10 +48,12 @@ const DeckPage: FC<Props> = ({ deck, snapshot }) => {
       return Promise.reject('image generation failed')
     },
     {
-      enabled: Boolean(deckcode) && !snapshot,
+      enabled: Boolean(deckcode) && !ssrImageDataUri && !snapshot,
       staleTime: Infinity,
     },
   )
+
+  const imageDataUri = ssrImageDataUri ?? fetchedImageDataUri ?? ''
 
   const copyDeckcode = async () => {
     if (deckcode) {
@@ -85,17 +89,29 @@ const DeckPage: FC<Props> = ({ deck, snapshot }) => {
             </>
           )}
         </OneTimeButton>
-        <OneTimeButton href={isImageGenerated ? imageDataUri : imageUrl} download={imageFilename}>
-          {(isDownloading) => (
-            <>
-              {isDownloading ? (
-                <MdDownloadDone className="mr-2" />
-              ) : (
-                <MdDownload className="mr-2" />
-              )}
-              Download image
-            </>
-          )}
+        <OneTimeButton href={imageDataUri} download={imageFilename} disabled={!imageDataUri}>
+          {(isDownloading) =>
+            imageDataUri ? (
+              <>
+                {isDownloading ? (
+                  <MdDownloadDone className="mr-2" />
+                ) : (
+                  <MdDownload className="mr-2" />
+                )}
+                Download image
+              </>
+            ) : (
+              <>
+                <BounceLoader
+                  size={18}
+                  speedMultiplier={0.66}
+                  color={colors.slate['400']}
+                  className="mr-2"
+                />
+                <span className="text-slate-400">Generating image</span>
+              </>
+            )
+          }
         </OneTimeButton>
       </div>
     </div>
@@ -107,12 +123,12 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     code: string | undefined
     snapshot: any
   }
+  const client = await createSsrClient()
+
   let deckcode = code
   let sharecode = null
 
   if (code) {
-    const client = await createSsrClient()
-
     const deck = +snapshot
       ? await client.query('getDeckinfo', { code })
       : await client.mutation('ensureDeckinfo', { code })
@@ -127,9 +143,14 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     return { notFound: true }
   }
 
+  const image = await client.query('getDeckimage', { deckcode: deckcode!, timeout: 250 })
+
+  const imageDataUri = image ? `data:image/png;base64,${image.toString('base64')}` : null
+
   return {
     props: {
       deck: { ...deckData, sharecode },
+      imageDataUri,
       snapshot: +snapshot,
     },
   }

@@ -9,13 +9,14 @@ export const OneTimeButton: FC<{
   clickedClassName?: string
   href?: string
   download?: string
+  disabled?: boolean
   children: (isClicked: boolean) => React.ReactNode
-}> = ({ onClick, timeout, href, download, children, clickedClassName, className }) => {
+}> = ({ onClick, timeout, href, download, children, clickedClassName, className, disabled }) => {
   const [isClicked, setClicked] = useState(false)
   const Tag = href ? 'a' : 'button'
 
   const handleClick: MouseEventHandler = (ev) => {
-    if (isClicked) {
+    if (isClicked || disabled) {
       ev.preventDefault()
       return true
     }
@@ -35,6 +36,7 @@ export const OneTimeButton: FC<{
       href={href}
       download={download}
       onClick={handleClick}
+      disabled={disabled}
       className={cx(
         'btn btn--large transition-colors',
         className,

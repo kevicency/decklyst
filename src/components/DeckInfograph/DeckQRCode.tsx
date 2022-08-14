@@ -1,6 +1,7 @@
 import { siteUrl } from '@/common/urls'
 import { QRCodeCanvas } from 'qrcode.react'
 import { useEffect, useState } from 'react'
+import colors from 'tailwindcss/colors'
 import { useDeck } from './useDeck'
 
 export const DeckQRCode = () => {
@@ -19,8 +20,8 @@ export const DeckQRCode = () => {
         key={qrValue}
         size={110}
         value={qrValue}
-        bgColor="#0f172a"
-        fgColor="#475569"
+        bgColor={colors.slate['900']}
+        fgColor={colors.slate['700']}
       />
     </div>
   )
