@@ -31,10 +31,7 @@ export const serverRouter = trpc
 
         if (image) return image
 
-        if (
-          deck.imageRenderStart &&
-          Date.now() - (deck.imageRenderStart as unknown as number) < 5000
-        ) {
+        if (deck.imageRenderStart && BigInt(Date.now()) - deck.imageRenderStart < 5000) {
           await new Promise((resolve) => setTimeout(resolve, 500))
         } else {
           return null
