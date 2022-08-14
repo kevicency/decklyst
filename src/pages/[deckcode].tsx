@@ -1,11 +1,10 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
-import { deckImageUrl, siteUrl } from '@/common/urls'
+import { deckImageUrl } from '@/common/urls'
 import { DeckInfograph } from '@/components/DeckInfograph'
 import type { Deck } from '@/components/DeckInfograph/useDeck'
 import { DeckMetadata } from '@/components/DeckMetadata'
 import { OneTimeButton } from '@/components/OneTimeButton'
-import type { ServerRouter } from '@/server/router'
-import { createTRPCClient } from '@trpc/client'
+import { createSsrClient } from '@/server'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
 import React from 'react'
@@ -112,9 +111,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   let shortid = null
 
   if (deckcodeOrShortid) {
-    const client = createTRPCClient<ServerRouter>({
-      url: `${siteUrl}/api/trpc`,
-    })
+    const client = await createSsrClient()
 
     const deck = +snapshot
       ? await client.query('resolveDeckcodeOrShortid', { deckcodeOrShortid })

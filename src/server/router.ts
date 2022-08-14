@@ -48,6 +48,17 @@ export const serverRouter = trpc
       return await ctx.deck.resolveDeckcodeOrShortid(deckcodeOrShortid)
     },
   })
+  .query('recentDeckcodes', {
+    input: z.number().gt(0).optional(),
+    resolve: async ({ input: count, ctx }) => {
+      const result = await ctx.deck.findMany({
+        select: { deckcode: true },
+        orderBy: { createdAt: 'desc' },
+        take: count ?? 3,
+      })
+      return result.map((x) => x.deckcode)
+    },
+  })
   .mutation('ensureDeckcodeOrShortid', {
     input: z.object({
       deckcodeOrShortid: z.string(),
