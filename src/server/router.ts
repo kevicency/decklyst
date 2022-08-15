@@ -1,4 +1,5 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
+import { deckRenderUrl } from '@/common/urls'
 import { createDeck } from '@/components/DeckInfograph/useDeck'
 import { DECK_IMAGE_VERSION } from '@/server/model/deckimage'
 import * as trpc from '@trpc/server'
@@ -64,11 +65,7 @@ export const serverRouter = trpc
 
       let image: Buffer | null = null
       try {
-        const query = `deckcode=${encodeURIComponent(deckcode)}`
-        const response = await fetch(
-          `https://duelyst-deck-renderer.azurewebsites.net/api/render?${query}`,
-          { method: 'POST' },
-        )
+        const response = await fetch(deckRenderUrl(deckcode), { method: 'POST' })
 
         if (response.ok) {
           const blob = await response.blob()
