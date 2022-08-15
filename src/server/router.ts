@@ -1,4 +1,5 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
+import { createDeck } from '@/components/DeckInfograph/useDeck'
 import { DECK_IMAGE_VERSION } from '@/server/model/deckimage'
 import * as trpc from '@trpc/server'
 import { differenceInMilliseconds } from 'date-fns'
@@ -29,13 +30,6 @@ export const serverRouter = trpc
       if (parsedDeck === null) return null
 
       return await ctx.deckinfo.createForDeck(parsedDeck)
-    },
-  })
-
-  .query('recentDeckinfos', {
-    input: z.number().gt(0).optional(),
-    resolve: async ({ input: count, ctx }) => {
-      return await ctx.deckinfo.recent(count ?? 3)
     },
   })
 
@@ -86,6 +80,28 @@ export const serverRouter = trpc
 
       return await ctx.deckimage.finishRendering(deckcode, image)
     },
+  })
+
+  .query('mostViewedDecks', {
+    input: z.object({
+      count: z.number().gt(0),
+      recent: z.boolean().optional(),
+    }),
+    resolve: async ({ input, ctx }) => {
+      const mostViewedDeckcodes = await ctx.deckviews.mostViewed(input)
+
+      return mostViewedDeckcodes.map(({ deckcode, viewCount }) =>
+        createDeck(deckcode, { viewCount }),
+      )
+    },
+  })
+  .mutation('registerView', {
+    input: z.object({
+      deckcode: z.string(),
+      ipAddress: z.string(),
+    }),
+    resolve: async ({ input: { deckcode, ipAddress }, ctx }) =>
+      await ctx.deckviews.incrementViewCount(deckcode, ipAddress),
   })
 
 export type ServerRouter = typeof serverRouter

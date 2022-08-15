@@ -1,8 +1,9 @@
 import { startCase } from 'lodash'
+import { FaRegEye } from 'react-icons/fa'
 import { useDeck } from './useDeck'
 
 export const DeckTitle = () => {
-  const { general, title, faction } = useDeck()
+  const { general, title, faction, viewCount } = useDeck()
   return (
     <div className="flex">
       <div className="w-32 mt-[-24px] mb-[-16px] ml-[-24px] flex-shrink-0">
@@ -14,8 +15,18 @@ export const DeckTitle = () => {
         />
       </div>
       <div className="flex flex-col flex-1 justify-center ml-2">
-        <div className="font-bold text-3xl mb-2 ">{title}</div>
-        <div className={`text-xl text-${faction}`}>{startCase(faction)}</div>
+        <div className="font-bold text-3xl mb-2 truncate">{title}</div>
+        <div className={`text-xl flex gap-2 content-center items-center text-slate-400 truncate`}>
+          <span className={`text-${faction} w-24`}>{startCase(faction)}</span>
+          {viewCount ? (
+            <>
+              <FaRegEye size={24} />
+              <span className="">
+                {viewCount} {viewCount <= 1 ? 'view' : 'views'}
+              </span>
+            </>
+          ) : null}
+        </div>
       </div>
     </div>
   )

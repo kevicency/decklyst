@@ -1,14 +1,17 @@
-import { parseDeckcode } from '@/common/deckcode'
 import { DeckcodeSearch } from '@/components/DeckcodeSearch'
-import type { Deck } from '@/components/DeckInfograph/useDeck'
-import { RecentDecks } from '@/components/RecentDecks'
+import { Decklinks } from '@/components/Decklinks'
 import { createSsrClient } from '@/server'
+import cx from 'classnames'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
 import type { GetServerSidePropsContext } from 'next/types'
+import { useState } from 'react'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+type Tab = 'most-viewed' | 'trending'
 
-const Home: NextPage<Props> = ({ decks }) => {
+const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) => {
+  const [tab, setTab] = useState<Tab>(initialTab)
+
   return (
     <div className="content-container flex flex-col justify-around flex-1 pb-8">
       <div className="flex flex-col">
@@ -17,22 +20,46 @@ const Home: NextPage<Props> = ({ decks }) => {
           <DeckcodeSearch big />
         </div>
       </div>
-      <RecentDecks decks={decks} className="mt-16" />
+      <div className="flex flex-col mt-16">
+        <div className="flex text-3xl gap-x-4">
+          <button
+            onClick={() => setTab('trending')}
+            className={cx(
+              tab === 'trending'
+                ? 'text-slate-100 cursor-default'
+                : ' text-slate-500 hover:text-cyan-400 cursor-pointer',
+            )}
+          >
+            Trending
+          </button>
+          <button
+            onClick={() => setTab('most-viewed')}
+            className={cx(
+              tab === 'most-viewed'
+                ? 'text-slate-100 cursor-default'
+                : 'text-slate-500 hover:text-cyan-400 cursor-pointer',
+            )}
+          >
+            Most Viewed
+          </button>
+        </div>
+        <Decklinks decks={tab === 'trending' ? trendingDecks : mostViewedDecks} />
+      </div>
     </div>
   )
 }
 
-export const getServerSideProps = async (_context: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const client = await createSsrClient()
-  const deckinfos = await client.query('recentDeckinfos')
-  const decks: Deck[] = deckinfos.map(({ deckcode, sharecode }) => ({
-    sharecode,
-    ...parseDeckcode(deckcode)!,
-  }))
+  const mostViewedDecks = await client.query('mostViewedDecks', { count: 3 })
+  const trendingDecks = await client.query('mostViewedDecks', { count: 3, recent: true })
+  const initialTab: Tab = query.tab === 'most-viewed' ? 'most-viewed' : 'trending'
 
   return {
     props: {
-      decks,
+      mostViewedDecks,
+      trendingDecks,
+      initialTab,
     },
   }
 }

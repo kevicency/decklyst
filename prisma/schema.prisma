@@ -28,3 +28,14 @@ model Deckimage {
 
   @@map("deckimage")
 }
+
+model Deckviews {
+  deckcode  String
+  ipAddress String
+  viewCount Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@id([deckcode, ipAddress])
+  @@map("deckviews")
+}

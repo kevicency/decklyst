@@ -1,5 +1,6 @@
 import { extendDeckimage } from '@/server/model/deckimage'
 import { extendDeckinfo } from '@/server/model/deckinfo'
+import { extendDeckviews } from '@/server/model/deckviews'
 import { PrismaClient } from '@prisma/client'
 import type * as trpc from '@trpc/server'
 import type * as trpcNext from '@trpc/server/adapters/next'
@@ -13,6 +14,7 @@ export async function createContext(_opts?: trpcNext.CreateNextContextOptions) {
     prisma: prisma,
     deckimage: extendDeckimage(prisma.deckimage),
     deckinfo: extendDeckinfo(prisma.deckinfo),
+    deckviews: extendDeckviews(prisma.deckviews),
   }
 }
 

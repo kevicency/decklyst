@@ -7,14 +7,10 @@ type Deckinfo = PrismaClient['deckinfo']
 
 export const extendDeckinfo = (deckinfo: Deckinfo) =>
   Object.assign(deckinfo, {
-    getByDeckcode: async (deckcode: string) => await deckinfo.findUnique({ where: { deckcode } }),
-    getBySharecode: async (deckcode: string) => await deckinfo.findUnique({ where: { deckcode } }),
     findByCode: async (code: string) =>
       await deckinfo.findFirst({
         where: { OR: [{ deckcode: code }, { sharecode: code }] },
       }),
-    recent: async (count: number) =>
-      await deckinfo.findMany({ take: count, orderBy: { createdAt: 'desc' } }),
     createForDeck: async (deck: DeckData) => {
       const sharecode = await generateSharecode(deckinfo)
       return await deckinfo.create({

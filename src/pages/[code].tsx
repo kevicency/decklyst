@@ -1,10 +1,12 @@
-import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
+import { validateDeckcode } from '@/common/deckcode'
 import { deckImageUrl } from '@/common/urls'
 import { DeckInfograph } from '@/components/DeckInfograph'
 import type { Deck } from '@/components/DeckInfograph/useDeck'
+import { createDeck } from '@/components/DeckInfograph/useDeck'
 import { DeckMetadata } from '@/components/DeckMetadata'
 import { OneTimeButton } from '@/components/OneTimeButton'
 import { createSsrClient } from '@/server'
+import { getIpAddress } from '@/server/utils'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
 import React from 'react'
@@ -118,18 +120,17 @@ const DeckPage: FC<Props> = ({ deck, snapshot, imageDataUri: ssrImageDataUri }) 
   )
 }
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { code, snapshot } = context.query as {
-    code: string | undefined
-    snapshot: any
-  }
+export const getServerSideProps = async ({ req, query }: GetServerSidePropsContext) => {
+  const code = query.code as string | undefined
+  const snapshot = +((query.snapshot as string | undefined) ?? '0') === 1
+
   const client = await createSsrClient()
 
   let deckcode = code
   let sharecode = null
 
   if (code) {
-    const deck = +snapshot
+    const deck = snapshot
       ? await client.query('getDeckinfo', { code })
       : await client.mutation('ensureDeckinfo', { code })
 
@@ -137,10 +138,17 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     sharecode = deck?.sharecode ?? sharecode
   }
 
-  const deckData = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
+  const deck = validateDeckcode(deckcode) ? createDeck(deckcode, { sharecode }) : null
 
-  if (!deckData) {
+  if (!deck) {
     return { notFound: true }
+  }
+
+  if (!snapshot) {
+    await client.mutation('registerView', {
+      deckcode: deckcode!,
+      ipAddress: getIpAddress(req),
+    })
   }
 
   const image = await client.query('getDeckimage', { deckcode: deckcode!, timeout: 250 })
@@ -149,7 +157,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   return {
     props: {
-      deck: { ...deckData, sharecode },
+      deck,
       imageDataUri,
       snapshot: +snapshot,
     },
