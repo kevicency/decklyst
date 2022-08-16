@@ -27,6 +27,10 @@
     image-rendering: pixelated;
   }
 
+  .link {
+    @apply text-slate-100 hover:text-sky-400;
+  }
+
   .btn {
     @apply flex items-center justify-center;
     @apply bg-slate-700 hover:bg-sky-600;
@@ -65,5 +69,5 @@ html {
 
 body {
   @apply bg-zinc-900;
-  @apply text-slate-50;
+  @apply text-slate-100;
 }

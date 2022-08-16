@@ -27,7 +27,7 @@ const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) =
             className={cx(
               tab === 'trending'
                 ? 'text-slate-100 cursor-default'
-                : ' text-slate-500 hover:text-cyan-400 cursor-pointer',
+                : 'text-slate-500 hover:text-sky-400 cursor-pointer',
             )}
           >
             Trending
@@ -37,7 +37,7 @@ const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) =
             className={cx(
               tab === 'most-viewed'
                 ? 'text-slate-100 cursor-default'
-                : 'text-slate-500 hover:text-cyan-400 cursor-pointer',
+                : 'text-slate-500 hover:text-sky-400 cursor-pointer',
             )}
           >
             Most Viewed

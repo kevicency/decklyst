@@ -1,28 +1,37 @@
+import { siteUrl } from '@/common/urls'
 import { Layout } from '@/components/Layout'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import '../styles/globals.css'
-
-const queryClient = new QueryClient()
+import { trpc } from '@/common/trpc'
 
 function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient())
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      url: `${siteUrl}/api/trpc`,
+    }),
+  )
   const router = useRouter()
   return (
-    <QueryClientProvider client={queryClient}>
-      <Layout showSearch={router.route !== '/'}>
-        <Head>
-          <title>Duelyst Share</title>
-          <meta name="description" content="Share Duelyst 2 deck codes" />
-          <meta property="og:site_name" content="Duelyst Share" />
-          <meta property="og:title" content="Duelyst Share" />
-          <link rel="icon" href="/public/favicon.ico" />
-          <link type="application/json+oembed" href="/public/oembed.json" />
-        </Head>
-        <Component {...pageProps} />
-      </Layout>
-    </QueryClientProvider>
+    <trpc.Provider queryClient={queryClient} client={trpcClient}>
+      <QueryClientProvider client={queryClient}>
+        <Layout showSearch={router.route !== '/'}>
+          <Head>
+            <title>Duelyst Share</title>
+            <meta name="description" content="Share Duelyst 2 deck codes" />
+            <meta property="og:site_name" content="Duelyst Share" />
+            <meta property="og:title" content="Duelyst Share" />
+            <link rel="icon" href="/public/favicon.ico" />
+            <link type="application/json+oembed" href="/public/oembed.json" />
+          </Head>
+          <Component {...pageProps} />
+        </Layout>
+      </QueryClientProvider>
+    </trpc.Provider>
   )
 }
 

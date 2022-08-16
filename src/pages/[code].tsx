@@ -1,10 +1,12 @@
 import { validateDeckcode } from '@/common/deckcode'
+import { trpc } from '@/common/trpc'
 import { deckImageUrl } from '@/common/urls'
 import { DeckInfograph } from '@/components/DeckInfograph'
 import type { Deck } from '@/components/DeckInfograph/useDeck'
 import { createDeck } from '@/components/DeckInfograph/useDeck'
 import { DeckMetadata } from '@/components/DeckMetadata'
 import { OneTimeButton } from '@/components/OneTimeButton'
+import { getImageDataUri } from '@/common/getImageDataUri'
 import { createSsrClient } from '@/server'
 import { getIpAddress } from '@/server/utils'
 import type { GetServerSidePropsContext } from 'next/types'
@@ -16,46 +18,42 @@ import { useQuery } from 'react-query'
 import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
 
-type Props = { deck?: Deck; snapshot: boolean; imageDataUri?: string | null }
+type Props = { deck: Deck; snapshot: boolean }
 
-const DeckPage: FC<Props> = ({ deck, snapshot, imageDataUri: ssrImageDataUri }) => {
-  const deckcode = deck?.deckcode ?? null
-  const imageUrl = deckImageUrl(deckcode ?? '', true)
+const DeckPage: FC<Props> = ({ deck, snapshot }) => {
+  const [imageDataUri, setImageDataUri] = React.useState<string | null>(null)
+
+  const deckcode = deck.deckcode
+  const imageUrl = deckImageUrl(deckcode)
   const imageFilename = deck
     ? `${deck.title}_${deck.faction}_${deck.deckcodePruned}.png`
     : `${deckcode}.png`
 
-  const { data: fetchedImageDataUri } = useQuery(
+  const { mutateAsync: regenerateDeckimage } = trpc.useMutation('renderDeckimage')
+  const { refetch: refetchDeckimage } = useQuery(
     ['deck-image', deckcode],
     async () => {
-      let dataUri = ''
-      let retries = 0
+      const blob = await fetch(imageUrl).then((res) => res.blob())
+      const reader = new FileReader()
 
-      while (retries++ < 3) {
-        const blob = await fetch(imageUrl).then((res) => res.blob())
-        const reader = new FileReader()
-
-        dataUri = await new Promise<string>((resolve) => {
-          reader.readAsDataURL(blob)
-          reader.onloadend = () => {
-            resolve(reader.result as string)
-          }
-        })
-        if (/^data:image\/png;base64,/.test(dataUri)) {
-          return dataUri
-        } else {
-          await new Promise((resolve) => setTimeout(resolve, 250))
+      const dataUri = await new Promise<string>((resolve) => {
+        reader.readAsDataURL(blob)
+        reader.onloadend = () => {
+          resolve(reader.result as string)
         }
-      }
-      return Promise.reject('image generation failed')
+      })
+      return /^data:image\/png;base64,/.test(dataUri)
+        ? dataUri
+        : Promise.reject(new Error('image retrieval failed'))
     },
     {
-      enabled: Boolean(deckcode) && !ssrImageDataUri && !snapshot,
+      enabled: !snapshot,
       staleTime: Infinity,
+      retry: true,
+      retryDelay: (retryCount) => 1000 * Math.pow(2, Math.max(0, retryCount - 5)),
+      onSuccess: (dataUri) => setImageDataUri(dataUri),
     },
   )
-
-  const imageDataUri = ssrImageDataUri ?? fetchedImageDataUri ?? ''
 
   const copyDeckcode = async () => {
     if (deckcode) {
@@ -65,6 +63,16 @@ const DeckPage: FC<Props> = ({ deck, snapshot, imageDataUri: ssrImageDataUri }) 
   const copyImageUrl = async () => {
     if (deckcode) {
       await navigator.clipboard.writeText(deckImageUrl(deckcode))
+    }
+  }
+
+  const handleRegenerateClick = () => async () => {
+    setImageDataUri(null)
+    try {
+      const image = await regenerateDeckimage({ deckcode })
+      setImageDataUri(getImageDataUri(image))
+    } catch (e) {
+      await refetchDeckimage()
     }
   }
 
@@ -91,7 +99,11 @@ const DeckPage: FC<Props> = ({ deck, snapshot, imageDataUri: ssrImageDataUri }) 
             </>
           )}
         </OneTimeButton>
-        <OneTimeButton href={imageDataUri} download={imageFilename} disabled={!imageDataUri}>
+        <OneTimeButton
+          href={imageDataUri ?? undefined}
+          download={imageFilename}
+          disabled={!imageDataUri}
+        >
           {(isDownloading) =>
             imageDataUri ? (
               <>
@@ -115,6 +127,16 @@ const DeckPage: FC<Props> = ({ deck, snapshot, imageDataUri: ssrImageDataUri }) 
             )
           }
         </OneTimeButton>
+      </div>
+      <div className="mt-4 flex gap-x-2 justify-end items-center text-slate-500 text-sm">
+        <span>Image broken?</span>
+        <button
+          disabled={!imageDataUri}
+          onClick={handleRegenerateClick()}
+          className="text-slate-400 hover:text-sky-400"
+        >
+          Regenerate
+        </button>
       </div>
     </div>
   )
@@ -151,14 +173,9 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
     })
   }
 
-  const image = await client.query('getDeckimage', { deckcode: deckcode!, timeout: 250 })
-
-  const imageDataUri = image ? `data:image/png;base64,${image.toString('base64')}` : null
-
   return {
     props: {
       deck,
-      imageDataUri,
       snapshot: +snapshot,
     },
   }

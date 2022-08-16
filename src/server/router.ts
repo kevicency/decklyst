@@ -56,6 +56,7 @@ export const serverRouter = trpc
       return null
     },
   })
+
   .mutation('renderDeckimage', {
     input: z.object({
       deckcode: z.string(),
@@ -65,12 +66,14 @@ export const serverRouter = trpc
 
       let image: Buffer | null = null
       try {
+        console.log('rendering deckimage for', deckcode)
         const response = await fetch(deckRenderUrl(deckcode), { method: 'POST' })
 
         if (response.ok) {
           const blob = await response.blob()
           image = Buffer.from(await blob.arrayBuffer())
         }
+        console.log('rendering done deckimage for', deckcode)
       } catch (e) {
         console.error(e)
       }
