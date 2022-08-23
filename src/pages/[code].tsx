@@ -24,27 +24,17 @@ const DeckPage: FC<Props> = ({ deck, snapshot }) => {
   const [imageDataUri, setImageDataUri] = React.useState<string | null>(null)
 
   const deckcode = deck.deckcode
-  const imageUrl = deckImageUrl(deckcode)
   const imageFilename = deck
     ? `${deck.title}_${deck.faction}_${deck.deckcodePruned}.png`
     : `${deckcode}.png`
 
-  const { mutateAsync: regenerateDeckimage } = trpc.useMutation('renderDeckimage')
+  const { mutateAsync: ensureDeckimage } = trpc.useMutation('ensureDeckimage')
   const { refetch: refetchDeckimage } = useQuery(
     ['deck-image', deckcode],
     async () => {
-      const blob = await fetch(imageUrl).then((res) => res.blob())
-      const reader = new FileReader()
+      const image = await ensureDeckimage({ deckcode })
 
-      const dataUri = await new Promise<string>((resolve) => {
-        reader.readAsDataURL(blob)
-        reader.onloadend = () => {
-          resolve(reader.result as string)
-        }
-      })
-      return /^data:image\/png;base64,/.test(dataUri)
-        ? dataUri
-        : Promise.reject(new Error('image retrieval failed'))
+      return getImageDataUri(image)
     },
     {
       enabled: !snapshot,
@@ -69,7 +59,7 @@ const DeckPage: FC<Props> = ({ deck, snapshot }) => {
   const handleRegenerateClick = () => async () => {
     setImageDataUri(null)
     try {
-      const image = await regenerateDeckimage({ deckcode })
+      const image = await ensureDeckimage({ deckcode, forceRender: true })
       setImageDataUri(getImageDataUri(image))
     } catch (e) {
       await refetchDeckimage()

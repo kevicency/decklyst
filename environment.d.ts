@@ -4,6 +4,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_SITE_URL?: string
     VERCEL_URL?: string
     SITE_URL?: string
+    BROWSERLESS_API_TOKEN?: string
     NODE_ENV: 'development' | 'production'
   }
 }

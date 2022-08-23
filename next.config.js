@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: process.env.NEXT_STANDALONE ? 'standalone' : 'serverless',
+  output: process.env.NEXT_STANDALONE ? 'standalone' : undefined,
   reactStrictMode: true,
   swcMinify: true,
   async rewrites() {

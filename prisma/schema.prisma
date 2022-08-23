@@ -24,6 +24,7 @@ model Deckimage {
   deckcode   String    @unique
   version    String?
   bytes      Bytes?
+  renderStartedAt DateTime?
   renderedAt DateTime?
 
   @@map("deckimage")

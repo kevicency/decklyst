@@ -13,11 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const client = serverRouter.createCaller(await createContext())
 
-  await client.mutation('ensureDeckinfo', { code: deckcode })
-
-  const image =
-    (await client.query('getDeckimage', { deckcode, timeout: 4000 })) ??
-    (await client.mutation('renderDeckimage', { deckcode }))
+  const image = await client.mutation('ensureDeckimage', { deckcode })
 
   res.setHeader('Content-Type', 'image/png').send(image)
 }

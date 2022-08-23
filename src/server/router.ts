@@ -1,10 +1,8 @@
 import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
-import { deckRenderUrl } from '@/common/urls'
 import { createDeck } from '@/components/DeckInfograph/useDeck'
-import { DECK_IMAGE_VERSION } from '@/server/model/deckimage'
+import { snapshot } from '@/server/snapshot'
 import * as trpc from '@trpc/server'
-import { differenceInMilliseconds } from 'date-fns'
-import { Buffer } from 'node:buffer'
+import type { Buffer } from 'node:buffer'
 import { z } from 'zod'
 import type { Context } from './context'
 
@@ -22,7 +20,7 @@ export const serverRouter = trpc
       code: z.string(),
     }),
     resolve: async ({ input: { code }, ctx }) => {
-      const deckinfo = await ctx.deckinfo.findByCode(code)
+      const deckinfo = await ctx.deckinfo.ensureDeckinfo(code)
 
       if (deckinfo) return deckinfo
 
@@ -40,48 +38,37 @@ export const serverRouter = trpc
       timeout: z.number().optional(),
     }),
     resolve: async ({ input: { deckcode, timeout }, ctx }) => {
-      let isRendering = true
-
-      while (isRendering) {
-        const deckimage = await ctx.deckimage.findByDeckcode(deckcode)
-
-        if (deckimage == null) return null
-        if (deckimage.bytes && deckimage.version === DECK_IMAGE_VERSION) return deckimage.bytes
-
-        isRendering =
-          deckimage.renderedAt !== null &&
-          differenceInMilliseconds(new Date(), deckimage.renderedAt) < (timeout ?? 5000)
-      }
-
-      return null
+      return await ctx.deckimage.findByDeckcode(deckcode, timeout)
     },
   })
 
-  .mutation('renderDeckimage', {
+  .mutation('ensureDeckimage', {
     input: z.object({
       deckcode: z.string(),
+      forceRender: z.boolean().optional(),
+      timeout: z.number().optional(),
     }),
-    resolve: async ({ input: { deckcode }, ctx }) => {
-      await ctx.deckimage.startRendering(deckcode)
+    resolve: async ({ input: { deckcode, timeout, forceRender }, ctx }) => {
+      let image: Buffer | null = forceRender
+        ? null
+        : await ctx.deckimage.findByDeckcode(deckcode, timeout ?? 10000)
 
-      let image: Buffer | null = null
-      try {
-        console.log('rendering deckimage for', deckcode)
-        const response = await fetch(deckRenderUrl(deckcode), { method: 'POST' })
+      if (image !== null) return image
 
-        if (response.ok) {
-          const blob = await response.blob()
-          image = Buffer.from(await blob.arrayBuffer())
-        }
-        console.log('rendering done deckimage for', deckcode)
-      } catch (e) {
-        console.error(e)
-      }
+      const deck = validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
+
+      if (deck === null) return null
+
+      const [deckinfo] = await Promise.all([
+        await ctx.deckinfo.ensureDeckinfo(deckcode),
+        await ctx.deckimage.startRendering(deckcode),
+      ])
+
+      image = deckinfo ? await snapshot(deckcode) : null
 
       return await ctx.deckimage.finishRendering(deckcode, image)
     },
   })
-
   .query('mostViewedDecks', {
     input: z.object({
       count: z.number().gt(0),
