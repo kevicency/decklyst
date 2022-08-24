@@ -51,7 +51,7 @@ export const serverRouter = trpc
     resolve: async ({ input: { deckcode, timeout, forceRender }, ctx }) => {
       let image: Buffer | null = forceRender
         ? null
-        : await ctx.deckimage.findByDeckcode(deckcode, timeout ?? 10000)
+        : await ctx.deckimage.findByDeckcode(deckcode, timeout ?? 25000)
 
       if (image !== null) return image
 

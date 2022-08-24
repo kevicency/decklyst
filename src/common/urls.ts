@@ -5,7 +5,7 @@ const env = {
   remoteSnapshotUrl:
     process.env.NEXT_PUBLIC_REMOTE_SNAPSHOT_URL ||
     process.env.REMOTE_SNAPSHOT_URL ||
-    'https://decklyst.azurewebsites.net',
+    'https://duelyst-deck-renderer.azurewebsites.net',
 }
 
 export const siteUrl = env.vercelEnv === 'preview' ? `https://${env.vercelUrl}` : env.siteUrl
@@ -20,4 +20,4 @@ export const deckImageUrl = (deckcode: string, relative = false) =>
   `${deckUrl(deckcode, relative)}.png`
 
 export const remoteSnapshotUrl = (deckcode: string) =>
-  `${env.remoteSnapshotUrl}/api/snapshot?deckcode=${encodeURIComponent(deckcode)}`
+  `${env.remoteSnapshotUrl}/api/render?deckcode=${encodeURIComponent(deckcode)}`
