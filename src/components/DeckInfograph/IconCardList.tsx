@@ -1,10 +1,10 @@
-import type { CardOccurrence } from '@/common/deckcode'
-import type { IconSpriteData } from '@/common/sprite'
+import type { CardEntry } from '@/data/deck'
+import type { IconSpriteData } from '@/data/sprite'
 import cx from 'classnames'
 import type { FC } from 'react'
 import { useQuery } from 'react-query'
 
-export const IconCardList: FC<{ cards: CardOccurrence[] }> = ({ cards }) => {
+export const IconCardList: FC<{ cards: CardEntry[] }> = ({ cards }) => {
   return (
     <div
       className={cx('bg-slate-800 grid', cards.length && 'h-24 mt-6')}
@@ -16,7 +16,7 @@ export const IconCardList: FC<{ cards: CardOccurrence[] }> = ({ cards }) => {
     </div>
   )
 }
-export const IconCard: FC<{ card: CardOccurrence }> = ({ card }) => (
+export const IconCard: FC<{ card: CardEntry }> = ({ card }) => (
   <div className="flex flex-col w-16">
     <div className="flex flex-1 relative">
       {card.spriteName && <IconCardSprite spriteName={card.spriteName} />}

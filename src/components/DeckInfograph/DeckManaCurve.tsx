@@ -1,8 +1,8 @@
-import type { ManaCurveEntry } from '@/common/deckcode'
+import { useDeck } from '@/context/useDeck'
 import type { Faction } from '@/data/cards'
+import type { ManaCurve } from '@/data/deck'
 import type { FC } from 'react'
 import { ManaIcon } from './ManaIcon'
-import { useDeck } from './useDeck'
 
 export const DeckManaCurve = () => {
   const { faction, manaCurve } = useDeck()
@@ -15,7 +15,7 @@ export const DeckManaCurve = () => {
     </div>
   )
 }
-const ManaCurveBar: FC<{ entry: ManaCurveEntry; mana: number; faction: Faction }> = ({
+const ManaCurveBar: FC<{ entry: ManaCurve[0]; mana: number; faction: Faction }> = ({
   entry: { abs, rel },
   mana,
   faction,

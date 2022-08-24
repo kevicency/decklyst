@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { normalizeDeckcode } from '@/common/deckcode'
+import { normalizeDeckcode } from '@/data/deckcode'
 import { createContext } from '@/server/context'
 import { serverRouter } from '@/server/router'
 import type { NextApiRequest, NextApiResponse } from 'next'

@@ -1,5 +1,4 @@
-import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
-import type { DeckData } from '@/common/deckcode'
+import { validateDeckcode } from '@/data/deckcode'
 import type { PrismaClient } from '@prisma/client'
 import { difference } from 'lodash'
 import { customAlphabet } from 'nanoid'
@@ -12,28 +11,24 @@ export const extendDeckinfo = (deckinfo: Deckinfo) =>
       await deckinfo.findFirst({
         where: { OR: [{ deckcode: code }, { sharecode: code }] },
       }),
-    createForDeck: async (deck: DeckData) => {
+    createForDeckcode: async (deckcode: string) => {
       const sharecode = await generateSharecode(deckinfo)
       return await deckinfo.create({
-        data: { deckcode: deck.deckcode, sharecode },
+        data: { deckcode: deckcode, sharecode },
       })
     },
     ensureDeckinfo: async (code: string) => {
-      const result = await deckinfo.findFirst({
+      const existingDeckinfo = await deckinfo.findFirst({
         where: { OR: [{ deckcode: code }, { sharecode: code }] },
       })
 
-      if (result) return result
+      if (existingDeckinfo) return existingDeckinfo
 
-      const parsedDeck = validateDeckcode(code) ? parseDeckcode(code) : null
-
-      if (parsedDeck === null) return null
-
-      const sharecode = await generateSharecode(deckinfo)
-
-      return await deckinfo.create({
-        data: { deckcode: parsedDeck.deckcode, sharecode },
-      })
+      return validateDeckcode(code)
+        ? await deckinfo.create({
+            data: { deckcode: code, sharecode: await generateSharecode(deckinfo) },
+          })
+        : null
     },
   })
 

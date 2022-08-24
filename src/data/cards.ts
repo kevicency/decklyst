@@ -1,3 +1,4 @@
+import { partition, sortBy } from 'lodash'
 import { abyssian, lyonar, magmar, neutral, songhai, vanar, vetruvian } from './utils'
 
 export type Faction =
@@ -401,3 +402,13 @@ export const cardDataById = cardData.reduce(
   }),
   {} as Record<number, CardData>,
 )
+
+export const sortCards = <T extends CardData>(cards: T[], includeGeneral = false): T[] => {
+  if (includeGeneral) {
+    const [generals, rest] = partition(cards, (card) => card.type === 'GENERAL')
+
+    return [...generals, ...sortCards(rest)]
+  }
+
+  return sortBy(cards, ['cost', 'id'])
+}

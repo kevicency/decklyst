@@ -1,9 +1,10 @@
+import { useDeck } from '@/context/useDeck'
 import { startCase } from 'lodash'
 import { FaRegEye } from 'react-icons/fa'
-import { useDeck } from './useDeck'
 
 export const DeckTitle = () => {
-  const { general, title, faction, viewCount } = useDeck()
+  const { general, title, faction, meta } = useDeck()
+  const viewCount = meta?.viewCount
   return (
     <div className="flex">
       <div className="w-32 mt-[-24px] mb-[-16px] ml-[-24px] flex-shrink-0">

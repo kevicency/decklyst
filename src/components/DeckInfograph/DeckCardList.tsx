@@ -1,13 +1,10 @@
+import { useDeck } from '@/context/useDeck'
 import cx from 'classnames'
 import { chunk, flatMap } from 'lodash'
 import { ManaIcon } from './ManaIcon'
-import { useDeck } from './useDeck'
 
 export const DeckCardList = () => {
-  const {
-    faction,
-    cards: { minions, spells, artifacts },
-  } = useDeck()
+  const { faction, minions, spells, artifacts } = useDeck()
 
   const cols = flatMap([minions, spells, artifacts], (cards, i) =>
     chunk(cards, 6).map((chunked, j) => ({

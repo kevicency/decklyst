@@ -1,13 +1,11 @@
-import type { CardOccurrence } from '@/common/deckcode'
-import type { UnitSpriteData } from '@/common/sprite'
+import { useDeck } from '@/context/useDeck'
+import type { CardEntry } from '@/data/deck'
+import type { UnitSpriteData } from '@/data/sprite'
 import type { FC } from 'react'
 import { useQuery } from 'react-query'
-import { useDeck } from './useDeck'
 
 export const DeckMinionList = () => {
-  const {
-    cards: { minions },
-  } = useDeck()
+  const { minions } = useDeck()
   const columnCount = Math.max(10, minions.length)
 
   return (
@@ -21,7 +19,7 @@ export const DeckMinionList = () => {
     </div>
   )
 }
-export const MinionCard: FC<{ card: CardOccurrence }> = ({ card }) => (
+export const MinionCard: FC<{ card: CardEntry }> = ({ card }) => (
   <div className="flex flex-col">
     <div className="flex flex-1 relative">
       {card.spriteName && <MinionCardSprite spriteName={card.spriteName} />}

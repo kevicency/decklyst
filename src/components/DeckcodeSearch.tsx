@@ -1,4 +1,4 @@
-import { normalizeDeckcode, validateDeckcode } from '@/common/deckcode'
+import { normalizeDeckcode, validateDeckcode } from '@/data/deckcode'
 import cx from 'classnames'
 import { useRouter } from 'next/router'
 import type { FC, KeyboardEventHandler } from 'react'

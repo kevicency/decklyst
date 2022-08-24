@@ -1,15 +1,15 @@
 import { siteUrl } from '@/common/urls'
+import { useDeck } from '@/context/useDeck'
 import { QRCodeCanvas } from 'qrcode.react'
 import { useEffect, useState } from 'react'
 import colors from 'tailwindcss/colors'
-import { useDeck } from './useDeck'
 
 export const DeckQRCode = () => {
-  const { deckcode, sharecode } = useDeck()
+  const { deckcode, meta } = useDeck()
   const [qrValue, setQrValue] = useState('')
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setQrValue(`${siteUrl}/${sharecode ?? deckcode}`)
+      setQrValue(`${siteUrl}/${meta?.sharecode ?? deckcode}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

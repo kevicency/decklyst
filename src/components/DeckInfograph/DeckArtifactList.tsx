@@ -1,9 +1,7 @@
+import { useDeck } from '@/context/useDeck'
 import { IconCardList } from './IconCardList'
-import { useDeck } from './useDeck'
 
 export const DeckArtifactList = () => {
-  const {
-    cards: { artifacts },
-  } = useDeck()
+  const { artifacts } = useDeck()
   return <IconCardList cards={artifacts} />
 }

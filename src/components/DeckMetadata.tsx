@@ -1,9 +1,10 @@
-import type { DeckData } from '@/common/deckcode'
+import type { DeckExpanded } from '@/context/useDeck'
+import { useDeck } from '@/context/useDeck'
 import { startCase } from 'lodash'
 import Head from 'next/head'
 import type { FC } from 'react'
 
-const lineAsciiManaCurve = (deck: DeckData) =>
+const lineAsciiManaCurve = (deck: DeckExpanded) =>
   deck.manaCurve
     .map(({ rel }) => {
       if (rel === 1) return '█'
@@ -17,41 +18,37 @@ const lineAsciiManaCurve = (deck: DeckData) =>
       return '▁'
     })
     .join(' ')
-const lineCardCounts = (deck: DeckData) =>
+const lineCardCounts = (deck: DeckExpanded) =>
   [
     `M: ${deck.counts.minions}`,
     `S: ${deck.counts.spells}`,
     `A: ${deck.counts.artifacts}`,
     `${deck.counts.total}/40`,
   ].join(' | ')
-const lineMinions = (deck: DeckData) =>
+const lineMinions = (deck: DeckExpanded) =>
   'Minions: ' +
-  deck.cards.minions.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
-const lineSpells = (deck: DeckData) =>
-  'Spells: ' +
-  deck.cards.spells.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
-const lineArtifacts = (deck: DeckData) =>
+  deck.minions.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
+const lineSpells = (deck: DeckExpanded) =>
+  'Spells: ' + deck.spells.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
+const lineArtifacts = (deck: DeckExpanded) =>
   'Artifacts: ' +
-  deck.cards.artifacts.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
+  deck.artifacts.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
 
-export const DeckMetadata: FC<{ deck: DeckData | null }> = ({ deck }) =>
-  deck ? (
+export const DeckMetadata: FC = () => {
+  const deck = useDeck()
+
+  return deck.deckcode ? (
     <Head>
       <title>{`${deck.title} | Duelyst Share`}</title>
       <meta property="og:site_name" content="Duelyst Share" />
       <meta property="og:title" content={`${deck.title} | ${startCase(deck.faction)}`} />
       <meta
         property="og:description"
-        content={[
-          lineCardCounts(deck) + ' | ' + lineAsciiManaCurve(deck),
-          lineMinions(deck),
-          lineSpells(deck),
-          lineArtifacts(deck),
-        ]
+        content={[lineCardCounts(deck), lineAsciiManaCurve(deck)]
           .map((line) => `➤ ${line}`)
           .join('\n')}
       />
-      <meta property="og:image" content={`/assets/generals/${deck.general.id}_hex@2x.png`} />
+      <meta property="og:image" content={`/assets/generals/${deck.general?.id}_hex@2x.png`} />
     </Head>
   ) : (
     <Head>
@@ -59,3 +56,4 @@ export const DeckMetadata: FC<{ deck: DeckData | null }> = ({ deck }) =>
       <meta property="og:description" content={'Invalid deckcode.'} />
     </Head>
   )
+}

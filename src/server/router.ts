@@ -1,5 +1,5 @@
-import { parseDeckcode, validateDeckcode } from '@/common/deckcode'
-import { createDeck } from '@/components/DeckInfograph/useDeck'
+import { createDeck } from '@/data/deck'
+import { parseDeckcode, validateDeckcode } from '@/data/deckcode'
 import { snapshot } from '@/server/snapshot'
 import * as trpc from '@trpc/server'
 import type { Buffer } from 'node:buffer'
@@ -19,19 +19,8 @@ export const serverRouter = trpc
     input: z.object({
       code: z.string(),
     }),
-    resolve: async ({ input: { code }, ctx }) => {
-      const deckinfo = await ctx.deckinfo.ensureDeckinfo(code)
-
-      if (deckinfo) return deckinfo
-
-      const parsedDeck = validateDeckcode(code) ? parseDeckcode(code) : null
-
-      if (parsedDeck === null) return null
-
-      return await ctx.deckinfo.createForDeck(parsedDeck)
-    },
+    resolve: async ({ input: { code }, ctx }) => ctx.deckinfo.ensureDeckinfo(code),
   })
-
   .query('getDeckimage', {
     input: z.object({
       deckcode: z.string(),
@@ -77,9 +66,10 @@ export const serverRouter = trpc
     resolve: async ({ input, ctx }) => {
       const mostViewedDeckcodes = await ctx.deckviews.mostViewed(input)
 
-      return mostViewedDeckcodes.map(({ deckcode, viewCount }) =>
-        createDeck(deckcode, { viewCount }),
-      )
+      return mostViewedDeckcodes.map(({ deckcode, viewCount }) => ({
+        deck: createDeck(deckcode),
+        viewCount,
+      }))
     },
   })
   .mutation('registerView', {

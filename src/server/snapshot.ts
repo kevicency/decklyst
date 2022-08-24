@@ -1,4 +1,4 @@
-import { remoteSnapshotUrl, deckUrl, snapshotUrl } from '@/common/urls'
+import { deckUrl, remoteSnapshotUrl, snapshotUrl } from '@/common/urls'
 import { Buffer } from 'node:buffer'
 
 export const snapshot = (code: string) =>
@@ -15,7 +15,11 @@ export const snapshotLocal = async (code: string) => {
   try {
     const page = await browser.newPage()
     await page.emulateMediaType('screen')
-    await page.goto(deckUrl(code), { waitUntil: 'networkidle2' })
+    // await page.goto(deckUrl(code), { waitUntil: 'networkidle2' })
+    await Promise.race([
+      page.goto(deckUrl(code), { waitUntil: 'networkidle0' }),
+      new Promise((resolve) => setTimeout(resolve, 7500)),
+    ])
     const content = await page.$('#snap')
     const image = (await content!.screenshot({ omitBackground: true })) as Buffer
 
