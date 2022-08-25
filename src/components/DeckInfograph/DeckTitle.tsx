@@ -11,7 +11,7 @@ export const DeckTitle = () => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`/assets/generals/${general.id}_hex@2x.png`}
-          alt={general.title}
+          alt={general.name}
           className="w-full"
         />
       </div>

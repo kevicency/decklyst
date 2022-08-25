@@ -1,5 +1,5 @@
-import type { Faction } from '@/data/cards'
-import type { Card, CardEntry, Deck, ManaCurve } from '@/data/deck'
+import type { CardData, Faction } from '@/data/cards'
+import type { CardEntry, Deck, ManaCurve } from '@/data/deck'
 import {
   artifactCount$,
   artifacts$,
@@ -18,7 +18,7 @@ import { createContext, useContext } from 'react'
 
 export type DeckExpanded = Deck & {
   faction: Faction
-  general: Card
+  general: CardData
   minions: CardEntry[]
   spells: CardEntry[]
   artifacts: CardEntry[]
@@ -37,7 +37,7 @@ export type DeckExpanded = Deck & {
 
 const expandDeck = (deck: Deck, meta?: DeckExpanded['meta']): DeckExpanded => ({
   ...deck,
-  faction: faction$(deck)!,
+  faction: faction$(deck) ?? 'neutral',
   general: general$(deck)!,
   minions: minions$(deck),
   spells: spells$(deck),

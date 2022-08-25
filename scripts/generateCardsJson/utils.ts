@@ -1,6 +1,5 @@
-import type { CardData, CardType, Faction, Rarity } from '@/data/cards'
-
-const normalizeSpriteName = (name: string | undefined | null): string | null => (name ? name : null)
+import type { CardType, Faction, Rarity } from '@/data/cards'
+import type { ScrapedCard } from './scrapedCards'
 
 export const card = (
   faction: Faction,
@@ -10,14 +9,14 @@ export const card = (
   type: CardType,
   rarity: Rarity,
   spriteName?: string,
-): CardData => ({
+): ScrapedCard => ({
   id,
-  title,
+  name: title,
   faction,
   cost,
   type,
   rarity,
-  spriteName: normalizeSpriteName(spriteName),
+  spriteName: spriteName ?? undefined,
 })
 
 export const lyonar = (
@@ -27,7 +26,7 @@ export const lyonar = (
   type: CardType,
   rarity: Rarity,
   spriteName?: string,
-): CardData => card('lyonar', id, title, cost, type, rarity, spriteName)
+): ScrapedCard => card('lyonar', id, title, cost, type, rarity, spriteName)
 
 export const songhai = (
   id: number,
@@ -36,7 +35,7 @@ export const songhai = (
   type: CardType,
   rarity: Rarity,
   spriteName?: string,
-): CardData => card('songhai', id, title, cost, type, rarity, spriteName)
+): ScrapedCard => card('songhai', id, title, cost, type, rarity, spriteName)
 
 export const vetruvian = (
   id: number,
@@ -45,7 +44,7 @@ export const vetruvian = (
   type: CardType,
   rarity: Rarity,
   spriteName?: string,
-): CardData => card('vetruvian', id, title, cost, type, rarity, spriteName)
+): ScrapedCard => card('vetruvian', id, title, cost, type, rarity, spriteName)
 
 export const abyssian = (
   id: number,
@@ -54,7 +53,7 @@ export const abyssian = (
   type: CardType,
   rarity: Rarity,
   spriteName?: string,
-): CardData => card('abyssian', id, title, cost, type, rarity, spriteName)
+): ScrapedCard => card('abyssian', id, title, cost, type, rarity, spriteName)
 
 export const magmar = (
   id: number,
@@ -63,7 +62,7 @@ export const magmar = (
   type: CardType,
   rarity: Rarity,
   spriteName?: string,
-): CardData => card('magmar', id, title, cost, type, rarity, spriteName)
+): ScrapedCard => card('magmar', id, title, cost, type, rarity, spriteName)
 
 export const vanar = (
   id: number,
@@ -72,7 +71,7 @@ export const vanar = (
   type: CardType,
   rarity: Rarity,
   spriteName?: string,
-): CardData => card('vanar', id, title, cost, type, rarity, spriteName)
+): ScrapedCard => card('vanar', id, title, cost, type, rarity, spriteName)
 
 export const neutral = (
   id: number,
@@ -81,4 +80,4 @@ export const neutral = (
   type: CardType,
   rarity: Rarity,
   spriteName?: string,
-): CardData => card('neutral', id, title, cost, type, rarity, spriteName)
+): ScrapedCard => card('neutral', id, title, cost, type, rarity, spriteName)

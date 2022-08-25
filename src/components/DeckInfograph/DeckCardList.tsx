@@ -28,10 +28,10 @@ export const DeckCardList = () => {
           <div className={`text-${faction} text-xl font-bold`}>{col.title} &nbsp;</div>
           {col.cards.map((card) => (
             <div key={card.id} className="mt-2 flex items-center">
-              <ManaIcon mana={card.cost} />
+              <ManaIcon mana={card.mana} />
               <span className="ml-2 flex-1 truncate text-sm mt-[-1px]">
                 {card.count} x{' '}
-                <span className={`text-${card.rarity.toLowerCase()}`}>{card.title}</span>
+                <span className={`text-${card.rarity.toLowerCase()}`}>{card.name}</span>
               </span>
             </div>
           ))}

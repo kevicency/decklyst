@@ -16,9 +16,9 @@ export const validateDeckcode = (deckcode?: string): deckcode is string =>
 export const splitDeckcode = (deckcode: string) =>
   (deckcode.match(deckcodeRegex)?.slice(2, 4) ?? ['', '']) as [string, string]
 
-export const addCard = (deckdata: Deckcode, cardId: number, count = 1) => ({
-  ...deckdata,
-  [cardId]: (deckdata[cardId] ?? 0) + count,
+export const addCard = (deckcode: Deckcode, cardId: number, count = 1, max = 3) => ({
+  ...deckcode,
+  [cardId]: Math.min(max, (deckcode[cardId] ?? 0) + count),
 })
 export const removeCard = (deckdata: Deckcode, cardId: number, count = 1) => ({
   ...deckdata,
@@ -38,10 +38,12 @@ export const parseDeckcode = memoize((deckcode: string) => {
 })
 
 export const encodeDeckcode = (deckcode: Deckcode) => {
-  const { title, ...cards } = deckcode
+  const { title, $from, ...cards } = deckcode
   const csv = Object.keys(cards)
     .sort()
-    .map((id) => `${deckcode[+id]}:${id}`)
+    .map((id) => [+id, deckcode[+id]] as const)
+    .filter(([id, count]) => id && count)
+    .map(([id, count]) => `${count}:${id}`)
     .join(',')
 
   return `[${title}]${Buffer.from(csv).toString('base64')}`

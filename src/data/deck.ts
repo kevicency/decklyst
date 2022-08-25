@@ -1,19 +1,10 @@
-import type { CardType, Faction, Rarity } from '@/data/cards'
-import { cardDataById, sortCards } from '@/data/cards'
+import type { CardData, CardType } from '@/data/cards'
+import { cardsById, sortCards } from '@/data/cards'
 import type { Deckcode } from '@/data/deckcode'
 import { parseDeckcode, splitDeckcode } from '@/data/deckcode'
 import { groupBy, max, memoize, sumBy } from 'lodash'
 
-export type Card = {
-  id: number
-  title: string
-  faction: Faction
-  type: CardType
-  cost: number
-  rarity: Rarity
-  spriteName?: string | null
-}
-export type CardEntry = Card & { count: number }
+export type CardEntry = CardData & { count: number }
 export type Deck = {
   title: string
   deckcode: string
@@ -40,8 +31,8 @@ export const createDeck = (deckcode?: string | Deckcode): Deck => {
     cards: sortCards(
       Object.keys(cards)
         .map((id) => +id)
-        .filter((id) => cardDataById[id])
-        .map((id) => ({ ...cardDataById[id], count: cards[id] })),
+        .filter((id) => cardsById[id])
+        .map((id) => ({ ...cardsById[id], count: cards[id] })),
       true,
     ),
   }
@@ -51,25 +42,26 @@ export const title$ = $(({ title }) => title)
 export const cards$ = $(({ cards }) => cards)
 export const deckcode$ = $(({ deckcode }) => deckcode)
 export const deckcodeWithoutTitle$ = $(({ deckcode }) => splitDeckcode(deckcode)[1])
-export const general$ = $((deck) => deck.cards.find((card) => card.type === 'GENERAL'))
+export const general$ = $((deck) => deck.cards.find((card) => card.cardType === 'General'))
 export const faction$ = $((deck) => general$(deck)?.faction)
 
 const cardGroups$ = $(
-  (deck) => groupBy(deck.cards, (card) => card.type) as unknown as Record<CardType, CardEntry[]>,
+  (deck) =>
+    groupBy(deck.cards, (card) => card.cardType) as unknown as Record<CardType, CardEntry[]>,
 )
-export const minions$ = $((deck) => sortCards(cardGroups$(deck)['MINION'] ?? []))
-export const spells$ = $((deck) => sortCards(cardGroups$(deck)['SPELL'] ?? []))
-export const artifacts$ = $((deck) => sortCards(cardGroups$(deck)['ARTIFACT'] ?? []))
+export const minions$ = $((deck) => sortCards(cardGroups$(deck)['Minion'] ?? []))
+export const spells$ = $((deck) => sortCards(cardGroups$(deck)['Spell'] ?? []))
+export const artifacts$ = $((deck) => sortCards(cardGroups$(deck)['Artifact'] ?? []))
 export const manaCurve$ = $((deck): ManaCurve => {
   const manaCurve = [...minions$(deck), ...spells$(deck), ...artifacts$(deck)].reduce(
     (acc, card) => {
-      acc[card.cost] = (acc[card.cost] ?? 0) + card.count
+      acc[card.mana] = (acc[card.mana] ?? 0) + card.count
 
       return acc
     },
     new Array(10).fill(0),
   )
-  const manaCurveMax = max(manaCurve)
+  const manaCurveMax = max(manaCurve) ?? 1
   return manaCurve.map((count) => ({ abs: count, rel: count / manaCurveMax }))
 })
 

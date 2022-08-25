@@ -26,13 +26,12 @@ const lineCardCounts = (deck: DeckExpanded) =>
     `${deck.counts.total}/40`,
   ].join(' | ')
 const lineMinions = (deck: DeckExpanded) =>
-  'Minions: ' +
-  deck.minions.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
+  'Minions: ' + deck.minions.map((card) => `{${card.mana}} ${card.name} x ${card.count}`).join('; ')
 const lineSpells = (deck: DeckExpanded) =>
-  'Spells: ' + deck.spells.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
+  'Spells: ' + deck.spells.map((card) => `{${card.mana}} ${card.name} x ${card.count}`).join('; ')
 const lineArtifacts = (deck: DeckExpanded) =>
   'Artifacts: ' +
-  deck.artifacts.map((card) => `{${card.cost}} ${card.title} x ${card.count}`).join('; ')
+  deck.artifacts.map((card) => `{${card.mana}} ${card.name} x ${card.count}`).join('; ')
 
 export const DeckMetadata: FC = () => {
   const deck = useDeck()
