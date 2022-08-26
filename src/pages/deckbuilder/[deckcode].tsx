@@ -26,7 +26,7 @@ const DeckbuilderPage: FC = () => {
 
   const updateDeckcode = useCallback(
     async (deckcode: Deckcode) => {
-      await router.replace(
+      await router.push(
         {
           pathname: '/deckbuilder/[deckcode]',
           query: { deckcode: encodeDeckcode(deckcode) },
@@ -45,12 +45,19 @@ const DeckbuilderPage: FC = () => {
     replaceCard: async (card, replaceWithCard) =>
       await updateDeckcode(replaceCard(deckcode, card, replaceWithCard)),
     updateTitle: async (title) => await updateDeckcode(updateTitle(deckcode, title)),
+    clear: async () => await updateDeckcode(parseDeckcode('')),
   }
+
+  const handleShare = async () =>
+    await router.push({
+      pathname: '/[code]',
+      query: { code: encodeDeckcode(deckcode) },
+    })
 
   return (
     <DeckcodeProvider deckcode={deckcode} {...handlers}>
       <DeckProvider deck={deck}>
-        <Deckbuilder />
+        <Deckbuilder share={handleShare} />
       </DeckProvider>
     </DeckcodeProvider>
   )

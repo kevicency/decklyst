@@ -9,6 +9,19 @@
     display: inline-block;
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
   }
+
+  .border-3 {
+    @apply border-[3px];
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @layer base {
@@ -35,14 +48,26 @@
     @apply flex items-center justify-center;
     @apply bg-slate-700 hover:bg-sky-600;
     @apply text-white;
+    @apply py-1 px-2;
   }
 
-  .btn:disabled {
+  .btn > svg {
+    @apply mr-1;
+  }
+
+  .btn:disabled,
+  .btn--disabled {
+    @apply cursor-default;
     @apply bg-slate-900 cursor-default;
   }
 
   .btn--large {
-    @apply font-bold px-6 py-4 text-xl;
+    @apply font-bold text-xl;
+    @apply px-6 py-4;
+  }
+
+  .btn--large > svg {
+    @apply mr-2;
   }
 }
 
@@ -70,4 +95,22 @@ html {
 body {
   @apply bg-zinc-900;
   @apply text-slate-100;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-500;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-700;
 }

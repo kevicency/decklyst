@@ -1,8 +1,11 @@
+import { ManaIcon } from '@/components/DeckInfograph/ManaIcon'
 import { useDeck } from '@/context/useDeck'
 import type { CardType } from '@/data/cards'
 import type { CardEntry } from '@/data/deck'
+import { useSpriteQuery } from '@/queries/useSpriteQuery'
 import { get, startCase } from 'lodash'
 import type { FC } from 'react'
+import colors from 'tailwindcss/colors'
 
 export const SidebarCardList: FC<{ cardType: CardType }> = ({ cardType }) => {
   const deck = useDeck()
@@ -17,11 +20,42 @@ export const SidebarCardList: FC<{ cardType: CardType }> = ({ cardType }) => {
       </div>
       <ul>
         {cards.map((card) => (
-          <li key={card.id}>
-            {card.count}x {card.name}
-          </li>
+          <SidebarCardEntry key={card.id} card={card} />
         ))}
       </ul>
+    </div>
+  )
+}
+
+export const SidebarCardEntry: FC<{ card: CardEntry }> = ({ card }) => {
+  const { data: sprite } = useSpriteQuery(card.id)
+  return (
+    <div className="relative bg-slate-800">
+      <div
+        className="absolute left-0 top-0 w-full h-full"
+        style={{
+          backgroundImage: `url(${sprite?.src})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center right',
+          backgroundSize: '90px',
+        }}
+      />
+      <div
+        className="absolute left-0 top-0 w-full h-full"
+        style={{
+          background: `linear-gradient(90deg, rgba(255,255,255,0) 25%, ${colors.slate[900]}c8 100%)`,
+        }}
+      />
+      <div className="flex items-center w-full mb-1 py-1.5 relative">
+        <ManaIcon mana={card.mana} className="mr-1" />
+        <div className="text-sm">{card.name}</div>
+        <div className="flex-1" />
+        <div
+          className={`font-mono font-bold border border-slate-600 text-slate-200 bg-slate-800 text-center px-1`}
+        >
+          x{card.count}
+        </div>
+      </div>
     </div>
   )
 }

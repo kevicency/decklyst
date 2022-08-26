@@ -1,3 +1,5 @@
+import type { CardHandler } from '@/components/Deckbuilder/CardList'
+import { CardList } from '@/components/Deckbuilder/CardList'
 import { GeneralCard } from '@/components/Deckbuilder/GeneralCard'
 import { Sidebar } from '@/components/Deckbuilder/Sidebar'
 import { useDeck } from '@/context/useDeck'
@@ -8,9 +10,7 @@ import { groupBy, startCase } from 'lodash'
 import type { FC } from 'react'
 import { useMemo } from 'react'
 
-export const PickAGeneral: FC<{ selectGeneral: (general: CardData) => void }> = ({
-  selectGeneral,
-}) => {
+export const PickAGeneral: FC<{ selectGeneral: CardHandler }> = ({ selectGeneral }) => {
   const generalsByFaction = useMemo(() => {
     const generals = cards.filter((card) => card.cardType === 'General')
     return groupBy(generals, (card) => card.faction)
@@ -38,8 +38,8 @@ export const PickAGeneral: FC<{ selectGeneral: (general: CardData) => void }> = 
   )
 }
 
-export const Deckbuilder = () => {
-  const [deckcode, { addCard, removeCard, replaceCard }] = useDeckcode()
+export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
+  const [deckcode, { addCard, removeCard, replaceCard, clear }] = useDeckcode()
   const deck = useDeck()
 
   const selectGeneral = (general: CardData) => {
@@ -50,15 +50,47 @@ export const Deckbuilder = () => {
     }
   }
 
+  const handleCardSelected: CardHandler = (card) => {
+    addCard(card.id)
+  }
+  const handleCardDeselected: CardHandler = (card) => {
+    removeCard(card.id)
+  }
+  const handleReset = () => {
+    clear()
+  }
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(deckcode.$encoded!)
+  }
+
   return (
     <div className="flex flex-1 overflow-hidden">
       <div className="flex flex-col flex-1 overflow-y-auto">
-        <div className="truncate">{JSON.stringify(deckcode)}</div>
-        <button onClick={() => addCard(11245)}>Add card</button>
-        <button onClick={() => removeCard(11245)}>Remove card</button>
-        {deck.general ? <div /> : <PickAGeneral selectGeneral={selectGeneral} />}
+        {deck.general ? (
+          <div>
+            <CardList
+              faction={deck.faction}
+              onSelectCard={handleCardSelected}
+              onDeselectCard={handleCardDeselected}
+            />
+            <CardList
+              faction="neutral"
+              onSelectCard={handleCardSelected}
+              onDeselectCard={handleCardDeselected}
+            />
+          </div>
+        ) : (
+          <PickAGeneral selectGeneral={selectGeneral} />
+        )}
       </div>
-      {deck.general && <Sidebar selectGeneral={selectGeneral} />}
+      {deck.general && (
+        <Sidebar
+          onSelectGeneral={selectGeneral}
+          onReset={handleReset}
+          onCopy={handleCopy}
+          onShare={share}
+        />
+      )}
     </div>
   )
 }

@@ -38,7 +38,7 @@ export const OneTimeButton: FC<{
       onClick={handleClick}
       disabled={disabled}
       className={cx(
-        'btn btn--large transition-colors',
+        'btn transition-colors',
         className,
         clickedClassName
           ? { clickedClassName: isClicked }

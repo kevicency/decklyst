@@ -78,18 +78,18 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
           <DeckMetadata />
           <DeckInfograph />
           <div className="mt-6 grid grid-cols-3 auto-cols-auto gap-4">
-            <OneTimeButton onClick={copyDeckcode} timeout={2500}>
+            <OneTimeButton onClick={copyDeckcode} timeout={2500} className="btn--large">
               {(copied) => (
                 <>
-                  {copied ? <MdDone className="mr-2" /> : <IoCodeWorking className="mr-2" />}
+                  {copied ? <MdDone /> : <IoCodeWorking />}
                   Copy deckcode
                 </>
               )}
             </OneTimeButton>
-            <OneTimeButton onClick={copyImageUrl} timeout={2500}>
+            <OneTimeButton onClick={copyImageUrl} timeout={2500} className="btn--large">
               {(copied) => (
                 <>
-                  {copied ? <MdDone className="mr-2" /> : <MdLink className="mr-2" />}
+                  {copied ? <MdDone /> : <MdLink />}
                   Copy image url
                 </>
               )}
@@ -98,15 +98,12 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
               href={imageDataUri ?? undefined}
               download={imageFilename}
               disabled={!imageDataUri}
+              className="btn--large"
             >
               {(isDownloading) =>
                 imageDataUri ? (
                   <>
-                    {isDownloading ? (
-                      <MdDownloadDone className="mr-2" />
-                    ) : (
-                      <MdDownload className="mr-2" />
-                    )}
+                    {isDownloading ? <MdDownloadDone /> : <MdDownload />}
                     Download image
                   </>
                 ) : (

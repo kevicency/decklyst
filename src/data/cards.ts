@@ -1,4 +1,4 @@
-import { partition, sortBy } from 'lodash'
+import { memoize, partition, sortBy } from 'lodash'
 
 export const cards: CardData[] = require('./cards.json')
 
@@ -74,3 +74,40 @@ export const sortCards = <T extends CardData>(cards: T[], includeGeneral = false
 
   return sortBy(cards, ['mana', 'id'])
 }
+
+export const cardCompareFn = (a: CardData, b: CardData) => {
+  if (a.mana !== b.mana) return a.mana - b.mana
+  if (a.id !== b.id) return a.id - b.id
+
+  return 0
+}
+
+export const keywords = [
+  'stun',
+  'shadow creep',
+  'airdrop',
+  'celerity',
+  'provoke',
+  'zeal',
+  'rush',
+  'ranged',
+  'flying',
+  'opening gambit',
+  'activate',
+  'backstab',
+  'frenzy',
+  'veil',
+  'blast',
+  'dying wish',
+  'rebirth',
+  'grow',
+]
+
+export const highlightKeywords = memoize((description?: string) => {
+  if (!description) return ''
+  const regex = new RegExp(keywords.map((keyword) => `\\b${keyword}\\b`).join('|'), 'gi')
+  return description.replace(
+    regex,
+    (match) => `<span class="font-bold text-slate-100">${match}</span>`,
+  )
+})
