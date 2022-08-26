@@ -2,13 +2,13 @@ import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 
-export const useSpriteQuery = (cardId: number) => {
+export const useSpriteQuery = (cardId: number, animated?: boolean) => {
   const { setSpriteLoaded } = useSpriteLoader()
 
-  const spriteImageUrl = `/assets/sprites/${cardId}.png`
+  const spriteImageUrl = `/assets/sprites/${cardId}.${animated ? 'gif' : 'png'}`
 
   const result = useQuery(
-    ['sprite', cardId],
+    ['sprite', cardId, { animated: animated ?? false }],
     async () => {
       const response = await fetch(spriteImageUrl)
       const blob = await response.blob()

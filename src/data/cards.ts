@@ -1,6 +1,6 @@
 import { partition, sortBy } from 'lodash'
 
-const cards: CardData[] = require('./cards.json')
+export const cards: CardData[] = require('./cards.json')
 
 export interface CardData {
   name: string
@@ -32,6 +32,16 @@ export type Faction =
   | 'magmar'
   | 'vanar'
   | 'neutral'
+
+export const factions: Faction[] = [
+  'lyonar',
+  'songhai',
+  'vetruvian',
+  'abyssian',
+  'magmar',
+  'vanar',
+  'neutral',
+]
 
 export interface SpriteResource {
   breathing?: string

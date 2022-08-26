@@ -1,4 +1,4 @@
-import { CardSprite } from '@/components/DeckInfograph/CardSprite'
+import { CardSprite } from '@/components/CardSprite'
 import { useDeck } from '@/context/useDeck'
 import type { CardEntry } from '@/data/deck'
 import type { FC } from 'react'
@@ -21,7 +21,7 @@ export const DeckMinionList = () => {
 export const MinionCard: FC<{ card: CardEntry; position: number }> = ({ card, position }) => (
   <div className="flex flex-col" style={{ zIndex: 40 - position }}>
     <div className="flex flex-1 relative">
-      <CardSprite card={card} />
+      <CardSprite card={card} centered className="scale-150 absolute left-1/2 bottom-2.5" />
     </div>
     <div className="text-center py-1 bg-slate-700">{card.count}</div>
   </div>

@@ -20,14 +20,14 @@ type DeckLens<T> = (deck: Deck) => T
 const $ = <T>(fn: DeckLens<T>) => memoize(fn)
 
 export const createDeck = (deckcode?: string | Deckcode): Deck => {
-  if (!deckcode) return { title: 'Untitled', cards: [], deckcode: '' }
+  if (!deckcode) return { title: '', cards: [], deckcode: '' }
 
-  const { title, $from, ...cards } =
+  const { title, $encoded, cards } =
     typeof deckcode === 'string' ? parseDeckcode(deckcode) : deckcode
 
   return {
     title,
-    deckcode: $from!,
+    deckcode: $encoded!,
     cards: sortCards(
       Object.keys(cards)
         .map((id) => +id)
@@ -61,7 +61,7 @@ export const manaCurve$ = $((deck): ManaCurve => {
     },
     new Array(10).fill(0),
   )
-  const manaCurveMax = max(manaCurve) ?? 1
+  const manaCurveMax = max(manaCurve) || 1
   return manaCurve.map((count) => ({ abs: count, rel: count / manaCurveMax }))
 })
 

@@ -18,7 +18,7 @@ const CardCount: FC<{ faction: Faction; label: string; count: number; of?: numbe
 export const DeckCounts: FC<{ showTotal?: boolean }> = ({ showTotal }) => {
   const { faction, counts } = useDeck()
   return (
-    <div className="flex flex-row pt-6 justify-around gap-x-4">
+    <div className="flex flex-row justify-around gap-x-4">
       <CardCount faction={faction} label="Minions" count={counts.minions} />
       <CardCount faction={faction} label="Spells" count={counts.spells} />
       <CardCount faction={faction} label="Artifacts" count={counts.artifacts} />

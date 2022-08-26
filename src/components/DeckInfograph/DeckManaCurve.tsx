@@ -24,7 +24,10 @@ const ManaCurveBar: FC<{ entry: ManaCurve[0]; mana: number; faction: Faction }> 
     <div className="flex flex-1 flex-col items-stretch mx-0.5">
       <div className="flex-1"></div>
       <div>{abs}</div>
-      <div className={`bg-${faction} w-full`} style={{ height: `${Math.round(50 * rel)}px` }}>
+      <div
+        className={`bg-${faction} w-full transition-all`}
+        style={{ height: `${Math.round(50 * rel)}px` }}
+      >
         &nbsp;
       </div>
     </div>

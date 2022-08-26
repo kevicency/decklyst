@@ -12,7 +12,7 @@ const Decklink: FC = () => {
   return (
     <a
       className={cx(
-        'flex flex-wrap gap-4 lg:gap-8 justify-between',
+        'flex flex-wrap gap-4 lg:gap-8 justify-between items-center',
         'bg-slate-900 py-2 pr-4 mt-4',
         'border-slate-700 border-[3px]',
         `hover:border-${faction}`,
