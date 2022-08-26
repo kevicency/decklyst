@@ -38,8 +38,8 @@ export const DeckMetadata: FC = () => {
 
   return deck.deckcode ? (
     <Head>
-      <title>{`${deck.title} | Duelyst Share`}</title>
-      <meta property="og:site_name" content="Duelyst Share" />
+      <title>{`${deck.title} | Decklyst`}</title>
+      <meta property="og:site_name" content="Decklyst" />
       <meta property="og:title" content={`${deck.title} | ${startCase(deck.faction)}`} />
       <meta
         property="og:description"
@@ -51,7 +51,7 @@ export const DeckMetadata: FC = () => {
     </Head>
   ) : (
     <Head>
-      <title>{`Invalid Deckcode | Duelyst Share`}</title>
+      <title>{`Invalid Deckcode | Decklyst`}</title>
       <meta property="og:description" content={'Invalid deckcode.'} />
     </Head>
   )

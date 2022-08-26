@@ -8,7 +8,7 @@ export const Layout: FC<{ children: any; showSearch?: boolean }> = ({ children, 
       <div className="flex flex-shrink-0 items-center bg-slate-800 h-16">
         <div className="content-container flex justify-between">
           <span className={'hover:text-sky-400 text-3xl'}>
-            <Link href={'/'}>Duelyst Share</Link>
+            <Link href={'/'}>Decklyst</Link>
           </span>
           <DeckcodeSearch />
         </div>

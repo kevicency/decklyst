@@ -15,7 +15,7 @@ const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) =
   return (
     <div className="content-container flex flex-col justify-around flex-1 pb-8">
       <div className="flex flex-col">
-        <h1 className="text-5xl text-center mt-8 mb-12">Duelyst Share</h1>
+        <h1 className="text-5xl text-center mt-8 mb-12">Decklyst</h1>
         <div className="flex px-48">
           <DeckcodeSearch big />
         </div>
