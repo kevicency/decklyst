@@ -73,7 +73,7 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
 
   return (
     <DeckProvider deck={deck} meta={meta}>
-      <div className="content-container mt-8">
+      <div className="content-container my-8">
         <DeckMetadata />
         <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
           <DeckInfograph />
@@ -129,7 +129,7 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
           <button
             disabled={!imageDataUri}
             onClick={handleRegenerateClick()}
-            className="text-slate-400 hover:text-sky-400"
+            className="text-slate-400 hover:text-sky-400 disabled:hover:text-slate-400"
           >
             Regenerate
           </button>
