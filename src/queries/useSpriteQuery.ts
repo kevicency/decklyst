@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 
 export const useSpriteQuery = (cardId: number) => {
-  const [, { setSpriteLoaded }] = useSpriteLoader()
+  const { setSpriteLoaded } = useSpriteLoader()
 
   const spriteImageUrl = `/assets/sprites/${cardId}.png`
 

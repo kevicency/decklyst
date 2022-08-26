@@ -11,7 +11,7 @@ import { DeckSpellList } from './DeckSpellList'
 import { DeckTitle } from './DeckTitle'
 
 export const DeckInfograph: FC = () => {
-  const [{ allSpritesLoaded }] = useSpriteLoader()
+  const { allSpritesLoaded } = useSpriteLoader()
 
   return (
     <div className="p-6 pb-2 bg-slate-900 relative" id={allSpritesLoaded ? 'snap' : 'snap-loading'}>

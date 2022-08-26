@@ -7,7 +7,7 @@ import { FaRegEye } from 'react-icons/fa'
 export const DeckTitle = () => {
   const imageRef = useRef<HTMLImageElement>(null)
   const { general, title, faction, meta } = useDeck()
-  const [, { setSpriteLoaded }] = useSpriteLoader()
+  const { setSpriteLoaded } = useSpriteLoader()
   const viewCount = meta?.viewCount
 
   useEffect(() => {
