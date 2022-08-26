@@ -1,4 +1,4 @@
-import { deckUrl, remoteSnapshotUrl, snapshotUrl } from '@/common/urls'
+import { remoteSnapshotUrl, snapshotUrl } from '@/common/urls'
 import { Buffer } from 'node:buffer'
 
 export const snapshot = (code: string) =>
@@ -15,7 +15,7 @@ export const snapshotLocal = async (code: string) => {
   try {
     const page = await browser.newPage()
     await page.emulateMediaType('screen')
-    await page.goto(deckUrl(code))
+    await page.goto(snapshotUrl(code), { waitUntil: 'networkidle0' })
     const content = await page.$('#snap')
     const image = (await content!.screenshot({ omitBackground: true })) as Buffer
 
@@ -45,6 +45,9 @@ export const snapshotBrowserless = async (code: string) => {
               options: {
                 fullPage: false,
                 type: 'png',
+              },
+              gotoOptions: {
+                waitUntil: 'networkidle0',
               },
               selector: '#snap',
               viewport: { width: 1280, height: 1024 },

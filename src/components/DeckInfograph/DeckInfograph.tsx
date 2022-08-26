@@ -1,5 +1,6 @@
 import { DeckShareUrl } from '@/components/DeckInfograph/DeckShareUrl'
 import { useSpriteLoader } from '@/context/useSpriteLoader'
+import cx from 'classnames'
 import type { FC } from 'react'
 import { DeckArtifactList } from './DeckArtifactList'
 import { DeckCardList } from './DeckCardList'
@@ -14,7 +15,13 @@ export const DeckInfograph: FC = () => {
   const { allSpritesLoaded } = useSpriteLoader()
 
   return (
-    <div className="p-6 pb-2 bg-slate-900 relative" id={allSpritesLoaded ? 'snap' : 'snap-loading'}>
+    <div
+      className={cx(
+        'p-6 pb-2 bg-slate-900 relative',
+        allSpritesLoaded ? 'snap--loaded' : 'snap--loading',
+      )}
+      id="snap"
+    >
       <div className="grid auto-rows-auto gap-6 text-slate-100">
         <div
           className="grid gap-4 lg:gap-6"

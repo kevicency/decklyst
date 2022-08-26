@@ -36,7 +36,6 @@ export const useSpriteQuery = (cardId: number) => {
   useEffect(() => {
     if (result.isSuccess) {
       setSpriteLoaded(cardId)
-      console.log('sprite loaded', cardId)
     }
   }, [result.isSuccess, setSpriteLoaded, cardId])
 
