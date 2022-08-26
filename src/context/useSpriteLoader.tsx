@@ -12,8 +12,8 @@ const SpriteLoaderContext = createContext<SpriteLoaderContextValue>({
   setSpriteLoaded: noop,
 })
 
-export const SpriteLoaderProvider = ({ deck, children }: { deck: Deck; children: any }) => {
-  const [requestedImageIds] = useState(new Set(deck.cards.map(({ id }) => id)))
+export const SpriteLoaderProvider = ({ deck, children }: { deck?: Deck; children: any }) => {
+  const [requestedImageIds] = useState(new Set(deck?.cards.map(({ id }) => id) ?? []))
   const [loadedImageIds, setLoadedImageIds] = useState(new Set<number>())
   const isLoaded = requestedImageIds.size === loadedImageIds.size
 

@@ -73,68 +73,68 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
 
   return (
     <DeckProvider deck={deck} meta={meta}>
-      <div className="content-container my-8">
-        <DeckMetadata />
-        <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
+      <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
+        <div className="content-container my-8">
+          <DeckMetadata />
           <DeckInfograph />
-        </SpriteLoaderProvider>
-        <div className="mt-6 grid grid-cols-3 auto-cols-auto gap-4">
-          <OneTimeButton onClick={copyDeckcode} timeout={2500}>
-            {(copied) => (
-              <>
-                {copied ? <MdDone className="mr-2" /> : <IoCodeWorking className="mr-2" />}
-                Copy deckcode
-              </>
-            )}
-          </OneTimeButton>
-          <OneTimeButton onClick={copyImageUrl} timeout={2500}>
-            {(copied) => (
-              <>
-                {copied ? <MdDone className="mr-2" /> : <MdLink className="mr-2" />}
-                Copy image url
-              </>
-            )}
-          </OneTimeButton>
-          <OneTimeButton
-            href={imageDataUri ?? undefined}
-            download={imageFilename}
-            disabled={!imageDataUri}
-          >
-            {(isDownloading) =>
-              imageDataUri ? (
+          <div className="mt-6 grid grid-cols-3 auto-cols-auto gap-4">
+            <OneTimeButton onClick={copyDeckcode} timeout={2500}>
+              {(copied) => (
                 <>
-                  {isDownloading ? (
-                    <MdDownloadDone className="mr-2" />
-                  ) : (
-                    <MdDownload className="mr-2" />
-                  )}
-                  Download image
+                  {copied ? <MdDone className="mr-2" /> : <IoCodeWorking className="mr-2" />}
+                  Copy deckcode
                 </>
-              ) : (
+              )}
+            </OneTimeButton>
+            <OneTimeButton onClick={copyImageUrl} timeout={2500}>
+              {(copied) => (
                 <>
-                  <BounceLoader
-                    size={18}
-                    speedMultiplier={0.66}
-                    color={colors.slate['400']}
-                    className="mr-2"
-                  />
-                  <span className="text-slate-400">Generating image</span>
+                  {copied ? <MdDone className="mr-2" /> : <MdLink className="mr-2" />}
+                  Copy image url
                 </>
-              )
-            }
-          </OneTimeButton>
+              )}
+            </OneTimeButton>
+            <OneTimeButton
+              href={imageDataUri ?? undefined}
+              download={imageFilename}
+              disabled={!imageDataUri}
+            >
+              {(isDownloading) =>
+                imageDataUri ? (
+                  <>
+                    {isDownloading ? (
+                      <MdDownloadDone className="mr-2" />
+                    ) : (
+                      <MdDownload className="mr-2" />
+                    )}
+                    Download image
+                  </>
+                ) : (
+                  <>
+                    <BounceLoader
+                      size={18}
+                      speedMultiplier={0.66}
+                      color={colors.slate['400']}
+                      className="mr-2"
+                    />
+                    <span className="text-slate-400">Generating image</span>
+                  </>
+                )
+              }
+            </OneTimeButton>
+          </div>
+          <div className="mt-4 flex gap-x-2 justify-end items-center text-slate-500 text-sm">
+            <span>Image broken?</span>
+            <button
+              disabled={!imageDataUri}
+              onClick={handleRegenerateClick()}
+              className="text-slate-400 hover:text-sky-400 disabled:hover:text-slate-400"
+            >
+              Regenerate
+            </button>
+          </div>
         </div>
-        <div className="mt-4 flex gap-x-2 justify-end items-center text-slate-500 text-sm">
-          <span>Image broken?</span>
-          <button
-            disabled={!imageDataUri}
-            onClick={handleRegenerateClick()}
-            className="text-slate-400 hover:text-sky-400 disabled:hover:text-slate-400"
-          >
-            Regenerate
-          </button>
-        </div>
-      </div>
+      </SpriteLoaderProvider>
     </DeckProvider>
   )
 }
