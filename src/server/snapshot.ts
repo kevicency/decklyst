@@ -15,11 +15,7 @@ export const snapshotLocal = async (code: string) => {
   try {
     const page = await browser.newPage()
     await page.emulateMediaType('screen')
-    // await page.goto(deckUrl(code), { waitUntil: 'networkidle2' })
-    await Promise.race([
-      page.goto(deckUrl(code), { waitUntil: 'networkidle0' }),
-      new Promise((resolve) => setTimeout(resolve, 7500)),
-    ])
+    await page.goto(deckUrl(code))
     const content = await page.$('#snap')
     const image = (await content!.screenshot({ omitBackground: true })) as Buffer
 
@@ -49,9 +45,6 @@ export const snapshotBrowserless = async (code: string) => {
               options: {
                 fullPage: false,
                 type: 'png',
-              },
-              gotoOptions: {
-                waitUntil: 'networkidle2',
               },
               selector: '#snap',
               viewport: { width: 1280, height: 1024 },

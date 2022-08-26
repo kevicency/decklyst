@@ -5,6 +5,7 @@ import { DeckInfograph } from '@/components/DeckInfograph'
 import { DeckMetadata } from '@/components/DeckMetadata'
 import { OneTimeButton } from '@/components/OneTimeButton'
 import { DeckProvider } from '@/context/useDeck'
+import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import type { Deck } from '@/data/deck'
 import { createDeck, deckcodeWithoutTitle$, faction$, title$ } from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
@@ -74,7 +75,9 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
     <DeckProvider deck={deck} meta={meta}>
       <div className="content-container mt-8">
         <DeckMetadata />
-        <DeckInfograph />
+        <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
+          <DeckInfograph />
+        </SpriteLoaderProvider>
         <div className="mt-6 grid grid-cols-3 auto-cols-auto gap-4">
           <OneTimeButton onClick={copyDeckcode} timeout={2500}>
             {(copied) => (

@@ -1,15 +1,32 @@
 import { useDeck } from '@/context/useDeck'
+import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { startCase } from 'lodash'
+import { useEffect, useRef } from 'react'
 import { FaRegEye } from 'react-icons/fa'
 
 export const DeckTitle = () => {
+  const imageRef = useRef<HTMLImageElement>(null)
   const { general, title, faction, meta } = useDeck()
+  const [, { setSpriteLoaded }] = useSpriteLoader()
   const viewCount = meta?.viewCount
+
+  useEffect(() => {
+    if (imageRef.current) {
+      const image = imageRef.current
+      if (image.complete) {
+        setSpriteLoaded(general.id)
+      } else {
+        image.onload = () => {
+          setSpriteLoaded(general.id)
+        }
+      }
+    }
+  }, [imageRef, setSpriteLoaded, general.id])
   return (
     <div className="flex">
       <div className="w-32 mt-[-24px] mb-[-16px] ml-[-24px] flex-shrink-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          ref={imageRef}
           src={`/assets/generals/${general.id}_hex@2x.png`}
           alt={general.name}
           className="w-full"
