@@ -34,11 +34,11 @@ export const SidebarCardEntry: FC<{ card: CardEntry }> = ({ card }) => {
   const [, { removeCard, addCard }] = useDeckcode()
   return (
     <div
-      className="relative bg-gray-800 hover:bg-gray-600 cursor-pointer select-none"
+      className="relative bg-gray-800 hover:bg-gray-600 cursor-pointer select-none transition-transform active:scale-95"
       onClick={(ev) => (ev.shiftKey ? addCard(card.id) : removeCard(card.id))}
     >
       <div
-        className="absolute left-0 top-0 right-0.5 h-full"
+        className="absolute left-0 top-0 right-0.5 h-full sprite"
         style={{
           backgroundImage: `url(${sprite?.src})`,
           backgroundRepeat: 'no-repeat',

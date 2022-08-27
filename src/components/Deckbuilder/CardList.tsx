@@ -95,13 +95,14 @@ export const Card: FC<{
       className={cx(
         className,
         'flex flex-col items-center relative',
-        'w-64 h-96 p-4 bg-gray-900 ',
+        'w-64 h-96 p-4 bg-gray-900',
         `border-3 border-gray-400 hover:border-${card.faction} outline-none`,
+        'transition-transform active:scale-105',
       )}
       onClick={(ev) => (ev.shiftKey ? onDeselect(card) : onSelect(card))}
     >
       <div className="scale-[2.5] absolute left-[-2px] top-0 -mx-3">
-        <ManaIcon mana={card.mana} />
+        <ManaIcon mana={card.mana} className="font-normal" />
       </div>
       {count && (
         <div
