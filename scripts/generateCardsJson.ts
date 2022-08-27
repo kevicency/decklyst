@@ -30,6 +30,7 @@ async function main() {
     .filter(({ id }) => !blacklist.includes(id))
     .map((cardJson) => ({
       ...cardJson,
+      description: cardJson.description ?? '',
       spriteName: scrapedCardsById[cardJson.id]?.spriteName,
       faction: scrapedCardsById[cardJson.id]?.faction ?? 'neutral',
       factionId: cardJson.faction,

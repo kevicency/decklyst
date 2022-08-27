@@ -23,6 +23,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f1_general",
     "factionId": 1
   },
@@ -46,6 +47,7 @@
     "attack": 1,
     "health": 4,
     "cardType": "Minion",
+    "description": "",
     "spriteName": "f1_silverguardsquire",
     "factionId": 1
   },
@@ -385,6 +387,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f1_altgeneral",
     "factionId": 1
   },
@@ -412,6 +415,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f1_3rdgeneral",
     "factionId": 1
   },
@@ -439,6 +443,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f2_general",
     "factionId": 2
   },
@@ -825,6 +830,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f2_altgeneral",
     "factionId": 2
   },
@@ -852,6 +858,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f2_3rdgeneral",
     "factionId": 2
   },
@@ -879,6 +886,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f3_general",
     "factionId": 3
   },
@@ -1265,6 +1273,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f3_altgeneral",
     "factionId": 3
   },
@@ -1292,6 +1301,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f3_3rdgeneral",
     "factionId": 3
   },
@@ -1319,6 +1329,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f4_general",
     "factionId": 4
   },
@@ -1510,6 +1521,7 @@
     "attack": 1,
     "health": 1,
     "cardType": "Minion",
+    "description": "",
     "factionId": 4
   },
   {
@@ -1704,6 +1716,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f4_altgeneral",
     "factionId": 4
   },
@@ -1731,6 +1744,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f4_3rdgeneral",
     "factionId": 4
   },
@@ -1758,6 +1772,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f5_general",
     "factionId": 5
   },
@@ -1877,6 +1892,7 @@
     "attack": 7,
     "health": 2,
     "cardType": "Minion",
+    "description": "",
     "spriteName": "f5_tank",
     "factionId": 5
   },
@@ -1996,6 +2012,7 @@
     "attack": 0,
     "health": 1,
     "cardType": "Minion",
+    "description": "",
     "factionId": 5
   },
   {
@@ -2114,6 +2131,7 @@
     "attack": 1,
     "health": 1,
     "cardType": "Minion",
+    "description": "",
     "factionId": 5
   },
   {
@@ -2164,6 +2182,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f5_altgeneral",
     "factionId": 5
   },
@@ -2191,6 +2210,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f5_3rdgeneral",
     "factionId": 5
   },
@@ -2218,6 +2238,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f6_general",
     "factionId": 6
   },
@@ -2265,6 +2286,7 @@
     "attack": 3,
     "health": 3,
     "cardType": "Minion",
+    "description": "",
     "factionId": 6
   },
   {
@@ -2383,6 +2405,7 @@
     "attack": 2,
     "health": 7,
     "cardType": "Minion",
+    "description": "",
     "factionId": 6
   },
   {
@@ -2596,6 +2619,7 @@
     "attack": 2,
     "health": 2,
     "cardType": "Minion",
+    "description": "",
     "factionId": 6
   },
   {
@@ -2642,6 +2666,7 @@
     "attack": 3,
     "health": 3,
     "cardType": "Minion",
+    "description": "",
     "factionId": 6
   },
   {
@@ -2687,6 +2712,7 @@
     "attack": 5,
     "health": 5,
     "cardType": "Minion",
+    "description": "",
     "factionId": 6
   },
   {
@@ -2806,6 +2832,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f6_altgeneral",
     "factionId": 6
   },
@@ -2833,6 +2860,7 @@
     "attack": 2,
     "health": 25,
     "cardType": "General",
+    "description": "",
     "spriteName": "f6_3rdgeneral",
     "factionId": 6
   },
@@ -3144,6 +3172,7 @@
     "attack": 4,
     "health": 9,
     "cardType": "Minion",
+    "description": "",
     "spriteName": "neutral_golemnature",
     "factionId": 100
   },
@@ -3167,6 +3196,7 @@
     "attack": 5,
     "health": 3,
     "cardType": "Minion",
+    "description": "",
     "spriteName": "neutral_golembloodshard",
     "factionId": 100
   },
@@ -3190,6 +3220,7 @@
     "attack": 10,
     "health": 10,
     "cardType": "Minion",
+    "description": "",
     "spriteName": "neutral_golemdragonbone",
     "factionId": 100
   },
@@ -3213,6 +3244,7 @@
     "attack": 8,
     "health": 8,
     "cardType": "Minion",
+    "description": "",
     "spriteName": "neutral_golemstormmetal",
     "factionId": 100
   },
@@ -3404,6 +3436,7 @@
     "attack": 2,
     "health": 1,
     "cardType": "Minion",
+    "description": "",
     "factionId": 100
   },
   {
@@ -4121,6 +4154,7 @@
     "attack": 4,
     "health": 2,
     "cardType": "Minion",
+    "description": "",
     "spriteName": "neutral_golemrunesand",
     "factionId": 100
   },
@@ -4809,6 +4843,7 @@
     "attack": 4,
     "health": 6,
     "cardType": "Minion",
+    "description": "",
     "spriteName": "neutral_golemice",
     "factionId": 100
   },

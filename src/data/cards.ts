@@ -14,7 +14,7 @@ export interface CardData {
   attack?: number
   health?: number
   cardType: CardType
-  description?: string
+  description: string
 
   faction: Faction
   factionId: number
@@ -94,6 +94,7 @@ export const keywords = [
   'dying wish',
   'rebirth',
   'grow',
+  'deathwatch',
 ]
 
 export const highlightKeywords = memoize((description?: string) => {
