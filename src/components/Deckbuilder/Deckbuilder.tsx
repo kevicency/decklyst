@@ -6,9 +6,10 @@ import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
 import type { CardData } from '@/data/cards'
 import { cards, factions } from '@/data/cards'
+import cx from 'classnames'
 import { groupBy, startCase } from 'lodash'
-import type { FC } from 'react'
-import { useMemo } from 'react'
+import type { FC, RefObject } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 export const PickAGeneral: FC<{ selectGeneral: CardHandler }> = ({ selectGeneral }) => {
   const generalsByFaction = useMemo(() => {
@@ -38,9 +39,58 @@ export const PickAGeneral: FC<{ selectGeneral: CardHandler }> = ({ selectGeneral
   )
 }
 
+const PivotButton: FC<{ onClick: () => void; active?: boolean; children: any }> = ({
+  onClick,
+  active,
+  children,
+}) => (
+  <button
+    onClick={onClick}
+    className={cx(
+      'hover:text-sky-400 cursor-pointer',
+      active ? 'text-slate-100' : 'text-slate-500',
+    )}
+  >
+    {children}
+  </button>
+)
+
+export default function useOnScreen(ref: RefObject<HTMLElement>) {
+  const observerRef = useRef<IntersectionObserver | null>(null)
+  const [isOnScreen, setIsOnScreen] = useState(false)
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(([entry]) => setIsOnScreen(entry.isIntersecting))
+  }, [])
+
+  useEffect(() => {
+    const observer = observerRef.current
+    if (ref.current) {
+      observer?.observe(ref.current!)
+    }
+
+    return () => {
+      observer?.disconnect()
+    }
+  }, [ref])
+
+  return isOnScreen
+}
+
 export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
   const [deckcode, { addCard, removeCard, replaceCard, clear }] = useDeckcode()
   const deck = useDeck()
+  const factionCardListRef = useRef<HTMLDivElement>(null)
+  const neutralCardListRef = useRef<HTMLDivElement>(null)
+  const neutralCardsOnScreen = useOnScreen(neutralCardListRef)
+
+  const generals = useMemo(
+    () =>
+      cards.filter(({ cardType, faction }) => faction === deck.faction && cardType === 'General'),
+    [deck.faction],
+  )
+
+  useEffect(() => {})
 
   const selectGeneral = (general: CardData) => {
     if (deck.general) {
@@ -65,32 +115,63 @@ export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
 
   return (
     <div className="flex flex-1 overflow-hidden">
-      <div className="flex flex-col flex-1 overflow-y-auto">
-        {deck.general ? (
-          <div>
-            <CardList
-              faction={deck.faction}
-              onSelectCard={handleCardSelected}
-              onDeselectCard={handleCardDeselected}
-            />
-            <CardList
-              faction="neutral"
-              onSelectCard={handleCardSelected}
-              onDeselectCard={handleCardDeselected}
-            />
+      {deck.general ? (
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <div className="flex items-end px-8 pb-4">
+            <div className="flex gap-x-4 text-3xl pb-2">
+              <PivotButton
+                active={!neutralCardsOnScreen}
+                onClick={() => factionCardListRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {startCase(deck.faction)}
+              </PivotButton>
+              <PivotButton
+                active={neutralCardsOnScreen}
+                onClick={() => neutralCardListRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {startCase('neutral')}
+              </PivotButton>
+            </div>
+            <div className="flex-1"></div>
+            <div className="flex justify-around pl-2 -mr-1 mt-4">
+              {generals.map((general) => (
+                <GeneralCard
+                  size="sm"
+                  general={general}
+                  onSelect={selectGeneral}
+                  key={general.id}
+                  className={cx(
+                    'transition-all',
+                    general.id === deck.general.id
+                      ? `opacity-100 text-${deck.faction}`
+                      : 'opacity-60',
+                  )}
+                />
+              ))}
+            </div>
           </div>
-        ) : (
-          <PickAGeneral selectGeneral={selectGeneral} />
-        )}
-      </div>
-      {deck.general && (
-        <Sidebar
-          onSelectGeneral={selectGeneral}
-          onReset={handleReset}
-          onCopy={handleCopy}
-          onShare={share}
-        />
+
+          <div className="flex flex-col flex-1 overflow-y-scroll">
+            <div ref={factionCardListRef}>
+              <CardList
+                faction={deck.faction}
+                onSelectCard={handleCardSelected}
+                onDeselectCard={handleCardDeselected}
+              />
+            </div>
+            <div ref={neutralCardListRef}>
+              <CardList
+                faction="neutral"
+                onSelectCard={handleCardSelected}
+                onDeselectCard={handleCardDeselected}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <PickAGeneral selectGeneral={selectGeneral} />
       )}
+      {deck.general && <Sidebar onReset={handleReset} onCopy={handleCopy} onShare={share} />}
     </div>
   )
 }

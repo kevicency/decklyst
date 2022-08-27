@@ -18,7 +18,7 @@ export const GeneralCard = ({
     className={cx(
       {
         'w-48 mt-[-24px] mb-[-16px] ml-[-24px]': size === 'md',
-        'w-24 mt-[-12px] mb-[-8px] ml-[-12px]': size === 'sm',
+        'w-20 mt-[-10px] mb-[-6px] ml-[-12px]': size === 'sm',
       },
       'flex flex-col flex-shrink-0 items-center',
       `hover:text-${general.faction}`,
@@ -26,13 +26,15 @@ export const GeneralCard = ({
     )}
   >
     <img src={`/assets/generals/${general.id}_hex@2x.png`} alt={general.name} />
-    <div
-      className={cx(`font-bold flex-1`, {
-        'text-sm px-2': size === 'sm',
-        'text-lg px-4': size === 'md',
-      })}
-    >
-      {general.name}
-    </div>
+    {size === 'md' && (
+      <div
+        className={cx(`font-bold flex-1`, {
+          // 'text-sm px-2': size === 'sm',
+          'text-lg px-4': size === 'md',
+        })}
+      >
+        {general.name}
+      </div>
+    )}
   </button>
 )

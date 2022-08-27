@@ -8,6 +8,7 @@ import type { FC } from 'react'
 import { useMemo } from 'react'
 
 export type CardHandler = (card: CardData) => void
+
 export const CardList: FC<{
   faction: Faction
   onSelectCard: CardHandler
@@ -23,7 +24,7 @@ export const CardList: FC<{
   )
 
   return (
-    <div id={`card-list-${faction}`} className="flex flex-wrap gap-12 mt-8 mx-4 justify-center">
+    <div className="flex flex-wrap gap-12 mt-8 mx-4 justify-center">
       {factionCards.map((card) => {
         const count = deck.cards.find(({ id }) => id === card.id)?.count
         return (
@@ -39,6 +40,7 @@ export const CardList: FC<{
     </div>
   )
 }
+
 export const Card: FC<{
   card: CardData
   onSelect: CardHandler
