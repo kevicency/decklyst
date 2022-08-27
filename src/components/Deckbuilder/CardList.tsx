@@ -34,7 +34,7 @@ export const CardList: FC<{
   return (
     <div className="flex flex-wrap gap-12 mt-8 mx-4 justify-center">
       {filteredCards.map((card) => {
-        const count = deck.cards.find(({ id }) => id === card.id)?.count
+        const count = deck.cards.find(({ id }) => id === card.id)?.count ?? 0
         return (
           <Card
             card={card}

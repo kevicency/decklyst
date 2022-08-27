@@ -5,6 +5,7 @@ import type { CardData } from '@/data/cards'
 import { highlightKeywords } from '@/data/cards'
 import cx from 'classnames'
 import type { FC } from 'react'
+import { useState } from 'react'
 import { GiBroadsword, GiCircle, GiShield } from 'react-icons/gi'
 
 export const CardAttack: FC<{ card: CardData }> = ({ card }) => {
@@ -44,6 +45,7 @@ export const Card: FC<{
   count?: number
   className?: string
 }> = ({ card, count, onSelect, onDeselect, className }) => {
+  const [animate, setAnimate] = useState<null | number>(null)
   return (
     <button
       className={cx(
@@ -51,23 +53,36 @@ export const Card: FC<{
         'flex flex-col items-center relative',
         'w-64 h-[25rem] p-4 bg-gray-900',
         `border-3 border-gray-400 hover:border-${card.faction} outline-none`,
-        'transition-transform active:scale-105',
+        'transition-transform',
+        animate && `scale-${animate}`,
       )}
       onClick={(ev) => (ev.shiftKey ? onDeselect(card) : onSelect(card))}
+      onMouseDown={(event) => {
+        if (count !== undefined) {
+          if (count < 3 && !event.shiftKey) {
+            setAnimate(105)
+          } else if (count > 0 && event.shiftKey) {
+            setAnimate(95)
+          }
+        }
+      }}
+      onMouseUp={() => {
+        setTimeout(() => setAnimate(null), 50)
+      }}
     >
       <div className="scale-[2.5] absolute left-[-2px] top-0 -mx-3">
         <ManaIcon mana={card.mana} className="font-normal" />
       </div>
-      {count && (
+      {count ? (
         <div
           className={cx(
-            'absolute right-0 top-0 -mr-3 mt-3 text-xl font-bold font-mono border border-gray-600  bg-gray-800 px-1',
+            'absolute right-0 top-0 -mr-4 mt-8 text-xl font-bold font-mono border border-gray-600  bg-gray-800 px-1',
             count === 3 && 'text-teal-400',
           )}
         >
           {count}/3
         </div>
-      )}
+      ) : null}
       <div className={cx('flex items-center h-1/3 mt-4', count === 3 && 'opacity-30')}>
         <CardSprite
           card={card}
