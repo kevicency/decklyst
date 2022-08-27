@@ -1,3 +1,4 @@
+import { deckImageUrl } from '@/common/urls'
 import type { DeckExpanded } from '@/context/useDeck'
 import { useDeck } from '@/context/useDeck'
 import { startCase } from 'lodash'
@@ -52,7 +53,7 @@ export const DeckMetadata: FC = () => {
           .map((line) => `➤ ${line}`)
           .join('\n')}
       />
-      <meta property="og:image" content={`/assets/generals/${deck.general?.id}_hex@2x.png`} />
+      <meta property="og:image" content={deckImageUrl(deck.deckcode)} />
     </Head>
   ) : (
     <Head>
