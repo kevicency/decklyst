@@ -30,6 +30,12 @@ export const serverRouter = trpc
       return await ctx.deckimage.findByDeckcode(deckcode, timeout)
     },
   })
+  .query('getDeckviews', {
+    input: z.object({
+      deckcode: z.string(),
+    }),
+    resolve: async ({ input: { deckcode }, ctx }) => await ctx.deckviews.getDeckviews(deckcode),
+  })
 
   .mutation('ensureDeckimage', {
     input: z.object({

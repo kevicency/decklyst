@@ -2,7 +2,7 @@ import { useDeck } from '@/context/useDeck'
 import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { startCase } from 'lodash'
 import { useEffect, useRef } from 'react'
-import { FaRegEye } from 'react-icons/fa'
+import { EyeIcon } from '../Icons'
 
 export const DeckTitle = () => {
   const imageRef = useRef<HTMLImageElement>(null)
@@ -38,7 +38,7 @@ export const DeckTitle = () => {
           <span className={`text-${faction} w-24`}>{startCase(faction)}</span>
           {viewCount ? (
             <span className="flex items-center text-black-400 group-hover:text-teal-600">
-              <FaRegEye size={24} className="mr-2" />
+              <EyeIcon size={24} className="mr-2" />
               <span>
                 {viewCount} {viewCount <= 1 ? 'view' : 'views'}
               </span>

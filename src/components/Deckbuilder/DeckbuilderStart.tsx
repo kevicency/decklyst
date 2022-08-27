@@ -1,5 +1,6 @@
 import type { CardHandler } from '@/components/Deckbuilder/CardList'
 import { GeneralCard } from '@/components/Deckbuilder/GeneralCard'
+import { PageHeader } from '@/components/PageHeader'
 import { cards, factions } from '@/data/cards'
 import { groupBy, startCase } from 'lodash'
 import type { FC } from 'react'
@@ -14,11 +15,11 @@ export const DeckbuilderStart: FC<{
   }, [])
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden">
-      <div className="flex items-end justify-between gap-x-8 pb-4 pt-6 px-8 bg-gray-800 shadow-lg shadow-dark z-20">
+    <>
+      <PageHeader>
         <div className="text-4xl font-light">Deckbuilder</div>
         <div className="text-2xl text-black-200">Choose a general to start</div>
-      </div>
+      </PageHeader>
       <div className="flex flex-wrap flex-1 justify-center text-center overflow-y-auto pt-8">
         {factions.map((faction) => (
           <div key={faction} className="flex flex-col mb-16">
@@ -31,6 +32,6 @@ export const DeckbuilderStart: FC<{
           </div>
         ))}
       </div>
-    </div>
+    </>
   )
 }

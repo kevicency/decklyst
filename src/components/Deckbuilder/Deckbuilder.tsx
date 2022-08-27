@@ -29,15 +29,15 @@ export const Deckbuilder: FC<{
   }
 
   return (
-    <div className="flex flex-1 overflow-hidden">
-      <div className="flex flex-col flex-1 overflow-hidden">
-        {deck.general ? (
-          <DeckbuilderBuild onGeneralSelected={handleGeneralSelected} />
-        ) : (
-          <DeckbuilderStart onSelectGeneral={handleGeneralSelected} />
-        )}
-      </div>
-      {deck.general && <Sidebar onReset={handleReset} onCopy={handleCopy} onShare={onShare} />}
+    <div className="flex flex-col flex-1 overflow-hidden">
+      {deck.general ? (
+        <DeckbuilderBuild
+          onGeneralSelected={handleGeneralSelected}
+          sidebar={<Sidebar onReset={handleReset} onCopy={handleCopy} onShare={onShare} />}
+        />
+      ) : (
+        <DeckbuilderStart onSelectGeneral={handleGeneralSelected} />
+      )}
     </div>
   )
 }

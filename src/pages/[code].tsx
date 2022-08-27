@@ -5,13 +5,16 @@ import { DeckInfograph } from '@/components/DeckInfograph'
 import { DeckMetadata } from '@/components/DeckMetadata'
 import {
   BuildIcon,
+  ClockIcon,
   CopyIcon,
   DoneIcon,
   DownloadDoneIcon,
   DownloadIcon,
+  EyeIcon,
   LinkIcon,
 } from '@/components/Icons'
 import { OneTimeButton } from '@/components/OneTimeButton'
+import { PageHeader } from '@/components/PageHeader'
 import { DeckProvider } from '@/context/useDeck'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import type { Deck } from '@/data/deck'
@@ -19,6 +22,7 @@ import { createDeck, deckcodeWithoutTitle$, faction$, title$ } from '@/data/deck
 import { validateDeckcode } from '@/data/deckcode'
 import { createSsrClient } from '@/server'
 import { getIpAddress } from '@/server/utils'
+import { formatDistance, parseISO } from 'date-fns'
 import Link from 'next/link'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
@@ -27,7 +31,11 @@ import { useQuery } from 'react-query'
 import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
 
-type Props = { deck: Deck; meta: { sharecode?: string }; isSnapshot: boolean }
+type Props = {
+  deck: Deck
+  meta: { sharecode?: string; createdAt?: string; viewCount: number }
+  isSnapshot: boolean
+}
 
 const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
   const [imageDataUri, setImageDataUri] = React.useState<string | null>(null)
@@ -81,12 +89,28 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
   return (
     <DeckProvider deck={deck} meta={meta}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="content-container my-8">
-            <DeckMetadata />
-            <DeckInfograph />
-            <div className="mt-6 grid grid-cols-3 auto-cols-auto grid-rows-2 gap-4">
-              <OneTimeButton onClick={copyDeckcode} timeout={2500} className="btn--large">
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <PageHeader>
+            <div className="text-sm text-black-300">
+              {meta.viewCount && (
+                <div className="flex gap-x-2 items-center">
+                  <EyeIcon />
+                  <span className="font-bold">{meta.viewCount}</span>
+                  <span>{meta.viewCount === 1 ? 'view' : 'views'}</span>
+                </div>
+              )}
+              {meta.createdAt && (
+                <div className="flex gap-x-2 items-center">
+                  <ClockIcon />
+                  Created
+                  <span className="font-bold">
+                    {formatDistance(parseISO(meta.createdAt), new Date(), { addSuffix: true })}
+                  </span>
+                </div>
+              )}
+            </div>
+            <div className="flex gap-x-4">
+              <OneTimeButton onClick={copyDeckcode} timeout={2500}>
                 {(copied) => (
                   <>
                     {copied ? <DoneIcon /> : <CopyIcon />}
@@ -94,7 +118,7 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
                   </>
                 )}
               </OneTimeButton>
-              <OneTimeButton onClick={copyImageUrl} timeout={2500} className="btn--large">
+              <OneTimeButton onClick={copyImageUrl} timeout={2500}>
                 {(copied) => (
                   <>
                     {copied ? <DoneIcon /> : <LinkIcon />}
@@ -106,7 +130,6 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
                 href={imageDataUri ?? undefined}
                 download={imageFilename}
                 disabled={!imageDataUri}
-                className="btn--large"
               >
                 {(isDownloading) =>
                   imageDataUri ? (
@@ -127,14 +150,21 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
                   )
                 }
               </OneTimeButton>
+            </div>
+            <div>
               <Link href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}>
-                <a className="btn btn--large">
+                <a className="btn">
                   <BuildIcon />
                   Open in deckbuilder
                 </a>
               </Link>
-              <div />
-              <div className="flex gap-x-2 justify-end items-center text-gray-500 text-sm -mt-8">
+            </div>
+          </PageHeader>
+          <DeckMetadata />
+          <div className="flex flex-col flex-1 overflow-y-auto">
+            <div className="content-container my-8">
+              <DeckInfograph />
+              <div className="flex gap-x-2 justify-end items-center text-gray-500 text-sm mt-4 mr-4">
                 <span>Image broken?</span>
                 <button
                   disabled={!imageDataUri}
@@ -159,15 +189,20 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
   const client = await createSsrClient()
 
   let deckcode = code
-  let sharecode = null
+  const meta = {
+    sharecode: null as string | null,
+    createdAt: null as string | null,
+    viewCount: 0,
+  }
 
   if (code) {
-    const deck = snapshot
+    const deckinfo = snapshot
       ? await client.query('getDeckinfo', { code })
       : await client.mutation('ensureDeckinfo', { code })
 
-    deckcode = deck?.deckcode ?? deckcode
-    sharecode = deck?.sharecode ?? sharecode
+    deckcode = deckinfo?.deckcode ?? deckcode
+    meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
+    meta.createdAt = deckinfo?.createdAt?.toISOString() ?? meta.createdAt
   }
 
   if (!validateDeckcode(deckcode)) {
@@ -185,12 +220,14 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
       deckcode: deckcode!,
       ipAddress: getIpAddress(req),
     })
+    const views = await client.query('getDeckviews', { deckcode: deckcode! })
+    meta.viewCount = views?.viewCount ?? meta.viewCount
   }
 
   return {
     props: {
       deck,
-      meta: { sharecode },
+      meta,
       isSnapshot: Boolean(+snapshot),
     },
   }

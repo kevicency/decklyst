@@ -1,4 +1,5 @@
 import { DeckPreviewList } from '@/components/DeckPreviewList'
+import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
 import { createSsrClient } from '@/server'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
@@ -17,7 +18,7 @@ const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) =
 
   return (
     <div className="flex flex-col flex-1 overflow-hidden">
-      <div className="flex items-end justify-between gap-x-8 pb-4 pt-6 px-8 bg-gray-800 shadow-lg shadow-dark-900 z-20">
+      <PageHeader>
         <div className="flex text-3xl gap-x-4">
           <PivotButton active={tab === 'trending'} onClick={() => setTab('trending')}>
             Trending
@@ -26,7 +27,7 @@ const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) =
             Most Viewed
           </PivotButton>
         </div>
-      </div>
+      </PageHeader>
       <div className="flex flex-col flex-1 pb-8 overflow-y-auto">
         <div className="flex flex-col content-container mt-8">
           <DeckPreviewList decks={tab === 'trending' ? trendingDecks : mostViewedDecks} />
