@@ -10,6 +10,7 @@ export type DeckcodeContextValue = [
     replaceCard: (cardId: number, replaceWithCardId: number) => Deckcode | Promise<Deckcode>
     updateTitle: (title: string) => Deckcode | Promise<Deckcode>
     clear: () => Deckcode | Promise<Deckcode>
+    replace: (deckcode: string) => Deckcode | Promise<Deckcode>
   },
 ]
 export const DeckcodeContext = createContext<DeckcodeContextValue>({} as DeckcodeContextValue)

@@ -65,6 +65,7 @@ export const encodeDeckcode = (deckcode: Deckcode) => {
       .filter((card) => card && card.count),
   )
   const csv = sortedCards.map((card) => `${card.count}:${card.id}`).join(',')
+  const prefix = title ? `[${title}]` : ''
 
-  return `[${title}]${Buffer.from(csv).toString('base64')}`
+  return `${prefix}${Buffer.from(csv).toString('base64')}`
 }

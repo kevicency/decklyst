@@ -21,16 +21,20 @@ type Props = { deckcode?: string }
 
 const DeckbuilderPage: FC<Props> = (props) => {
   const router = useRouter()
-  const deckcode = useMemo(() => parseDeckcode(props.deckcode ?? ''), [props.deckcode])
+  const deckcodeFromRoute = (router.query.deckcode as string) ?? props.deckcode ?? ''
+  const deckcode = useMemo(() => parseDeckcode(deckcodeFromRoute), [deckcodeFromRoute])
   const deck = useMemo(() => createDeck(deckcode), [deckcode])
 
   const updateDeckcode = useCallback(
     async (deckcode: Deckcode) => {
+      const encodedDeckcode = encodeDeckcode(deckcode)
       await router.push(
-        {
-          pathname: '/deckbuilder/[deckcode]',
-          query: { deckcode: encodeDeckcode(deckcode) },
-        },
+        encodedDeckcode
+          ? {
+              pathname: '/deckbuilder/[deckcode]',
+              query: { deckcode: encodedDeckcode },
+            }
+          : { pathname: '/deckbuilder' },
         undefined,
         { shallow: true },
       )
@@ -46,6 +50,7 @@ const DeckbuilderPage: FC<Props> = (props) => {
       await updateDeckcode(replaceCard(deckcode, card, replaceWithCard)),
     updateTitle: async (title) => await updateDeckcode(updateTitle(deckcode, title)),
     clear: async () => await updateDeckcode(parseDeckcode('')),
+    replace: async (deckcode) => await updateDeckcode(parseDeckcode(deckcode)),
   }
 
   const handleShare = async () =>
