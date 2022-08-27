@@ -6,7 +6,7 @@ import { cardCompareFn, cards } from '@/data/cards'
 import type { FC } from 'react'
 import { useMemo } from 'react'
 
-export type CardHandler = (card: CardData) => void
+export type CardHandler = (card: CardData, all?: boolean) => void
 
 export const CardList: FC<{
   onSelectCard: CardHandler

@@ -45,7 +45,8 @@ export const Card: FC<{
   count?: number
   className?: string
 }> = ({ card, count, onSelect, onDeselect, className }) => {
-  const [animate, setAnimate] = useState<null | number>(null)
+  const [animate, setAnimate] = useState<number>(0)
+
   return (
     <button
       className={cx(
@@ -54,20 +55,24 @@ export const Card: FC<{
         'w-64 h-[25rem] p-4 bg-gray-900',
         `border-3 border-gray-400 hover:border-${card.faction} outline-none`,
         'transition-transform',
-        animate && `scale-${animate}`,
+        {
+          'scale-100': animate === 0,
+          'scale-95': animate === -1,
+          'scale-105': animate === 1,
+        },
       )}
-      onClick={(ev) => (ev.shiftKey ? onDeselect(card) : onSelect(card))}
+      onClick={(ev) => (ev.altKey ? onDeselect(card, ev.shiftKey) : onSelect(card, ev.shiftKey))}
       onMouseDown={(event) => {
         if (count !== undefined) {
-          if (count < 3 && !event.shiftKey) {
-            setAnimate(105)
-          } else if (count > 0 && event.shiftKey) {
-            setAnimate(95)
+          if (count < 3 && !event.altKey) {
+            setAnimate(1)
+          } else if (count > 0 && event.altKey) {
+            setAnimate(-1)
           }
         }
       }}
       onMouseUp={() => {
-        setTimeout(() => setAnimate(null), 50)
+        setAnimate(0)
       }}
     >
       <div className="scale-[2.5] absolute left-[-2px] top-0 -mx-3">

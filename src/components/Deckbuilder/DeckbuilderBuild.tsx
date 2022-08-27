@@ -30,11 +30,11 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
     [deck.faction],
   )
 
-  const handleCardSelected: CardHandler = (card) => {
-    addCard(card.id)
+  const handleCardSelected: CardHandler = (card, all?: boolean) => {
+    addCard(card.id, all ? 3 : 1)
   }
-  const handleCardDeselected: CardHandler = (card) => {
-    removeCard(card.id)
+  const handleCardDeselected: CardHandler = (card, all?: boolean) => {
+    removeCard(card.id, all ? 3 : 1)
   }
   return (
     <>

@@ -35,7 +35,9 @@ export const SidebarCardEntry: FC<{ card: CardEntry }> = ({ card }) => {
   return (
     <div
       className="relative bg-gray-800 hover:bg-gray-600 cursor-pointer select-none transition-transform active:scale-95"
-      onClick={(ev) => (ev.shiftKey ? addCard(card.id) : removeCard(card.id))}
+      onClick={(ev) =>
+        ev.altKey ? addCard(card.id, ev.shiftKey ? 3 : 1) : removeCard(card.id, ev.shiftKey ? 3 : 1)
+      }
     >
       <div
         className="absolute left-0 top-0 right-0.5 h-full sprite"
