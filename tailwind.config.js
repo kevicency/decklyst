@@ -24,6 +24,7 @@ module.exports = {
         rare: '#396cfd',
         epic: '#bf20e1',
         legendary: '#e39f28',
+        dark: '#0c0c0cc0',
       },
       fontFamily: {
         mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono],

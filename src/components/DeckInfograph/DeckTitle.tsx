@@ -33,7 +33,7 @@ export const DeckTitle = () => {
         />
       </div>
       <div className="flex flex-col flex-1 justify-center ml-2">
-        <div className="font-bold text-3xl mb-2 truncate">{title}</div>
+        <div className="font-bold text-3xl mb-2 truncate">{title || 'Untitled'}</div>
         <div className={`text-xl flex gap-2 content-center items-center text-slate-400 truncate`}>
           <span className={`text-${faction} w-24`}>{startCase(faction)}</span>
           {viewCount ? (

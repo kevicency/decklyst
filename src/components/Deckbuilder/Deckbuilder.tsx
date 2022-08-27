@@ -2,6 +2,7 @@ import type { CardHandler } from '@/components/Deckbuilder/CardList'
 import { CardList } from '@/components/Deckbuilder/CardList'
 import { GeneralCard } from '@/components/Deckbuilder/GeneralCard'
 import { Sidebar } from '@/components/Deckbuilder/Sidebar'
+import { CardFilterContext } from '@/context/useCardFilter'
 import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
 import type { CardData } from '@/data/cards'
@@ -9,7 +10,7 @@ import { cards, factions } from '@/data/cards'
 import cx from 'classnames'
 import { groupBy, startCase } from 'lodash'
 import type { FC, RefObject } from 'react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 
 export const PickAGeneral: FC<{ selectGeneral: CardHandler }> = ({ selectGeneral }) => {
   const generalsByFaction = useMemo(() => {
@@ -83,6 +84,8 @@ export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
   const factionCardListRef = useRef<HTMLDivElement>(null)
   const neutralCardListRef = useRef<HTMLDivElement>(null)
   const neutralCardsOnScreen = useOnScreen(neutralCardListRef)
+  const [cardQuery, setCardQuery] = useState('')
+  const deferredCardQuery = useDeferredValue(cardQuery)
 
   const generals = useMemo(
     () =>
@@ -117,8 +120,8 @@ export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
     <div className="flex flex-1 overflow-hidden">
       {deck.general ? (
         <div className="flex flex-col flex-1 overflow-hidden">
-          <div className="flex items-end px-8 pb-4">
-            <div className="flex gap-x-4 text-3xl pb-2">
+          <div className="flex items-end px-8 shadow-lg shadow-dark z-20">
+            <div className="flex gap-x-4 text-3xl pb-1">
               <PivotButton
                 active={!neutralCardsOnScreen}
                 onClick={() => factionCardListRef.current?.scrollIntoView({ behavior: 'smooth' })}
@@ -132,8 +135,15 @@ export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
                 {startCase('neutral')}
               </PivotButton>
             </div>
-            <div className="flex-1"></div>
-            <div className="flex justify-around pl-2 -mr-1 mt-4">
+            <div className="flex flex-1 justify-center mb-1">
+              <input
+                className="w-2/3 bg-slate-900 border border-slate-700 px-4 py-2"
+                placeholder="Search"
+                value={cardQuery}
+                onChange={(e) => setCardQuery(e.target.value)}
+              />
+            </div>
+            <div className="flex justify-around pl-2 -mr-1 mt-4 -mb-4 z-10">
               {generals.map((general) => (
                 <GeneralCard
                   size="sm"
@@ -143,28 +153,26 @@ export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
                   className={cx(
                     'transition-all',
                     general.id === deck.general.id
-                      ? `opacity-100 text-${deck.faction}`
-                      : 'opacity-60',
+                      ? `brightness-100  text-${deck.faction}`
+                      : 'brightness-50',
                   )}
                 />
               ))}
             </div>
           </div>
 
-          <div className="flex flex-col flex-1 overflow-y-scroll">
+          <div className="flex flex-col flex-1 overflow-y-scroll pl-8 pr-4">
             <div ref={factionCardListRef}>
-              <CardList
-                faction={deck.faction}
-                onSelectCard={handleCardSelected}
-                onDeselectCard={handleCardDeselected}
-              />
+              <CardFilterContext.Provider
+                value={{ faction: deck.faction, query: deferredCardQuery }}
+              >
+                <CardList onSelectCard={handleCardSelected} onDeselectCard={handleCardDeselected} />
+              </CardFilterContext.Provider>
             </div>
             <div ref={neutralCardListRef}>
-              <CardList
-                faction="neutral"
-                onSelectCard={handleCardSelected}
-                onDeselectCard={handleCardDeselected}
-              />
+              <CardFilterContext.Provider value={{ faction: 'neutral', query: deferredCardQuery }}>
+                <CardList onSelectCard={handleCardSelected} onDeselectCard={handleCardDeselected} />
+              </CardFilterContext.Provider>
             </div>
           </div>
         </div>
