@@ -1,4 +1,5 @@
 import { debase64 } from '@/data/base64'
+import type { Faction } from '@/data/cards'
 import { cardsById, sortCards } from '@/data/cards'
 import type { CardEntry } from '@/data/deck'
 import { memoize } from 'lodash'
@@ -68,4 +69,22 @@ export const encodeDeckcode = (deckcode: Deckcode) => {
   const prefix = title ? `[${title}]` : ''
 
   return `${prefix}${Buffer.from(csv).toString('base64')}`
+}
+
+export const defaultDeckcode = (faction: Omit<Faction, 'neutral'>): string => {
+  switch (faction) {
+    case 'lyonar':
+      return 'MTo2MA=='
+    case 'songhai':
+      return 'MToxNjE='
+    case 'vetruvian':
+      return 'MToyNjQ='
+    case 'abyssian':
+      return 'MTozNjQ='
+    case 'magmar':
+      return 'MTo0NTk='
+    case 'vanar':
+      return 'MTo1Njg='
+  }
+  return ''
 }

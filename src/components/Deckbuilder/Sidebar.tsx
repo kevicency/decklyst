@@ -7,7 +7,8 @@ import cx from 'classnames'
 import Link from 'next/link'
 import type { FC } from 'react'
 import React from 'react'
-import { IoCopyOutline, IoShareOutline, IoTrashOutline } from 'react-icons/io5'
+import { IoIosShareAlt } from 'react-icons/io'
+import { IoCopyOutline, IoTrashOutline } from 'react-icons/io5'
 import { MdDone } from 'react-icons/md'
 
 export const Sidebar: FC<{
@@ -19,7 +20,7 @@ export const Sidebar: FC<{
   const [{ title, $encoded: encodedDeckcode }, { updateTitle }] = useDeckcode()
 
   return (
-    <div className="flex flex-col shrink-0 gap-y-2 bg-slate-900 p-2 w-72">
+    <div className="flex flex-col shrink-0 gap-y-2 bg-slate-900 p-2 w-72 border-l border-zinc-700">
       <div className="flex gap-2">
         <input
           className="px-2 py-2 bg-slate-800 w-full"
@@ -82,7 +83,7 @@ export const Sidebar: FC<{
             className={cx('btn px-3 py-1', deck.counts.total > 40 && 'btn--disabled')}
             onClick={onShare}
           >
-            <IoShareOutline />
+            <IoIosShareAlt />
             Share
           </a>
         </Link>

@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 
 module.exports = {
   content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
@@ -17,7 +17,7 @@ module.exports = {
         abyssian: '#bf20e1',
         magmar: '#3db586',
         vanar: '#2ba3db',
-        neutral: '#ffffff',
+        neutral: colors.neutral['100'],
         mana: '#2ba9d8',
         common: colors.neutral['100'],
         basic: colors.neutral['400'],
@@ -25,6 +25,7 @@ module.exports = {
         epic: '#bf20e1',
         legendary: '#e39f28',
         dark: '#0c0c0cc0',
+        black: colors.neutral,
       },
       fontFamily: {
         mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono],

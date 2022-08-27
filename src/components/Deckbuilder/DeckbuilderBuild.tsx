@@ -20,8 +20,8 @@ const PivotButton: FC<{
   <button
     onClick={onClick}
     className={cx(
-      'hover:text-sky-400 cursor-pointer',
-      active ? activeClassName ?? 'text-slate-100' : 'text-slate-500',
+      'hover:text-teal-400 cursor-pointer font-light',
+      active ? activeClassName ?? 'text-zinc-100' : 'text-slate-500',
     )}
   >
     {children}
@@ -50,8 +50,8 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler }> = ({ onGen
   }
   return (
     <>
-      <div className="flex gap-x-8 items-end px-8 shadow-lg shadow-dark z-20">
-        <div className="flex gap-x-4 text-3xl mb-2.5">
+      <div className="flex items-end h-20 gap-x-8 pb-4 px-8 shadow-lg shadow-dark z-20 bg-slate-800">
+        <div className="flex gap-x-4 text-3xl">
           <PivotButton
             active={!neutralCardsOnScreen}
             activeClassName={`text-${deck.faction}`}
@@ -67,15 +67,18 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler }> = ({ onGen
             {startCase('neutral')}
           </PivotButton>
         </div>
-        <div className="flex flex-1 justify-center mb-3">
+        <div className="flex flex-1 justify-center -mb-4">
           <input
-            className="w-full max-w-xl bg-slate-900 border border-slate-700 px-4 py-2"
+            className={cx(
+              'transition-colors max-w-72',
+              'w-full border-b-2 pl-5 pr-10 py-2 bg-slate-800 border-slate-500 focus:border-slate-300',
+            )}
             placeholder="Search"
             value={cardQuery}
             onChange={(ev) => setCardQuery(ev.target.value)}
           />
         </div>
-        <div className="flex justify-around -mr-1 mt-4 -mb-4 z-10">
+        <div className="flex justify-around -mr-1 mt-4 -mb-8 z-10">
           {generals.map((general) => (
             <GeneralCard
               size="sm"
@@ -93,7 +96,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler }> = ({ onGen
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 overflow-y-scroll pl-8 pr-4">
+      <div className="flex flex-col flex-1 overflow-y-scroll pl-8 pr-4 pt-3.5 mt-0.5">
         <div ref={factionCardListRef}>
           <CardFilterContext.Provider value={{ faction: deck.faction, query: deferredCardQuery }}>
             <CardList onSelectCard={handleCardSelected} onDeselectCard={handleCardDeselected} />

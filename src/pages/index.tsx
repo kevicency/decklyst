@@ -26,8 +26,8 @@ const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) =
             onClick={() => setTab('trending')}
             className={cx(
               tab === 'trending'
-                ? 'text-slate-100 cursor-default'
-                : 'text-slate-500 hover:text-sky-400 cursor-pointer',
+                ? 'text-zinc-100 cursor-default'
+                : 'text-slate-500 hover:text-teal-400 cursor-pointer',
             )}
           >
             Trending
@@ -36,8 +36,8 @@ const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) =
             onClick={() => setTab('most-viewed')}
             className={cx(
               tab === 'most-viewed'
-                ? 'text-slate-100 cursor-default'
-                : 'text-slate-500 hover:text-sky-400 cursor-pointer',
+                ? 'text-zinc-100 cursor-default'
+                : 'text-slate-500 hover:text-teal-400 cursor-pointer',
             )}
           >
             Most Viewed

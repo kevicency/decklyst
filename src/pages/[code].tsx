@@ -125,7 +125,7 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
             <button
               disabled={!imageDataUri}
               onClick={handleRegenerateClick()}
-              className="text-slate-400 hover:text-sky-400 disabled:hover:text-slate-400"
+              className="text-slate-400 hover:text-teal-400 disabled:hover:text-slate-400"
             >
               Regenerate
             </button>

@@ -11,7 +11,9 @@ import {
   removeCard,
   replaceCard,
   updateTitle,
+  validateDeckcode,
 } from '@/data/deckcode'
+import type { Deckinfo } from '@prisma/client'
 import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
@@ -19,7 +21,7 @@ import React, { useCallback, useMemo } from 'react'
 
 type Props = { deckcode?: string }
 
-const DeckbuilderPage: FC<Props> = (props) => {
+const BuildPage: FC<Props> = (props) => {
   const router = useRouter()
   const deckcodeFromRoute = (router.query.deckcode as string) ?? props.deckcode ?? ''
   const deckcode = useMemo(() => parseDeckcode(deckcodeFromRoute), [deckcodeFromRoute])
@@ -31,10 +33,10 @@ const DeckbuilderPage: FC<Props> = (props) => {
       await router.push(
         encodedDeckcode
           ? {
-              pathname: '/deckbuilder/[deckcode]',
+              pathname: '/build/[deckcode]',
               query: { deckcode: encodedDeckcode },
             }
-          : { pathname: '/deckbuilder' },
+          : { pathname: '/build' },
         undefined,
         { shallow: true },
       )
@@ -59,16 +61,29 @@ const DeckbuilderPage: FC<Props> = (props) => {
       query: { code: encodeDeckcode(deckcode) },
     })
 
+  const handleImport = async (deckcode: string) => {
+    if (validateDeckcode(deckcode)) {
+      return handlers.replace(deckcode)
+    }
+    const deckinfo = await fetch(`/api/deckinfo/${deckcode}`).then(
+      (res) => res.json() as Promise<Deckinfo | null>,
+    )
+    if (deckinfo?.deckcode) {
+      return handlers.replace(deckinfo.deckcode)
+    }
+    return Promise.reject(new Error('Invalid deckcode'))
+  }
+
   return (
     <DeckcodeProvider deckcode={deckcode} {...handlers}>
       <DeckProvider deck={deck}>
-        <Deckbuilder share={handleShare} />
+        <Deckbuilder onShare={handleShare} onImport={handleImport} />
       </DeckProvider>
     </DeckcodeProvider>
   )
 }
 
-export default DeckbuilderPage
+export default BuildPage
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const deckcode = ctx.query.deckcode as string | undefined

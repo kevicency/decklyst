@@ -22,7 +22,7 @@ export const DeckInfograph: FC = () => {
       )}
       id="snap"
     >
-      <div className="grid auto-rows-auto gap-6 text-slate-100">
+      <div className="grid auto-rows-auto gap-6 text-zinc-100">
         <div
           className="grid gap-4 lg:gap-6"
           style={{

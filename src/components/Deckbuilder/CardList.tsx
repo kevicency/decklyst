@@ -7,6 +7,7 @@ import { cardCompareFn, cards, highlightKeywords } from '@/data/cards'
 import cx from 'classnames'
 import type { FC } from 'react'
 import { useMemo } from 'react'
+import { GiBroadsword, GiCircle, GiShield } from 'react-icons/gi'
 
 export type CardHandler = (card: CardData) => void
 
@@ -51,6 +52,37 @@ export const CardList: FC<{
   )
 }
 
+export const CardAttack: FC<{ card: CardData }> = ({ card }) => {
+  return (
+    <div className="flex items-center justify-center w-16 h-16 relative">
+      <GiCircle
+        className="text-amber-400 absolute top-1/2 left-1/2 -mt-[24px] -mx-[24px]"
+        size={48}
+      />
+      <GiBroadsword
+        className="text-amber-400 absolute top-1/2 left-0 -mt-[16px] -mx-[6px] -rotate-45"
+        size={32}
+      />
+      <span className="font-mono text-2xl z-10">{card.attack}</span>
+    </div>
+  )
+}
+export const CardHealth: FC<{ card: CardData }> = ({ card }) => {
+  return (
+    <div className="flex items-center justify-center w-16 h-16 relative">
+      <GiCircle
+        className="text-red-600 absolute top-1/2 left-1/2 -mt-[24px] -mx-[24px]"
+        size={48}
+      />
+      <GiShield
+        className="text-red-600 absolute top-1/2 right-0 -mt-[16px] -mx-[6px] -scale-x-100"
+        size={32}
+      />
+      <span className=" text-2xl z-10 tracking-tighter -ml-0.5">{card.health}</span>
+    </div>
+  )
+}
+
 export const Card: FC<{
   card: CardData
   onSelect: CardHandler
@@ -68,14 +100,14 @@ export const Card: FC<{
       )}
       onClick={(ev) => (ev.shiftKey ? onDeselect(card) : onSelect(card))}
     >
-      <div className="scale-[2.5] absolute left-0 top-0 -mx-3">
+      <div className="scale-[2.5] absolute left-[-2px] top-0 -mx-3">
         <ManaIcon mana={card.mana} />
       </div>
       {count && (
         <div
           className={cx(
             'absolute right-0 top-0 -mr-3 mt-3 text-xl font-bold font-mono border border-slate-600  bg-slate-800 px-1',
-            count === 3 && 'text-sky-400',
+            count === 3 && 'text-teal-400',
           )}
         >
           {count}/3
@@ -95,24 +127,14 @@ export const Card: FC<{
       <div className={'text-lg uppercase text-slate-400'}>
         {card.tribes.length ? card.tribes.join(' ') : card.cardType}
       </div>
-      <div className="flex justify-around items-center w-full ">
-        {card.cardType === 'Minion' && (
-          <div className="font-mono text-4xl text-yellow-400 flex">
-            <span>⚔️</span>
-            <span className="ml-1 mt-1">{card.attack}</span>
-          </div>
-        )}
+      <div className="flex justify-around items-center w-full mb-2">
+        {card.cardType === 'Minion' && <CardAttack card={card} />}
         <img
           src={`/assets/icons/rarity/collection_card_rarity_${card.rarity}.png`}
           width="64"
           alt={card.rarity}
         />
-        {card.cardType === 'Minion' && (
-          <div className="font-mono text-4xl text-red-400 flex">
-            <span className="mr-1">{card.attack}</span>
-            <span>♥️️</span>
-          </div>
-        )}
+        {card.cardType === 'Minion' && <CardHealth card={card} />}
       </div>
       <div
         className="text-slate-300 text-sm"

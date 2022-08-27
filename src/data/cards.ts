@@ -33,15 +33,8 @@ export type Faction =
   | 'vanar'
   | 'neutral'
 
-export const factions: Faction[] = [
-  'lyonar',
-  'songhai',
-  'vetruvian',
-  'abyssian',
-  'magmar',
-  'vanar',
-  'neutral',
-]
+export const factions: Faction[] = ['lyonar', 'songhai', 'vetruvian', 'abyssian', 'magmar', 'vanar']
+export const factionsWithNeutral: Faction[] = [...factions, 'neutral']
 
 export interface SpriteResource {
   breathing?: string
@@ -108,6 +101,6 @@ export const highlightKeywords = memoize((description?: string) => {
   const regex = new RegExp(keywords.map((keyword) => `\\b${keyword}\\b`).join('|'), 'gi')
   return description.replace(
     regex,
-    (match) => `<span class="font-bold text-slate-100">${match}</span>`,
+    (match) => `<span class="font-bold text-zinc-100">${match}</span>`,
   )
 })
