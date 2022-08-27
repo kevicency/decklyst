@@ -51,8 +51,10 @@ export const DeckMetadata: FC = () => {
     </Head>
   ) : (
     <Head>
-      <title>{`Invalid Deckcode | Decklyst`}</title>
-      <meta property="og:description" content={'Invalid deckcode.'} />
+      <title>{`Deckbuilder | Decklyst`}</title>
+      <meta property="og:site_name" content="Decklyst" />
+      <meta property="og:title" content="Deckbuilder" />
+      <meta property="og:description" content="Deckbuiler for Duelyst 2" />
     </Head>
   )
 }

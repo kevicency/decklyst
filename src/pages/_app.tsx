@@ -28,7 +28,6 @@ function App({ Component, pageProps }: AppProps) {
               <meta property="og:site_name" content="Decklyst" />
               <meta property="og:title" content="Decklyst" />
               <link rel="icon" href="/public/favicon.ico" />
-              <link type="application/json+oembed" href="/public/oembed.json" />
             </Head>
             <Component {...pageProps} />
           </Layout>

@@ -1,4 +1,5 @@
 import { Deckbuilder } from '@/components/Deckbuilder/Deckbuilder'
+import { DeckMetadata } from '@/components/DeckMetadata'
 import { DeckProvider } from '@/context/useDeck'
 import type { DeckcodeContextValue } from '@/context/useDeckcode'
 import { DeckcodeProvider } from '@/context/useDeckcode'
@@ -77,7 +78,10 @@ const BuildPage: FC<Props> = (props) => {
   return (
     <DeckcodeProvider deckcode={deckcode} {...handlers}>
       <DeckProvider deck={deck}>
-        <Deckbuilder onShare={handleShare} onImport={handleImport} />
+        <>
+          <DeckMetadata />
+          <Deckbuilder onShare={handleShare} onImport={handleImport} />
+        </>
       </DeckProvider>
     </DeckcodeProvider>
   )
