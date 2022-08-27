@@ -24,9 +24,8 @@ function App({ Component, pageProps }: AppProps) {
           <Layout showSearch={router.route !== '/'}>
             <Head>
               <title>Decklyst</title>
-              <meta name="description" content="Share Duelyst 2 deck codes" />
+              <meta name="description" content="Share or create Duelyst 2 deck codes" />
               <meta property="og:site_name" content="Decklyst" />
-              <meta property="og:title" content="Decklyst" />
               <link rel="icon" href="/public/favicon.ico" />
             </Head>
             <Component {...pageProps} />

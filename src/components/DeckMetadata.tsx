@@ -18,13 +18,19 @@ const lineAsciiManaCurve = (deck: DeckExpanded) =>
       return '▁'
     })
     .join(' ')
-const lineCardCounts = (deck: DeckExpanded) =>
-  [
-    `M: ${deck.counts.minions}`,
-    `S: ${deck.counts.spells}`,
-    `A: ${deck.counts.artifacts}`,
-    `${deck.counts.total}/40`,
-  ].join(' | ')
+// const lineCardCounts = (deck: DeckExpanded) =>
+//   [
+//     `M: ${deck.counts.minions}`,
+//     `S: ${deck.counts.spells}`,
+//     `A: ${deck.counts.artifacts}`,
+//     `${deck.counts.total}/40`,
+//   ].join(' | ')
+const lineCardCountsAlt = (deck: DeckExpanded) => [
+  `Minions: ${deck.counts.minions}`,
+  `Spells: ${deck.counts.spells}`,
+  `Artifacts: ${deck.counts.artifacts}`,
+  `Total: ${deck.counts.total}/40`,
+]
 // const lineMinions = (deck: DeckExpanded) =>
 //   'Minions: ' + deck.minions.map((card) => `{${card.mana}} ${card.name} x ${card.count}`).join('; ')
 // const lineSpells = (deck: DeckExpanded) =>
@@ -39,11 +45,10 @@ export const DeckMetadata: FC = () => {
   return deck.deckcode ? (
     <Head>
       <title>{`${deck.title} | Decklyst`}</title>
-      <meta property="og:site_name" content="Decklyst" />
       <meta property="og:title" content={`${deck.title} | ${startCase(deck.faction)}`} />
       <meta
         property="og:description"
-        content={[lineCardCounts(deck), lineAsciiManaCurve(deck)]
+        content={[lineAsciiManaCurve(deck), ...lineCardCountsAlt(deck)]
           .map((line) => `➤ ${line}`)
           .join('\n')}
       />
