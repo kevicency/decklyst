@@ -4,6 +4,8 @@ import fetch from 'node-fetch'
 import path from 'path'
 import { scrapedCardsById } from './generateCardsJson/scrapedCards'
 
+const blacklist = [20452, 20424]
+
 export interface CardJSON {
   name: string
   id: number
@@ -24,12 +26,14 @@ async function main() {
   const json = await fetch('https://api-phppdmqb3q-uc.a.run.app/cards.json').then(
     (response) => response.json() as Promise<CardJSON[]>,
   )
-  const cards: CardData[] = json.map((cardJson) => ({
-    ...cardJson,
-    spriteName: scrapedCardsById[cardJson.id]?.spriteName,
-    faction: scrapedCardsById[cardJson.id]?.faction ?? 'neutral',
-    factionId: cardJson.faction,
-  }))
+  const cards: CardData[] = json
+    .filter(({ id }) => !blacklist.includes(id))
+    .map((cardJson) => ({
+      ...cardJson,
+      spriteName: scrapedCardsById[cardJson.id]?.spriteName,
+      faction: scrapedCardsById[cardJson.id]?.faction ?? 'neutral',
+      factionId: cardJson.faction,
+    }))
 
   const jsonFilePath = path.join(__dirname, '../src/data/cards.json')
 

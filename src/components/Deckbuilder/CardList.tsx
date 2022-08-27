@@ -82,7 +82,12 @@ export const Card: FC<{
         </div>
       )}
       <div className={cx('flex items-center h-1/3 mt-4', count === 3 && 'opacity-30')}>
-        <CardSprite card={card} animated scale={2} />
+        <CardSprite
+          card={card}
+          animated
+          scale={2}
+          style={({ width }) => (width > 200 ? { marginTop: -(width - 200) } : {})}
+        />
       </div>
       <div className={cx('font-bold text-lg uppercase mt-4', count === 3 && 'text-slate-300')}>
         {card.name}

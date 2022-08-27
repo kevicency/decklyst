@@ -1,7 +1,7 @@
 import type { CardData } from '@/data/cards'
 import { useSpriteQuery } from '@/queries/useSpriteQuery'
 import cx from 'classnames'
-import type { FC } from 'react'
+import type { CSSProperties, FC } from 'react'
 
 export const CardSprite: FC<{
   card: CardData
@@ -9,7 +9,8 @@ export const CardSprite: FC<{
   centered?: boolean
   scale?: number
   className?: string
-}> = ({ card, animated, centered, scale, className }) => {
+  style?: (size: { width: number; height: number }) => CSSProperties
+}> = ({ card, animated, centered, scale, className, style }) => {
   const { data, isSuccess } = useSpriteQuery(card.id, animated)
 
   const src = data?.src
@@ -33,6 +34,7 @@ export const CardSprite: FC<{
         width: `${width}px`,
         height: `${height}px`,
         ...margins,
+        ...style?.({ width, height }),
       }}
     ></img>
   )

@@ -12,16 +12,16 @@ import {
   replaceCard,
   updateTitle,
 } from '@/data/deckcode'
+import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
 import React, { useCallback, useMemo } from 'react'
 
-const DeckbuilderPage: FC = () => {
+type Props = { deckcode?: string }
+
+const DeckbuilderPage: FC<Props> = (props) => {
   const router = useRouter()
-  const deckcode = useMemo(
-    () => parseDeckcode((router.query.deckcode as string) ?? ''),
-    [router.query.deckcode],
-  )
+  const deckcode = useMemo(() => parseDeckcode(props.deckcode ?? ''), [props.deckcode])
   const deck = useMemo(() => createDeck(deckcode), [deckcode])
 
   const updateDeckcode = useCallback(
@@ -64,3 +64,12 @@ const DeckbuilderPage: FC = () => {
 }
 
 export default DeckbuilderPage
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const deckcode = ctx.query.deckcode as string | undefined
+  return {
+    props: {
+      deckcode,
+    },
+  }
+}

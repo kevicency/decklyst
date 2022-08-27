@@ -95,7 +95,7 @@ export const vetruvianCardData: ScrapedCard[] = [
   vetruvian(281, 'Ciphyron Ascendant', 0, 'General', 'basic', 'f3_3rdgeneral'),
   vetruvian(280, 'Scioness Sajj', 0, 'General', 'basic', 'f3_altgeneral'),
   vetruvian(264, 'Zirix Starstrider', 0, 'General', 'basic', 'f3_general'),
-  vetruvian(20152, 'Fountain of Youth', 0, 'Spell', 'rare', 'icon_f3_d2_fountainofyouth'),
+  vetruvian(20455, 'Fountain of Youth', 0, 'Spell', 'rare', 'icon_f3_d2_fountainofyouth'),
   vetruvian(20440, 'Siphon Energy', 0, 'Spell', 'common', 'icon_f3_d2_syphonenergy'),
   vetruvian(20444, 'Auroras Tears', 1, 'Spell', 'epic', 'icon_f3_d2_aurorastear'),
   vetruvian(20442, 'Blindscorch', 1, 'Spell', 'basic', 'icon_f3_d2_blindscorch'),

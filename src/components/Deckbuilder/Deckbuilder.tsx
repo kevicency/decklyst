@@ -7,10 +7,11 @@ import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
 import type { CardData } from '@/data/cards'
 import { cards, factions } from '@/data/cards'
+import useOnScreen from '@/hooks/useOnScreen'
 import cx from 'classnames'
 import { groupBy, startCase } from 'lodash'
-import type { FC, RefObject } from 'react'
-import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
+import type { FC } from 'react'
+import { useDeferredValue, useMemo, useRef, useState } from 'react'
 
 export const PickAGeneral: FC<{ selectGeneral: CardHandler }> = ({ selectGeneral }) => {
   const generalsByFaction = useMemo(() => {
@@ -56,28 +57,6 @@ const PivotButton: FC<{ onClick: () => void; active?: boolean; children: any }> 
   </button>
 )
 
-export default function useOnScreen(ref: RefObject<HTMLElement>) {
-  const observerRef = useRef<IntersectionObserver | null>(null)
-  const [isOnScreen, setIsOnScreen] = useState(false)
-
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(([entry]) => setIsOnScreen(entry.isIntersecting))
-  }, [])
-
-  useEffect(() => {
-    const observer = observerRef.current
-    if (ref.current) {
-      observer?.observe(ref.current!)
-    }
-
-    return () => {
-      observer?.disconnect()
-    }
-  }, [ref])
-
-  return isOnScreen
-}
-
 export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
   const [deckcode, { addCard, removeCard, replaceCard, clear }] = useDeckcode()
   const deck = useDeck()
@@ -92,8 +71,6 @@ export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
       cards.filter(({ cardType, faction }) => faction === deck.faction && cardType === 'General'),
     [deck.faction],
   )
-
-  useEffect(() => {})
 
   const selectGeneral = (general: CardData) => {
     if (deck.general) {
@@ -120,8 +97,8 @@ export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
     <div className="flex flex-1 overflow-hidden">
       {deck.general ? (
         <div className="flex flex-col flex-1 overflow-hidden">
-          <div className="flex items-end px-8 shadow-lg shadow-dark z-20">
-            <div className="flex gap-x-4 text-3xl pb-1">
+          <div className="flex gap-x-8 items-end px-8 shadow-lg shadow-dark z-20">
+            <div className="flex gap-x-4 text-3xl mb-2.5">
               <PivotButton
                 active={!neutralCardsOnScreen}
                 onClick={() => factionCardListRef.current?.scrollIntoView({ behavior: 'smooth' })}
@@ -135,15 +112,15 @@ export const Deckbuilder: FC<{ share: () => void }> = ({ share }) => {
                 {startCase('neutral')}
               </PivotButton>
             </div>
-            <div className="flex flex-1 justify-center mb-1">
+            <div className="flex flex-1 justify-center mb-3">
               <input
-                className="w-2/3 bg-slate-900 border border-slate-700 px-4 py-2"
+                className="w-full max-w-xl bg-slate-900 border border-slate-700 px-4 py-2"
                 placeholder="Search"
                 value={cardQuery}
                 onChange={(e) => setCardQuery(e.target.value)}
               />
             </div>
-            <div className="flex justify-around pl-2 -mr-1 mt-4 -mb-4 z-10">
+            <div className="flex justify-around -mr-1 mt-4 -mb-4 z-10">
               {generals.map((general) => (
                 <GeneralCard
                   size="sm"

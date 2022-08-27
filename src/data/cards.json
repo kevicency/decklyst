@@ -6132,23 +6132,6 @@
     "factionId": 2
   },
   {
-    "name": "Kage Lightning",
-    "id": 20424,
-    "cardSet": "core",
-    "faction": "neutral",
-    "tribes": [],
-    "rarity": "basic",
-    "description": "Deal 5 damage to a minion.",
-    "relatedCards": [],
-    "resource": {
-      "idle": "resources/card_gifs/iconD2KageLightningIdle.gif",
-      "active": "resources/card_gifs/iconD2KageLightningActive.gif"
-    },
-    "mana": 1,
-    "cardType": "Spell",
-    "factionId": 2
-  },
-  {
     "name": "Twin Strike",
     "id": 20425,
     "cardSet": "core",
@@ -6634,23 +6617,6 @@
     "factionId": 3
   },
   {
-    "name": "Rasha's Curse",
-    "id": 20452,
-    "cardSet": "core",
-    "faction": "neutral",
-    "tribes": [],
-    "rarity": "epic",
-    "description": "Destroy a random artifact equipped to the enemy General. Summon a Wind Dervish nearby them.",
-    "relatedCards": [],
-    "resource": {
-      "idle": "resources/card_gifs/iconD2RashasCurseIdle.gif",
-      "active": "resources/card_gifs/iconD2RashasCurseActive.gif"
-    },
-    "mana": 0,
-    "cardType": "Spell",
-    "factionId": 3
-  },
-  {
     "name": "Star's Fury",
     "id": 20453,
     "cardSet": "core",
@@ -6690,7 +6656,7 @@
     "name": "Fountain of Youth",
     "id": 20455,
     "cardSet": "core",
-    "faction": "neutral",
+    "faction": "vetruvian",
     "tribes": [],
     "rarity": "rare",
     "description": "Transform a minion into a copy of itself.",
@@ -6701,6 +6667,7 @@
     },
     "mana": 0,
     "cardType": "Spell",
+    "spriteName": "icon_f3_d2_fountainofyouth",
     "factionId": 3
   },
   {
