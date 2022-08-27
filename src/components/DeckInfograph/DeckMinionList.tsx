@@ -9,7 +9,7 @@ export const DeckMinionList = () => {
 
   return (
     <div
-      className="bg-slate-800 h-32 grid"
+      className="bg-gray-800 h-32 grid"
       style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}
     >
       {minions.map((card, i) => (
@@ -21,8 +21,8 @@ export const DeckMinionList = () => {
 export const MinionCard: FC<{ card: CardEntry; position: number }> = ({ card, position }) => (
   <div className="flex flex-col" style={{ zIndex: 40 - position }}>
     <div className="flex flex-1 relative">
-      <CardSprite card={card} centered className="scale-150 absolute left-1/2 bottom-2.5" />
+      <CardSprite card={card} centered className="scale-150 absolute left-1/2 bottom-3" />
     </div>
-    <div className="text-center py-1 bg-slate-700">{card.count}</div>
+    <div className="text-center py-1 bg-gray-700">{card.count}</div>
   </div>
 )

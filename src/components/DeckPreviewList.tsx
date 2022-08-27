@@ -5,30 +5,34 @@ import { DeckTitle } from '@/components/DeckInfograph/DeckTitle'
 import { DeckProvider, useDeck } from '@/context/useDeck'
 import type { Deck } from '@/data/deck'
 import cx from 'classnames'
+import Link from 'next/link'
 import type { FC } from 'react'
 
-const Decklink: FC = () => {
+const DeckPreview: FC = () => {
   const { faction, deckcode } = useDeck()
   return (
-    <a
-      className={cx(
-        'flex flex-wrap gap-4 lg:gap-8 justify-between items-center',
-        'bg-slate-900 py-2 pr-4 mt-4',
-        'border-slate-700 border-[3px]',
-        `hover:border-${faction}`,
-      )}
-      href={deckUrl(deckcode, true)}
-    >
-      <div className="scale-90 flex-1">
-        <DeckTitle />
-      </div>
-      <DeckCounts />
-      <DeckManaCurve />
-    </a>
+    <Link href={deckUrl(deckcode, true)}>
+      <a
+        className={cx(
+          'group',
+          'flex flex-wrap gap-4 lg:gap-8 justify-between items-center',
+          'bg-gray-900 py-2 pr-4 mt-4',
+          'border-gray-700 border-[3px]',
+          `hover:border-${faction} hover:text-black-100`,
+        )}
+        href={deckUrl(deckcode, true)}
+      >
+        <div className="scale-90 flex-1">
+          <DeckTitle />
+        </div>
+        <DeckCounts />
+        <DeckManaCurve />
+      </a>
+    </Link>
   )
 }
 
-export const Decklinks: FC<{
+export const DeckPreviewList: FC<{
   title?: string
   decks: { deck: Deck; viewCount: number }[]
   className?: string
@@ -42,7 +46,7 @@ export const Decklinks: FC<{
         {decks.map(({ deck, viewCount }) => (
           <li key={deck.deckcode}>
             <DeckProvider deck={deck} meta={{ viewCount }}>
-              <Decklink />
+              <DeckPreview />
             </DeckProvider>
           </li>
         ))}

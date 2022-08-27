@@ -1,6 +1,7 @@
 import type { CardHandler } from '@/components/Deckbuilder/CardList'
 import { CardList } from '@/components/Deckbuilder/CardList'
 import { GeneralCard } from '@/components/Deckbuilder/GeneralCard'
+import { PivotButton } from '@/components/PivotButton'
 import { CardFilterContext } from '@/context/useCardFilter'
 import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
@@ -10,23 +11,6 @@ import cx from 'classnames'
 import { startCase } from 'lodash'
 import type { FC } from 'react'
 import { useDeferredValue, useMemo, useRef, useState } from 'react'
-
-const PivotButton: FC<{
-  onClick: () => void
-  active?: boolean
-  activeClassName?: string
-  children: any
-}> = ({ onClick, active, activeClassName, children }) => (
-  <button
-    onClick={onClick}
-    className={cx(
-      'hover:text-teal-400 cursor-pointer font-light',
-      active ? activeClassName ?? 'text-zinc-100' : 'text-slate-500',
-    )}
-  >
-    {children}
-  </button>
-)
 
 export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler }> = ({ onGeneralSelected }) => {
   const [, { addCard, removeCard }] = useDeckcode()
@@ -50,7 +34,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler }> = ({ onGen
   }
   return (
     <>
-      <div className="flex items-end h-20 gap-x-8 pb-4 px-8 shadow-lg shadow-dark z-20 bg-slate-800">
+      <div className="flex items-end h-20 gap-x-8 pb-4 px-8 shadow-lg shadow-dark z-20 bg-gray-800">
         <div className="flex gap-x-4 text-3xl">
           <PivotButton
             active={!neutralCardsOnScreen}
@@ -71,7 +55,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler }> = ({ onGen
           <input
             className={cx(
               'transition-colors max-w-72',
-              'w-full border-b-2 pl-5 pr-10 py-2 bg-slate-800 border-slate-500 focus:border-slate-300',
+              'w-full border-b-2 pl-5 pr-10 py-2 bg-gray-800 border-gray-500 focus:border-gray-300',
             )}
             placeholder="Search"
             value={cardQuery}

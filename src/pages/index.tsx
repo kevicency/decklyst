@@ -1,49 +1,36 @@
-import { DeckcodeSearch } from '@/components/DeckcodeSearch'
-import { Decklinks } from '@/components/Decklinks'
+import { DeckPreviewList } from '@/components/DeckPreviewList'
+import { PivotButton } from '@/components/PivotButton'
 import { createSsrClient } from '@/server'
-import cx from 'classnames'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
+import { useRouter } from 'next/router'
 import type { GetServerSidePropsContext } from 'next/types'
-import { useState } from 'react'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 type Tab = 'most-viewed' | 'trending'
 
 const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) => {
-  const [tab, setTab] = useState<Tab>(initialTab)
+  const router = useRouter()
+  const tab: Tab = (router.query.tab as Tab | undefined) ?? initialTab ?? 'trending'
+
+  const setTab = async (input: Tab) =>
+    await router.push(`/?tab=${input}`, undefined, { shallow: true })
 
   return (
-    <div className="content-container flex flex-col justify-around flex-1 pb-8">
-      <div className="flex flex-col">
-        <h1 className="text-5xl text-center mt-8 mb-12">Decklyst</h1>
-        <div className="flex px-48">
-          <DeckcodeSearch big />
+    <div className="flex flex-col flex-1 overflow-hidden">
+      <div className="flex items-end justify-between gap-x-8 pb-4 pt-6 px-8 bg-gray-800 shadow-lg shadow-dark-900 z-20">
+        <div className="flex text-3xl gap-x-4">
+          <PivotButton active={tab === 'trending'} onClick={() => setTab('trending')}>
+            Trending
+          </PivotButton>
+          <PivotButton active={tab === 'most-viewed'} onClick={() => setTab('most-viewed')}>
+            Most Viewed
+          </PivotButton>
         </div>
       </div>
-      <div className="flex flex-col mt-16">
-        <div className="flex text-3xl gap-x-4">
-          <button
-            onClick={() => setTab('trending')}
-            className={cx(
-              tab === 'trending'
-                ? 'text-zinc-100 cursor-default'
-                : 'text-slate-500 hover:text-teal-400 cursor-pointer',
-            )}
-          >
-            Trending
-          </button>
-          <button
-            onClick={() => setTab('most-viewed')}
-            className={cx(
-              tab === 'most-viewed'
-                ? 'text-zinc-100 cursor-default'
-                : 'text-slate-500 hover:text-teal-400 cursor-pointer',
-            )}
-          >
-            Most Viewed
-          </button>
+      <div className="flex flex-col flex-1 pb-8 overflow-y-auto">
+        <div className="flex flex-col content-container mt-8">
+          <DeckPreviewList decks={tab === 'trending' ? trendingDecks : mostViewedDecks} />
         </div>
-        <Decklinks decks={tab === 'trending' ? trendingDecks : mostViewedDecks} />
       </div>
     </div>
   )
@@ -51,8 +38,8 @@ const Home: NextPage<Props> = ({ mostViewedDecks, trendingDecks, initialTab }) =
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const client = await createSsrClient()
-  const mostViewedDecks = await client.query('mostViewedDecks', { count: 3 })
-  const trendingDecks = await client.query('mostViewedDecks', { count: 3, recent: true })
+  const mostViewedDecks = await client.query('mostViewedDecks', { count: 5 })
+  const trendingDecks = await client.query('mostViewedDecks', { count: 5, recent: true })
   const initialTab: Tab = query.tab === 'most-viewed' ? 'most-viewed' : 'trending'
 
   return {

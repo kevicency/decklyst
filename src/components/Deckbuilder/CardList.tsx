@@ -95,8 +95,8 @@ export const Card: FC<{
       className={cx(
         className,
         'flex flex-col items-center relative',
-        'w-64 h-96 p-4 bg-slate-900 ',
-        `border-3 border-slate-400 hover:border-${card.faction} outline-none`,
+        'w-64 h-96 p-4 bg-gray-900 ',
+        `border-3 border-gray-400 hover:border-${card.faction} outline-none`,
       )}
       onClick={(ev) => (ev.shiftKey ? onDeselect(card) : onSelect(card))}
     >
@@ -106,7 +106,7 @@ export const Card: FC<{
       {count && (
         <div
           className={cx(
-            'absolute right-0 top-0 -mr-3 mt-3 text-xl font-bold font-mono border border-slate-600  bg-slate-800 px-1',
+            'absolute right-0 top-0 -mr-3 mt-3 text-xl font-bold font-mono border border-gray-600  bg-gray-800 px-1',
             count === 3 && 'text-teal-400',
           )}
         >
@@ -121,10 +121,10 @@ export const Card: FC<{
           style={({ width }) => (width > 200 ? { marginTop: -(width - 200) } : {})}
         />
       </div>
-      <div className={cx('font-bold text-lg uppercase mt-4', count === 3 && 'text-slate-300')}>
+      <div className={cx('font-bold text-lg uppercase mt-4', count === 3 && 'text-gray-300')}>
         {card.name}
       </div>
-      <div className={'text-lg uppercase text-slate-400'}>
+      <div className={'text-lg uppercase text-gray-400'}>
         {card.tribes.length ? card.tribes.join(' ') : card.cardType}
       </div>
       <div className="flex justify-around items-center w-full mb-2">
@@ -137,7 +137,7 @@ export const Card: FC<{
         {card.cardType === 'Minion' && <CardHealth card={card} />}
       </div>
       <div
-        className="text-slate-300 text-sm"
+        className="text-gray-300 text-sm"
         dangerouslySetInnerHTML={{ __html: highlightKeywords(card.description) }}
       ></div>
     </button>

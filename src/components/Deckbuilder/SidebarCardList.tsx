@@ -34,7 +34,7 @@ export const SidebarCardEntry: FC<{ card: CardEntry }> = ({ card }) => {
   const [, { removeCard, addCard }] = useDeckcode()
   return (
     <div
-      className="relative bg-slate-800 hover:bg-slate-600 cursor-pointer select-none"
+      className="relative bg-gray-800 hover:bg-gray-600 cursor-pointer select-none"
       onClick={(ev) => (ev.shiftKey ? addCard(card.id) : removeCard(card.id))}
     >
       <div
@@ -57,7 +57,7 @@ export const SidebarCardEntry: FC<{ card: CardEntry }> = ({ card }) => {
         <div className="text-sm">{card.name}</div>
         <div className="flex-1" />
         <div
-          className={`font-mono font-bold border border-slate-600 text-slate-200 bg-slate-800 text-center px-1`}
+          className={`font-mono font-bold border border-gray-600 text-gray-200 bg-gray-800 text-center px-1`}
         >
           x{card.count}
         </div>

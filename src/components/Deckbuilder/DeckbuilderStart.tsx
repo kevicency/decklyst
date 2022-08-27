@@ -15,7 +15,7 @@ export const DeckbuilderStart: FC<{
 
   return (
     <div className="flex flex-col flex-1 overflow-hidden">
-      <div className="flex items-end justify-between gap-x-8 pb-4 pt-6 px-8 bg-slate-800 shadow-lg shadow-dark z-20">
+      <div className="flex items-end justify-between gap-x-8 pb-4 pt-6 px-8 bg-gray-800 shadow-lg shadow-dark z-20">
         <div className="text-4xl font-light">Deckbuilder</div>
         <div className="text-2xl text-black-200">Choose a general to start</div>
       </div>

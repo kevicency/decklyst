@@ -1,4 +1,5 @@
 import { isShareOrDeckcode } from '@/common/utils'
+import { BuildIcon, CompareIcon, ImportIcon, SearchIcon, ShareIcon } from '@/components/Icons'
 import { factions } from '@/data/cards'
 import { defaultDeckcode, validateDeckcode } from '@/data/deckcode'
 import cx from 'classnames'
@@ -9,9 +10,8 @@ import { useRouter } from 'next/router'
 import type { FC } from 'react'
 import { Children, useState } from 'react'
 import type { IconType } from 'react-icons'
-import { BiImport } from 'react-icons/bi'
-import { IoIosBuild, IoIosShareAlt } from 'react-icons/io'
-import { MdSearch } from 'react-icons/md'
+import { HiCode } from 'react-icons/hi'
+import { SiBuymeacoffee, SiGithub } from 'react-icons/si'
 
 const AppSidebarLink: FC<{
   href: LinkProps['href']
@@ -71,6 +71,7 @@ const AppSidebarInput: FC<{
           )}
           placeholder="Enter deck/share code"
           value={value}
+          onFocus={(ev) => ev.target.select()}
           onChange={(ev) => setValue(ev.target.value)}
           onKeyDown={async (ev) => {
             if (ev.key === 'Enter') {
@@ -140,19 +141,19 @@ export const AppSidebar: FC = () => {
       </h1>
       <div className="flex flex-col gap-y-8">
         <div>
-          <AppSidebarLink href="/decks" active={router.pathname === '/decks'} icon={IoIosShareAlt}>
+          <AppSidebarLink href="/" active={router.pathname === '/'} icon={ShareIcon}>
             Share
           </AppSidebarLink>
           <AppSidebarInput
-            icon={MdSearch}
+            icon={SearchIcon}
             onEnter={navigateToDeckcode}
             validate={isShareOrDeckcode}
           />
           <AppSidebarMenu>
-            <Link href={`/decks?tab=trending`}>
+            <Link href={`/?tab=trending`}>
               <a>Trending</a>
             </Link>
-            <Link href={`/decks?tab=most-viewed`}>
+            <Link href={`/?tab=most-viewed`}>
               <a>Most viewed</a>
             </Link>
           </AppSidebarMenu>
@@ -161,13 +162,13 @@ export const AppSidebar: FC = () => {
           <AppSidebarLink
             href="/build"
             active={router.pathname === '/build'}
-            icon={IoIosBuild}
+            icon={BuildIcon}
             iconClassName="p-0.5"
           >
             Build
           </AppSidebarLink>
           <AppSidebarInput
-            icon={BiImport}
+            icon={ImportIcon}
             onEnter={navigateToBuilder}
             validate={isShareOrDeckcode}
           />
@@ -180,13 +181,41 @@ export const AppSidebar: FC = () => {
           </AppSidebarMenu>
         </div>
         <div>
-          <AppSidebarLink href="/compare" active={router.pathname === '/compare'} disabled>
+          <AppSidebarLink
+            href="/compare"
+            active={router.pathname === '/compare'}
+            disabled
+            icon={CompareIcon}
+          >
             Compare
           </AppSidebarLink>
         </div>
       </div>
       <div className="flex-1" />
-      <div className="border-t border-zinc-600 py-8 px-4 bg-dark"></div>
+      <div className="flex justify-center border-t border-zinc-600 py-4 px-8 bg-black-900">
+        <div className="text-sm text-black-500">
+          <div className="flex gap-x-2 items-center">
+            <HiCode /> by{' '}
+            <a
+              href="https://github.com/kmees"
+              target="_blank"
+              className="flex items-center text-black-400"
+              rel="noreferrer"
+            >
+              <SiGithub className="mr-1" />
+              kmees
+            </a>
+          </div>
+          <a
+            href="https://www.buymeacoffee.com/kmees"
+            target="_blank"
+            className="flex gap-x-2 items-center"
+            rel="noreferrer"
+          >
+            <SiBuymeacoffee /> buy me a coffee
+          </a>
+        </div>
+      </div>
     </div>
   )
 }

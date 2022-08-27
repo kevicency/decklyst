@@ -4,11 +4,12 @@ import { chunk, flatMap } from 'lodash'
 import { ManaIcon } from './ManaIcon'
 
 export const DeckCardList = () => {
-  const { faction, minions, spells, artifacts } = useDeck()
+  const { faction, minions, spells, artifacts, counts } = useDeck()
 
   const cols = flatMap([minions, spells, artifacts], (cards, i) =>
     chunk(cards, 6).map((chunked, j) => ({
       title: j === 0 ? (i === 0 ? 'Minions' : i === 1 ? 'Spells' : 'Artifacts') : '',
+      count: i === 0 ? counts.minions : i === 1 ? counts.spells : counts.artifacts,
       cards: chunked,
     })),
   )
@@ -25,7 +26,16 @@ export const DeckCardList = () => {
     >
       {cols.map((col, i) => (
         <div key={i}>
-          <div className={`text-${faction} text-xl font-bold`}>{col.title} &nbsp;</div>
+          <div className={`text-xl`}>
+            {col.title ? (
+              <>
+                <span className={`text-${faction} font-bold mr-2`}>{col.count}</span>
+                <span className={`font-light`}>{col.title}</span>
+              </>
+            ) : (
+              <span>&nbsp;</span>
+            )}
+          </div>
           {col.cards.map((card) => (
             <div key={card.id} className="mt-2 flex items-center">
               <ManaIcon mana={card.mana} />

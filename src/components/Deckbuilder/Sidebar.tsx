@@ -20,10 +20,10 @@ export const Sidebar: FC<{
   const [{ title, $encoded: encodedDeckcode }, { updateTitle }] = useDeckcode()
 
   return (
-    <div className="flex flex-col shrink-0 gap-y-2 bg-slate-900 p-2 w-72 border-l border-zinc-700">
+    <div className="flex flex-col shrink-0 gap-y-2 bg-gray-900 p-2 w-72 border-l border-zinc-700">
       <div className="flex gap-2">
         <input
-          className="px-2 py-2 bg-slate-800 w-full"
+          className="px-2 py-2 bg-gray-800 w-full"
           placeholder="Untitled"
           autoFocus
           value={title}
@@ -58,7 +58,7 @@ export const Sidebar: FC<{
           <SidebarCardList cardType="Artifact" />
         </div>
       </div>
-      <div className="flex justify-between items-center -mx-2 pl-2 pr-4 pt-4 pb-2 border-t border-slate-600">
+      <div className="flex justify-between items-center -mx-2 pl-2 pr-4 pt-4 pb-2 border-t border-gray-600">
         <span className={cx(`font-mono font-bold text-xl`)}>
           <span className={`text-${deck.faction}`}>{deck.counts.total}</span>/
           <span

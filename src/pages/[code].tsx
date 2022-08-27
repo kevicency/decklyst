@@ -3,6 +3,14 @@ import { trpc } from '@/common/trpc'
 import { deckImageUrl } from '@/common/urls'
 import { DeckInfograph } from '@/components/DeckInfograph'
 import { DeckMetadata } from '@/components/DeckMetadata'
+import {
+  BuildIcon,
+  CopyIcon,
+  DoneIcon,
+  DownloadDoneIcon,
+  DownloadIcon,
+  LinkIcon,
+} from '@/components/Icons'
 import { OneTimeButton } from '@/components/OneTimeButton'
 import { DeckProvider } from '@/context/useDeck'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
@@ -11,11 +19,10 @@ import { createDeck, deckcodeWithoutTitle$, faction$, title$ } from '@/data/deck
 import { validateDeckcode } from '@/data/deckcode'
 import { createSsrClient } from '@/server'
 import { getIpAddress } from '@/server/utils'
+import Link from 'next/link'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
 import React, { useMemo } from 'react'
-import { IoCodeWorking } from 'react-icons/io5'
-import { MdDone, MdDownload, MdDownloadDone, MdLink } from 'react-icons/md'
 import { useQuery } from 'react-query'
 import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
@@ -74,61 +81,70 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
   return (
     <DeckProvider deck={deck} meta={meta}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
-        <div className="content-container my-8">
-          <DeckMetadata />
-          <DeckInfograph />
-          <div className="mt-6 grid grid-cols-3 auto-cols-auto gap-4">
-            <OneTimeButton onClick={copyDeckcode} timeout={2500} className="btn--large">
-              {(copied) => (
-                <>
-                  {copied ? <MdDone /> : <IoCodeWorking />}
-                  Copy deckcode
-                </>
-              )}
-            </OneTimeButton>
-            <OneTimeButton onClick={copyImageUrl} timeout={2500} className="btn--large">
-              {(copied) => (
-                <>
-                  {copied ? <MdDone /> : <MdLink />}
-                  Copy image url
-                </>
-              )}
-            </OneTimeButton>
-            <OneTimeButton
-              href={imageDataUri ?? undefined}
-              download={imageFilename}
-              disabled={!imageDataUri}
-              className="btn--large"
-            >
-              {(isDownloading) =>
-                imageDataUri ? (
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="content-container my-8">
+            <DeckMetadata />
+            <DeckInfograph />
+            <div className="mt-6 grid grid-cols-3 auto-cols-auto grid-rows-2 gap-4">
+              <OneTimeButton onClick={copyDeckcode} timeout={2500} className="btn--large">
+                {(copied) => (
                   <>
-                    {isDownloading ? <MdDownloadDone /> : <MdDownload />}
-                    Download image
+                    {copied ? <DoneIcon /> : <CopyIcon />}
+                    Copy deckcode
                   </>
-                ) : (
+                )}
+              </OneTimeButton>
+              <OneTimeButton onClick={copyImageUrl} timeout={2500} className="btn--large">
+                {(copied) => (
                   <>
-                    <BounceLoader
-                      size={18}
-                      speedMultiplier={0.66}
-                      color={colors.slate['400']}
-                      className="mr-2"
-                    />
-                    <span className="text-slate-400">Generating image</span>
+                    {copied ? <DoneIcon /> : <LinkIcon />}
+                    Copy image url
                   </>
-                )
-              }
-            </OneTimeButton>
-          </div>
-          <div className="mt-4 flex gap-x-2 justify-end items-center text-slate-500 text-sm">
-            <span>Image broken?</span>
-            <button
-              disabled={!imageDataUri}
-              onClick={handleRegenerateClick()}
-              className="text-slate-400 hover:text-teal-400 disabled:hover:text-slate-400"
-            >
-              Regenerate
-            </button>
+                )}
+              </OneTimeButton>
+              <OneTimeButton
+                href={imageDataUri ?? undefined}
+                download={imageFilename}
+                disabled={!imageDataUri}
+                className="btn--large"
+              >
+                {(isDownloading) =>
+                  imageDataUri ? (
+                    <>
+                      {isDownloading ? <DownloadDoneIcon /> : <DownloadIcon />}
+                      Download image
+                    </>
+                  ) : (
+                    <>
+                      <BounceLoader
+                        size={18}
+                        speedMultiplier={0.66}
+                        color={colors.gray['400']}
+                        className="mr-2"
+                      />
+                      <span className="text-gray-400">Generating image</span>
+                    </>
+                  )
+                }
+              </OneTimeButton>
+              <Link href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}>
+                <a className="btn btn--large">
+                  <BuildIcon />
+                  Open in deckbuilder
+                </a>
+              </Link>
+              <div />
+              <div className="flex gap-x-2 justify-end items-center text-gray-500 text-sm -mt-8">
+                <span>Image broken?</span>
+                <button
+                  disabled={!imageDataUri}
+                  onClick={handleRegenerateClick()}
+                  className="text-gray-400 hover:text-teal-400 disabled:hover:text-gray-400"
+                >
+                  Regenerate
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </SpriteLoaderProvider>

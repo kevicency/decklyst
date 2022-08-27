@@ -45,8 +45,8 @@
 
   .btn {
     @apply flex items-center justify-center;
-    @apply bg-slate-700 hover:bg-teal-600;
-    @apply text-white;
+    @apply bg-gray-700 hover:bg-teal-600;
+    @apply text-black-100 hover:text-black-100;
     @apply py-1 px-2;
   }
 
@@ -57,7 +57,7 @@
   .btn:disabled,
   .btn--disabled {
     @apply cursor-default;
-    @apply bg-slate-900 cursor-default;
+    @apply bg-gray-900 cursor-default;
   }
 
   .btn--large {
@@ -121,10 +121,10 @@ input {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-500;
+  @apply bg-gray-500;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-700;
+  @apply bg-gray-700;
 }
