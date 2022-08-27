@@ -45,7 +45,7 @@ export const DeckMetadata: FC = () => {
 
   return deck.deckcode ? (
     <Head>
-      <title>{`${deck.title} | Decklyst`}</title>
+      <title>{`${deck.title ?? 'Untitled'} | Decklyst`}</title>
       <meta property="og:title" content={`${deck.title} | ${startCase(deck.faction)}`} />
       <meta
         property="og:description"
