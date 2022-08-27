@@ -24,6 +24,7 @@ export const Sidebar: FC<{
         <input
           className="px-2 py-2 bg-slate-800 w-full"
           placeholder="Untitled"
+          autoFocus
           value={title}
           onChange={(ev) => updateTitle(ev.target.value)}
         />
