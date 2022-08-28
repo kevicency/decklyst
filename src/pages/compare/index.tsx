@@ -10,19 +10,23 @@ import { useDeckDiff } from '@/hooks/useDeckDiff'
 import { useSpriteQuery } from '@/queries/useSpriteQuery'
 import cx from 'classnames'
 import { debounce, get, startCase } from 'lodash'
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import type { InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import type { FC, KeyboardEventHandler, ReactNode } from 'react'
+import type { GetServerSidePropsContext } from 'next/types'
+import type { FC, ReactNode } from 'react'
 import { Fragment, useCallback, useMemo, useState } from 'react'
 import colors from 'tailwindcss/colors'
 
+type Show = 'all' | 'diff'
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-export const ComparePage: FC<Props> = (props) => {
+export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
   const router = useRouter()
   const left = (router.query.left as string) ?? props.left ?? ''
   const right = (router.query.right as string) ?? props.right ?? ''
+  const show = (router.query.show as Show) ?? props.show ?? 'all'
   const [leftValue, setLeftValue] = useState(left)
   const [rightValue, setRightValue] = useState(right)
 
@@ -30,8 +34,6 @@ export const ComparePage: FC<Props> = (props) => {
   const rightDeck = useMemo(() => createDeckExpanded(right ?? ''), [right])
 
   const deckDiff = useDeckDiff(leftDeck, rightDeck)
-
-  console.log(deckDiff)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateRoute = useCallback(
@@ -52,24 +54,6 @@ export const ComparePage: FC<Props> = (props) => {
     [router],
   )
 
-  const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = async (ev) => {
-    if (ev.key === 'Enter') {
-      const target = ev.target as HTMLInputElement
-      await router.push(
-        {
-          pathname: router.pathname,
-          query: {
-            left,
-            right,
-            [target.name]: target.value,
-          },
-        },
-        undefined,
-        { shallow: true },
-      )
-    }
-  }
-
   return (
     <div className="flex flex-col flex-1 overflow-hidden">
       <CompareMetadata leftDeck={leftDeck} rightDeck={rightDeck} deckDiff={deckDiff} />
@@ -82,51 +66,81 @@ export const ComparePage: FC<Props> = (props) => {
             value={leftValue}
             onChange={(ev) => {
               setLeftValue(ev.target.value)
-              updateRoute('left', ev.target.value)
+              updateRoute(ev.target.name, ev.target.value)
             }}
             onFocus={(ev) => ev.target.select()}
           />
         </div>
-        <div className="py-1 w-24 text-center text-2xl">VS</div>
+        <div className="flex flex-col w-24">
+          <div className="text-center text-xl">VS</div>
+        </div>
         <div className="flex-1">
           <input
             name="right"
             placeholder="Enter a deckcode"
             className="page-header-input"
             value={rightValue}
-            onChange={(ev) => setRightValue(ev.target.value)}
-            onKeyDown={handleKeyDown}
+            onChange={(ev) => {
+              setRightValue(ev.target.value)
+              updateRoute(ev.target.name, ev.target.value)
+            }}
+            onFocus={(ev) => ev.target.select()}
           />
         </div>
       </PageHeader>
       <div className="flex flex-col flex-1 overflow-y-auto">
-        <div className="content-container py-8">
+        <div className="content-container my-8 p-6 bg-slate-900" id="snap">
           <Row>
             <DeckHeader deck={leftDeck} />
-            <div className="flex flex-col text-center text-sm text-black-400 items-center justify-center">
-              <div className="text-teal-400 font-bold text-2xl">{deckDiff.changes}</div>
-              <div>cards</div>
-              <div>changed</div>
+            <div className="flex flex-col text-center justify-center">
+              <div className="flex gap-x-2 text-black-400 text-lg items-end justify-center mb-2">
+                <div className="text-teal-600 font-bold text-2xl">{deckDiff.changes}</div>
+                <div>changes</div>
+              </div>
+              {!snapshot && (
+                <label className="flex gap-x-1 justify-center items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className=""
+                    checked={show === 'diff'}
+                    onChange={async (ev) => {
+                      await router.replace({
+                        pathname: router.pathname,
+                        query: {
+                          ...router.query,
+                          show: ev.target.checked ? 'diff' : 'all',
+                        },
+                      })
+                    }}
+                  />
+                  changes only
+                </label>
+              )}
             </div>
             <DeckHeader deck={rightDeck} />
           </Row>
 
-          {['minions', 'spells', 'artifacts'].map((path) => (
-            <Fragment key={path}>
-              <Row className="mt-6 mb-4 text">
-                <CardCount count={get(leftDeck.counts, path)} title={startCase(path)} />
-                <Delta value={get(deckDiff.deltas, path)} big />
-                <CardCount count={get(rightDeck.counts, path)} title={startCase(path)} mirrored />
-              </Row>
-              {get(deckDiff, path).map(({ card, left, right, delta }: CardDiff) => (
-                <Row key={card.id} className="mb-1">
-                  <CardItem card={card} count={left} delta={delta} />
-                  <Delta value={delta} />
-                  <CardItem card={card} count={right} delta={delta} mirrored />
+          {['minions', 'spells', 'artifacts'].map((path) => {
+            const diffCards = (get(deckDiff, path) as CardDiff[]).filter(
+              (diff) => show === 'all' || diff.delta !== 0,
+            )
+            return diffCards.length ? (
+              <Fragment key={path}>
+                <Row className="mt-6 mb-4 text">
+                  <CardCount count={get(leftDeck.counts, path)} title={startCase(path)} />
+                  <Delta value={get(deckDiff.deltas, path)} big />
+                  <CardCount count={get(rightDeck.counts, path)} title={startCase(path)} mirrored />
                 </Row>
-              ))}
-            </Fragment>
-          ))}
+                {diffCards.map(({ card, left, right, delta }: CardDiff) => (
+                  <Row key={card.id} className="mb-1">
+                    <CardItem card={card} count={left} delta={delta} />
+                    <Delta value={delta} />
+                    <CardItem card={card} count={right} delta={delta} mirrored />
+                  </Row>
+                ))}
+              </Fragment>
+            ) : null
+          })}
         </div>
       </div>
     </div>
@@ -170,12 +184,18 @@ const DeckHeader: FC<{ deck: DeckExpanded }> = ({ deck }) => {
   return (
     <DeckProvider deck={deck}>
       {deck.valid ? (
-        <div className="scale-90">
-          <DeckTitle />
-        </div>
-      ) : (
+        <Link href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}>
+          <a className="scale-90">
+            <DeckTitle />
+          </a>
+        </Link>
+      ) : deck.deckcode ? (
         <div className="flex items-center justify-center font-bold text-xl text-red-500">
           Invalid deckcode
+        </div>
+      ) : (
+        <div className="flex items-center justify-center text-lg text-black-500">
+          Please enter a deckcode above
         </div>
       )}
     </DeckProvider>
@@ -187,7 +207,7 @@ const CardCount: FC<{ title?: string; count: number; mirrored?: boolean }> = ({
   mirrored,
 }) => (
   <div className={cx('flex gap-x-2 text-2xl', !mirrored && 'flex-row-reverse')}>
-    <span className={`text-teal-400`}>{count}</span>
+    <span className={`text-teal-600`}>{count}</span>
     <span>{title}</span>
   </div>
 )
@@ -228,7 +248,7 @@ export const CardItem: FC<{ card: CardData; count: number; delta: number; mirror
       className={cx(
         'relative bg-gray-800 cursor-pointer select-none transition-transform text-normal',
         mirrored ? 'mr-8' : 'ml-8',
-        count === 0 && 'opacity-25',
+        count === 0 && 'opacity-40',
       )}
     >
       <div
@@ -262,12 +282,19 @@ export const CardItem: FC<{ card: CardData; count: number; delta: number; mirror
 
 export default ComparePage
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { left, right } = context.query as { left?: string; right?: string }
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const { left, right, show, snapshot } = context.query as {
+    left?: string
+    right?: string
+    show?: 'all' | 'diff'
+    snapshot?: number | boolean
+  }
   return {
     props: {
-      left,
-      right,
+      left: left ?? '',
+      right: right ?? '',
+      show: show ?? 'diff',
+      snapshot: Boolean(snapshot ?? 0),
     },
   }
 }

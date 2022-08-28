@@ -47,7 +47,7 @@
     @apply flex items-center justify-center;
     @apply bg-gray-700 hover:bg-teal-600;
     @apply text-black-100 hover:text-black-100;
-    @apply py-1 px-2;
+    @apply py-1 px-3;
   }
 
   .btn > svg {

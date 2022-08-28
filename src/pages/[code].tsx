@@ -6,6 +6,7 @@ import { DeckMetadata } from '@/components/DeckMetadata'
 import {
   BuildIcon,
   ClockIcon,
+  CompareIcon,
   CopyIcon,
   DoneIcon,
   DownloadDoneIcon,
@@ -141,7 +142,7 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
                   imageDataUri ? (
                     <>
                       {isDownloading ? <DownloadDoneIcon /> : <DownloadIcon />}
-                      Download image
+                      Download image &nbsp;
                     </>
                   ) : (
                     <>
@@ -157,8 +158,19 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
                 }
               </OneTimeButton>
             </div>
-            <div>
-              <Link href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}>
+            <div className="flex gap-x-4">
+              <Link href={{ pathname: '/compare', query: { left: deck.deckcode } }}>
+                <a className="btn">
+                  <CompareIcon />
+                  Compare
+                </a>
+              </Link>
+              <Link
+                href={{
+                  pathname: '/build/[deckcode]',
+                  query: { deckcode: deck.deckcode },
+                }}
+              >
                 <a className="btn">
                   <BuildIcon />
                   Open in deckbuilder

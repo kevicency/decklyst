@@ -4,13 +4,9 @@ import { Sidebar } from '@/components/Deckbuilder/Sidebar'
 import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
 import type { CardData } from '@/data/cards'
-import type { Deckcode } from '@/data/deckcode'
 import type { FC } from 'react'
 
-export const Deckbuilder: FC<{
-  onShare: () => void
-  onImport: (code: string) => Promise<Deckcode>
-}> = ({ onShare }) => {
+export const Deckbuilder: FC = () => {
   const [deckcode, { addCard, replaceCard, clear }] = useDeckcode()
   const deck = useDeck()
 
@@ -33,7 +29,7 @@ export const Deckbuilder: FC<{
       {deck.general ? (
         <DeckbuilderBuild
           onGeneralSelected={handleGeneralSelected}
-          sidebar={<Sidebar onReset={handleReset} onCopy={handleCopy} onShare={onShare} />}
+          sidebar={<Sidebar onReset={handleReset} onCopy={handleCopy} />}
         />
       ) : (
         <DeckbuilderStart onSelectGeneral={handleGeneralSelected} />

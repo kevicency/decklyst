@@ -12,19 +12,43 @@ import {
   removeCard,
   replaceCard,
   updateTitle,
-  validateDeckcode,
 } from '@/data/deckcode'
-import type { Deckinfo } from '@prisma/client'
-import type { GetServerSideProps } from 'next'
+import { noop } from 'lodash'
+import type { InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
+import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-type Props = { deckcode?: string }
+type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+
+const useRouteQuery = (deckcode: string | null) => {
+  const { query, replace, pathname } = useRouter()
+  const deckcodeFromRoute = (query.deckcode as string | undefined) ?? deckcode ?? ''
+  const [baseDeckcode] = useState((query.base as string | undefined) ?? deckcodeFromRoute)
+
+  useEffect(() => {
+    if (baseDeckcode !== query.base) {
+      replace(
+        {
+          pathname,
+          query: {
+            ...query,
+            base: baseDeckcode,
+          },
+        },
+        undefined,
+        { shallow: true },
+      ).catch(noop)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  return { deckcodeFromRoute, baseDeckcode }
+}
 
 const BuildPage: FC<Props> = (props) => {
   const router = useRouter()
-  const deckcodeFromRoute = (router.query.deckcode as string) ?? props.deckcode ?? ''
+  const { deckcodeFromRoute, baseDeckcode } = useRouteQuery(props.deckcode)
   const deckcode = useMemo(() => parseDeckcode(deckcodeFromRoute), [deckcodeFromRoute])
   const deck = useMemo(() => createDeck(deckcode), [deckcode])
 
@@ -35,7 +59,10 @@ const BuildPage: FC<Props> = (props) => {
         encodedDeckcode
           ? {
               pathname: '/build/[deckcode]',
-              query: { deckcode: encodedDeckcode },
+              query: {
+                ...router.query,
+                deckcode: encodedDeckcode,
+              },
             }
           : { pathname: '/build' },
         undefined,
@@ -56,31 +83,12 @@ const BuildPage: FC<Props> = (props) => {
     replace: async (deckcode) => await updateDeckcode(parseDeckcode(deckcode)),
   }
 
-  const handleShare = async () =>
-    await router.push({
-      pathname: '/[code]',
-      query: { code: encodeDeckcode(deckcode) },
-    })
-
-  const handleImport = async (deckcode: string) => {
-    if (validateDeckcode(deckcode)) {
-      return handlers.replace(deckcode)
-    }
-    const deckinfo = await fetch(`/api/deckinfo/${deckcode}`).then(
-      (res) => res.json() as Promise<Deckinfo | null>,
-    )
-    if (deckinfo?.deckcode) {
-      return handlers.replace(deckinfo.deckcode)
-    }
-    return Promise.reject(new Error('Invalid deckcode'))
-  }
-
   return (
-    <DeckcodeProvider deckcode={deckcode} {...handlers}>
+    <DeckcodeProvider deckcode={deckcode} baseDeckcode={baseDeckcode} {...handlers}>
       <DeckProvider deck={deck}>
         <>
           <DeckMetadata />
-          <Deckbuilder onShare={handleShare} onImport={handleImport} />
+          <Deckbuilder />
         </>
       </DeckProvider>
     </DeckcodeProvider>
@@ -89,8 +97,9 @@ const BuildPage: FC<Props> = (props) => {
 
 export default BuildPage
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const deckcode = ctx.query.deckcode as string | undefined
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const deckcode = (ctx.query.deckcode as string | undefined) ?? null
+
   return {
     props: {
       deckcode,

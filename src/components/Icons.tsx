@@ -1,13 +1,14 @@
 import { BiImport } from 'react-icons/bi'
 import { FaRegClock, FaRegEye } from 'react-icons/fa'
-import { IoIosBuild, IoIosShareAlt, IoMdGitCompare } from 'react-icons/io'
+import { GoRepoForked } from 'react-icons/go'
+import { IoIosBuild, IoIosShareAlt } from 'react-icons/io'
 import { IoCopyOutline, IoTrashOutline } from 'react-icons/io5'
 import { MdDone, MdDownload, MdDownloadDone, MdLink, MdSearch } from 'react-icons/md'
 
 export const ImportIcon = BiImport
 export const BuildIcon = IoIosBuild
 export const ShareIcon = IoIosShareAlt
-export const CompareIcon = IoMdGitCompare
+export const CompareIcon = GoRepoForked
 export const SearchIcon = MdSearch
 export const DoneIcon = MdDone
 export const DownloadIcon = MdDownload
