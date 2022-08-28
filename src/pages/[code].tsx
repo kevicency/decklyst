@@ -26,7 +26,7 @@ import { formatDistance, parseISO } from 'date-fns'
 import Link from 'next/link'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useQuery } from 'react-query'
 import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
@@ -38,8 +38,6 @@ type Props = {
 }
 
 const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
-  const [imageDataUri, setImageDataUri] = React.useState<string | null>(null)
-
   const deckcode = deck.deckcode
   const imageFilename = useMemo(
     () => `${title$(deck)}_${faction$(deck)}_${deckcodeWithoutTitle$(deck)}.png`,
@@ -47,7 +45,7 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
   )
 
   const { mutateAsync: ensureDeckimage } = trpc.useMutation('ensureDeckimage')
-  const { refetch: refetchDeckimage } = useQuery(
+  const { data: imageDataUriFromQuery, refetch: refetchDeckimage } = useQuery(
     ['deck-image', deckcode],
     async () => {
       const image = await ensureDeckimage({ deckcode })
@@ -59,9 +57,17 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
       staleTime: Infinity,
       retry: true,
       retryDelay: (retryCount) => 1000 * Math.pow(2, Math.max(0, retryCount - 5)),
-      onSuccess: (dataUri) => setImageDataUri(dataUri),
     },
   )
+  const [imageDataUri, setImageDataUri] = React.useState<string | null>(
+    imageDataUriFromQuery ?? null,
+  )
+
+  useEffect(() => {
+    if (imageDataUriFromQuery && imageDataUri !== imageDataUriFromQuery) {
+      setImageDataUri(imageDataUriFromQuery)
+    }
+  }, [imageDataUri, imageDataUriFromQuery])
 
   const copyDeckcode = async () => {
     if (deckcode) {
