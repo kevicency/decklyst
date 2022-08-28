@@ -4,10 +4,11 @@ import { OneTimeButton } from '@/components/OneTimeButton'
 import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
 import cx from 'classnames'
+import { debounce } from 'lodash'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { CompareIcon, CopyIcon, DoneIcon, ShareIcon, TrashIcon } from '../Icons'
 
 export const Sidebar: FC<{
@@ -17,6 +18,9 @@ export const Sidebar: FC<{
   const router = useRouter()
   const deck = useDeck()
   const [{ title, cards, $encoded: encodedDeckcode }, { baseDeckcode, updateTitle }] = useDeckcode()
+  const [titleValue, setTitleValue] = useState(title)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const updateTitleDebounced = useCallback(debounce(updateTitle, 500), [updateTitle])
 
   const canCompare = Boolean(
     baseDeckcode && Object.keys(cards).length && encodedDeckcode !== baseDeckcode,
@@ -29,8 +33,11 @@ export const Sidebar: FC<{
           className="px-2 py-2 bg-gray-800 w-full"
           placeholder="Untitled"
           autoFocus
-          value={title}
-          onChange={(ev) => updateTitle(ev.target.value)}
+          value={titleValue}
+          onChange={(ev) => {
+            setTitleValue(ev.target.value)
+            updateTitleDebounced(ev.target.value)
+          }}
         />
 
         <button className="flex bg-red-900 hover:bg-red-700 px-3 py-2 text-xl" onClick={onReset}>

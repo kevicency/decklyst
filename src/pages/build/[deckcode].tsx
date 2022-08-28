@@ -38,7 +38,6 @@ const useRouteQuery = (deckcode: string | null) => {
           },
         },
         undefined,
-        { shallow: true },
       ).catch(noop)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
