@@ -1,4 +1,4 @@
-import type { CardData, CardType } from '@/data/cards'
+import type { CardData, CardType, Faction } from '@/data/cards'
 import { cardsById, sortCards } from '@/data/cards'
 import type { Deckcode } from '@/data/deckcode'
 import { parseDeckcode, splitDeckcode } from '@/data/deckcode'
@@ -15,6 +15,25 @@ export type ManaCurve = Array<{
   rel: number
 }>
 
+export type DeckExpanded = Deck & {
+  get valid(): boolean
+  faction: Faction
+  general: CardData
+  minions: CardEntry[]
+  spells: CardEntry[]
+  artifacts: CardEntry[]
+  counts: {
+    total: number
+    minions: number
+    spells: number
+    artifacts: number
+  }
+  manaCurve: ManaCurve
+  meta?: {
+    sharecode?: string
+    viewCount?: number
+  }
+}
 type DeckLens<T> = (deck: Deck) => T
 
 const $ = <T>(fn: DeckLens<T>) => memoize(fn)
@@ -69,3 +88,25 @@ export const totalCount$ = $((deck) => sumBy(deck.cards, (card) => card.count))
 export const minionCount$ = $((deck) => sumBy(minions$(deck), (card) => card.count))
 export const spellCount$ = $((deck) => sumBy(spells$(deck), (card) => card.count))
 export const artifactCount$ = $((deck) => sumBy(artifacts$(deck), (card) => card.count))
+
+export const expandDeck = (deck: Deck, meta?: DeckExpanded['meta']): DeckExpanded => ({
+  ...deck,
+  faction: faction$(deck) ?? 'neutral',
+  general: general$(deck)!,
+  minions: minions$(deck),
+  spells: spells$(deck),
+  artifacts: artifacts$(deck),
+  counts: {
+    total: totalCount$(deck),
+    minions: minionCount$(deck),
+    spells: spellCount$(deck),
+    artifacts: artifactCount$(deck),
+  },
+  manaCurve: manaCurve$(deck),
+  meta,
+  get valid(): boolean {
+    return !!this.general
+  },
+})
+export const createDeckExpanded = (deckcode?: string | Deckcode): DeckExpanded =>
+  expandDeck(createDeck(deckcode))

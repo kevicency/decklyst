@@ -57,10 +57,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
         </div>
         <div className="flex flex-1 justify-center -mb-4">
           <input
-            className={cx(
-              'transition-colors max-w-md',
-              'w-full border-b-2 pl-5 pr-10 py-2 bg-gray-800 border-gray-500 focus:border-gray-300',
-            )}
+            className="page-header-input max-w-md"
             placeholder="Search"
             value={cardQuery}
             onChange={(ev) => setCardQuery(ev.target.value)}

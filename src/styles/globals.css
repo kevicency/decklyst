@@ -68,6 +68,11 @@
   .btn--large > svg {
     @apply mr-2;
   }
+
+  .page-header-input {
+    @apply transition-colors bg-gray-800 border-b-2 border-gray-500 focus:border-gray-300;
+    @apply w-full px-2 py-2;
+  }
 }
 
 html,
@@ -83,9 +88,11 @@ a {
   text-decoration: none;
   @apply transition-colors;
 }
+
 a:hover {
   @apply text-teal-400;
 }
+
 .disabled {
   @apply text-zinc-600;
 }

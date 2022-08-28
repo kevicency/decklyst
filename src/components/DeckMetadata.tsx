@@ -1,6 +1,6 @@
 import { deckImageUrl } from '@/common/urls'
-import type { DeckExpanded } from '@/context/useDeck'
 import { useDeck } from '@/context/useDeck'
+import type { DeckExpanded } from '@/data/deck'
 import { startCase } from 'lodash'
 import Head from 'next/head'
 import type { FC } from 'react'

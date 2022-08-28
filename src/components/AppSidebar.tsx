@@ -184,7 +184,6 @@ export const AppSidebar: FC = () => {
           <AppSidebarLink
             href="/compare"
             active={router.pathname === '/compare'}
-            disabled
             icon={CompareIcon}
           >
             Compare
