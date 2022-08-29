@@ -20,7 +20,7 @@ module.exports = {
         neutral: colors.neutral['100'],
         mana: '#2ba9d8',
         common: colors.neutral['100'],
-        basic: colors.neutral['400'],
+        basic: colors.neutral['300'],
         rare: '#396cfd',
         epic: '#bf20e1',
         legendary: '#e39f28',
