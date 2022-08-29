@@ -25,7 +25,14 @@ export const GeneralCard = ({
       className,
     )}
   >
-    <img src={`/assets/generals/${general.id}_hex@2x.png`} alt={general.name} />
+    <img
+      src={`/assets/generals/${general.id}_hex.png`}
+      srcSet={[
+        `/assets/generals/${general.id}_hex.png 1x`,
+        `/assets/generals/${general.id}_hex@2x.png 2x`,
+      ].join(',')}
+      alt={general.name}
+    />
     {size === 'md' && (
       <div
         className={cx(`font-bold flex-1`, {

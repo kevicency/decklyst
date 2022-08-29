@@ -27,7 +27,11 @@ export const DeckTitle = () => {
       <div className="w-32 mt-[-24px] mb-[-16px] ml-[-24px] flex-shrink-0">
         <img
           ref={imageRef}
-          src={`/assets/generals/${general.id}_hex@2x.png`}
+          src={`/assets/generals/${general.id}_hex.png`}
+          srcSet={[
+            `/assets/generals/${general.id}_hex.png 1x`,
+            `/assets/generals/${general.id}_hex@2x.png 2x`,
+          ].join(',')}
           alt={general.name}
           className="w-full"
         />
