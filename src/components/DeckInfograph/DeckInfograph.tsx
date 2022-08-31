@@ -1,3 +1,4 @@
+import { CardTooltip } from '@/components/DeckInfograph/CardTooltip'
 import { DeckShareUrl } from '@/components/DeckInfograph/DeckShareUrl'
 import { useSpriteLoader } from '@/context/useSpriteLoader'
 import cx from 'classnames'
@@ -50,6 +51,7 @@ export const DeckInfograph: FC = () => {
       <div className="flex justify-end mt-1 -mr-2">
         <DeckShareUrl />
       </div>
+      <CardTooltip />
     </div>
   )
 }

@@ -3,7 +3,7 @@ const { withSuperjson } = require('next-superjson')
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   output: process.env.NEXT_STANDALONE ? 'standalone' : undefined,
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   async rewrites() {
     return [

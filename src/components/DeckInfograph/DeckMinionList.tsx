@@ -20,9 +20,14 @@ export const DeckMinionList = () => {
 }
 export const MinionCard: FC<{ card: CardEntry; position: number }> = ({ card, position }) => (
   <div className="flex flex-col" style={{ zIndex: 40 - position }}>
-    <div className="flex flex-1 relative">
+    <a
+      className="flex flex-1 relative"
+      data-tip={card.id}
+      data-for="card-tooltip"
+      data-place="bottom"
+    >
       <CardSprite card={card} centered className="scale-150 absolute left-1/2 bottom-3" />
-    </div>
+    </a>
     <div className="text-center py-1 bg-gray-700">{card.count}</div>
   </div>
 )

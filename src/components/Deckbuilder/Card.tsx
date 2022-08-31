@@ -40,15 +40,16 @@ export const CardHealth: FC<{ card: CardData }> = ({ card }) => {
 }
 export const Card: FC<{
   card: CardData
-  onSelect: CardHandler
-  onDeselect: CardHandler
+  onSelect?: CardHandler
+  onDeselect?: CardHandler
   count?: number
   className?: string
 }> = ({ card, count, onSelect, onDeselect, className }) => {
   const [animate, setAnimate] = useState<number>(0)
+  const Tag = onSelect ? 'button' : 'div'
 
   return (
-    <button
+    <Tag
       className={cx(
         className,
         'flex flex-col items-center relative',
@@ -61,7 +62,9 @@ export const Card: FC<{
           'scale-105': animate === 1,
         },
       )}
-      onClick={(ev) => (ev.altKey ? onDeselect(card, ev.shiftKey) : onSelect(card, ev.shiftKey))}
+      onClick={(ev) =>
+        ev.altKey ? onDeselect?.(card, ev.shiftKey) : onSelect?.(card, ev.shiftKey)
+      }
       onMouseDown={(event) => {
         if (count !== undefined) {
           if (count < 3 && !event.altKey) {
@@ -124,6 +127,6 @@ export const Card: FC<{
         })}
         dangerouslySetInnerHTML={{ __html: highlightKeywords(card.description) }}
       ></div>
-    </button>
+    </Tag>
   )
 }

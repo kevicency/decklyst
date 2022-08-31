@@ -73,6 +73,15 @@
     @apply transition-colors bg-gray-800 border-b-2 border-gray-500 focus:border-gray-300;
     @apply w-full px-2 py-2;
   }
+
+  a[data-tip] {
+    @apply hover:text-inherit cursor-help;
+  }
+
+  #card-tooltip {
+    font-size: inherit !important;
+    padding: 0 !important;
+  }
 }
 
 html,

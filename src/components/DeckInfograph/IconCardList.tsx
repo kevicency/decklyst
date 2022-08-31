@@ -17,9 +17,14 @@ export const IconCardList: FC<{ cards: CardEntry[] }> = ({ cards }) => {
 }
 export const IconCard: FC<{ card: CardEntry }> = ({ card }) => (
   <div className="flex flex-col w-16">
-    <div className="flex flex-1 relative">
+    <a
+      className="flex flex-1 relative"
+      data-tip={card.id}
+      data-for="card-tooltip"
+      data-place="bottom"
+    >
       <CardSprite card={card} centered className="scale-150 absolute left-1/2 bottom-4" />
-    </div>
+    </a>
     <div className="text-center py-0.5 bg-gray-700">{card.count}</div>
   </div>
 )
