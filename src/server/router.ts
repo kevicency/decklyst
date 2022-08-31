@@ -1,4 +1,4 @@
-import { createDeck } from '@/data/deck'
+import { transformer } from '@/common/transformer'
 import { parseDeckcode, validateDeckcode } from '@/data/deckcode'
 import { snapshot } from '@/server/snapshot'
 import * as trpc from '@trpc/server'
@@ -8,7 +8,7 @@ import type { Context } from './context'
 
 export const serverRouter = trpc
   .router<Context>()
-
+  .transformer(transformer)
   .query('getDeckinfo', {
     input: z.object({
       code: z.string(),
@@ -32,9 +32,10 @@ export const serverRouter = trpc
   })
   .query('getDeckviews', {
     input: z.object({
-      deckcode: z.string(),
+      deckcodes: z.array(z.string()),
     }),
-    resolve: async ({ input: { deckcode }, ctx }) => await ctx.deckviews.getDeckviews(deckcode),
+    resolve: async ({ input: { deckcodes }, ctx }) =>
+      await ctx.deckviews.getDeckviews(...deckcodes),
   })
 
   .mutation('ensureDeckimage', {
@@ -64,17 +65,40 @@ export const serverRouter = trpc
       return await ctx.deckimage.finishRendering(deckcode, image)
     },
   })
-  .query('mostViewedDecks', {
+  .query('decks.mostViewed', {
     input: z.object({
-      count: z.number().gt(0),
-      recent: z.boolean().optional(),
+      count: z.number().gt(0).lte(25),
+      sinceDaysAgo: z.number().optional(),
     }),
     resolve: async ({ input, ctx }) => {
       const mostViewedDeckcodes = await ctx.deckviews.mostViewed(input)
 
-      return mostViewedDeckcodes.map(({ deckcode, viewCount }) => ({
-        deck: createDeck(deckcode),
-        viewCount,
+      return mostViewedDeckcodes.map(({ deckcode, viewCount }) =>
+        // createDeckExpanded(deckcode, { viewCount }),
+        ({ deckcode, meta: { viewCount } }),
+      )
+    },
+  })
+  .query('decks.latest', {
+    input: z.object({
+      count: z.number().gt(0).lte(25),
+    }),
+    resolve: async ({ input: { count }, ctx }) => {
+      const deckinfos = await ctx.deckinfo.findMany({
+        select: { deckcode: true, createdAt: true },
+        orderBy: { createdAt: 'desc' },
+        take: count,
+      })
+      const viewCounts = await ctx.deckviews.getDeckviews(
+        ...deckinfos.map(({ deckcode }) => deckcode),
+      )
+      const viewCountMap = new Map(
+        viewCounts.map(({ deckcode, viewCount }) => [deckcode, viewCount]),
+      )
+
+      return deckinfos.map(({ deckcode, createdAt }) => ({
+        deckcode,
+        meta: { createdAt, viewCount: viewCountMap.get(deckcode) ?? 1 },
       }))
     },
   })

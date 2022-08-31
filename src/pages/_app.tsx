@@ -1,3 +1,4 @@
+import { transformer } from '@/common/transformer'
 import { trpc } from '@/common/trpc'
 import { siteUrl } from '@/common/urls'
 import { Layout } from '@/components/Layout'
@@ -14,6 +15,7 @@ function App({ Component, pageProps }: AppProps) {
   const [trpcClient] = useState(() =>
     trpc.createClient({
       url: `${siteUrl}/api/trpc`,
+      transformer,
     }),
   )
   const router = useRouter()

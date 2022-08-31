@@ -1,5 +1,5 @@
 import type { PrismaClient } from '@prisma/client'
-import { addWeeks } from 'date-fns'
+import { addDays } from 'date-fns'
 
 type Deckviews = PrismaClient['deckviews']
 
@@ -22,16 +22,16 @@ export const extendDeckviews = (deckviews: Deckviews) =>
       }),
     mostViewed: async ({
       count: take,
-      recent,
+      sinceDaysAgo,
     }: {
       count: number
-      recent?: boolean
+      sinceDaysAgo?: number
     }): Promise<DeckviewResult[]> => {
       const result = await deckviews.groupBy({
-        where: recent
+        where: sinceDaysAgo
           ? {
               updatedAt: {
-                gte: addWeeks(new Date(), -1),
+                gte: addDays(new Date(), -Math.abs(sinceDaysAgo)),
               },
             }
           : undefined,
@@ -49,10 +49,10 @@ export const extendDeckviews = (deckviews: Deckviews) =>
 
       return result.map(({ deckcode, _count }) => ({ deckcode, viewCount: _count.deckcode }))
     },
-    getDeckviews: async (deckcode: string): Promise<DeckviewResult | null> => {
+    getDeckviews: async (...deckcodes: string[]): Promise<DeckviewResult[]> => {
       const result = await deckviews.groupBy({
         where: {
-          deckcode,
+          deckcode: { in: deckcodes },
         },
         by: ['deckcode'],
         _count: {
@@ -65,10 +65,7 @@ export const extendDeckviews = (deckviews: Deckviews) =>
         },
         take: 1,
       })
-      if (result[0]) {
-        return { deckcode: result[0].deckcode, viewCount: result[0]._count.deckcode }
-      }
 
-      return null
+      return result.map(({ deckcode, _count }) => ({ deckcode, viewCount: _count.deckcode }))
     },
   })

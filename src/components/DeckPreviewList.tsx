@@ -3,7 +3,7 @@ import { DeckCounts } from '@/components/DeckInfograph/DeckCounts'
 import { DeckManaCurve } from '@/components/DeckInfograph/DeckManaCurve'
 import { DeckTitle } from '@/components/DeckInfograph/DeckTitle'
 import { DeckProvider, useDeck } from '@/context/useDeck'
-import type { Deck } from '@/data/deck'
+import type { DeckExpanded } from '@/data/deck'
 import cx from 'classnames'
 import Link from 'next/link'
 import type { FC } from 'react'
@@ -23,7 +23,7 @@ const DeckPreview: FC = () => {
         href={deckUrl(deckcode, true)}
       >
         <div className="scale-90 flex-1">
-          <DeckTitle />
+          <DeckTitle showMeta />
         </div>
         <DeckCounts />
         <DeckManaCurve />
@@ -34,7 +34,7 @@ const DeckPreview: FC = () => {
 
 export const DeckPreviewList: FC<{
   title?: string
-  decks: { deck: Deck; viewCount: number }[]
+  decks: DeckExpanded[]
   className?: string
 }> = ({ title, decks, className }) => {
   if (!decks.length) return null
@@ -43,9 +43,9 @@ export const DeckPreviewList: FC<{
     <div className={cx(className)}>
       {title && <h3 className="text-3xl mb-6">{title}</h3>}
       <ul>
-        {decks.map(({ deck, viewCount }) => (
+        {decks.map((deck) => (
           <li key={deck.deckcode}>
-            <DeckProvider deck={deck} meta={{ viewCount }}>
+            <DeckProvider deck={deck}>
               <DeckPreview />
             </DeckProvider>
           </li>

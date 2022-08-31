@@ -18,12 +18,12 @@ import { OneTimeButton } from '@/components/OneTimeButton'
 import { PageHeader } from '@/components/PageHeader'
 import { DeckProvider } from '@/context/useDeck'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
-import type { Deck } from '@/data/deck'
-import { createDeck, deckcodeWithoutTitle$, faction$, title$ } from '@/data/deck'
+import type { DeckExpanded, DeckMeta } from '@/data/deck'
+import { createDeck, deckcodeWithoutTitle$, expandDeck, faction$, title$ } from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
 import { createSsrClient } from '@/server'
 import { getIpAddress } from '@/server/utils'
-import { formatDistance, parseISO } from 'date-fns'
+import { formatDistance } from 'date-fns'
 import Link from 'next/link'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
@@ -33,13 +33,13 @@ import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
 
 type Props = {
-  deck: Deck
-  meta: { sharecode?: string; createdAt?: string; viewCount: number }
+  deck: DeckExpanded
   isSnapshot: boolean
 }
 
-const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
+const DeckPage: FC<Props> = ({ deck, isSnapshot }) => {
   const deckcode = deck.deckcode
+  const meta = deck.meta ?? {}
   const imageFilename = useMemo(
     () => `${title$(deck)}_${faction$(deck)}_${deckcodeWithoutTitle$(deck)}.png`,
     [deck],
@@ -94,7 +94,7 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
   if (!deck) return null
 
   return (
-    <DeckProvider deck={deck} meta={meta}>
+    <DeckProvider deck={deck}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
         <div className="flex flex-col flex-1 overflow-hidden">
           <PageHeader>
@@ -111,7 +111,7 @@ const DeckPage: FC<Props> = ({ deck, meta, isSnapshot }) => {
                   <ClockIcon />
                   Created
                   <span className="font-bold">
-                    {formatDistance(parseISO(meta.createdAt), new Date(), { addSuffix: true })}
+                    {formatDistance(meta.createdAt, new Date(), { addSuffix: true })}
                   </span>
                 </div>
               )}
@@ -207,9 +207,7 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
   const client = await createSsrClient()
 
   let deckcode = code
-  const meta = {
-    sharecode: null as string | null,
-    createdAt: null as string | null,
+  const meta: DeckMeta = {
     viewCount: 0,
   }
 
@@ -220,7 +218,7 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
 
     deckcode = deckinfo?.deckcode ?? deckcode
     meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
-    meta.createdAt = deckinfo?.createdAt?.toISOString() ?? meta.createdAt
+    meta.createdAt = deckinfo?.createdAt ?? meta.createdAt
   }
 
   if (!validateDeckcode(deckcode)) {
@@ -238,14 +236,13 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
       deckcode: deckcode!,
       ipAddress: getIpAddress(req),
     })
-    const views = await client.query('getDeckviews', { deckcode: deckcode! })
-    meta.viewCount = views?.viewCount ?? meta.viewCount
+    const views = await client.query('getDeckviews', { deckcodes: [deckcode!] })
+    meta.viewCount = views[0]?.viewCount ?? meta.viewCount
   }
 
   return {
     props: {
-      deck,
-      meta,
+      deck: expandDeck(deck, meta),
       isSnapshot: Boolean(+snapshot),
     },
   }

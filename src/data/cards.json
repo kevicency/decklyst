@@ -3042,12 +3042,12 @@
     "description": "This gains Health equal to the cost of the next artifact you equip.",
     "relatedCards": [],
     "resource": {
-      "breathing": "resources/card_gifs/neutralBeastCavernBreathing.gif",
-      "idle": "resources/card_gifs/neutralBeastCavernIdle.gif",
-      "walk": "resources/card_gifs/neutralBeastCavernRun.gif",
-      "attack": "resources/card_gifs/neutralBeastCavernAttack.gif",
-      "damage": "resources/card_gifs/neutralBeastCavernHit.gif",
-      "death": "resources/card_gifs/neutralBeastCavernDeath.gif"
+      "breathing": "resources/card_gifs/neutralD2KomodoScavengerBreathing.gif",
+      "idle": "resources/card_gifs/neutralD2KomodoScavengerIdle.gif",
+      "walk": "resources/card_gifs/neutralD2KomodoScavengerRun.gif",
+      "attack": "resources/card_gifs/neutralD2KomodoScavengerAttack.gif",
+      "damage": "resources/card_gifs/neutralD2KomodoScavengerHit.gif",
+      "death": "resources/card_gifs/neutralD2KomodoScavengerDeath.gif"
     },
     "mana": 1,
     "attack": 2,

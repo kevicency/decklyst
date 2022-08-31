@@ -32,8 +32,11 @@ export type DeckExpanded = Deck & {
   meta?: {
     sharecode?: string
     viewCount?: number
+    createdAt?: Date
   }
 }
+export type DeckMeta = DeckExpanded['meta']
+
 type DeckLens<T> = (deck: Deck) => T
 
 const $ = <T>(fn: DeckLens<T>) => memoize(fn)
@@ -108,5 +111,7 @@ export const expandDeck = (deck: Deck, meta?: DeckExpanded['meta']): DeckExpande
     return !!this.general
   },
 })
-export const createDeckExpanded = (deckcode?: string | Deckcode): DeckExpanded =>
-  expandDeck(createDeck(deckcode))
+export const createDeckExpanded = (
+  deckcode?: string | Deckcode,
+  meta?: DeckExpanded['meta'],
+): DeckExpanded => expandDeck(createDeck(deckcode), meta)

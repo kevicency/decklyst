@@ -1,3 +1,5 @@
+const { withSuperjson } = require('next-superjson')
+
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   output: process.env.NEXT_STANDALONE ? 'standalone' : undefined,
@@ -34,4 +36,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withSuperjson()(nextConfig)

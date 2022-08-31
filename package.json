@@ -10,7 +10,10 @@
     "prepare": "husky install",
     "prebuild": "prisma generate",
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
-    "generate:cards.json": "ts-node scripts/generateCardsJson.ts"
+    "studio:prod": "dotenv -e .env.production -- prisma studio",
+    "generate:cards.json": "ts-node scripts/generateCardsJson.ts",
+    "syncDb:export": "ts-node scripts/syncDb.ts export",
+    "syncDb:import": "ts-node scripts/syncDb.ts import"
   },
   "dependencies": {
     "@prisma/client": "4.2.1",
@@ -25,6 +28,7 @@
     "lodash": "4.17.21",
     "nanoid": "4.0.0",
     "next": "12.2.5",
+    "next-superjson": "0.0.4",
     "puppeteer": "16.2.0",
     "qrcode.react": "3.1.0",
     "react": "18.2.0",

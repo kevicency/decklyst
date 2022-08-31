@@ -1,10 +1,10 @@
 import { useDeck } from '@/context/useDeck'
 import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { startCase } from 'lodash'
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { EyeIcon } from '../Icons'
 
-export const DeckTitle = () => {
+export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
   const imageRef = useRef<HTMLImageElement>(null)
   const { general, title, faction, meta } = useDeck()
   const { setSpriteLoaded } = useSpriteLoader()
@@ -40,7 +40,7 @@ export const DeckTitle = () => {
         <div className="font-bold text-3xl mb-2 truncate">{title || 'Untitled'}</div>
         <div className={`text-xl flex gap-x-2 content-center items-center truncate`}>
           <span className={`text-${faction} w-24`}>{startCase(faction)}</span>
-          {viewCount ? (
+          {showMeta && viewCount ? (
             <span className="flex items-center text-black-400 group-hover:text-teal-600">
               <EyeIcon size={24} className="mr-2" />
               <span>
