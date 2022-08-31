@@ -15,7 +15,8 @@ const allTabs: Tab[] = ['most-viewed', 'trending', 'latest']
 
 const Home: NextPage<Props> = ({ initialTab, initialDeckcodes, initialCount }) => {
   const router = useRouter()
-  const tab: Tab = (router.query.tab as Tab | undefined) ?? initialTab ?? 'trending'
+  const tab: Tab =
+    ((router.query.tab as string | undefined)?.toLowerCase() as Tab) ?? initialTab ?? 'trending'
   const count: number = +(router.query.count as string) || initialCount
 
   const handleTabChanged = async (input: Tab) =>

@@ -188,7 +188,7 @@ export const AppSidebar: FC = () => {
             <Link href={`/?tab=most-viewed`}>
               <a>Most viewed</a>
             </Link>
-            <Link href={`/?tab=Latest`}>
+            <Link href={`/?tab=latest`}>
               <a>Latest</a>
             </Link>
           </AppSidebarMenu>
