@@ -19,7 +19,7 @@ export const CardAttack: FC<{ card: CardData }> = ({ card }) => {
         className="text-amber-400 absolute top-1/2 left-0 -mt-[16px] -mx-[6px] -rotate-45"
         size={32}
       />
-      <span className="font-mono text-2xl z-10">{card.attack}</span>
+      <span className="text-2xl z-10">{card.attack}</span>
     </div>
   )
 }
