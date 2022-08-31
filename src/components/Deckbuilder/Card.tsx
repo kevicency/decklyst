@@ -2,11 +2,12 @@ import { CardSprite } from '@/components/CardSprite'
 import type { CardHandler } from '@/components/Deckbuilder/CardList'
 import { ManaIcon } from '@/components/DeckInfograph/ManaIcon'
 import type { CardData } from '@/data/cards'
-import { highlightKeywords } from '@/data/cards'
+import { cardsById, highlightKeywords } from '@/data/cards'
 import cx from 'classnames'
 import type { FC } from 'react'
 import { useState } from 'react'
 import { GiBroadsword, GiCircle, GiShield } from 'react-icons/gi'
+import ReactTooltip from 'react-tooltip'
 
 export const CardAttack: FC<{ card: CardData }> = ({ card }) => {
   return (
@@ -38,6 +39,32 @@ export const CardHealth: FC<{ card: CardData }> = ({ card }) => {
     </div>
   )
 }
+
+export const RelatedCardsTooltip = () => (
+  <ReactTooltip
+    id="related-cards-tooltip"
+    effect="solid"
+    place="left"
+    getContent={(cardIds) => (
+      <RelatedCardTooltipContent cardIds={cardIds?.split(',').map((x) => +x) ?? []} />
+    )}
+  />
+)
+const RelatedCardTooltipContent: FC<{ cardIds: number[] }> = ({ cardIds }) => {
+  const cards = cardIds.map((cardId) => cardsById[cardId]).filter(Boolean)
+  console.log({ cardIds, cards })
+
+  return cards.length ? (
+    <div className="flex flex-col -mx-6">
+      {cards.map((card) => (
+        <div key={card.id} className="scale-75 bg-zinc-900 p-2">
+          <Card card={card} className="border-gray-600" />
+        </div>
+      ))}
+    </div>
+  ) : null
+}
+
 export const Card: FC<{
   card: CardData
   onSelect?: CardHandler
@@ -47,6 +74,13 @@ export const Card: FC<{
 }> = ({ card, count, onSelect, onDeselect, className }) => {
   const [animate, setAnimate] = useState<number>(0)
   const Tag = onSelect ? 'button' : 'div'
+
+  const tooltipData = card.relatedCards.length
+    ? {
+        'data-tip': card.relatedCards.join(','),
+        'data-for': 'related-cards-tooltip',
+      }
+    : {}
 
   return (
     <Tag
@@ -77,6 +111,7 @@ export const Card: FC<{
       onMouseUp={() => {
         setAnimate(0)
       }}
+      {...tooltipData}
     >
       <div className="scale-[2.5] absolute left-[-2px] top-0 -mx-3">
         <ManaIcon mana={card.mana} className="font-normal" />
@@ -114,7 +149,9 @@ export const Card: FC<{
       <div className="flex justify-around items-center w-full mb-2">
         {card.cardType === 'Minion' && <CardAttack card={card} />}
         <img
-          src={`/assets/icons/rarity/collection_card_rarity_${card.rarity}.png`}
+          src={`/assets/icons/rarity/collection_card_rarity_${
+            card.rarity === 'token' ? 'basic' : card.rarity
+          }.png`}
           width="64"
           alt={card.rarity}
         />

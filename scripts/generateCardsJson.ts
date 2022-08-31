@@ -4,7 +4,7 @@ import fetch from 'node-fetch'
 import path from 'path'
 import { scrapedCardsById } from './generateCardsJson/scrapedCards'
 
-const blacklist = [20452, 20424]
+const blacklist = [20452]
 
 export interface CardJSON {
   name: string

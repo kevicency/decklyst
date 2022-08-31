@@ -1,3 +1,4 @@
+import { RelatedCardsTooltip } from '@/components/Deckbuilder/Card'
 import type { CardHandler } from '@/components/Deckbuilder/CardList'
 import { CardList } from '@/components/Deckbuilder/CardList'
 import { GeneralCard } from '@/components/Deckbuilder/GeneralCard'
@@ -82,7 +83,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
       </PageHeader>
 
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex flex-col flex-1 overflow-y-scroll pl-8 pr-4 pt-3.5 mt-0.5">
+        <div className="flex flex-col flex-1 overflow-y-scroll pl-8 pr-4 pt-3.5 mt-0.5 relative">
           <div ref={factionCardListRef}>
             <CardFilterContext.Provider value={{ faction: deck.faction, query: deferredCardQuery }}>
               <CardList onSelectCard={handleCardSelected} onDeselectCard={handleCardDeselected} />
@@ -93,6 +94,8 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
               <CardList onSelectCard={handleCardSelected} onDeselectCard={handleCardDeselected} />
             </CardFilterContext.Provider>
           </div>
+
+          <RelatedCardsTooltip />
         </div>
         {sidebar}
       </div>

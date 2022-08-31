@@ -6167,6 +6167,23 @@
     "factionId": 2
   },
   {
+    "name": "Kage Lightning",
+    "id": 20424,
+    "cardSet": "core",
+    "faction": "neutral",
+    "tribes": [],
+    "rarity": "basic",
+    "description": "Deal 5 damage to a minion.",
+    "relatedCards": [],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2KageLightningIdle.gif",
+      "active": "resources/card_gifs/iconD2KageLightningActive.gif"
+    },
+    "mana": 1,
+    "cardType": "Spell",
+    "factionId": 2
+  },
+  {
     "name": "Twin Strike",
     "id": 20425,
     "cardSet": "core",

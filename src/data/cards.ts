@@ -1,6 +1,12 @@
 import { memoize, partition, sortBy } from 'lodash'
 
-export const cards: CardData[] = require('./cards.json')
+const tokenSpells = [20424]
+
+export const allCards: CardData[] = require('./cards.json')
+
+export const cards = allCards.filter(
+  (card) => card.rarity !== 'token' && !tokenSpells.includes(card.id),
+)
 
 export interface CardData {
   name: string
@@ -50,7 +56,7 @@ export interface SpriteResource {
   active?: string
 }
 
-export const cardsById = cards.reduce(
+export const cardsById = allCards.reduce(
   (acc, cardJson) => ({
     ...acc,
     [cardJson.id]: cardJson,
