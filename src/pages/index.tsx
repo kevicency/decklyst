@@ -7,7 +7,7 @@ import { createSsrClient } from '@/server'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import type { GetServerSidePropsContext } from 'next/types'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 type Tab = 'most-viewed' | 'trending' | 'latest'
@@ -43,7 +43,14 @@ const Home: NextPage<Props> = ({ initialTab, initialDeckcodes, initialCount }) =
       { shallow: true },
     )
 
-  const { data: deckcodes } = trpc.useQuery(
+  const [deckcodes, setDeckcodes] = useState<Props['initialDeckcodes']>(initialDeckcodes ?? [])
+  const decks = useMemo(() => {
+    return (deckcodes ?? [])
+      .map(({ deckcode, meta }) => createDeckExpanded(deckcode, meta))
+      .filter((x) => x.general)
+  }, [deckcodes])
+
+  trpc.useQuery(
     tab === 'latest'
       ? ['decks.latest', { count }]
       : [
@@ -54,15 +61,10 @@ const Home: NextPage<Props> = ({ initialTab, initialDeckcodes, initialCount }) =
           },
         ],
     {
-      initialData: initialDeckcodes,
+      initialData: tab === initialTab ? initialDeckcodes : [],
+      onSuccess: setDeckcodes,
     },
   )
-
-  const decks = useMemo(() => {
-    return (deckcodes ?? [])
-      .map(({ deckcode, meta }) => createDeckExpanded(deckcode, meta))
-      .filter((x) => x.general)
-  }, [deckcodes])
 
   return (
     <div className="flex flex-col flex-1 overflow-hidden">
