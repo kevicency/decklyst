@@ -69,7 +69,7 @@ export const extendDeckviews = (deckviews: Deckviews) =>
             deckcode: 'desc',
           },
         },
-        take: 1,
+        take: deckcodes.length,
       })
 
       return result.map(({ deckcode, _count }) => ({ deckcode, viewCount: _count.deckcode }))
