@@ -11,9 +11,7 @@
     "prebuild": "prisma generate",
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
     "studio:prod": "dotenv -e .env.production -- prisma studio",
-    "generate:cards.json": "ts-node scripts/generateCardsJson.ts",
-    "syncDb:export": "ts-node scripts/syncDb.ts export",
-    "syncDb:import": "ts-node scripts/syncDb.ts import"
+    "generate:cards.json": "ts-node scripts/generateCardsJson.ts"
   },
   "dependencies": {
     "@prisma/client": "4.2.1",

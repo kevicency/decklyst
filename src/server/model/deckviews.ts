@@ -23,18 +23,24 @@ export const extendDeckviews = (deckviews: Deckviews) =>
     mostViewed: async ({
       count: take,
       sinceDaysAgo,
+      faction,
     }: {
       count: number
       sinceDaysAgo?: number
+      faction?: string
     }): Promise<DeckviewResult[]> => {
       const result = await deckviews.groupBy({
-        where: sinceDaysAgo
-          ? {
-              updatedAt: {
-                gte: addDays(new Date(), -Math.abs(sinceDaysAgo)),
-              },
-            }
-          : undefined,
+        where: {
+          info: {
+            totalCount: 40,
+            faction,
+          },
+          ...(sinceDaysAgo && {
+            updatedAt: {
+              gte: addDays(new Date(), -Math.abs(sinceDaysAgo)),
+            },
+          }),
+        },
         by: ['deckcode'],
         _count: {
           deckcode: true,

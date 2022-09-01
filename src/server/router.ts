@@ -1,4 +1,5 @@
 import { transformer } from '@/common/transformer'
+import { factions } from '@/data/cards'
 import { parseDeckcode, validateDeckcode } from '@/data/deckcode'
 import { snapshot } from '@/server/snapshot'
 import * as trpc from '@trpc/server'
@@ -69,6 +70,7 @@ export const serverRouter = trpc
     input: z.object({
       count: z.number().gt(0).lte(25),
       sinceDaysAgo: z.number().optional(),
+      faction: z.enum(factions as [string, ...string[]]).optional(),
     }),
     resolve: async ({ input, ctx }) => {
       const mostViewedDeckcodes = await ctx.deckviews.mostViewed(input)
@@ -82,11 +84,19 @@ export const serverRouter = trpc
   .query('decks.latest', {
     input: z.object({
       count: z.number().gt(0).lte(25),
+      faction: z.enum(factions as [string, ...string[]]).optional(),
     }),
-    resolve: async ({ input: { count }, ctx }) => {
+    resolve: async ({ input: { faction, count }, ctx }) => {
       const deckinfos = await ctx.deckinfo.findMany({
         select: { deckcode: true, createdAt: true },
-        orderBy: { createdAt: 'desc' },
+        where: {
+          totalCount: 40,
+          faction,
+          // ...(faction && { faction }),
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
         take: count,
       })
       const viewCounts = await ctx.deckviews.getDeckviews(
@@ -110,5 +120,32 @@ export const serverRouter = trpc
     resolve: async ({ input: { deckcode, ipAddress }, ctx }) =>
       await ctx.deckviews.incrementViewCount(deckcode, ipAddress),
   })
+// .mutation('deckinfo.fixStats', {
+//   resolve: async ({ ctx }) => {
+//     const deckinfos = await ctx.deckinfo.findMany({
+//       select: { deckcode: true },
+//       where: { totalCount: 0 },
+//     })
+//
+//     for (const { deckcode } of deckinfos) {
+//       const deck = createDeck(deckcode)
+//
+//       console.log(`Updating ${deck.title}`)
+//
+//       await ctx.deckinfo.updateMany({
+//         where: { deckcode },
+//         data: {
+//           faction: faction$(deck),
+//           spellCount: spellCount$(deck),
+//           artifactCount: artifactCount$(deck),
+//           minionCount: minionCount$(deck),
+//           totalCount: totalCount$(deck),
+//         },
+//       })
+//     }
+//
+//     console.log(`Updated ${deckinfos.length} decks`)
+//   },
+// })
 
 export type ServerRouter = typeof serverRouter

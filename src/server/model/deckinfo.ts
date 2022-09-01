@@ -1,3 +1,12 @@
+import type { Deck } from '@/data/deck'
+import {
+  artifactCount$,
+  createDeck,
+  faction$,
+  minionCount$,
+  spellCount$,
+  totalCount$,
+} from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
 import type { PrismaClient } from '@prisma/client'
 import { difference } from 'lodash'
@@ -5,18 +14,34 @@ import { customAlphabet } from 'nanoid'
 
 type Deckinfo = PrismaClient['deckinfo']
 
-export const extendDeckinfo = (deckinfo: Deckinfo) =>
-  Object.assign(deckinfo, {
+export const extendDeckinfo = (deckinfo: Deckinfo) => {
+  const createForDeck = async (deck: Deck) => {
+    const faction = faction$(deck)
+    if (!faction) return null
+
+    const sharecode = await generateSharecode(deckinfo)
+    return await deckinfo.create({
+      data: {
+        deckcode: deck.deckcode,
+        sharecode,
+        faction,
+        artifactCount: artifactCount$(deck),
+        minionCount: minionCount$(deck),
+        spellCount: spellCount$(deck),
+        totalCount: totalCount$(deck),
+      },
+    })
+  }
+  const createForDeckcode = async (deckcode: string) => createForDeck(createDeck(deckcode))
+
+  return Object.assign(deckinfo, {
+    createForDeck,
+    createForDeckcode,
     findByCode: async (code: string) =>
       await deckinfo.findFirst({
         where: { OR: [{ deckcode: code }, { sharecode: code }] },
       }),
-    createForDeckcode: async (deckcode: string) => {
-      const sharecode = await generateSharecode(deckinfo)
-      return await deckinfo.create({
-        data: { deckcode: deckcode, sharecode },
-      })
-    },
+
     ensureDeckinfo: async (code: string) => {
       const existingDeckinfo = await deckinfo.findFirst({
         where: { OR: [{ deckcode: code }, { sharecode: code }] },
@@ -24,13 +49,10 @@ export const extendDeckinfo = (deckinfo: Deckinfo) =>
 
       if (existingDeckinfo) return existingDeckinfo
 
-      return validateDeckcode(code)
-        ? await deckinfo.create({
-            data: { deckcode: code, sharecode: await generateSharecode(deckinfo) },
-          })
-        : null
+      return validateDeckcode(code) ? createForDeckcode(code) : null
     },
   })
+}
 
 const alphabet = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz'
 const nanoid = customAlphabet(alphabet, 3)
