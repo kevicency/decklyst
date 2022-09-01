@@ -23,7 +23,7 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
     }
   }, [imageRef, setSpriteLoaded, general.id])
   return (
-    <div className="flex">
+    <div className="flex flex-1">
       <div className="w-32 mt-[-24px] mb-[-16px] ml-[-24px] flex-shrink-0">
         <img
           ref={imageRef}
@@ -37,7 +37,9 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
         />
       </div>
       <div className="flex flex-col flex-1 justify-center ml-2">
-        <div className="font-bold text-3xl mb-2 truncate">{title || 'Untitled'}</div>
+        <div className="font-bold text-3xl mb-2 overflow-hidden">
+          {title?.slice(0, 40) || 'Untitled'}
+        </div>
         <div className={`text-xl flex gap-x-2 content-center items-center truncate`}>
           <span className={`text-${faction} w-24`}>{startCase(faction)}</span>
           {showMeta && viewCount ? (

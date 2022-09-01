@@ -2,8 +2,10 @@ import { trpc } from '@/common/trpc'
 import { DeckPreviewList } from '@/components/DeckPreviewList'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
+import { factions } from '@/data/cards'
 import { createDeckExpanded } from '@/data/deck'
 import { createSsrClient } from '@/server'
+import { startCase } from 'lodash'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import type { GetServerSidePropsContext } from 'next/types'
@@ -13,37 +15,45 @@ type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 type Tab = 'most-viewed' | 'trending' | 'latest'
 const allTabs: Tab[] = ['most-viewed', 'trending', 'latest']
 
-const Home: NextPage<Props> = ({ initialTab, initialDeckcodes, initialCount }) => {
+const useRouterQuery = (initialQuery: Props['initialQuery']) => {
   const router = useRouter()
   const tab: Tab =
-    ((router.query.tab as string | undefined)?.toLowerCase() as Tab) ?? initialTab ?? 'trending'
-  const count: number = +(router.query.count as string) || initialCount
+    ((router.query.tab as string | undefined)?.toLowerCase() as Tab) ??
+    initialQuery.tab ??
+    'trending'
+  const count: number = +(router.query.count as string) || initialQuery.count
+  const faction: string | undefined =
+    (router.query.faction as string | undefined)?.toLowerCase() || undefined
 
-  const handleTabChanged = async (input: Tab) =>
+  const updateQuery = async (partialQuery: Partial<typeof initialQuery>) => {
+    const updatedQuery = Object.keys(partialQuery).reduce(
+      (query, key) => {
+        const value = partialQuery[key as keyof typeof partialQuery]
+        if (value) {
+          query[key] = value
+        } else {
+          delete query[key]
+        }
+        return query
+      },
+      { tab, faction, count } as Record<string, string | number>,
+    )
+
     await router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          tab: input,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: true },
     )
-  const handleCountChanged = async (count: string) =>
-    await router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          count,
-        },
-      },
-      undefined,
-      { shallow: true },
-    )
+  }
 
+  return [{ tab, count, faction }, updateQuery] as const
+}
+
+const Home: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
+  const [{ tab, faction, count }, updateQuery] = useRouterQuery(initialQuery)
   const [deckcodes, setDeckcodes] = useState<Props['initialDeckcodes']>(initialDeckcodes ?? [])
   const decks = useMemo(() => {
     return (deckcodes ?? [])
@@ -51,18 +61,23 @@ const Home: NextPage<Props> = ({ initialTab, initialDeckcodes, initialCount }) =
       .filter((x) => x.general)
   }, [deckcodes])
 
+  const handleTabChanged = async (input: Tab) => await updateQuery({ tab: input })
+  const handleCountChanged = async (count: string) => await updateQuery({ count: +count })
+  const handleFactionChanged = async (faction?: string) => await updateQuery({ faction })
+
   trpc.useQuery(
     tab === 'latest'
-      ? ['decks.latest', { count }]
+      ? ['decks.latest', { count, faction }]
       : [
           'decks.mostViewed',
           {
             count,
             sinceDaysAgo: tab === 'trending' ? 3 : undefined,
+            faction,
           },
         ],
     {
-      initialData: tab === initialTab ? initialDeckcodes : [],
+      initialData: tab === initialQuery.tab ? initialDeckcodes : [],
       onSuccess: setDeckcodes,
     },
   )
@@ -85,15 +100,29 @@ const Home: NextPage<Props> = ({ initialTab, initialDeckcodes, initialCount }) =
               Latest
             </PivotButton>
           </div>
-          <select
-            className="px-2 bg-slate-900 text-lg"
-            value={`${count}`}
-            onChange={(ev) => handleCountChanged(ev.target.value)}
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="25">25</option>
-          </select>
+          <div className="flex gap-x-4">
+            <select
+              className="px-2 bg-slate-900 text-lg"
+              value={`${faction}`}
+              onChange={(ev) => handleFactionChanged(ev.target.value)}
+            >
+              <option value="">All Factions</option>
+              {factions.map((faction) => (
+                <option key={faction} value={faction}>
+                  {startCase(faction)}
+                </option>
+              ))}
+            </select>
+            <select
+              className="px-2 bg-slate-900 text-lg"
+              value={`${count}`}
+              onChange={(ev) => handleCountChanged(ev.target.value)}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+            </select>
+          </div>
         </div>
       </PageHeader>
       <div className="flex flex-col flex-1 pb-8 overflow-y-auto">
@@ -107,21 +136,26 @@ const Home: NextPage<Props> = ({ initialTab, initialDeckcodes, initialCount }) =
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const client = await createSsrClient()
-  const initialCount = +(query.count as string) || 5
-  const initialTab: Tab = allTabs.find((tab) => tab === (query.tab as string)) ?? 'trending'
+  const count = +(query.count as string) || 5
+  const tab: Tab = allTabs.find((tab) => tab === (query.tab as string)) ?? 'trending'
+  const faction: string | undefined = query.faction as string | undefined
+
   const initialDeckcodes = await ((tab: Tab) => {
     if (tab === 'trending') {
-      return client.query('decks.mostViewed', { count: initialCount, sinceDaysAgo: 3 })
+      return client.query('decks.mostViewed', {
+        count,
+        faction,
+        sinceDaysAgo: 3,
+      })
     } else if (tab === 'most-viewed') {
-      return client.query('decks.mostViewed', { count: initialCount })
-    } else return client.query('decks.latest', { count: initialCount })
-  })(initialTab)
+      return client.query('decks.mostViewed', { count, faction })
+    } else return client.query('decks.latest', { count, faction })
+  })(tab)
 
   return {
     props: {
-      initialTab,
+      initialQuery: { tab, count, faction },
       initialDeckcodes,
-      initialCount,
     },
   }
 }

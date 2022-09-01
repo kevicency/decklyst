@@ -8,7 +8,7 @@ export const DeckManaCurve = () => {
   const { faction, manaCurve } = useDeck()
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row shrink-0 min-w-min">
       {manaCurve.map((entry, mana) => (
         <ManaCurveBar key={mana} entry={entry} mana={mana} faction={faction} />
       ))}

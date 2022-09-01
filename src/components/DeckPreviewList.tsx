@@ -15,14 +15,14 @@ const DeckPreview: FC = () => {
       <a
         className={cx(
           'group',
-          'flex flex-wrap gap-4 lg:gap-8 justify-between items-center',
+          'flex gap-4 lg:gap-8 justify-between items-center',
           'bg-gray-900 py-2 pr-4 mt-4',
           'border-gray-700 border-[3px]',
           `hover:border-${faction} hover:text-black-100`,
         )}
         href={deckUrl(deckcode, true)}
       >
-        <div className="scale-90 flex-1">
+        <div className="scale-90 flex-1 overflow-hidden">
           <DeckTitle showMeta />
         </div>
         <DeckCounts />

@@ -91,8 +91,7 @@ export const serverRouter = trpc
         select: { deckcode: true, createdAt: true },
         where: {
           totalCount: 40,
-          faction,
-          // ...(faction && { faction }),
+          faction: faction || undefined,
         },
         orderBy: {
           createdAt: 'desc',

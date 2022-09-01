@@ -33,7 +33,7 @@ export const extendDeckviews = (deckviews: Deckviews) =>
         where: {
           info: {
             totalCount: 40,
-            faction,
+            faction: faction || undefined,
           },
           ...(sinceDaysAgo && {
             updatedAt: {
