@@ -101,13 +101,14 @@ export const serverRouter = trpc
       const viewCounts = await ctx.deckviews.getDeckviews(
         ...deckinfos.map(({ deckcode }) => deckcode),
       )
-      const viewCountMap = new Map(
-        viewCounts.map(({ deckcode, viewCount }) => [deckcode, viewCount]),
+      const viewCountMap = viewCounts.reduce(
+        (acc, { deckcode, viewCount }) => ({ ...acc, [deckcode]: viewCount }),
+        {} as Record<string, number>,
       )
 
       return deckinfos.map(({ deckcode, createdAt }) => ({
         deckcode,
-        meta: { createdAt, viewCount: viewCountMap.get(deckcode) ?? 1 },
+        meta: { createdAt, viewCount: viewCountMap[deckcode] ?? 1 },
       }))
     },
   })

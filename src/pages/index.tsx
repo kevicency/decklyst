@@ -138,7 +138,8 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
   const client = await createSsrClient()
   const count = +(query.count as string) || 5
   const tab: Tab = allTabs.find((tab) => tab === (query.tab as string)) ?? 'trending'
-  const faction: string | undefined = query.faction as string | undefined
+  const faction: string | undefined =
+    (query.faction as string | undefined)?.toLowerCase() || undefined
 
   const initialDeckcodes = await ((tab: Tab) => {
     if (tab === 'trending') {
