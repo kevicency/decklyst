@@ -22,7 +22,7 @@ const DeckPreview: FC = () => {
         )}
         href={deckUrl(deckcode, true)}
       >
-        <div className="scale-90 flex-1 overflow-hidden">
+        <div className="scale-90 flex-1">
           <DeckTitle showMeta />
         </div>
         <DeckCounts />
