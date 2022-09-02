@@ -54,7 +54,7 @@ export const Sidebar: FC<{
           <SidebarCardList cardType="Artifact" />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2 -mx-2 px-2 py-2 border-t border-gray-600 bg-black-900">
+      <div className="grid grid-cols-2 gap-2 -mx-2 -mb-2 px-2 py-2 border-t border-gray-600 bg-black-900">
         <div className={cx(`flex flex-1 justify-center font-mono font-bold text-xl`)}>
           <span className={` text-${deck.faction}`}>{deck.counts.total}</span>/
           <span
@@ -93,6 +93,13 @@ export const Sidebar: FC<{
             Share
           </a>
         </Link>
+      </div>
+      <div className="-mx-2 px-1 -mb-2 border-t border-gray-600 bg-black-900">
+        <input
+          className="page-header-input bg-black-900 text-gray-200 px-4 w-full"
+          value={deck.deckcode}
+          onFocus={(ev) => setTimeout(() => ev.target.select(), 50)}
+        />
       </div>
     </div>
   )

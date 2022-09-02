@@ -52,7 +52,6 @@ export const RelatedCardsTooltip = () => (
 )
 const RelatedCardTooltipContent: FC<{ cardIds: number[] }> = ({ cardIds }) => {
   const cards = cardIds.map((cardId) => cardsById[cardId]).filter(Boolean)
-  console.log({ cardIds, cards })
 
   return cards.length ? (
     <div className="flex flex-col -mx-6">

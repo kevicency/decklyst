@@ -182,6 +182,14 @@ const DeckPage: FC<Props> = ({ deck, isSnapshot }) => {
           <div className="flex flex-col flex-1 overflow-y-auto">
             <div className="content-container my-8">
               <DeckInfograph />
+              <div>
+                <input
+                  name="deckcode"
+                  className="page-header-input bg-gray-900 text-gray-200 px-4 w-full"
+                  value={deckcode}
+                  onFocus={(ev) => setTimeout(() => ev.target.select(), 50)}
+                />
+              </div>
               <div className="flex gap-x-2 justify-end items-center text-gray-500 text-sm mt-4 mr-4">
                 <span>Image broken?</span>
                 <button
