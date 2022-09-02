@@ -86,7 +86,7 @@ export const Card: FC<{
       className={cx(
         className,
         'flex flex-col items-center relative',
-        'w-64 h-[25rem] p-4 bg-gray-900',
+        'w-64 h-[26rem] p-4 bg-gray-900',
         `border-3 border-gray-400 hover:border-${card.faction} outline-none`,
         'transition-transform',
         {
@@ -157,7 +157,7 @@ export const Card: FC<{
         {card.cardType === 'Minion' && <CardHealth card={card} />}
       </div>
       <div
-        className={cx('text-gray-300', {
+        className={cx('text-gray-300 whitespace-pre-line', {
           'text-sm': card.description.length > 70 && card.description.length < 110,
           'text-xs leading-5': card.description.length >= 110,
         })}
