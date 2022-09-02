@@ -82,7 +82,7 @@
     "faction": "lyonar",
     "tribes": [],
     "rarity": "epic",
-    "description": "Airdrop\nOpening Gambit: This turn, your minions have Airdrop when played.",
+    "description": "Airdrop\nOpening Gambit: This turn, allied minions have Airdrop when played.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f1SunstoneTemplarBreathing.gif",
@@ -5537,7 +5537,7 @@
     },
     "mana": 4,
     "attack": 1,
-    "health": 8,
+    "health": 7,
     "cardType": "Minion",
     "spriteName": "neutral_sunelemental",
     "factionId": 100
@@ -7341,7 +7341,7 @@
     "faction": "magmar",
     "tribes": [],
     "rarity": "rare",
-    "description": "Deal 2 damage to units in a 3x3 area and give them +2/+0 this turn.",
+    "description": "Deal 2 damage to minions in a 3x3 area and give allied minions in that area +2/+0.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2KineticEquilibriumIdle.gif",
