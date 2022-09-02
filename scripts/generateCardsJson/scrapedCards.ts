@@ -108,7 +108,7 @@ export const vetruvianCardData: ScrapedCard[] = [
   vetruvian(269, 'Orb Weaver', 2, 'Minion', 'common', 'f3_dunecaster'),
   vetruvian(270, 'Pyromancer', 2, 'Minion', 'basic', 'f3_pyromancer'),
   vetruvian(20451, "Rasha's Curse", 2, 'Spell', 'epic', 'icon_f3_d2_rashascurse'),
-  vetruvian(20477, 'Sand Trap', 2, 'Spell', 'common', 'icon_f3_d2_sandtrap'),
+  vetruvian(20447, 'Sand Trap', 2, 'Spell', 'common', 'icon_f3_d2_sandtrap'),
   vetruvian(20449, "Scion's Second Wish", 2, 'Spell', 'basic', 'icon_f3_d2_scionssecondwish'),
   vetruvian(30107, "Staff Of Y'Kir", 2, 'Artifact', 'basic', 'artifact_f3_d2_staffofykir'),
   vetruvian(20443, 'Astral Phasing', 3, 'Spell', 'common', 'icon_f3_d2_astralphasing'),
