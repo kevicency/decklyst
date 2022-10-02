@@ -11,9 +11,8 @@ datasource db {
 }
 
 model Deckinfo {
-  id            Int    @id @default(autoincrement())
+  deckcode      String @id
   sharecode     String @unique
-  deckcode      String @unique
   faction       String @default("neutral")
   minionCount   Int    @default(0)
   spellCount    Int    @default(0)
@@ -28,8 +27,7 @@ model Deckinfo {
 }
 
 model Deckimage {
-  id              Int       @id @default(autoincrement())
-  deckcode        String    @unique
+  deckcode        String    @id
   version         String?
   bytes           Bytes?
   renderStartedAt DateTime?
