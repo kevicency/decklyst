@@ -238,8 +238,6 @@ export const getStaticProps = async (
 ) => {
   const code = ctx.params?.code as string | undefined
 
-  console.log('static props', { code })
-
   const ssg = createProxySSGHelpers({
     router: appRouter,
     ctx: await createContext(),
@@ -252,6 +250,13 @@ export const getStaticProps = async (
 
   if (code) {
     const deckinfo = await ssg.deckinfo.get.fetch({ code, ensure: true })
+
+    if (deckinfo === null) {
+      return {
+        notFound: true,
+        revalidate: true,
+      }
+    }
 
     deckcode = deckinfo?.deckcode ?? deckcode
     meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
