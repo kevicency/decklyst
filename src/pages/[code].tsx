@@ -226,7 +226,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: deckinfos
-      .flatMap(({ deckcode, sharecode }) => [deckcode, sharecode])
+      .flatMap(({ deckcode, sharecode }) => [deckcode])
       .filter((code) => code.length <= 255 - 40)
       .map((code) => `/${encodeURIComponent(code)}`),
     fallback: false,
