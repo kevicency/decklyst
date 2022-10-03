@@ -157,7 +157,7 @@ export const Card: FC<{
         {card.cardType === 'Minion' && <CardHealth card={card} />}
       </div>
       <div
-        className={cx('text-gray-300 whitespace-pre-line', {
+        className={cx('text-gray-300 whitespace-pre-line text-center', {
           'text-sm': card.description.length > 70 && card.description.length < 110,
           'text-xs leading-5': card.description.length >= 110,
         })}

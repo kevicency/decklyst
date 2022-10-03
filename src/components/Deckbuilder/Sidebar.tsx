@@ -4,7 +4,7 @@ import { OneTimeButton } from '@/components/OneTimeButton'
 import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
 import cx from 'classnames'
-import { debounce } from 'lodash'
+import { debounce, noop } from 'lodash'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
@@ -40,7 +40,11 @@ export const Sidebar: FC<{
           }}
         />
 
-        <button className="flex bg-red-900 hover:bg-red-700 px-3 py-2 text-xl" onClick={onReset}>
+        <button
+          className="flex bg-red-900 hover:bg-red-700 px-3 py-2 text-xl"
+          onClick={onReset}
+          aria-label="Delete"
+        >
           <TrashIcon />
         </button>
       </div>
@@ -97,8 +101,11 @@ export const Sidebar: FC<{
       <div className="-mx-2 px-1 -mb-2 border-t border-gray-600 bg-black-900">
         <input
           className="page-header-input bg-black-900 text-gray-200 px-4 w-full"
+          readOnly
           value={deck.deckcode}
+          onChange={noop}
           onFocus={(ev) => setTimeout(() => ev.target.select(), 50)}
+          aria-label="Deckcode"
         />
       </div>
     </div>
