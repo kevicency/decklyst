@@ -115,3 +115,5 @@ export const createDeckExpanded = (
   deckcode?: string | Deckcode,
   meta?: DeckExpanded['meta'],
 ): DeckExpanded => expandDeck(createDeck(deckcode), meta)
+
+export const isDeckExpanded = (deck: Deck | DeckExpanded): deck is DeckExpanded => 'valid' in deck

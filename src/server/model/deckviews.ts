@@ -55,7 +55,7 @@ export const extendDeckviews = (deckviews: Deckviews) =>
 
       return result.map(({ deckcode, _count }) => ({ deckcode, viewCount: _count.deckcode }))
     },
-    getDeckviews: async (...deckcodes: string[]): Promise<DeckviewResult[]> => {
+    getDeckviews: async (...deckcodes: string[]): Promise<Record<string, number>> => {
       const result = await deckviews.groupBy({
         where: {
           deckcode: { in: deckcodes },
@@ -72,6 +72,9 @@ export const extendDeckviews = (deckviews: Deckviews) =>
         take: deckcodes.length,
       })
 
-      return result.map(({ deckcode, _count }) => ({ deckcode, viewCount: _count.deckcode }))
+      return result.reduce(
+        (acc, { deckcode, _count }) => ({ ...acc, [deckcode]: _count.deckcode }),
+        {} as Record<string, number>,
+      )
     },
   })

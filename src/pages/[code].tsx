@@ -1,4 +1,5 @@
 import { getImageDataUri } from '@/common/getImageDataUri'
+import { transformer } from '@/common/transformer'
 import { deckImageUrl } from '@/common/urls'
 import { DeckInfograph } from '@/components/DeckInfograph'
 import { DeckMetadata } from '@/components/DeckMetadata'
@@ -16,18 +17,19 @@ import {
 import { OneTimeButton } from '@/components/OneTimeButton'
 import { PageHeader } from '@/components/PageHeader'
 import { DeckProvider } from '@/context/useDeck'
+import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import type { DeckExpanded, DeckMeta } from '@/data/deck'
 import { createDeck, deckcodeWithoutTitle$, expandDeck, faction$, title$ } from '@/data/deck'
-import { validateDeckcode } from '@/data/deckcode'
 import { trpc } from '@/hooks/trpc'
-import { createApiClient } from '@/server'
-import { getIpAddress } from '@/server/utils'
+import { appRouter, createContext } from '@/server'
 import { useQuery } from '@tanstack/react-query'
+import { createProxySSGHelpers } from '@trpc/react/ssg'
 import { formatDistance } from 'date-fns'
-import { noop } from 'lodash'
+import { merge, noop } from 'lodash'
 import Link from 'next/link'
-import type { GetServerSidePropsContext } from 'next/types'
+import { useRouter } from 'next/router'
+import type { GetStaticPaths, GetStaticPropsContext } from 'next/types'
 import type { FC } from 'react'
 import React, { useEffect, useMemo } from 'react'
 import { BounceLoader } from 'react-spinners'
@@ -38,7 +40,9 @@ type Props = {
   isSnapshot: boolean
 }
 
-const DeckPage: FC<Props> = ({ deck, isSnapshot }) => {
+const DeckPage: FC<Props> = ({ deck }) => {
+  const { query } = useRouter()
+  const isSnapshot = +((query.snapshot as string | undefined) ?? '0') === 1
   const deckcode = deck.deckcode
   const meta = deck.meta ?? {}
   const imageFilename = useMemo(
@@ -46,6 +50,8 @@ const DeckPage: FC<Props> = ({ deck, isSnapshot }) => {
     [deck],
   )
 
+  useRegisterView(deckcode)
+  const { data: viewCount } = trpc.deckviews.get.useQuery({ deckcode }, { enabled: !isSnapshot })
   const { mutateAsync: ensureDeckimage } = trpc.deckimage.ensure.useMutation()
   const { data: imageDataUriFromQuery, refetch: refetchDeckimage } = useQuery(
     ['deck-image', deckcode],
@@ -95,7 +101,7 @@ const DeckPage: FC<Props> = ({ deck, isSnapshot }) => {
   if (!deck) return null
 
   return (
-    <DeckProvider deck={deck}>
+    <DeckProvider deck={merge(deck, { meta: { viewCount: viewCount ?? 1 } })}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
         <div className="flex flex-col flex-1 overflow-hidden">
           <PageHeader>
@@ -212,52 +218,100 @@ const DeckPage: FC<Props> = ({ deck, isSnapshot }) => {
   )
 }
 
-export const getServerSideProps = async ({ req, query }: GetServerSidePropsContext) => {
-  const code = query.code as string | undefined
-  const snapshot = +((query.snapshot as string | undefined) ?? '0') === 1
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { prisma } = await createContext()
+  const deckinfos = await prisma.deckinfo.findMany({
+    select: { deckcode: true, sharecode: true },
+  })
 
-  const client = await createApiClient()
+  return {
+    paths: deckinfos
+      .flatMap(({ deckcode, sharecode }) => [deckcode, sharecode])
+      .map((code) => `/${encodeURIComponent(code)}`),
+    fallback: false,
+  }
+}
 
+export const getStaticProps = async (
+  ctx: GetStaticPropsContext<{ snapshot?: string; code?: string }>,
+) => {
+  const code = ctx.params?.code as string | undefined
+
+  console.log('static props', { code })
+
+  const ssg = createProxySSGHelpers({
+    router: appRouter,
+    ctx: await createContext(),
+    transformer,
+  })
   let deckcode = code
   const meta: DeckMeta = {
     viewCount: 0,
   }
 
   if (code) {
-    const deckinfo = snapshot
-      ? await client.deckinfo.get({ code })
-      : await client.deckinfo.ensure({ code })
+    const deckinfo = await ssg.deckinfo.get.fetch({ code })
 
     deckcode = deckinfo?.deckcode ?? deckcode
     meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
     meta.createdAt = deckinfo?.createdAt ?? meta.createdAt
   }
 
-  if (!validateDeckcode(deckcode)) {
-    return { notFound: true }
-  }
-
   const deck = createDeck(deckcode)
-
-  if (deck.cards.length === 0) {
-    return { notFound: true }
-  }
-
-  if (!snapshot) {
-    await client.deckviews.registerView({
-      code: deck.deckcode!,
-      ipAddress: getIpAddress(req),
-    })
-    const views = await client.deckviews.get({ deckcodes: [deckcode!] })
-    meta.viewCount = views[0]?.viewCount ?? meta.viewCount
-  }
 
   return {
     props: {
       deck: expandDeck(deck, meta),
-      isSnapshot: Boolean(+snapshot),
     },
   }
 }
+
+// export const getServerSideProps = async ({ req, query }: GetServerSidePropsContext) => {
+//   const code = query.code as string | undefined
+//   const snapshot = +((query.snapshot as string | undefined) ?? '0') === 1
+
+//   const client = await createApiClient()
+
+//   let deckcode = code
+//   const meta: DeckMeta = {
+//     viewCount: 0,
+//   }
+
+//   if (code) {
+//     const deckinfo = snapshot
+//       ? await client.deckinfo.get({ code })
+//       : await client.deckinfo.ensure({ code })
+
+//     deckcode = deckinfo?.deckcode ?? deckcode
+//     meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
+//     meta.createdAt = deckinfo?.createdAt ?? meta.createdAt
+//   }
+
+//   if (!validateDeckcode(deckcode)) {
+//     return { notFound: true }
+//   }
+
+//   const deck = createDeck(deckcode)
+
+//   if (deck.cards.length === 0) {
+//     return { notFound: true }
+//   }
+
+//   if (!snapshot) {
+//     await client.deckviews.registerView({
+//       code: deck.deckcode!,
+//       ipAddress: getIpAddress(req),
+//     })
+//     const views = await client.deckviews.get({ deckcodes: [deckcode!] })
+//     meta.viewCount = views[0]?.viewCount ?? meta.viewCount
+//   }
+
+//   return {
+//     props: {
+//       deck: expandDeck(deck, meta),
+//       isSnapshot: Boolean(+snapshot),
+//     },
+//   }
+// }
 
 export default DeckPage

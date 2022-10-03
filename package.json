@@ -62,6 +62,7 @@
     "jest-environment-jsdom": "29.1.2",
     "lint-staged": ">=10",
     "node-fetch": "2",
+    "organize-imports-cli": "^0.10.0",
     "postcss": "8.4.17",
     "prettier": "2.7.1",
     "prisma": "4.4.0",
@@ -72,7 +73,10 @@
     "webpack": "^5.74.0"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "eslint --cache --fix",
+    "*.{ts,tsx}": [
+      "organize-imports-cli",
+      "eslint --cache --fix"
+    ],
     "*.{json,css,md}": "prettier --write"
   }
 }

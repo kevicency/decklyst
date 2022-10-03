@@ -25,14 +25,10 @@ export const decksRouter = t.router({
       const viewCounts = await ctx.deckviews.getDeckviews(
         ...deckinfos.map(({ deckcode }) => deckcode),
       )
-      const viewCountMap = viewCounts.reduce(
-        (acc, { deckcode, viewCount }) => ({ ...acc, [deckcode]: viewCount }),
-        {} as Record<string, number>,
-      )
 
       return deckinfos.map(({ deckcode, createdAt }) => ({
         deckcode,
-        meta: { createdAt, viewCount: viewCountMap[deckcode] ?? 1 },
+        meta: { createdAt, viewCount: viewCounts[deckcode] || 1 },
       }))
     }),
   mostViewed: t.procedure
