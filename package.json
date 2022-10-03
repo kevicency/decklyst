@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "jest --passWithNoTests",
     "prepare": "husky install",
     "prebuild": "prisma generate",
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",

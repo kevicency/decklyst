@@ -65,6 +65,7 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
           big ? 'pl-4 pr-3' : 'pl-2 pr-1.5',
         )}
         onClick={navigateToDeckcode}
+        aria-label="Search"
       >
         <MdSearch size={big ? 32 : 24} />
       </button>
