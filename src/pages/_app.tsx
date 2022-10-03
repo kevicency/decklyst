@@ -1,6 +1,6 @@
-import { trpc } from '@/hooks/trpc'
 import { Layout } from '@/components/Layout'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
+import { trpc } from '@/hooks/trpc'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -11,7 +11,7 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <SpriteLoaderProvider>
-      <Layout showSearch={router.route !== '/'}>
+      <Layout hideSidebar={router.pathname.startsWith('/deckimage')}>
         <Head>
           <title>Decklyst</title>
           <meta name="description" content="Share or create Duelyst 2 deckcodes" />

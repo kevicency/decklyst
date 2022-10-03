@@ -42,7 +42,6 @@ type Props = {
 
 const DeckPage: FC<Props> = ({ deck }) => {
   const { query } = useRouter()
-  const isSnapshot = +((query.snapshot as string | undefined) ?? '0') === 1
   const deckcode = deck.deckcode
   const meta = deck.meta ?? {}
   const imageFilename = useMemo(
@@ -51,7 +50,7 @@ const DeckPage: FC<Props> = ({ deck }) => {
   )
 
   useRegisterView(deckcode)
-  const { data: viewCount } = trpc.deckviews.get.useQuery({ deckcode }, { enabled: !isSnapshot })
+  const { data: viewCount } = trpc.deckviews.get.useQuery({ deckcode })
   const { mutateAsync: ensureDeckimage } = trpc.deckimage.ensure.useMutation()
   const { data: imageDataUriFromQuery, refetch: refetchDeckimage } = useQuery(
     ['deck-image', deckcode],
@@ -61,7 +60,6 @@ const DeckPage: FC<Props> = ({ deck }) => {
       return getImageDataUri(image)
     },
     {
-      enabled: !isSnapshot,
       staleTime: Infinity,
       retry: true,
       retryDelay: (retryCount) => 1000 * Math.pow(2, Math.max(0, retryCount - 5)),
@@ -253,7 +251,7 @@ export const getStaticProps = async (
   }
 
   if (code) {
-    const deckinfo = await ssg.deckinfo.get.fetch({ code })
+    const deckinfo = await ssg.deckinfo.get.fetch({ code, ensure: true })
 
     deckcode = deckinfo?.deckcode ?? deckcode
     meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
@@ -264,6 +262,7 @@ export const getStaticProps = async (
 
   return {
     props: {
+      trpcState: ssg.dehydrate(),
       deck: expandDeck(deck, meta),
     },
   }

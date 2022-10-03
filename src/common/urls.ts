@@ -15,7 +15,7 @@ export const deckUrl = (code: string, relative = false) =>
   `${relative ? '' : siteUrl}/${encodeURIComponent(code)}`
 
 export const snapshotUrl = (code: string, relative = false) =>
-  `${deckUrl(code, relative)}?snapshot=1`
+  `${relative ? '' : siteUrl}/deckimage/${encodeURIComponent(code)}`
 
 export const deckImageUrl = (deckcode: string, relative = false) =>
   `${deckUrl(deckcode, relative)}.png`

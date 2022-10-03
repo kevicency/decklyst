@@ -20,6 +20,8 @@ export const extendDeckimage = (deckimage: Deckimage) =>
         isRendering =
           image.renderStartedAt !== null &&
           differenceInMilliseconds(new Date(), image.renderStartedAt) < renderTimeout
+
+        await new Promise((resolve) => setTimeout(resolve, 250))
       }
 
       return null
