@@ -26,7 +26,7 @@ import { appRouter, createContext } from '@/server'
 import { useQuery } from '@tanstack/react-query'
 import { createProxySSGHelpers } from '@trpc/react/ssg'
 import { formatDistance } from 'date-fns'
-import { merge, noop } from 'lodash'
+import { merge, noop, uniqBy } from 'lodash'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { GetStaticPaths, GetStaticPropsContext } from 'next/types'
@@ -225,10 +225,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   })
 
   return {
-    paths: deckinfos
-      .flatMap(({ deckcode, sharecode }) => [deckcode])
-      .filter((code) => code.length <= 255 - 40)
-      .map((code) => `/${encodeURIComponent(code)}`),
+    paths: uniqBy(
+      deckinfos
+        .flatMap(({ deckcode, sharecode }) => [deckcode, sharecode])
+        .filter((code) => code.length <= 255 - 40),
+      (code) => code.toLowerCase(),
+    ).map((code) => `/${encodeURIComponent(code)}`),
     fallback: 'blocking',
   }
 }
