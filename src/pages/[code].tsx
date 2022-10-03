@@ -99,7 +99,7 @@ const DeckPage: FC<Props> = ({ deck }) => {
   if (!deck) return null
 
   return (
-    <DeckProvider deck={merge(deck, { meta: { viewCount: viewCount ?? 1 } })}>
+    <DeckProvider deck={merge(deck, { meta: { viewCount: viewCount || 1 } })}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
         <div className="flex flex-col flex-1 overflow-hidden">
           <PageHeader>
