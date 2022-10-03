@@ -105,6 +105,7 @@ const Home: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
               className="px-2 bg-slate-900 text-lg"
               value={`${faction}`}
               onChange={(ev) => handleFactionChanged(ev.target.value)}
+              aria-label="Faction"
             >
               <option value="">All Factions</option>
               {factions.map((faction) => (
@@ -117,6 +118,7 @@ const Home: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
               className="px-2 bg-slate-900 text-lg"
               value={`${count}`}
               onChange={(ev) => handleCountChanged(ev.target.value)}
+              aria-label="Count"
             >
               <option value="5">5</option>
               <option value="10">10</option>
