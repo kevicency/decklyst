@@ -233,9 +233,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async (
-  ctx: GetStaticPropsContext<{ snapshot?: string; code?: string }>,
-) => {
+export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string }>) => {
   const code = ctx.params?.code as string | undefined
 
   if (!code) {

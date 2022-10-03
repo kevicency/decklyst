@@ -26,7 +26,7 @@ const AppSidebarLink: FC<{
     <Link href={href}>
       <Tag
         className={cx(
-          'flex items-center inline-block text-2xl pl-4 font-light border-l-4 py-1',
+          'flex items-center text-2xl pl-4 font-light border-l-4 py-1',
           active ? 'border-teal-400' : 'border-transparent',
           disabled && 'disabled',
         )}
@@ -89,6 +89,7 @@ const AppSidebarInput: FC<{
         />
         {Icon && (
           <button
+            aria-label="Search"
             disabled={!valid || active}
             className={cx(
               'bg-zinc-600 hover:bg-teal-600',
@@ -182,13 +183,13 @@ export const AppSidebar: FC = () => {
             validate={isShareOrDeckcode}
           />
           <AppSidebarMenu>
-            <Link href={`/?tab=trending`}>
+            <Link href={`/decks?tab=trending`}>
               <a>Trending</a>
             </Link>
-            <Link href={`/?tab=most-viewed`}>
+            <Link href={`/decks?tab=most-viewed`}>
               <a>Most viewed</a>
             </Link>
-            <Link href={`/?tab=latest`}>
+            <Link href={`/decks?tab=latest`}>
               <a>Latest</a>
             </Link>
           </AppSidebarMenu>
@@ -261,7 +262,7 @@ export const AppSidebar: FC = () => {
               href="https://github.com/kmees"
               target="_blank"
               className="flex items-center text-black-400"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <SiGithub className="mr-1" />
               kmees
@@ -271,7 +272,7 @@ export const AppSidebar: FC = () => {
             href="https://www.buymeacoffee.com/kmees"
             target="_blank"
             className="flex gap-x-2 items-center"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <SiBuymeacoffee /> buy me a coffee
           </a>
