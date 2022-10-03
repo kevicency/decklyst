@@ -9,6 +9,7 @@ const env = {
 }
 
 export const siteUrl = env.vercelEnv === 'preview' ? `https://${env.vercelUrl}` : env.siteUrl
+export const trpcUrl = `${siteUrl}/api/trpc`
 
 export const deckUrl = (code: string, relative = false) =>
   `${relative ? '' : siteUrl}/${encodeURIComponent(code)}`

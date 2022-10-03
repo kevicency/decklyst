@@ -1,5 +1,4 @@
 import { getImageDataUri } from '@/common/getImageDataUri'
-import { trpc } from '@/common/trpc'
 import { deckImageUrl } from '@/common/urls'
 import { DeckInfograph } from '@/components/DeckInfograph'
 import { DeckMetadata } from '@/components/DeckMetadata'
@@ -21,15 +20,16 @@ import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import type { DeckExpanded, DeckMeta } from '@/data/deck'
 import { createDeck, deckcodeWithoutTitle$, expandDeck, faction$, title$ } from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
-import { createSsrClient } from '@/server'
+import { trpc } from '@/hooks/trpc'
+import { createApiClient } from '@/server'
 import { getIpAddress } from '@/server/utils'
+import { useQuery } from '@tanstack/react-query'
 import { formatDistance } from 'date-fns'
 import { noop } from 'lodash'
 import Link from 'next/link'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
 import React, { useEffect, useMemo } from 'react'
-import { useQuery } from 'react-query'
 import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
 
@@ -46,11 +46,11 @@ const DeckPage: FC<Props> = ({ deck, isSnapshot }) => {
     [deck],
   )
 
-  const { mutateAsync: ensureDeckimage } = trpc.useMutation('ensureDeckimage')
+  const { mutateAsync: ensureDeckimage } = trpc.deckimage.ensure.useMutation()
   const { data: imageDataUriFromQuery, refetch: refetchDeckimage } = useQuery(
     ['deck-image', deckcode],
     async () => {
-      const image = await ensureDeckimage({ deckcode })
+      const image = await ensureDeckimage({ code: deckcode })
 
       return getImageDataUri(image)
     },
@@ -85,7 +85,7 @@ const DeckPage: FC<Props> = ({ deck, isSnapshot }) => {
   const handleRegenerateClick = () => async () => {
     setImageDataUri(null)
     try {
-      const image = await ensureDeckimage({ deckcode, forceRender: true })
+      const image = await ensureDeckimage({ code: deckcode, forceRerender: true })
       setImageDataUri(getImageDataUri(image))
     } catch (e) {
       await refetchDeckimage()
@@ -216,7 +216,7 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
   const code = query.code as string | undefined
   const snapshot = +((query.snapshot as string | undefined) ?? '0') === 1
 
-  const client = await createSsrClient()
+  const client = await createApiClient()
 
   let deckcode = code
   const meta: DeckMeta = {
@@ -225,8 +225,8 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
 
   if (code) {
     const deckinfo = snapshot
-      ? await client.query('getDeckinfo', { code })
-      : await client.mutation('ensureDeckinfo', { code })
+      ? await client.deckinfo.get({ code })
+      : await client.deckinfo.ensure({ code })
 
     deckcode = deckinfo?.deckcode ?? deckcode
     meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
@@ -244,11 +244,11 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
   }
 
   if (!snapshot) {
-    await client.mutation('registerView', {
-      deckcode: deckcode!,
+    await client.deckviews.registerView({
+      code: deck.deckcode!,
       ipAddress: getIpAddress(req),
     })
-    const views = await client.query('getDeckviews', { deckcodes: [deckcode!] })
+    const views = await client.deckviews.get({ deckcodes: [deckcode!] })
     meta.viewCount = views[0]?.viewCount ?? meta.viewCount
   }
 

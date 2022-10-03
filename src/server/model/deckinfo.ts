@@ -33,16 +33,16 @@ export const extendDeckinfo = (deckinfo: Deckinfo) => {
     })
   }
   const createForDeckcode = async (deckcode: string) => createForDeck(createDeck(deckcode))
+  const findByCode = async (code: string) =>
+    await deckinfo.findFirst({
+      where: { OR: [{ deckcode: code }, { sharecode: code }] },
+    })
 
   return Object.assign(deckinfo, {
     createForDeck,
     createForDeckcode,
-    findByCode: async (code: string) =>
-      await deckinfo.findFirst({
-        where: { OR: [{ deckcode: code }, { sharecode: code }] },
-      }),
-
-    ensureDeckinfo: async (code: string) => {
+    findByCode,
+    ensureByCode: async (code: string) => {
       const existingDeckinfo = await deckinfo.findFirst({
         where: { OR: [{ deckcode: code }, { sharecode: code }] },
       })
@@ -51,6 +51,8 @@ export const extendDeckinfo = (deckinfo: Deckinfo) => {
 
       return validateDeckcode(code) ? createForDeckcode(code) : null
     },
+    unwrapCode: async (code: string) =>
+      validateDeckcode(code) ? code : (await findByCode(code))?.deckcode ?? null,
   })
 }
 

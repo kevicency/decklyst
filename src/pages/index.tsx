@@ -1,10 +1,10 @@
-import { trpc } from '@/common/trpc'
+import { trpc } from '@/hooks/trpc'
 import { DeckPreviewList } from '@/components/DeckPreviewList'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
 import { factions } from '@/data/cards'
 import { createDeckExpanded } from '@/data/deck'
-import { createSsrClient } from '@/server'
+import { createApiClient } from '@/server'
 import { startCase } from 'lodash'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -65,18 +65,18 @@ const Home: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
   const handleCountChanged = async (count: string) => await updateQuery({ count: +count })
   const handleFactionChanged = async (faction?: string) => await updateQuery({ faction })
 
-  trpc.useQuery(
-    tab === 'latest'
-      ? ['decks.latest', { count, faction }]
-      : [
-          'decks.mostViewed',
-          {
-            count,
-            sinceDaysAgo: tab === 'trending' ? 3 : undefined,
-            faction,
-          },
-        ],
+  trpc.decks.latest.useQuery(
+    { count, faction },
     {
+      enabled: tab === 'latest',
+      initialData: tab === initialQuery.tab ? initialDeckcodes : [],
+      onSuccess: setDeckcodes,
+    },
+  )
+  trpc.decks.mostViewed.useQuery(
+    { count, faction, sinceDaysAgo: tab === 'trending' ? 3 : undefined },
+    {
+      enabled: tab !== 'latest',
       initialData: tab === initialQuery.tab ? initialDeckcodes : [],
       onSuccess: setDeckcodes,
     },
@@ -137,7 +137,7 @@ const Home: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
 }
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const client = await createSsrClient()
+  const client = await createApiClient()
   const count = +(query.count as string) || 5
   const tab: Tab = allTabs.find((tab) => tab === (query.tab as string)) ?? 'trending'
   const faction: string | undefined =
@@ -145,14 +145,14 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
 
   const initialDeckcodes = await ((tab: Tab) => {
     if (tab === 'trending') {
-      return client.query('decks.mostViewed', {
+      return client.decks.mostViewed({
         count,
         faction,
         sinceDaysAgo: 3,
       })
     } else if (tab === 'most-viewed') {
-      return client.query('decks.mostViewed', { count, faction })
-    } else return client.query('decks.latest', { count, faction })
+      return client.decks.mostViewed({ count, faction })
+    } else return client.decks.latest({ count, faction })
   })(tab)
 
   return {

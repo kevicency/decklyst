@@ -58,6 +58,9 @@ export const parseDeckcode = memoize((deckcode: string) => {
   }
 })
 
+export const parseDeckcodeUnvalidated = (deckcode: string) =>
+  validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
+
 export const encodeDeckcode = (deckcode: Deckcode) => {
   const { title, cards } = deckcode
   const sortedCards = sortCards(

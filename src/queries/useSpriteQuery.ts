@@ -1,6 +1,6 @@
 import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { useEffect } from 'react'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 export const useSpriteQuery = (cardId: number, animated?: boolean) => {
   const { setSpriteLoaded } = useSpriteLoader()
