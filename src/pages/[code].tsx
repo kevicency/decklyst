@@ -19,8 +19,8 @@ import { PageHeader } from '@/components/PageHeader'
 import { DeckProvider } from '@/context/useDeck'
 import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
-import type { DeckExpanded, DeckMeta } from '@/data/deck'
-import { createDeck, deckcodeWithoutTitle$, expandDeck, faction$, title$ } from '@/data/deck'
+import type { DeckExpanded } from '@/data/deck'
+import { createDeckExpanded, deckcodeWithoutTitle$, faction$, title$ } from '@/data/deck'
 import { trpc } from '@/hooks/trpc'
 import { appRouter, createContext } from '@/server'
 import { useQuery } from '@tanstack/react-query'
@@ -238,39 +238,28 @@ export const getStaticProps = async (
 ) => {
   const code = ctx.params?.code as string | undefined
 
+  if (!code) {
+    return { notFound: true }
+  }
+
   const ssg = createProxySSGHelpers({
     router: appRouter,
     ctx: await createContext(),
     transformer,
   })
-  let deckcode = code
-  const meta: DeckMeta = {
-    viewCount: 0,
-  }
-
-  if (code) {
-    const deckinfo = await ssg.deckinfo.get.fetch({ code, ensure: true })
-
-    if (deckinfo === null) {
-      return {
-        notFound: true,
-        revalidate: true,
+  const deckinfo = await ssg.deckinfo.get.fetch({ code, ensure: true })
+  return deckinfo
+    ? {
+        props: {
+          trpcState: ssg.dehydrate(),
+          deck: createDeckExpanded(deckinfo.deckcode, {
+            viewCount: 0,
+            sharecode: deckinfo?.sharecode,
+            createdAt: deckinfo?.createdAt,
+          }),
+        },
       }
-    }
-
-    deckcode = deckinfo?.deckcode ?? deckcode
-    meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
-    meta.createdAt = deckinfo?.createdAt ?? meta.createdAt
-  }
-
-  const deck = createDeck(deckcode)
-
-  return {
-    props: {
-      trpcState: ssg.dehydrate(),
-      deck: expandDeck(deck, meta),
-    },
-  }
+    : { notFound: true, revalidate: true }
 }
 
 // export const getServerSideProps = async ({ req, query }: GetServerSidePropsContext) => {
