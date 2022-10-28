@@ -27,7 +27,7 @@ export interface CardData {
   spriteName?: string
 }
 
-export type CardSet = 'core'
+export type CardSet = 'Core Set'
 export type CardType = 'Artifact' | 'General' | 'Minion' | 'Spell'
 export type Rarity = 'basic' | 'common' | 'epic' | 'legendary' | 'rare' | 'token'
 export type Faction =

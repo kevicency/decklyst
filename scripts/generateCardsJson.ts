@@ -63,6 +63,7 @@ async function main() {
       spriteName: getSpriteName(cardJson),
       faction: getFaction(cardJson.faction),
       factionId: cardJson.faction,
+      rarity: cardJson.rarity.toLowerCase() as Rarity,
     }))
 
   const jsonFilePath = path.join(__dirname, '../src/data/cards.json')
