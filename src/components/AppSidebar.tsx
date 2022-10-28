@@ -212,7 +212,7 @@ export const AppSidebar: FC = () => {
           />
           <AppSidebarMenu>
             {factions.map((faction) => (
-              <Link key={faction} href={`/build/${defaultDeckcode(faction)}`}>
+              <Link key={faction} href={`/build/${defaultDeckcode(faction)}`} prefetch={true}>
                 <a className={`hover:text-${faction}`}>{startCase(faction)}</a>
               </Link>
             ))}

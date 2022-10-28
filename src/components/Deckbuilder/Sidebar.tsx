@@ -8,7 +8,7 @@ import { debounce, noop } from 'lodash'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { CompareIcon, CopyIcon, DoneIcon, ShareIcon, TrashIcon } from '../Icons'
 
 export const Sidebar: FC<{
@@ -91,7 +91,7 @@ export const Sidebar: FC<{
           <CompareIcon />
           Compare
         </button>
-        <Link href={{ pathname: '/[code]', query: { code: encodedDeckcode } }}>
+        <Link href={{ pathname: '/[code]', query: { code: encodedDeckcode } }} prefetch={false}>
           <a className={cx('flex-1 btn px-3 py-1', deck.counts.total > 40 && 'btn--disabled')}>
             <ShareIcon />
             Share

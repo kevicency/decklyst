@@ -164,7 +164,10 @@ const DeckPage: FC<Props> = ({ deck }) => {
               </OneTimeButton>
             </div>
             <div className="flex gap-x-4">
-              <Link href={{ pathname: '/compare', query: { left: deck.deckcode } }}>
+              <Link
+                href={{ pathname: '/compare', query: { left: deck.deckcode } }}
+                prefetch={false}
+              >
                 <a className="btn">
                   <CompareIcon />
                   Compare
