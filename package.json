@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --passWithNoTests",
-    "prepare": "husky install",
+    "prepare": "husky install && cp -n .env.template .env | true",
     "prebuild": "prisma generate",
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
     "studio:prod": "dotenv -e .env.production -- prisma studio",
