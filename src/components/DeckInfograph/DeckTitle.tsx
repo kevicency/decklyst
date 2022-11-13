@@ -1,7 +1,8 @@
 import { useDeck } from '@/context/useDeck'
 import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { startCase } from 'lodash'
-import React, { useEffect, useRef } from 'react'
+import Image from 'next/image'
+import { useRef } from 'react'
 import { EyeIcon } from '../Icons'
 
 export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
@@ -10,31 +11,22 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
   const { setSpriteLoaded } = useSpriteLoader()
   const viewCount = meta?.viewCount
 
-  useEffect(() => {
-    if (imageRef.current) {
-      const image = imageRef.current
-      if (image.complete) {
-        setSpriteLoaded(general.id)
-      } else {
-        image.onload = () => {
-          setSpriteLoaded(general.id)
-        }
-      }
-    }
-  }, [imageRef, setSpriteLoaded, general.id])
+  // useEffect(() => {
+  //   if (imageRef.current) {
+  //     const image = imageRef.current
+  //     if (image.complete) {
+  //       setSpriteLoaded(general.id)
+  //     } else {
+  //       image.onload = () => {
+  //         setSpriteLoaded(general.id)
+  //       }
+  //     }
+  //   }
+  // }, [imageRef, setSpriteLoaded, general.id])
   return (
     <div className="flex flex-1">
-      <div className="w-32 mt-[-24px] mb-[-16px] ml-[-24px] flex-shrink-0">
-        <img
-          ref={imageRef}
-          src={`/assets/generals/${general.id}_hex.png`}
-          srcSet={[
-            `/assets/generals/${general.id}_hex.png 1x`,
-            `/assets/generals/${general.id}_hex@2x.png 2x`,
-          ].join(',')}
-          alt={general.name}
-          className="w-full"
-        />
+      <div className="relative w-32 mt-[-24px] mb-[-16px] ml-[-24px] flex-shrink-0">
+        <Image src={`/assets/generals/${general.id}_hex@2x.png`} fill alt={general.name} />
       </div>
       <div className="flex flex-col flex-1 justify-center ml-2">
         <div className="font-bold text-3xl mb-2 overflow-hidden">
