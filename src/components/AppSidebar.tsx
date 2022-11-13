@@ -21,20 +21,22 @@ const AppSidebarLink: FC<{
   disabled?: boolean
   children: any
 }> = ({ href, active, disabled, icon: Icon, iconClassName, children }) => {
-  const Tag = disabled ? 'span' : 'a'
+  const { Tag, props } = disabled
+    ? { Tag: 'span', props: {} as any }
+    : { Tag: Link, props: { href } }
+
   return (
-    <Link href={href}>
-      <Tag
-        className={cx(
-          'flex items-center text-2xl pl-4 font-light border-l-4 py-1',
-          active ? 'border-teal-400' : 'border-transparent',
-          disabled && 'disabled',
-        )}
-      >
-        {Icon && <Icon className={cx('mr-2', iconClassName)} />}
-        {children}
-      </Tag>
-    </Link>
+    <Tag
+      {...props}
+      className={cx(
+        'flex items-center text-2xl pl-4 font-light border-l-4 py-1',
+        active ? 'border-teal-400' : 'border-transparent',
+        disabled && 'disabled',
+      )}
+    >
+      {Icon && <Icon className={cx('mr-2', iconClassName)} />}
+      {children}
+    </Tag>
   )
 }
 const AppSidebarInput: FC<{
@@ -162,8 +164,8 @@ export const AppSidebar: FC = () => {
   return (
     <div className="flex flex-col w-60 h-screen overflow-hidden bg-zinc-800 border-r border-zinc-700">
       <h1 className="mt-8 mb-12 text-center">
-        <Link href="/">
-          <a className="text-5xl font-thin">Decklyst</a>
+        <Link href="/" className="text-5xl font-thin">
+          Decklyst
         </Link>
       </h1>
       <div className="flex flex-col gap-y-8">
@@ -183,15 +185,9 @@ export const AppSidebar: FC = () => {
             validate={isShareOrDeckcode}
           />
           <AppSidebarMenu>
-            <Link href={`/decks?tab=trending`}>
-              <a>Trending</a>
-            </Link>
-            <Link href={`/decks?tab=most-viewed`}>
-              <a>Most viewed</a>
-            </Link>
-            <Link href={`/decks?tab=latest`}>
-              <a>Latest</a>
-            </Link>
+            <Link href={`/decks?tab=trending`}>Trending</Link>
+            <Link href={`/decks?tab=most-viewed`}>Most viewed</Link>
+            <Link href={`/decks?tab=latest`}>Latest</Link>
           </AppSidebarMenu>
         </div>
         <div>
@@ -212,8 +208,13 @@ export const AppSidebar: FC = () => {
           />
           <AppSidebarMenu>
             {factions.map((faction) => (
-              <Link key={faction} href={`/build/${defaultDeckcode(faction)}`} prefetch={false}>
-                <a className={`hover:text-${faction}`}>{startCase(faction)}</a>
+              <Link
+                key={faction}
+                href={`/build/${defaultDeckcode(faction)}`}
+                prefetch={false}
+                className={`hover:text-${faction}`}
+              >
+                {startCase(faction)}
               </Link>
             ))}
           </AppSidebarMenu>

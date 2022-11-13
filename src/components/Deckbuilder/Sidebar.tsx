@@ -91,11 +91,12 @@ export const Sidebar: FC<{
           <CompareIcon />
           Compare
         </button>
-        <Link href={{ pathname: '/[code]', query: { code: encodedDeckcode } }} prefetch={false}>
-          <a className={cx('flex-1 btn px-3 py-1', deck.counts.total > 40 && 'btn--disabled')}>
-            <ShareIcon />
-            Share
-          </a>
+        <Link
+          href={{ pathname: '/[code]', query: { code: encodedDeckcode } }}
+          prefetch={false}
+          className={cx('flex-1 btn px-3 py-1', deck.counts.total > 40 && 'btn--disabled')}
+        >
+          <ShareIcon /> Share
         </Link>
       </div>
       <div className="-mx-2 px-1 -mb-2 border-t border-gray-600 bg-black-900">

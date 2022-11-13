@@ -11,23 +11,21 @@ import type { FC } from 'react'
 const DeckPreview: FC = () => {
   const { faction, deckcode } = useDeck()
   return (
-    <Link href={deckUrl(deckcode, true)}>
-      <a
-        className={cx(
-          'group',
-          'flex gap-4 lg:gap-8 justify-between items-center',
-          'bg-gray-900 py-2 pr-4 mt-4',
-          'border-gray-700 border-[3px]',
-          `hover:border-${faction} hover:text-black-100`,
-        )}
-        href={deckUrl(deckcode, true)}
-      >
-        <div className="scale-90 flex-1">
-          <DeckTitle showMeta />
-        </div>
-        <DeckCounts />
-        <DeckManaCurve />
-      </a>
+    <Link
+      href={deckUrl(deckcode, true)}
+      className={cx(
+        'group',
+        'flex gap-4 lg:gap-8 justify-between items-center',
+        'bg-gray-900 py-2 pr-4 mt-4',
+        'border-gray-700 border-[3px]',
+        `hover:border-${faction} hover:text-black-100`,
+      )}
+    >
+      <div className="scale-90 flex-1">
+        <DeckTitle showMeta />
+      </div>
+      <DeckCounts />
+      <DeckManaCurve />
     </Link>
   )
 }

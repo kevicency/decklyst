@@ -184,10 +184,11 @@ const DeckHeader: FC<{ deck: DeckExpanded }> = ({ deck }) => {
   return (
     <DeckProvider deck={deck}>
       {deck.valid ? (
-        <Link href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}>
-          <a className="scale-90">
-            <DeckTitle />
-          </a>
+        <Link
+          href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}
+          className="scale-90"
+        >
+          <DeckTitle />
         </Link>
       ) : deck.deckcode ? (
         <div className="flex items-center justify-center font-bold text-xl text-red-500">
