@@ -793,24 +793,24 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@swc/helpers@0.4.11", "@swc/helpers@^0.4.11":
+"@swc/helpers@0.4.11":
   version "0.4.11"
   resolved "https://registry.npmjs.org/@swc/helpers/-/helpers-0.4.11.tgz"
   integrity sha512-rEUrBSGIoSFuYxwBYtlUFMlE2CwGhmW+w9355/5oduSw8e5h2+Tj4UrAGNNgP9915++wj5vkQo0UuOBqOAq4nw==
   dependencies:
     tslib "^2.4.0"
 
-"@tanstack/query-core@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.9.0.tgz"
-  integrity sha512-Vl0jAWJR3A1md0PoPMoEd6+H1dlRB5NqXDBNF+MZEgjQsR0Nly2kJgJj0Zh6eRDndnn7VlspxTWoOpt+dwDdAA==
+"@tanstack/query-core@4.15.1":
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.15.1.tgz#a282f04fe5e612b50019e1cfaf0efabd220e00ce"
+  integrity sha512-+UfqJsNbPIVo0a9ANW0ZxtjiMfGLaaoIaL9vZeVycvmBuWywJGtSi7fgPVMCPdZQFOzMsaXaOsDtSKQD5xLRVQ==
 
-"@tanstack/react-query@^4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.9.0.tgz#e0e8894b9b7415608c488d68793826113d61224d"
-  integrity sha512-M4utYjk9BRDUYbbprSsa0eExdC9NjqQ0deuHXYxQkT8l8BIVyw6yv02LQUGBdOnn/6w5xXFyQRG2slo+JhqeBg==
+"@tanstack/react-query@^4.15.1":
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.15.1.tgz#0e108cbce6231c0710b0fc781f77e011e0286863"
+  integrity sha512-Me6atZD1IzE7fzKdu8AjZPXFTPe83009b46icyfn7UsaOwaFkMqh+aX4/5Te34YVVREFH+Zfe+N2KFFbC/j8hg==
   dependencies:
-    "@tanstack/query-core" "4.9.0"
+    "@tanstack/query-core" "4.15.1"
     use-sync-external-store "^1.2.0"
 
 "@testing-library/dom@^8.5.0":
@@ -856,28 +856,27 @@
   resolved "https://registry.npmjs.org/@tootallnate/once/-/once-2.0.0.tgz"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@trpc/client@10.0.0-proxy-beta.13":
-  version "10.0.0-proxy-beta.13"
-  resolved "https://registry.npmjs.org/@trpc/client/-/client-10.0.0-proxy-beta.13.tgz"
-  integrity sha512-GM0X7OPftU3AQ+ZncuVcUPjmOM7wh76bENgkEfY5phhvnY0FCPhpHVtBhVff75lnENRf2RdIU04G0G3wwKRLmQ==
+"@trpc/client@10.0.0-rc.7":
+  version "10.0.0-rc.7"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.0.0-rc.7.tgz#bf43231800cb9f0afcb2635cbdc276bb08dd2f83"
+  integrity sha512-J13OZZF/7qfUb88LIn6eJbLnka/8O+MVEJcIXvvQuYM+WCmVGSV7RVxmkLulJ+nwCLOXf0oDcPr63Xebdo92hA==
 
-"@trpc/next@10.0.0-proxy-beta.13":
-  version "10.0.0-proxy-beta.13"
-  resolved "https://registry.npmjs.org/@trpc/next/-/next-10.0.0-proxy-beta.13.tgz"
-  integrity sha512-Zf3neIVwUx0LxOr/NvFd8Y/7HLvqhcrbwK0ZG++n9iQGt3G/O66xnRq6bSp3ZEe4F+PvZ3RCUhK9oDpSLB96iA==
+"@trpc/next@10.0.0-rc.7":
+  version "10.0.0-rc.7"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.0.0-rc.7.tgz#1fb4c99b7a93eba9f5832a5b76f8935e751140e2"
+  integrity sha512-5RwmgSKz/D+X1aR34+wXb4knouQw+fQlJDI2flnzel76LIGuKFV3axJP/YYKWXY+nlPzANhVyPGpuk0PR07IZQ==
   dependencies:
-    "@swc/helpers" "^0.4.11"
     react-ssr-prepass "^1.5.0"
 
-"@trpc/react@10.0.0-proxy-beta.13":
-  version "10.0.0-proxy-beta.13"
-  resolved "https://registry.npmjs.org/@trpc/react/-/react-10.0.0-proxy-beta.13.tgz"
-  integrity sha512-7W+hJoD50Tt23QuI5IlCGjRuDo5pF2vHC4qEcM/vG5+1r4nUFBVUDBtQ+p1b7KVlqgUbJFBR+7zmVEQIpO1umg==
+"@trpc/react-query@^10.0.0-rc.7":
+  version "10.0.0-rc.7"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.0.0-rc.7.tgz#e13e65ad0e4ae7f49cf173773036534ecd73ba2a"
+  integrity sha512-nwz94j8HeTSJ5BLk/2HZmN2JPkVajAwNeiBAdnB30bX+zoFm2j61EtdspQRuzmuqId7EDaTlAvSU+s/CLcLtUg==
 
-"@trpc/server@10.0.0-proxy-beta.13":
-  version "10.0.0-proxy-beta.13"
-  resolved "https://registry.npmjs.org/@trpc/server/-/server-10.0.0-proxy-beta.13.tgz"
-  integrity sha512-m3VCl3Boiwb7mqnbx6tLdYMyemccr5AgYY3NORnuXHnJpGOykmh5Fe6nq6x6efinuSXsUEipSD63oJmV4v1guw==
+"@trpc/server@10.0.0-rc.7":
+  version "10.0.0-rc.7"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.0.0-rc.7.tgz#a8a2a440b8847692b3713e207571f4427ce9dc87"
+  integrity sha512-XbQCVRJLppHkGRVLZ5hSi1UXTsXx8f4tNwChil6neUVsr7hEvqrTG1HgNYWq/JG6FA0sxps/IVxzuegsY8LryA==
 
 "@ts-morph/common@~0.16.0":
   version "0.16.0"

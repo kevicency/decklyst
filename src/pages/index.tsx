@@ -1,6 +1,6 @@
 import { transformer } from '@/common/transformer'
 import { appRouter, createContext } from '@/server'
-import { createProxySSGHelpers } from '@trpc/react/ssg'
+import { createProxySSGHelpers } from '@trpc/react-query/ssg'
 import type { NextPage } from 'next'
 import type { Props } from './decks'
 import DecksPage from './decks'

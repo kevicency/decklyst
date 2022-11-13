@@ -24,7 +24,7 @@ import { createDeckExpanded, deckcodeWithoutTitle$, faction$, title$ } from '@/d
 import { trpc } from '@/hooks/trpc'
 import { appRouter, createContext } from '@/server'
 import { useQuery } from '@tanstack/react-query'
-import { createProxySSGHelpers } from '@trpc/react/ssg'
+import { createProxySSGHelpers } from '@trpc/react-query/ssg'
 import { formatDistance } from 'date-fns'
 import { merge, noop, uniqBy } from 'lodash'
 import Link from 'next/link'
