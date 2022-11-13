@@ -6,9 +6,9 @@ export const DeckShareUrl = () => {
   const hostname = siteUrl.replace(/^https?:\/\//, '')
 
   return meta?.sharecode ? (
-    <div className="flex text-gray-500 items-center text-lg">
+    <div className="flex items-center text-lg text-gray-500">
       <span>{hostname}/</span>
-      <span className={`text-${faction} font-bold font-mono text-2xl ml-1 mt-[-2px] `}>
+      <span className={`text-${faction} ml-1 mt-[-2px] font-mono text-2xl font-bold `}>
         {meta?.sharecode}
       </span>
     </div>

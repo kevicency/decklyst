@@ -25,7 +25,7 @@ export const Deckbuilder: FC = () => {
   }
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden">
+    <div className="flex flex-1 flex-col overflow-hidden">
       {deck.general ? (
         <DeckbuilderBuild
           onGeneralSelected={handleGeneralSelected}

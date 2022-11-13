@@ -20,11 +20,11 @@ export const DeckbuilderStart: FC<{
         <div className="text-4xl font-light">Deckbuilder</div>
         <div className="text-2xl text-black-200">Choose a general to start</div>
       </PageHeader>
-      <div className="flex flex-wrap flex-1 justify-center text-center overflow-y-auto pt-8">
+      <div className="flex flex-1 flex-wrap justify-center overflow-y-auto pt-8 text-center">
         {factions.map((faction) => (
-          <div key={faction} className="flex flex-col mb-16">
-            <h3 className={`text-4xl text-${faction} font-mono mb-4`}>{startCase(faction)}</h3>
-            <div className="flex justify-around ml-8 mr-3">
+          <div key={faction} className="mb-16 flex flex-col">
+            <h3 className={`text-4xl text-${faction} mb-4 font-mono`}>{startCase(faction)}</h3>
+            <div className="ml-8 mr-3 flex justify-around">
               {generalsByFaction[faction].map((general) => (
                 <GeneralCard key={general.id} general={general} onSelect={onSelectGeneral} />
               ))}

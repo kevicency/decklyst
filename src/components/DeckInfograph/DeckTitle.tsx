@@ -1,7 +1,7 @@
 import { useDeck } from '@/context/useDeck'
 import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { startCase } from 'lodash'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { EyeIcon } from '../Icons'
 
 export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
@@ -24,7 +24,7 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
   }, [imageRef, setSpriteLoaded, general.id])
   return (
     <div className="flex flex-1">
-      <div className="w-32 mt-[-24px] mb-[-16px] ml-[-24px] flex-shrink-0">
+      <div className="mt-[-24px] mb-[-16px] ml-[-24px] w-32 flex-shrink-0">
         <img
           ref={imageRef}
           src={`/assets/generals/${general.id}_hex.png`}
@@ -36,11 +36,11 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
           className="w-full"
         />
       </div>
-      <div className="flex flex-col flex-1 justify-center ml-2">
-        <div className="font-bold text-3xl mb-2 overflow-hidden">
+      <div className="ml-2 flex flex-1 flex-col justify-center">
+        <div className="mb-2 overflow-hidden text-3xl font-bold">
           {title?.slice(0, 40) || 'Untitled'}
         </div>
-        <div className={`text-xl flex gap-x-2 content-center items-center truncate`}>
+        <div className={`flex content-center items-center gap-x-2 truncate text-xl`}>
           <span className={`text-${faction} w-24`}>{startCase(faction)}</span>
           {showMeta && viewCount ? (
             <span className="flex items-center text-black-400 group-hover:text-teal-600">

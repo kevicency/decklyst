@@ -101,18 +101,18 @@ const DeckPage: FC<Props> = ({ deck }) => {
   return (
     <DeckProvider deck={merge(deck, { meta: { viewCount: viewCount || 1 } })}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
-        <div className="flex flex-col flex-1 overflow-hidden">
+        <div className="flex flex-1 flex-col overflow-hidden">
           <PageHeader>
             <div className="text-sm text-black-300">
               {meta.viewCount && (
-                <div className="flex gap-x-2 items-center">
+                <div className="flex items-center gap-x-2">
                   <EyeIcon />
                   <span className="font-bold">{meta.viewCount}</span>
                   <span>{meta.viewCount === 1 ? 'view' : 'views'}</span>
                 </div>
               )}
               {meta.createdAt && (
-                <div className="flex gap-x-2 items-center">
+                <div className="flex items-center gap-x-2">
                   <ClockIcon />
                   Created
                   <span className="font-bold">
@@ -183,13 +183,13 @@ const DeckPage: FC<Props> = ({ deck }) => {
             </div>
           </PageHeader>
           <DeckMetadata />
-          <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-1 flex-col overflow-y-auto">
             <div className="content-container my-8">
               <DeckInfograph />
               <div>
                 <input
                   name="deckcode"
-                  className="page-header-input bg-gray-900 text-gray-200 px-4 w-full"
+                  className="page-header-input w-full bg-gray-900 px-4 text-gray-200"
                   value={deckcode}
                   onFocus={(ev) => setTimeout(() => ev.target.select(), 50)}
                   readOnly
@@ -197,7 +197,7 @@ const DeckPage: FC<Props> = ({ deck }) => {
                   aria-label="Deckcode"
                 />
               </div>
-              <div className="flex gap-x-2 justify-end items-center text-gray-500 text-sm mt-4 mr-4">
+              <div className="mt-4 mr-4 flex items-center justify-end gap-x-2 text-sm text-gray-500">
                 <span>Image broken?</span>
                 <button
                   disabled={!imageDataUri}

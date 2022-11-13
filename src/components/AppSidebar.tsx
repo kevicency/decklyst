@@ -29,7 +29,7 @@ const AppSidebarLink: FC<{
     <Tag
       {...props}
       className={cx(
-        'flex items-center text-2xl pl-4 font-light border-l-4 py-1',
+        'flex items-center border-l-4 py-1 pl-4 text-2xl font-light',
         active ? 'border-teal-400' : 'border-transparent',
         disabled && 'disabled',
       )}
@@ -73,7 +73,7 @@ const AppSidebarInput: FC<{
         <input
           className={cx(
             'transition-colors',
-            'w-full border-b-2 pl-5 py-2 bg-zinc-700',
+            'w-full border-b-2 bg-zinc-700 py-2 pl-5',
             Icon ? 'pr-10' : 'pr-5',
             error ? 'border-red-500' : 'border-zinc-400 focus:border-zinc-200',
           )}
@@ -97,7 +97,7 @@ const AppSidebarInput: FC<{
               'bg-zinc-600 hover:bg-teal-600',
               'disabled:bg-transparent disabled:text-zinc-500',
               'absolute right-0.5 top-0 bottom-0.5 w-10',
-              'flex justify-center items-center',
+              'flex items-center justify-center',
             )}
             onClick={handleAction}
           >
@@ -105,13 +105,13 @@ const AppSidebarInput: FC<{
           </button>
         )}
       </div>
-      <div className="text-red-500 text-xs py-0.5 px-10">{error?.message}&nbsp;</div>
+      <div className="py-0.5 px-10 text-xs text-red-500">{error?.message}&nbsp;</div>
     </div>
   )
 }
 export const AppSidebarMenu: FC<{ children?: any }> = ({ children }) => (
-  <ul className="pl-6 text-lg -mt-5">
-    <li className="border-l border-zinc-400 pl-4 -mb-2">&nbsp;</li>
+  <ul className="-mt-5 pl-6 text-lg">
+    <li className="-mb-2 border-l border-zinc-400 pl-4">&nbsp;</li>
     {children
       ? Children.map(children, (child, i) => (
           <li key={child.key ?? i} className="border-l border-zinc-400 pl-4">
@@ -162,7 +162,7 @@ export const AppSidebar: FC = () => {
   }
 
   return (
-    <div className="flex flex-col w-60 h-screen overflow-hidden bg-zinc-800 border-r border-zinc-700">
+    <div className="flex h-screen w-60 flex-col overflow-hidden border-r border-zinc-700 bg-zinc-800">
       <h1 className="mt-8 mb-12 text-center">
         <Link href="/" className="text-5xl font-thin">
           Decklyst
@@ -255,9 +255,9 @@ export const AppSidebar: FC = () => {
         </div>
       </div>
       <div className="flex-1" />
-      <div className="flex border-t border-zinc-600 py-4 px-8 bg-black-900">
+      <div className="flex border-t border-zinc-600 bg-black-900 py-4 px-8">
         <div className="text-sm text-black-500">
-          <div className="flex gap-x-2 items-center">
+          <div className="flex items-center gap-x-2">
             <HiCode /> by{' '}
             <a
               href="https://github.com/kmees"
@@ -272,7 +272,7 @@ export const AppSidebar: FC = () => {
           <a
             href="https://www.buymeacoffee.com/kmees"
             target="_blank"
-            className="flex gap-x-2 items-center"
+            className="flex items-center gap-x-2"
             rel="noopener noreferrer"
           >
             <SiBuymeacoffee /> buy me a coffee

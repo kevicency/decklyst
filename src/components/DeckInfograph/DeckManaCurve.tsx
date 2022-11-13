@@ -8,7 +8,7 @@ export const DeckManaCurve = () => {
   const { faction, manaCurve } = useDeck()
 
   return (
-    <div className="flex flex-row shrink-0 min-w-min">
+    <div className="flex min-w-min shrink-0 flex-row">
       {manaCurve.map((entry, mana) => (
         <ManaCurveBar key={mana} entry={entry} mana={mana} faction={faction} />
       ))}
@@ -20,8 +20,8 @@ const ManaCurveBar: FC<{ entry: ManaCurve[0]; mana: number; faction: Faction }> 
   mana,
   faction,
 }) => (
-  <div className="flex flex-col text-center w-6 items-stretch h-[100px]">
-    <div className="flex flex-1 flex-col items-stretch mx-0.5">
+  <div className="flex h-[100px] w-6 flex-col items-stretch text-center">
+    <div className="mx-0.5 flex flex-1 flex-col items-stretch">
       <div className="flex-1"></div>
       <div>{abs}</div>
       <div
@@ -31,7 +31,7 @@ const ManaCurveBar: FC<{ entry: ManaCurve[0]; mana: number; faction: Faction }> 
         &nbsp;
       </div>
     </div>
-    <div className="border-t-2 border-gray-200 h-[26px]">
+    <div className="h-[26px] border-t-2 border-gray-200">
       <ManaIcon mana={mana === 9 ? '9+' : mana} className="mt-1" />
     </div>
   </div>

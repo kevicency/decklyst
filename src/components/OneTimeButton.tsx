@@ -43,7 +43,7 @@ export const OneTimeButton: FC<{
         clickedClassName
           ? { clickedClassName: isClicked }
           : {
-              'cursor-default hover:bg-green-600 bg-green-600': isClicked,
+              'cursor-default bg-green-600 hover:bg-green-600': isClicked,
             },
       )}
     >

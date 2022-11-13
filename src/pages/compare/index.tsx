@@ -55,7 +55,7 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
   )
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden">
+    <div className="flex flex-1 flex-col overflow-hidden">
       <CompareMetadata leftDeck={leftDeck} rightDeck={rightDeck} deckDiff={deckDiff} />
       <PageHeader>
         <div className="flex-1">
@@ -71,7 +71,7 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
             onFocus={(ev) => ev.target.select()}
           />
         </div>
-        <div className="flex flex-col w-24">
+        <div className="flex w-24 flex-col">
           <div className="text-center text-xl">VS</div>
         </div>
         <div className="flex-1">
@@ -88,17 +88,17 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
           />
         </div>
       </PageHeader>
-      <div className="flex flex-col flex-1 overflow-y-auto">
-        <div className="content-container my-8 p-6 bg-slate-900" id="snap">
+      <div className="flex flex-1 flex-col overflow-y-auto">
+        <div className="content-container my-8 bg-slate-900 p-6" id="snap">
           <Row>
             <DeckHeader deck={leftDeck} />
-            <div className="flex flex-col text-center justify-center">
-              <div className="flex gap-x-2 text-black-400 text-lg items-end justify-center mb-2">
-                <div className="text-teal-600 font-bold text-2xl">{deckDiff.changes}</div>
+            <div className="flex flex-col justify-center text-center">
+              <div className="mb-2 flex items-end justify-center gap-x-2 text-lg text-black-400">
+                <div className="text-2xl font-bold text-teal-600">{deckDiff.changes}</div>
                 <div>changes</div>
               </div>
               {!snapshot && (
-                <label className="flex gap-x-1 justify-center items-center cursor-pointer">
+                <label className="flex cursor-pointer items-center justify-center gap-x-1">
                   <input
                     type="checkbox"
                     className=""
@@ -126,7 +126,7 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
             )
             return diffCards.length ? (
               <Fragment key={path}>
-                <Row className="mt-6 mb-4 text">
+                <Row className="text mt-6 mb-4">
                   <CardCount count={get(leftDeck.counts, path)} title={startCase(path)} />
                   <Delta value={get(deckDiff.deltas, path)} big />
                   <CardCount count={get(rightDeck.counts, path)} title={startCase(path)} mirrored />
@@ -191,7 +191,7 @@ const DeckHeader: FC<{ deck: DeckExpanded }> = ({ deck }) => {
           <DeckTitle />
         </Link>
       ) : deck.deckcode ? (
-        <div className="flex items-center justify-center font-bold text-xl text-red-500">
+        <div className="flex items-center justify-center text-xl font-bold text-red-500">
           Invalid deckcode
         </div>
       ) : (
@@ -221,7 +221,7 @@ const Row: FC<{ children: ReactNode; className?: string }> = ({ children, classN
 
 const Delta: FC<{ value: number; big?: boolean }> = ({ value, big }) => (
   <div
-    className={cx(big ? 'text-2xl' : 'text-xl', 'font-mono text-center', {
+    className={cx(big ? 'text-2xl' : 'text-xl', 'text-center font-mono', {
       'text-green-500': value > 0,
       'text-red-500': value < 0,
     })}
@@ -247,13 +247,13 @@ export const CardItem: FC<{ card: CardData; count: number; delta: number; mirror
   return (
     <div
       className={cx(
-        'relative bg-gray-800 cursor-pointer select-none transition-transform text-normal',
+        'text-normal relative cursor-pointer select-none bg-gray-800 transition-transform',
         mirrored ? 'mr-8' : 'ml-8',
         count === 0 && 'opacity-40',
       )}
     >
       <div
-        className="absolute left-0 top-0 right-0.5 h-full sprite"
+        className="sprite absolute left-0 top-0 right-0.5 h-full"
         style={{
           backgroundImage: `url(${sprite?.src})`,
           backgroundRepeat: 'no-repeat',
@@ -262,17 +262,17 @@ export const CardItem: FC<{ card: CardData; count: number; delta: number; mirror
         }}
       />
       <div
-        className="absolute left-0 top-0 w-full h-full"
+        className="absolute left-0 top-0 h-full w-full"
         style={{
           background: `linear-gradient(90deg, rgba(255,255,255,0) 25%, ${gradientColor} 100%)`,
         }}
       />
-      <div className="flex items-center w-full mb-1 py-1.5 relative">
+      <div className="relative mb-1 flex w-full items-center py-1.5">
         <ManaIcon mana={card.mana} className="-ml-2.5 mr-1" />
         <div className="text-sm">{card.name}</div>
         <div className="flex-1" />
         <div
-          className={`font-mono font-bold border border-gray-600 text-gray-200 bg-gray-800 text-center px-1`}
+          className={`border border-gray-600 bg-gray-800 px-1 text-center font-mono font-bold text-gray-200`}
         >
           x{count}
         </div>

@@ -3,7 +3,6 @@ import { DeckShareUrl } from '@/components/DeckInfograph/DeckShareUrl'
 import { useSpriteLoader } from '@/context/useSpriteLoader'
 import cx from 'classnames'
 import type { FC } from 'react'
-import { useEffect, useState } from 'react'
 import { DeckArtifactList } from './DeckArtifactList'
 import { DeckCardList } from './DeckCardList'
 import { DeckCountsAlt } from './DeckCounts'
@@ -19,7 +18,7 @@ export const DeckInfograph: FC = () => {
   return (
     <div
       className={cx(
-        'p-6 pb-2 bg-gray-900 relative',
+        'relative bg-gray-900 p-6 pb-2',
         allSpritesLoaded ? 'snap--loaded' : 'snap--loading',
       )}
       id="snap"
@@ -49,7 +48,7 @@ export const DeckInfograph: FC = () => {
         </div>
         <DeckCardList />
       </div>
-      <div className="flex justify-end mt-1 -mr-2">
+      <div className="mt-1 -mr-2 flex justify-end">
         <DeckShareUrl />
       </div>
       <CardTooltip />

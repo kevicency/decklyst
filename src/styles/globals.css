@@ -57,11 +57,11 @@
   .btn:disabled,
   .btn--disabled {
     @apply cursor-default;
-    @apply bg-gray-900 cursor-default;
+    @apply cursor-default bg-gray-900;
   }
 
   .btn--large {
-    @apply font-bold text-xl;
+    @apply text-xl font-bold;
     @apply px-6 py-4;
   }
 
@@ -70,12 +70,12 @@
   }
 
   .page-header-input {
-    @apply transition-colors bg-gray-800 border-b-2 border-gray-500 focus:border-gray-300;
+    @apply border-b-2 border-gray-500 bg-gray-800 transition-colors focus:border-gray-300;
     @apply w-full px-2 py-2;
   }
 
   a[data-tip] {
-    @apply hover:text-inherit cursor-help;
+    @apply cursor-help hover:text-inherit;
   }
 
   #card-tooltip {

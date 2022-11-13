@@ -27,10 +27,10 @@ export const Sidebar: FC<{
   )
 
   return (
-    <div className="flex flex-col shrink-0 gap-y-2 bg-gray-900 p-2 w-72 border-l border-zinc-700 pt-4">
+    <div className="flex w-72 shrink-0 flex-col gap-y-2 border-l border-zinc-700 bg-gray-900 p-2 pt-4">
       <div className="flex gap-2">
         <input
-          className="px-2 py-2 bg-gray-800 w-full"
+          className="w-full bg-gray-800 px-2 py-2"
           placeholder="Untitled"
           autoFocus
           value={titleValue}
@@ -41,7 +41,7 @@ export const Sidebar: FC<{
         />
 
         <button
-          className="flex bg-red-900 hover:bg-red-700 px-3 py-2 text-xl"
+          className="flex bg-red-900 px-3 py-2 text-xl hover:bg-red-700"
           onClick={onReset}
           aria-label="Delete"
         >
@@ -51,15 +51,15 @@ export const Sidebar: FC<{
       <div className="mx-auto mb-2 ">
         <DeckManaCurve />
       </div>
-      <div className="py-2 flex flex-1 overflow-y-hidden -mr-1.5">
-        <div className="px-2 flex-1 overflow-y-scroll">
+      <div className="-mr-1.5 flex flex-1 overflow-y-hidden py-2">
+        <div className="flex-1 overflow-y-scroll px-2">
           <SidebarCardList cardType="Minion" />
           <SidebarCardList cardType="Spell" />
           <SidebarCardList cardType="Artifact" />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2 -mx-2 -mb-2 px-2 py-2 border-t border-gray-600 bg-black-900">
-        <div className={cx(`flex flex-1 justify-center font-mono font-bold text-xl`)}>
+      <div className="-mx-2 -mb-2 grid grid-cols-2 gap-2 border-t border-gray-600 bg-black-900 px-2 py-2">
+        <div className={cx(`flex flex-1 justify-center font-mono text-xl font-bold`)}>
           <span className={` text-${deck.faction}`}>{deck.counts.total}</span>/
           <span
             className={cx({
@@ -79,7 +79,7 @@ export const Sidebar: FC<{
           )}
         </OneTimeButton>
         <button
-          className={cx('flex-1 btn px-3 py-1', !canCompare && 'btn--disabled')}
+          className={cx('btn flex-1 px-3 py-1', !canCompare && 'btn--disabled')}
           disabled={!canCompare}
           onClick={async () => {
             await router.push({
@@ -94,14 +94,14 @@ export const Sidebar: FC<{
         <Link
           href={{ pathname: '/[code]', query: { code: encodedDeckcode } }}
           prefetch={false}
-          className={cx('flex-1 btn px-3 py-1', deck.counts.total > 40 && 'btn--disabled')}
+          className={cx('btn flex-1 px-3 py-1', deck.counts.total > 40 && 'btn--disabled')}
         >
           <ShareIcon /> Share
         </Link>
       </div>
-      <div className="-mx-2 px-1 -mb-2 border-t border-gray-600 bg-black-900">
+      <div className="-mx-2 -mb-2 border-t border-gray-600 bg-black-900 px-1">
         <input
-          className="page-header-input bg-black-900 text-gray-200 px-4 w-full"
+          className="page-header-input w-full bg-black-900 px-4 text-gray-200"
           readOnly
           value={deck.deckcode}
           onChange={noop}

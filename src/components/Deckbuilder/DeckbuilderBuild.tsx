@@ -56,7 +56,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
             {startCase('neutral')}
           </PivotButton>
         </div>
-        <div className="flex flex-1 justify-center -mb-4">
+        <div className="-mb-4 flex flex-1 justify-center">
           <input
             className="page-header-input max-w-md"
             placeholder="Search"
@@ -64,7 +64,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
             onChange={(ev) => setCardQuery(ev.target.value)}
           />
         </div>
-        <div className="flex justify-around mr-7 mt-4 -mb-8 z-10">
+        <div className="z-10 mr-7 mt-4 -mb-8 flex justify-around">
           {generals.map((general) => (
             <GeneralCard
               size="sm"
@@ -83,7 +83,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
       </PageHeader>
 
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex flex-col flex-1 overflow-y-scroll pl-8 pr-4 pt-3.5 mt-0.5 relative">
+        <div className="relative mt-0.5 flex flex-1 flex-col overflow-y-scroll pl-8 pr-4 pt-3.5">
           <div ref={factionCardListRef}>
             <CardFilterContext.Provider value={{ faction: deck.faction, query: deferredCardQuery }}>
               <CardList onSelectCard={handleCardSelected} onDeselectCard={handleCardDeselected} />

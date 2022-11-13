@@ -83,10 +83,10 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
   )
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden">
+    <div className="flex flex-1 flex-col overflow-hidden">
       <PageHeader>
         <div className="flex flex-1 justify-between">
-          <div className="flex text-3xl gap-x-4">
+          <div className="flex gap-x-4 text-3xl">
             <PivotButton active={tab === 'trending'} onClick={() => handleTabChanged('trending')}>
               Trending
             </PivotButton>
@@ -102,7 +102,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
           </div>
           <div className="flex gap-x-4">
             <select
-              className="px-2 bg-slate-900 text-lg"
+              className="bg-slate-900 px-2 text-lg"
               value={`${faction}`}
               onChange={(ev) => handleFactionChanged(ev.target.value)}
               aria-label="Faction"
@@ -115,7 +115,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
               ))}
             </select>
             <select
-              className="px-2 bg-slate-900 text-lg"
+              className="bg-slate-900 px-2 text-lg"
               value={`${count}`}
               onChange={(ev) => handleCountChanged(ev.target.value)}
               aria-label="Count"
@@ -127,8 +127,8 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
           </div>
         </div>
       </PageHeader>
-      <div className="flex flex-col flex-1 pb-8 overflow-y-auto">
-        <div className="flex flex-col content-container mt-8">
+      <div className="flex flex-1 flex-col overflow-y-auto pb-8">
+        <div className="content-container mt-8 flex flex-col">
           <DeckPreviewList decks={decks ?? []} />
         </div>
       </div>

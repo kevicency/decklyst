@@ -1,10 +1,10 @@
 export const Custom404Page = () => {
   return (
-    <div className="flex flex-1 justify-center items-center">
-      <div className="flex items-center -ml-10">
+    <div className="flex flex-1 items-center justify-center">
+      <div className="-ml-10 flex items-center">
         <img src="/assets/vaath_frustrated.webp" alt="404" />
         <div>
-          <h2 className="text-4xl font-bold border-b-2 pb-2 mb-1">404</h2>
+          <h2 className="mb-1 border-b-2 pb-2 text-4xl font-bold">404</h2>
           <p className="text-lg text-gray-300">Page not found</p>
         </div>
       </div>

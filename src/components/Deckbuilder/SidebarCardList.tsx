@@ -16,7 +16,7 @@ export const SidebarCardList: FC<{ cardType: CardType }> = ({ cardType }) => {
 
   return (
     <div className="mb-3">
-      <div className="text-lg font-mono mb-1">
+      <div className="mb-1 font-mono text-lg">
         <span className={`text-${deck.faction} inline-block w-8`}>{count}</span>
         <span>{startCase(cardType)}s</span>
       </div>
@@ -34,13 +34,13 @@ export const SidebarCardEntry: FC<{ card: CardEntry }> = ({ card }) => {
   const [, { removeCard, addCard }] = useDeckcode()
   return (
     <div
-      className="relative bg-gray-800 hover:bg-gray-600 cursor-pointer select-none transition-transform active:scale-95"
+      className="relative cursor-pointer select-none bg-gray-800 transition-transform hover:bg-gray-600 active:scale-95"
       onClick={(ev) =>
         ev.altKey ? addCard(card.id, ev.shiftKey ? 3 : 1) : removeCard(card.id, ev.shiftKey ? 3 : 1)
       }
     >
       <div
-        className="absolute left-0 top-0 right-0.5 h-full sprite"
+        className="sprite absolute left-0 top-0 right-0.5 h-full"
         style={{
           backgroundImage: `url(${sprite?.src})`,
           backgroundRepeat: 'no-repeat',
@@ -49,17 +49,17 @@ export const SidebarCardEntry: FC<{ card: CardEntry }> = ({ card }) => {
         }}
       />
       <div
-        className="absolute left-0 top-0 w-full h-full"
+        className="absolute left-0 top-0 h-full w-full"
         style={{
           background: `linear-gradient(90deg, rgba(255,255,255,0) 25%, ${colors.slate[900]}c8 100%)`,
         }}
       />
-      <div className="flex items-center w-full mb-1 py-1.5 relative">
+      <div className="relative mb-1 flex w-full items-center py-1.5">
         <ManaIcon mana={card.mana} className="-ml-2.5 mr-1" />
         <div className="text-sm">{card.name}</div>
         <div className="flex-1" />
         <div
-          className={`font-mono font-bold border border-gray-600 text-gray-200 bg-gray-800 text-center px-1`}
+          className={`border border-gray-600 bg-gray-800 px-1 text-center font-mono font-bold text-gray-200`}
         >
           x{card.count}
         </div>

@@ -29,7 +29,7 @@ export const DeckCardList = () => {
           <div className={`text-xl`}>
             {col.title ? (
               <>
-                <span className={`text-${faction} font-bold mr-2`}>{col.count}</span>
+                <span className={`text-${faction} mr-2 font-bold`}>{col.count}</span>
                 <span className={`font-light`}>{col.title}</span>
               </>
             ) : (
@@ -40,7 +40,7 @@ export const DeckCardList = () => {
             <div key={card.id} className="mt-2 flex items-center">
               <ManaIcon mana={card.mana} />
               <a
-                className="ml-2 flex-1 truncate text-sm mt-[-1px]"
+                className="ml-2 mt-[-1px] flex-1 truncate text-sm"
                 data-tip={card.id}
                 data-for="card-tooltip"
               >

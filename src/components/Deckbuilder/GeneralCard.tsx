@@ -17,10 +17,10 @@ export const GeneralCard = ({
     onClick={() => onSelect(general)}
     className={cx(
       {
-        'w-48 mt-[-24px] mb-[-16px] ml-[-24px]': size === 'md',
-        'w-20 mt-[-10px] mb-[-6px] ml-[-12px]': size === 'sm',
+        'mt-[-24px] mb-[-16px] ml-[-24px] w-48': size === 'md',
+        'mt-[-10px] mb-[-6px] ml-[-12px] w-20': size === 'sm',
       },
-      'flex flex-col flex-shrink-0 items-center',
+      'flex flex-shrink-0 flex-col items-center',
       `hover:text-${general.faction}`,
       className,
     )}
@@ -35,9 +35,9 @@ export const GeneralCard = ({
     />
     {size === 'md' && (
       <div
-        className={cx(`font-bold flex-1`, {
+        className={cx(`flex-1 font-bold`, {
           // 'text-sm px-2': size === 'sm',
-          'text-lg px-4': size === 'md',
+          'px-4 text-lg': size === 'md',
         })}
       >
         {general.name}

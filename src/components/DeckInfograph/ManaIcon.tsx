@@ -5,7 +5,7 @@ export const ManaIcon: FC<{ mana: number | string; className?: string }> = ({
   mana,
   className,
 }) => (
-  <div className={cx('hexagon bg-mana text-gray-900 font-bold', className)}>
-    <span className="inline-block w-6 h-[22px] text-center text-sm">{mana}</span>
+  <div className={cx('hexagon bg-mana font-bold text-gray-900', className)}>
+    <span className="inline-block h-[22px] w-6 text-center text-sm">{mana}</span>
   </div>
 )

@@ -15,13 +15,13 @@ const DeckPreview: FC = () => {
       href={deckUrl(deckcode, true)}
       className={cx(
         'group',
-        'flex gap-4 lg:gap-8 justify-between items-center',
-        'bg-gray-900 py-2 pr-4 mt-4',
-        'border-gray-700 border-[3px]',
+        'flex items-center justify-between gap-4 lg:gap-8',
+        'mt-4 bg-gray-900 py-2 pr-4',
+        'border-[3px] border-gray-700',
         `hover:border-${faction} hover:text-black-100`,
       )}
     >
-      <div className="scale-90 flex-1">
+      <div className="flex-1 scale-90">
         <DeckTitle showMeta />
       </div>
       <DeckCounts />
@@ -39,7 +39,7 @@ export const DeckPreviewList: FC<{
 
   return (
     <div className={cx(className)}>
-      {title && <h3 className="text-3xl mb-6">{title}</h3>}
+      {title && <h3 className="mb-6 text-3xl">{title}</h3>}
       <ul>
         {decks.map((deck) => (
           <li key={deck.deckcode}>

@@ -66,6 +66,7 @@
     "organize-imports-cli": "^0.10.0",
     "postcss": "8.4.19",
     "prettier": "2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.13",
     "prisma": "4.6.1",
     "tailwindcss": "3.2.4",
     "tailwindcss-animate": "1.0.5",
