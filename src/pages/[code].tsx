@@ -167,22 +167,18 @@ const DeckPage: FC<Props> = ({ deck }) => {
               <Link
                 href={{ pathname: '/compare', query: { left: deck.deckcode } }}
                 prefetch={false}
+                className="btn"
               >
-                <a className="btn">
-                  <CompareIcon />
-                  Compare
-                </a>
+                <CompareIcon /> Compare
               </Link>
               <Link
                 href={{
                   pathname: '/build/[deckcode]',
                   query: { deckcode: deck.deckcode },
                 }}
+                className="btn"
               >
-                <a className="btn">
-                  <BuildIcon />
-                  Open in deckbuilder
-                </a>
+                <BuildIcon /> Open in deckbuilder
               </Link>
             </div>
           </PageHeader>
