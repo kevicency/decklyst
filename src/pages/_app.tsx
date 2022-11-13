@@ -21,7 +21,7 @@ function App({ Component, pageProps }: AppProps) {
             name="google-site-verification"
             content="todbfz-oykJnt7ZTWmfVp8J6TyL1pnYoPMo6tZtkz-o"
           />
-          <link rel="icon" href="/public/favicon.ico" />
+          <link rel="icon" href="favicon.ico" />
         </Head>
         <Component {...pageProps} />
         <Analytics />
