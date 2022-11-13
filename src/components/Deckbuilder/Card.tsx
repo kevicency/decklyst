@@ -4,10 +4,13 @@ import { ManaIcon } from '@/components/DeckInfograph/ManaIcon'
 import type { CardData } from '@/data/cards'
 import { cardsById, highlightKeywords } from '@/data/cards'
 import cx from 'classnames'
+import dynamic from 'next/dynamic'
 import type { FC } from 'react'
 import { useState } from 'react'
 import { GiBroadsword, GiCircle, GiShield } from 'react-icons/gi'
-import ReactTooltip from 'react-tooltip'
+import colors from 'tailwindcss/colors'
+
+const ReactTooltip = dynamic(() => import('react-tooltip'), { ssr: false })
 
 export const CardAttack: FC<{ card: CardData }> = ({ card }) => {
   return (
@@ -45,6 +48,10 @@ export const RelatedCardsTooltip = () => (
     id="related-cards-tooltip"
     effect="solid"
     place="left"
+    className="!bg-transparent"
+    arrowColor={colors.gray[500]}
+    scrollHide={true}
+    resizeHide={true}
     getContent={(cardIds) => (
       <RelatedCardTooltipContent cardIds={cardIds?.split(',').map((x) => +x) ?? []} />
     )}
@@ -54,10 +61,10 @@ const RelatedCardTooltipContent: FC<{ cardIds: number[] }> = ({ cardIds }) => {
   const cards = cardIds.map((cardId) => cardsById[cardId]).filter(Boolean)
 
   return cards.length ? (
-    <div className="-mx-6 flex flex-col">
+    <div className="-mx-7 flex scale-75 flex-col">
       {cards.map((card) => (
-        <div key={card.id} className="scale-75 bg-zinc-900 p-2">
-          <Card card={card} className="border-gray-600" />
+        <div key={card.id} className="bg-zinc-900 p-2">
+          <Card card={card} className={`!border-${card.faction}`} />
         </div>
       ))}
     </div>
