@@ -229,9 +229,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: uniqBy(
       deckinfos
         .flatMap(({ deckcode, sharecode }) => [deckcode, sharecode])
-        .filter((code) => code.length <= 255 - 40),
+        .map((code) => `/${encodeURIComponent(code)}`)
+        .filter((code) => code?.length > 0 && code.length <= 205),
       (code) => code.toLowerCase(),
-    ).map((code) => `/${encodeURIComponent(code)}`),
+    ),
     fallback: 'blocking',
   }
 }
