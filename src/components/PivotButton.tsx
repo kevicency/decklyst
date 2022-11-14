@@ -11,7 +11,7 @@ export const PivotButton: FC<{
     onClick={onClick}
     className={cx(
       'cursor-pointer font-light hover:text-accent-400',
-      active ? activeClassName ?? 'text-neutral-100' : 'text-neutral-500',
+      active ? activeClassName ?? 'text-gray-100' : 'text-gray-500',
     )}
   >
     {children}

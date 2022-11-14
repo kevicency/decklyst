@@ -73,9 +73,9 @@ const AppSidebarInput: FC<{
         <input
           className={cx(
             'transition-colors',
-            'w-full border-b-2 bg-neutral-700 py-2 pl-5',
+            'w-full border-b-2 bg-gray-700 py-2 pl-5',
             Icon ? 'pr-10' : 'pr-5',
-            error ? 'border-red-500' : 'border-neutral-400 focus:border-neutral-200',
+            error ? 'border-red-500' : 'border-gray-400 focus:border-gray-200',
           )}
           placeholder={placeholder ?? 'Enter deck/share code'}
           value={value ?? ''}
@@ -94,8 +94,8 @@ const AppSidebarInput: FC<{
             aria-label="Search"
             disabled={!valid || active}
             className={cx(
-              'bg-neutral-600 hover:bg-accent-600',
-              'disabled:bg-transparent disabled:text-neutral-500',
+              'bg-gray-600 hover:bg-accent-600',
+              'disabled:bg-transparent disabled:text-gray-500',
               'absolute right-0.5 top-0 bottom-0.5 w-10',
               'flex items-center justify-center',
             )}
@@ -111,10 +111,10 @@ const AppSidebarInput: FC<{
 }
 export const AppSidebarMenu: FC<{ children?: any }> = ({ children }) => (
   <ul className="-mt-5 pl-6 text-lg">
-    <li className="-mb-2 border-l border-neutral-400 pl-4">&nbsp;</li>
+    <li className="-mb-2 border-l border-gray-400 pl-4">&nbsp;</li>
     {children
       ? Children.map(children, (child, i) => (
-          <li key={child.key ?? i} className="border-l border-neutral-400 pl-4">
+          <li key={child.key ?? i} className="border-l border-gray-400 pl-4">
             {child}
           </li>
         ))
@@ -162,7 +162,7 @@ export const AppSidebar: FC = () => {
   }
 
   return (
-    <div className="flex h-screen w-60 flex-col overflow-hidden border-r border-neutral-700 bg-neutral-800">
+    <div className="flex h-screen w-60 flex-col overflow-hidden border-r border-gray-700 bg-gray-800">
       <h1 className="mt-8 mb-12 text-center">
         <Link href="/" className="text-5xl font-thin">
           Decklyst
@@ -255,14 +255,14 @@ export const AppSidebar: FC = () => {
         </div>
       </div>
       <div className="flex-1" />
-      <div className="flex border-t border-neutral-600 bg-neutral-900 py-4 px-8">
-        <div className="text-sm text-neutral-500">
+      <div className="flex border-t border-gray-600 bg-gray-900 py-4 px-8">
+        <div className="text-sm text-gray-500">
           <div className="flex items-center gap-x-2">
             <HiCode /> by{' '}
             <a
               href="https://github.com/kmees"
               target="_blank"
-              className="flex items-center text-neutral-400"
+              className="flex items-center text-gray-400"
               rel="noopener noreferrer"
             >
               <SiGithub className="mr-1" />

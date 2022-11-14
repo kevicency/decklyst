@@ -16,14 +16,13 @@ module.exports = {
       current: 'currentColor',
       red: colors.red,
       green: colors.green,
-      neutral: {
-        ...colors.neutral,
-        850: '#202020',
-        DEFAULT: colors.neutral[100], // rarity neutral workaround
-      },
-      alt: colors.gray,
 
       // semantic colors
+      gray: {
+        ...colors.neutral,
+        850: '#202020',
+      },
+      alt: colors.gray,
       accent: colors.teal,
 
       // faction
@@ -35,7 +34,7 @@ module.exports = {
       vanar: '#2ba3db',
 
       // rarity
-      // neutral: colors.neutral['100'],
+      neutral: colors.neutral['100'],
       common: colors.neutral['100'],
       basic: colors.neutral['300'],
       rare: '#396cfd',

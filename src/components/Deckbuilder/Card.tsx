@@ -63,7 +63,7 @@ const RelatedCardTooltipContent: FC<{ cardIds: number[] }> = ({ cardIds }) => {
   return cards.length ? (
     <div className="-mx-7 flex scale-75 flex-col">
       {cards.map((card) => (
-        <div key={card.id} className="bg-neutral-900 p-2">
+        <div key={card.id} className="bg-gray-900 p-2">
           <Card card={card} className={`!border-${card.faction}`} />
         </div>
       ))}

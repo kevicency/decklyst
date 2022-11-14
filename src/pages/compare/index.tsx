@@ -93,7 +93,7 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
           <Row>
             <DeckHeader deck={leftDeck} />
             <div className="flex flex-col justify-center text-center">
-              <div className="mb-2 flex items-end justify-center gap-x-2 text-lg text-neutral-400">
+              <div className="mb-2 flex items-end justify-center gap-x-2 text-lg text-gray-400">
                 <div className="text-2xl font-bold text-accent-600">{deckDiff.changes}</div>
                 <div>changes</div>
               </div>
@@ -195,7 +195,7 @@ const DeckHeader: FC<{ deck: DeckExpanded }> = ({ deck }) => {
           Invalid deckcode
         </div>
       ) : (
-        <div className="flex items-center justify-center text-lg text-neutral-500">
+        <div className="flex items-center justify-center text-lg text-gray-500">
           Please enter a deckcode above
         </div>
       )}
