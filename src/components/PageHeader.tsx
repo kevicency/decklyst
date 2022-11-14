@@ -7,7 +7,7 @@ export const PageHeader: FC<{ children: ReactNode }> = ({ children }) => {
       className={cx(
         'flex items-end justify-between gap-x-8',
         'h-20 px-8 pb-4 pt-6',
-        ' z-50 bg-gray-800 shadow-lg shadow-dark',
+        ' z-50 bg-alt-800 shadow-lg shadow-dark',
       )}
     >
       {children}

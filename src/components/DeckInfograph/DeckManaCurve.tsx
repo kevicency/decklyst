@@ -31,7 +31,7 @@ const ManaCurveBar: FC<{ entry: ManaCurve[0]; mana: number; faction: Faction }> 
         &nbsp;
       </div>
     </div>
-    <div className="h-[26px] border-t-2 border-gray-200">
+    <div className="h-[26px] border-t-2 border-alt-200">
       <ManaIcon mana={mana === 9 ? '9+' : mana} className="mt-1" />
     </div>
   </div>

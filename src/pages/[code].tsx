@@ -158,7 +158,7 @@ const DeckPage: FC<Props> = ({ deck }) => {
                         color={colors.gray['400']}
                         className="mr-2"
                       />
-                      <span className="text-gray-400">Generating image</span>
+                      <span className="text-alt-400">Generating image</span>
                     </>
                   )
                 }
@@ -190,7 +190,7 @@ const DeckPage: FC<Props> = ({ deck }) => {
               <div>
                 <input
                   name="deckcode"
-                  className="page-header-input w-full bg-gray-900 px-4 text-gray-200"
+                  className="page-header-input w-full bg-alt-900 px-4 text-alt-200"
                   value={deckcode}
                   onFocus={(ev) => setTimeout(() => ev.target.select(), 50)}
                   readOnly
@@ -198,12 +198,12 @@ const DeckPage: FC<Props> = ({ deck }) => {
                   aria-label="Deckcode"
                 />
               </div>
-              <div className="mt-4 mr-4 flex items-center justify-end gap-x-2 text-sm text-gray-500">
+              <div className="mt-4 mr-4 flex items-center justify-end gap-x-2 text-sm text-alt-500">
                 <span>Image broken?</span>
                 <button
                   disabled={!imageDataUri}
                   onClick={handleRegenerateClick()}
-                  className="text-gray-400 hover:text-accent-400 disabled:hover:text-gray-400"
+                  className="text-alt-400 hover:text-accent-400 disabled:hover:text-alt-400"
                 >
                   Regenerate
                 </button>

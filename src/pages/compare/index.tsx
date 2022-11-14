@@ -247,7 +247,7 @@ export const CardItem: FC<{ card: CardData; count: number; delta: number; mirror
   return (
     <div
       className={cx(
-        'text-normal relative cursor-pointer select-none bg-gray-800 transition-transform',
+        'text-normal relative cursor-pointer select-none bg-alt-800 transition-transform',
         mirrored ? 'mr-8' : 'ml-8',
         count === 0 && 'opacity-40',
       )}
@@ -272,7 +272,7 @@ export const CardItem: FC<{ card: CardData; count: number; delta: number; mirror
         <div className="text-sm">{card.name}</div>
         <div className="flex-1" />
         <div
-          className={`border border-gray-600 bg-gray-800 px-1 text-center font-mono font-bold text-gray-200`}
+          className={`border border-alt-600 bg-alt-800 px-1 text-center font-mono font-bold text-alt-200`}
         >
           x{count}
         </div>

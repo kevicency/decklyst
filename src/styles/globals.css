@@ -45,7 +45,7 @@
 
   .btn {
     @apply flex items-center justify-center;
-    @apply bg-gray-700 hover:bg-accent-600;
+    @apply bg-alt-700 hover:bg-accent-600;
     @apply text-neutral-100 hover:text-neutral-100;
     @apply py-1 px-3;
   }
@@ -57,7 +57,7 @@
   .btn:disabled,
   .btn--disabled {
     @apply cursor-default;
-    @apply cursor-default bg-gray-900;
+    @apply cursor-default bg-alt-900;
   }
 
   .btn--large {
@@ -70,7 +70,7 @@
   }
 
   .page-header-input {
-    @apply border-b-2 border-gray-500 bg-gray-800 transition-colors focus:border-gray-300;
+    @apply border-b-2 border-alt-500 bg-alt-800 transition-colors focus:border-alt-300;
     @apply w-full px-2 py-2;
   }
 
@@ -144,10 +144,10 @@ input {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-500;
+  @apply bg-alt-500;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-700;
+  @apply bg-alt-700;
 }

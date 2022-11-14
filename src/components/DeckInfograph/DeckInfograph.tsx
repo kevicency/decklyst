@@ -18,7 +18,7 @@ export const DeckInfograph: FC = () => {
   return (
     <div
       className={cx(
-        'relative bg-gray-900 p-6 pb-2',
+        'relative bg-alt-900 p-6 pb-2',
         allSpritesLoaded ? 'snap--loaded' : 'snap--loading',
       )}
       id="snap"

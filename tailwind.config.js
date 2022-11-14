@@ -14,18 +14,17 @@ module.exports = {
       inherit: 'inherit',
       transparent: 'transparent',
       current: 'currentColor',
-
-      gray: colors.gray,
-      accent: colors.teal,
       red: colors.red,
       green: colors.green,
-      zinc: colors.zinc,
       neutral: {
         ...colors.neutral,
         850: '#202020',
         DEFAULT: colors.neutral[100], // rarity neutral workaround
       },
       alt: colors.gray,
+
+      // semantic colors
+      accent: colors.teal,
 
       // faction
       lyonar: '#e5c56d',

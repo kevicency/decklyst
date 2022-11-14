@@ -16,8 +16,8 @@ const DeckPreview: FC = () => {
       className={cx(
         'group',
         'flex items-center justify-between gap-4 lg:gap-8',
-        'mt-4 bg-gray-900 py-2 pr-4',
-        'border-[3px] border-gray-700',
+        'mt-4 bg-alt-900 py-2 pr-4',
+        'border-[3px] border-alt-700',
         `hover:border-${faction} hover:text-neutral-100`,
       )}
     >
