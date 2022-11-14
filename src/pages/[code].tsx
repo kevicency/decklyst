@@ -21,8 +21,9 @@ import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import type { DeckExpanded } from '@/data/deck'
 import { createDeckExpanded, deckcodeWithoutTitle$, faction$, title$ } from '@/data/deck'
-import { trpc } from '@/hooks/trpc'
-import { appRouter, createContext } from '@/server'
+import { appRouter } from '@/server'
+import { createContextInner } from '@/server/trpc/context'
+import { trpc } from '@/utils/trpc'
 import { useQuery } from '@tanstack/react-query'
 import { createProxySSGHelpers } from '@trpc/react-query/ssg'
 import { formatDistance } from 'date-fns'
@@ -216,7 +217,7 @@ const DeckPage: FC<Props> = ({ deck }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { prisma } = await createContext()
+  const { prisma } = await createContextInner()
   const deckinfos = await prisma.deckinfo.findMany({
     select: { deckcode: true, sharecode: true },
   })
@@ -242,7 +243,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
 
   const ssg = createProxySSGHelpers({
     router: appRouter,
-    ctx: await createContext(),
+    ctx: await createContextInner(),
     transformer,
   })
   const deckinfo = await ssg.deckinfo.get.fetch({ code, ensure: true })

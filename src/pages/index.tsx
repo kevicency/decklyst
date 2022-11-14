@@ -1,5 +1,5 @@
 import { transformer } from '@/common/transformer'
-import { appRouter, createContext } from '@/server'
+import { appRouter, createContextInner } from '@/server'
 import { createProxySSGHelpers } from '@trpc/react-query/ssg'
 import type { NextPage } from 'next'
 import type { Props } from './decks'
@@ -12,7 +12,7 @@ const Home: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => (
 export const getStaticProps = async () => {
   const ssg = createProxySSGHelpers({
     router: appRouter,
-    ctx: await createContext(),
+    ctx: await createContextInner(),
     transformer,
   })
 

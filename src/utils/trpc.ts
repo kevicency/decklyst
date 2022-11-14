@@ -1,6 +1,7 @@
 import type { AppRouter } from '@/server'
 import { httpBatchLink, loggerLink } from '@trpc/client'
 import { createTRPCNext } from '@trpc/next'
+import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
 import type { NextPageContext } from 'next'
 import { transformer } from '../common/transformer'
 import { trpcUrl } from '../common/urls'
@@ -72,10 +73,6 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
           },
         }),
       ],
-      /**
-       * @link https://react-query.tanstack.com/reference/QueryClient
-       */
-      // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
     }
   },
   /**
@@ -108,3 +105,14 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
   //   return {}
   // },
 })
+
+/**
+ * Inference helper for inputs
+ * @example type HelloInput = RouterInputs['example']['hello']
+ **/
+export type RouterInputs = inferRouterInputs<AppRouter>
+/**
+ * Inference helper for outputs
+ * @example type HelloOutput = RouterOutputs['example']['hello']
+ **/
+export type RouterOutputs = inferRouterOutputs<AppRouter>

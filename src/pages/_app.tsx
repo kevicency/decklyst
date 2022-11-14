@@ -1,6 +1,6 @@
 import { Layout } from '@/components/Layout'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
-import { trpc } from '@/hooks/trpc'
+import { trpc } from '@/utils/trpc'
 import { Analytics } from '@vercel/analytics/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'

@@ -1,5 +1,5 @@
 import type { CardData } from '@/data/cards'
-import { useSpriteQuery } from '@/queries/useSpriteQuery'
+import { useSpriteQuery } from '@/hooks/useSpriteQuery'
 import cx from 'classnames'
 import type { CSSProperties, FC } from 'react'
 
