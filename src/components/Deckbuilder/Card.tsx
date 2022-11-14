@@ -16,11 +16,11 @@ export const CardAttack: FC<{ card: CardData }> = ({ card }) => {
   return (
     <div className="relative flex h-16 w-16 items-center justify-center">
       <GiCircle
-        className="absolute top-1/2 left-1/2 -mx-[24px] -mt-[24px] text-amber-400"
+        className="text-amber-400 absolute top-1/2 left-1/2 -mx-[24px] -mt-[24px]"
         size={48}
       />
       <GiBroadsword
-        className="absolute top-1/2 left-0 -mx-[6px] -mt-[16px] -rotate-45 text-amber-400"
+        className="text-amber-400 absolute top-1/2 left-0 -mx-[6px] -mt-[16px] -rotate-45"
         size={32}
       />
       <span className="z-10 text-2xl">{card.attack}</span>
@@ -63,7 +63,7 @@ const RelatedCardTooltipContent: FC<{ cardIds: number[] }> = ({ cardIds }) => {
   return cards.length ? (
     <div className="-mx-7 flex scale-75 flex-col">
       {cards.map((card) => (
-        <div key={card.id} className="bg-zinc-900 p-2">
+        <div key={card.id} className="bg-neutral-900 p-2">
           <Card card={card} className={`!border-${card.faction}`} />
         </div>
       ))}

@@ -27,7 +27,7 @@ export const Sidebar: FC<{
   )
 
   return (
-    <div className="flex w-72 shrink-0 flex-col gap-y-2 border-l border-zinc-700 bg-gray-900 p-2 pt-4">
+    <div className="flex w-72 shrink-0 flex-col gap-y-2 border-l border-neutral-700 bg-gray-900 p-2 pt-4">
       <div className="flex gap-2">
         <input
           className="w-full bg-gray-800 px-2 py-2"

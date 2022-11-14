@@ -40,7 +40,7 @@
   }
 
   .link {
-    @apply text-zinc-100 hover:text-teal-400;
+    @apply text-neutral-100 hover:text-teal-400;
   }
 
   .btn {
@@ -110,7 +110,7 @@ a:hover {
 }
 
 .disabled {
-  @apply text-zinc-600;
+  @apply text-neutral-600;
 }
 
 button {
@@ -126,8 +126,8 @@ html {
 }
 
 body {
-  @apply bg-zinc-900;
-  @apply text-zinc-100;
+  @apply bg-neutral-900;
+  @apply text-neutral-100;
 }
 
 input {
