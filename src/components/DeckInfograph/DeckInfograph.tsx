@@ -18,12 +18,12 @@ export const DeckInfograph: FC = () => {
   return (
     <div
       className={cx(
-        'relative bg-gray-900 p-6 pb-2',
+        'relative bg-alt-900 p-6 pb-2',
         allSpritesLoaded ? 'snap--loaded' : 'snap--loading',
       )}
       id="snap"
     >
-      <div className="grid auto-rows-auto gap-6 text-zinc-100">
+      <div className="grid auto-rows-auto gap-6 text-gray-100">
         <div
           className="grid gap-4 lg:gap-6"
           style={{

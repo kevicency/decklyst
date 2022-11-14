@@ -6,7 +6,7 @@ import type { FC } from 'react'
 export const IconCardList: FC<{ cards: CardEntry[] }> = ({ cards }) => {
   return (
     <div
-      className={cx('grid bg-gray-800', cards.length && 'mt-6 h-24')}
+      className={cx('grid bg-alt-800', cards.length && 'mt-6 h-24')}
       style={{ gridTemplateColumns: `repeat(${cards.length}, minmax(0, 1fr))` }}
     >
       {cards.map((card) => (
@@ -25,6 +25,6 @@ export const IconCard: FC<{ card: CardEntry }> = ({ card }) => (
     >
       <CardSprite card={card} centered className="absolute left-1/2 bottom-4 scale-150" />
     </a>
-    <div className="bg-gray-700 py-0.5 text-center">{card.count}</div>
+    <div className="bg-alt-700 py-0.5 text-center">{card.count}</div>
   </div>
 )

@@ -16,9 +16,9 @@ const DeckPreview: FC = () => {
       className={cx(
         'group',
         'flex items-center justify-between gap-4 lg:gap-8',
-        'mt-4 bg-gray-900 py-2 pr-4',
-        'border-[3px] border-gray-700',
-        `hover:border-${faction} hover:text-black-100`,
+        'mt-4 bg-alt-900 py-2 pr-4',
+        'border-[3px] border-alt-700',
+        `hover:border-${faction} hover:text-gray-100`,
       )}
     >
       <div className="flex-1 scale-90">

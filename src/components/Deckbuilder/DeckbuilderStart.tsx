@@ -18,7 +18,7 @@ export const DeckbuilderStart: FC<{
     <>
       <PageHeader>
         <div className="text-4xl font-light">Deckbuilder</div>
-        <div className="text-2xl text-black-200">Choose a general to start</div>
+        <div className="text-2xl text-gray-200">Choose a general to start</div>
       </PageHeader>
       <div className="flex flex-1 flex-wrap justify-center overflow-y-auto pt-8 text-center">
         {factions.map((faction) => (

@@ -44,7 +44,7 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
       <input
         ref={inputElement}
         className={cx(
-          'w-64 flex-1 border-2 border-gray-700 bg-gray-900 pl-4',
+          'w-64 flex-1 border-2 border-alt-700 bg-alt-900 pl-4',
           big ? 'pl-4 pr-14' : 'pl-2 pr-11',
           {
             'border-red-500': touched && invalid,
@@ -60,7 +60,7 @@ export const DeckcodeSearch: FC<{ big?: boolean }> = ({ big }) => {
       <button
         disabled={invalid || navigating}
         className={cx(
-          'btn disabled:bg-gray-900 disabled:text-gray-500',
+          'btn disabled:bg-alt-900 disabled:text-alt-500',
           'absolute right-[2px] top-[2px] h-[calc(100%-4px)]',
           big ? 'pl-4 pr-3' : 'pl-2 pr-1.5',
         )}

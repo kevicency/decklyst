@@ -89,12 +89,12 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
         </div>
       </PageHeader>
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <div className="content-container my-8 bg-slate-900 p-6" id="snap">
+        <div className="content-container bg-slate-900 my-8 p-6" id="snap">
           <Row>
             <DeckHeader deck={leftDeck} />
             <div className="flex flex-col justify-center text-center">
-              <div className="mb-2 flex items-end justify-center gap-x-2 text-lg text-black-400">
-                <div className="text-2xl font-bold text-teal-600">{deckDiff.changes}</div>
+              <div className="mb-2 flex items-end justify-center gap-x-2 text-lg text-gray-400">
+                <div className="text-2xl font-bold text-accent-600">{deckDiff.changes}</div>
                 <div>changes</div>
               </div>
               {!snapshot && (
@@ -195,7 +195,7 @@ const DeckHeader: FC<{ deck: DeckExpanded }> = ({ deck }) => {
           Invalid deckcode
         </div>
       ) : (
-        <div className="flex items-center justify-center text-lg text-black-500">
+        <div className="flex items-center justify-center text-lg text-gray-500">
           Please enter a deckcode above
         </div>
       )}
@@ -208,7 +208,7 @@ const CardCount: FC<{ title?: string; count: number; mirrored?: boolean }> = ({
   mirrored,
 }) => (
   <div className={cx('flex gap-x-2 text-2xl', !mirrored && 'flex-row-reverse')}>
-    <span className={`text-teal-600`}>{count}</span>
+    <span className={`text-accent-600`}>{count}</span>
     <span>{title}</span>
   </div>
 )
@@ -247,7 +247,7 @@ export const CardItem: FC<{ card: CardData; count: number; delta: number; mirror
   return (
     <div
       className={cx(
-        'text-normal relative cursor-pointer select-none bg-gray-800 transition-transform',
+        'text-normal relative cursor-pointer select-none bg-alt-800 transition-transform',
         mirrored ? 'mr-8' : 'ml-8',
         count === 0 && 'opacity-40',
       )}
@@ -272,7 +272,7 @@ export const CardItem: FC<{ card: CardData; count: number; delta: number; mirror
         <div className="text-sm">{card.name}</div>
         <div className="flex-1" />
         <div
-          className={`border border-gray-600 bg-gray-800 px-1 text-center font-mono font-bold text-gray-200`}
+          className={`border border-alt-600 bg-alt-800 px-1 text-center font-mono font-bold text-alt-200`}
         >
           x{count}
         </div>
