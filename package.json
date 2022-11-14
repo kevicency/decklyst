@@ -62,6 +62,7 @@
     "jest": "29.3.1",
     "jest-environment-jsdom": "29.3.1",
     "lint-staged": ">=10",
+    "nightwind": "^1.1.12",
     "node-fetch": "2",
     "organize-imports-cli": "^0.10.0",
     "postcss": "8.4.19",

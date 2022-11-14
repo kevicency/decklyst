@@ -255,14 +255,14 @@ export const AppSidebar: FC = () => {
         </div>
       </div>
       <div className="flex-1" />
-      <div className="flex border-t border-zinc-600 bg-black-900 py-4 px-8">
-        <div className="text-sm text-black-500">
+      <div className="flex border-t border-zinc-600 bg-neutral-900 py-4 px-8">
+        <div className="text-sm text-neutral-500">
           <div className="flex items-center gap-x-2">
             <HiCode /> by{' '}
             <a
               href="https://github.com/kmees"
               target="_blank"
-              className="flex items-center text-black-400"
+              className="flex items-center text-neutral-400"
               rel="noopener noreferrer"
             >
               <SiGithub className="mr-1" />

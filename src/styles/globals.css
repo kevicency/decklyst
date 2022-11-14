@@ -46,7 +46,7 @@
   .btn {
     @apply flex items-center justify-center;
     @apply bg-gray-700 hover:bg-teal-600;
-    @apply text-black-100 hover:text-black-100;
+    @apply text-neutral-100 hover:text-neutral-100;
     @apply py-1 px-3;
   }
 

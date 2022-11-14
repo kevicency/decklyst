@@ -104,7 +104,7 @@ const DeckPage: FC<Props> = ({ deck }) => {
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
         <div className="flex flex-1 flex-col overflow-hidden">
           <PageHeader>
-            <div className="text-sm text-black-300">
+            <div className="text-sm text-neutral-300">
               {meta.viewCount && (
                 <div className="flex items-center gap-x-2">
                   <EyeIcon />

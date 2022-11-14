@@ -43,7 +43,7 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
         <div className={`flex content-center items-center gap-x-2 truncate text-xl`}>
           <span className={`text-${faction} w-24`}>{startCase(faction)}</span>
           {showMeta && viewCount ? (
-            <span className="flex items-center text-black-400 group-hover:text-teal-600">
+            <span className="flex items-center text-neutral-400 group-hover:text-teal-600">
               <EyeIcon size={24} className="mr-2" />
               <span>
                 {viewCount} {viewCount <= 1 ? 'view' : 'views'}

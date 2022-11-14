@@ -58,7 +58,7 @@ export const Sidebar: FC<{
           <SidebarCardList cardType="Artifact" />
         </div>
       </div>
-      <div className="-mx-2 -mb-2 grid grid-cols-2 gap-2 border-t border-gray-600 bg-black-900 px-2 py-2">
+      <div className="-mx-2 -mb-2 grid grid-cols-2 gap-2 border-t border-gray-600 bg-neutral-900 px-2 py-2">
         <div className={cx(`flex flex-1 justify-center font-mono text-xl font-bold`)}>
           <span className={` text-${deck.faction}`}>{deck.counts.total}</span>/
           <span
@@ -99,9 +99,9 @@ export const Sidebar: FC<{
           <ShareIcon /> Share
         </Link>
       </div>
-      <div className="-mx-2 -mb-2 border-t border-gray-600 bg-black-900 px-1">
+      <div className="-mx-2 -mb-2 border-t border-gray-600 bg-neutral-900 px-1">
         <input
-          className="page-header-input w-full bg-black-900 px-4 text-gray-200"
+          className="page-header-input w-full bg-neutral-900 px-4 text-gray-200"
           readOnly
           value={deck.deckcode}
           onChange={noop}
