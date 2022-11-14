@@ -11,7 +11,7 @@ export const serverSchema = z.object({
   REMOTE_SNAPSHOT_URL: z.string().url().optional(),
   VERCEL: z.enum(['1']).optional(),
   VERCEL_ENV: z.enum(['development', 'preview', 'production']).optional(),
-  VERCEL_URL: z.string().url().optional(),
+  VERCEL_URL: z.string().optional(),
   BROWSERLESS_API_TOKEN: z.string().optional(),
   // NEXTAUTH_SECRET:
   //   process.env.NODE_ENV === "production"
