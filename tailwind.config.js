@@ -21,8 +21,9 @@ module.exports = {
       gray: {
         ...colors.neutral,
         850: '#202020',
+        1000: '#101010',
       },
-      alt: colors.gray,
+      alt: { ...colors.gray, 850: '#18212F', 1000: '#090C14' },
       accent: colors.teal,
 
       // faction
@@ -44,6 +45,7 @@ module.exports = {
       // semantic
       mana: '#2ba9d8',
 
+      // shadow
       dark: '#0c0c0cc0',
     },
     extend: {
