@@ -1,10 +1,10 @@
-import type { Context } from '@/server/context'
-import { createContext } from '@/server/context'
-import { appRouter } from '@/server/routers'
+import type { Context } from '@/server/trpc/context'
+import { createContextInner } from '@/server/trpc/context'
+import { appRouter } from '@/server/trpc/router/_app'
 
-export { type AppRouter, appRouter } from '@/server/routers'
-export { type Context, createContext } from '@/server/context'
+export { createContext, createContextInner, type Context } from '@/server/trpc/context'
+export { appRouter, type AppRouter } from '@/server/trpc/router/_app'
 
 export const createApiClient = async (context?: Context) => {
-  return appRouter.createCaller(context ?? (await createContext()))
+  return appRouter.createCaller(context ?? (await createContextInner()))
 }

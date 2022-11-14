@@ -1,15 +1,15 @@
 import { z } from 'zod'
-import { snapshot } from '../snapshot'
-import { t } from '../trpc'
+import { snapshot } from '../../model/snapshot'
+import { proc, router } from '../trpc'
 
-export const deckimageRouter = t.router({
-  get: t.procedure
+export const deckimageRouter = router({
+  get: proc
     .input(z.object({ code: z.string(), timeout: z.number().optional() }))
     .query(async ({ ctx, input }) => {
       const deckcode = await ctx.deckinfo.unwrapCode(input.code)
       return deckcode ? ctx.deckimage.findByDeckcode(deckcode, input.timeout) : null
     }),
-  ensure: t.procedure
+  ensure: proc
     .input(
       z.object({
         code: z.string(),

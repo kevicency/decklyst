@@ -1,9 +1,9 @@
 import { factions } from '@/data/cards'
 import { z } from 'zod'
-import { t } from '../trpc'
+import { proc, router } from '../trpc'
 
-export const decksRouter = t.router({
-  latest: t.procedure
+export const decksRouter = router({
+  latest: proc
     .input(
       z.object({
         count: z.number().gt(0).lte(25),
@@ -31,7 +31,7 @@ export const decksRouter = t.router({
         meta: { createdAt, viewCount: viewCounts[deckcode] || 1 },
       }))
     }),
-  mostViewed: t.procedure
+  mostViewed: proc
     .input(
       z.object({
         count: z.number().gt(0).lte(25),

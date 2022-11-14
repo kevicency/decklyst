@@ -1,8 +1,16 @@
-import { remoteSnapshotUrl, snapshotUrl } from '@/common/urls'
+import { env } from '@/env/server.mjs'
 import { Buffer } from 'node:buffer'
 
+export const snapshotUrl = (code: string, relative = false) =>
+  `${relative ? '' : env.NEXT_PUBLIC_SITE_URL}/deckimage/${encodeURIComponent(code)}`
+
+export const remoteSnapshotUrl = (deckcode: string) =>
+  `${
+    env.REMOTE_SNAPSHOT_URL ?? 'https://duelyst-deck-renderer.azurewebsites.net'
+  }/api/render?deckcode=${encodeURIComponent(deckcode)}`
+
 export const snapshot = (code: string) =>
-  process.env.VERCEL ? snapshotBrowserless(code) : snapshotLocal(code)
+  env.VERCEL === '1' ? snapshotBrowserless(code) : snapshotLocal(code)
 
 export const snapshotLocal = async (code: string) => {
   const puppeteer = require('puppeteer')
@@ -32,28 +40,25 @@ export const snapshotLocal = async (code: string) => {
 
 export const snapshotBrowserless = async (code: string) => {
   try {
-    const response = process.env.BROWSERLESS_API_TOKEN
-      ? await fetch(
-          `https://chrome.browserless.io/screenshot?token=${process.env.BROWSERLESS_API_TOKEN}`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              url: snapshotUrl(code),
-              options: {
-                fullPage: false,
-                type: 'png',
-              },
-              gotoOptions: {
-                waitUntil: 'networkidle0',
-              },
-              selector: '#snap',
-              viewport: { width: 1280, height: 1024 },
-            }),
+    const response = env.BROWSERLESS_API_TOKEN
+      ? await fetch(`https://chrome.browserless.io/screenshot?token=${env.BROWSERLESS_API_TOKEN}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        )
+          body: JSON.stringify({
+            url: snapshotUrl(code),
+            options: {
+              fullPage: false,
+              type: 'png',
+            },
+            gotoOptions: {
+              waitUntil: 'networkidle0',
+            },
+            selector: '#snap',
+            viewport: { width: 1280, height: 1024 },
+          }),
+        })
       : await fetch(remoteSnapshotUrl(code), { method: 'POST' })
 
     if (response.ok) {
