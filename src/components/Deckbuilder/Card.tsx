@@ -15,12 +15,9 @@ const ReactTooltip = dynamic(() => import('react-tooltip'), { ssr: false })
 export const CardAttack: FC<{ card: CardData }> = ({ card }) => {
   return (
     <div className="relative flex h-16 w-16 items-center justify-center">
-      <GiCircle
-        className="text-amber-400 absolute top-1/2 left-1/2 -mx-[24px] -mt-[24px]"
-        size={48}
-      />
+      <GiCircle className="absolute top-1/2 left-1/2 -mx-[24px] -mt-[24px] text-attack" size={48} />
       <GiBroadsword
-        className="text-amber-400 absolute top-1/2 left-0 -mx-[6px] -mt-[16px] -rotate-45"
+        className="absolute top-1/2 left-0 -mx-[6px] -mt-[16px] -rotate-45 text-attack"
         size={32}
       />
       <span className="z-10 text-2xl">{card.attack}</span>
@@ -30,12 +27,9 @@ export const CardAttack: FC<{ card: CardData }> = ({ card }) => {
 export const CardHealth: FC<{ card: CardData }> = ({ card }) => {
   return (
     <div className="relative flex h-16 w-16 items-center justify-center">
-      <GiCircle
-        className="absolute top-1/2 left-1/2 -mx-[24px] -mt-[24px] text-red-600"
-        size={48}
-      />
+      <GiCircle className="absolute top-1/2 left-1/2 -mx-[24px] -mt-[24px] text-health" size={48} />
       <GiShield
-        className="absolute top-1/2 right-0 -mx-[6px] -mt-[16px] -scale-x-100 text-red-600"
+        className="absolute top-1/2 right-0 -mx-[6px] -mt-[16px] -scale-x-100 text-health"
         size={32}
       />
       <span className=" z-10 -ml-0.5 text-2xl tracking-tighter">{card.health}</span>

@@ -16,6 +16,7 @@ module.exports = {
       current: 'currentColor',
       red: colors.red,
       green: colors.green,
+      amber: colors.amber,
 
       // semantic colors
       gray: {
@@ -25,6 +26,9 @@ module.exports = {
       },
       alt: { ...colors.gray, 850: '#18212F', 1000: '#090C14' },
       accent: colors.teal,
+      mana: '#2ba9d8',
+      attack: colors.amber[400],
+      health: colors.red[600],
 
       // faction
       lyonar: '#e5c56d',
@@ -41,9 +45,6 @@ module.exports = {
       rare: '#396cfd',
       epic: '#bf20e1',
       legendary: '#e39f28',
-
-      // semantic
-      mana: '#2ba9d8',
 
       // shadow
       dark: '#0c0c0cc0',
