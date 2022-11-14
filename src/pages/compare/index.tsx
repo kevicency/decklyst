@@ -94,7 +94,7 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
             <DeckHeader deck={leftDeck} />
             <div className="flex flex-col justify-center text-center">
               <div className="mb-2 flex items-end justify-center gap-x-2 text-lg text-neutral-400">
-                <div className="text-2xl font-bold text-teal-600">{deckDiff.changes}</div>
+                <div className="text-2xl font-bold text-accent-600">{deckDiff.changes}</div>
                 <div>changes</div>
               </div>
               {!snapshot && (
@@ -208,7 +208,7 @@ const CardCount: FC<{ title?: string; count: number; mirrored?: boolean }> = ({
   mirrored,
 }) => (
   <div className={cx('flex gap-x-2 text-2xl', !mirrored && 'flex-row-reverse')}>
-    <span className={`text-teal-600`}>{count}</span>
+    <span className={`text-accent-600`}>{count}</span>
     <span>{title}</span>
   </div>
 )

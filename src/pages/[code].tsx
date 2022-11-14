@@ -203,7 +203,7 @@ const DeckPage: FC<Props> = ({ deck }) => {
                 <button
                   disabled={!imageDataUri}
                   onClick={handleRegenerateClick()}
-                  className="text-gray-400 hover:text-teal-400 disabled:hover:text-gray-400"
+                  className="text-gray-400 hover:text-accent-400 disabled:hover:text-gray-400"
                 >
                   Regenerate
                 </button>

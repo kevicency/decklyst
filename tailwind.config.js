@@ -16,7 +16,7 @@ module.exports = {
       current: 'currentColor',
 
       gray: colors.gray,
-      teal: colors.teal,
+      accent: colors.teal,
       red: colors.red,
       green: colors.green,
       zinc: colors.zinc,
@@ -25,6 +25,7 @@ module.exports = {
         850: '#202020',
         DEFAULT: colors.neutral[100], // rarity neutral workaround
       },
+      alt: colors.gray,
 
       // faction
       lyonar: '#e5c56d',

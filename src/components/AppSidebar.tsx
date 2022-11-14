@@ -30,7 +30,7 @@ const AppSidebarLink: FC<{
       {...props}
       className={cx(
         'flex items-center border-l-4 py-1 pl-4 text-2xl font-light',
-        active ? 'border-teal-400' : 'border-transparent',
+        active ? 'border-accent-400' : 'border-transparent',
         disabled && 'disabled',
       )}
     >
@@ -94,7 +94,7 @@ const AppSidebarInput: FC<{
             aria-label="Search"
             disabled={!valid || active}
             className={cx(
-              'bg-neutral-600 hover:bg-teal-600',
+              'bg-neutral-600 hover:bg-accent-600',
               'disabled:bg-transparent disabled:text-neutral-500',
               'absolute right-0.5 top-0 bottom-0.5 w-10',
               'flex items-center justify-center',

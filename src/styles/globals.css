@@ -40,12 +40,12 @@
   }
 
   .link {
-    @apply text-neutral-100 hover:text-teal-400;
+    @apply text-neutral-100 hover:text-accent-400;
   }
 
   .btn {
     @apply flex items-center justify-center;
-    @apply bg-gray-700 hover:bg-teal-600;
+    @apply bg-gray-700 hover:bg-accent-600;
     @apply text-neutral-100 hover:text-neutral-100;
     @apply py-1 px-3;
   }
@@ -106,7 +106,7 @@ a {
 }
 
 a:hover {
-  @apply text-teal-400;
+  @apply text-accent-400;
 }
 
 .disabled {

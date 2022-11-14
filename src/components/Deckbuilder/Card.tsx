@@ -126,7 +126,7 @@ export const Card: FC<{
         <div
           className={cx(
             'absolute right-0 top-0 -mr-4 mt-8 border border-gray-600 bg-gray-800 px-1 font-mono  text-xl font-bold',
-            count === 3 && 'text-teal-400',
+            count === 3 && 'text-accent-400',
           )}
         >
           {count}/3
