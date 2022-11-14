@@ -9,7 +9,7 @@ export const serverSchema = z.object({
   DATABASE_URL: z.string().url(),
   NODE_ENV: z.enum(['development', 'test', 'production']),
   REMOTE_SNAPSHOT_URL: z.string().url().optional(),
-  VERCEL: z.boolean().optional(),
+  VERCEL: z.enum(['1']).optional(),
   VERCEL_ENV: z.enum(['development', 'preview', 'production']).optional(),
   VERCEL_URL: z.string().url().optional(),
   BROWSERLESS_API_TOKEN: z.string().optional(),

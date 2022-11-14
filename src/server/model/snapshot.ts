@@ -10,7 +10,7 @@ export const remoteSnapshotUrl = (deckcode: string) =>
   }/api/render?deckcode=${encodeURIComponent(deckcode)}`
 
 export const snapshot = (code: string) =>
-  env.VERCEL ? snapshotBrowserless(code) : snapshotLocal(code)
+  env.VERCEL === '1' ? snapshotBrowserless(code) : snapshotLocal(code)
 
 export const snapshotLocal = async (code: string) => {
   const puppeteer = require('puppeteer')
