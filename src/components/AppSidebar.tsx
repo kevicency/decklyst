@@ -162,7 +162,7 @@ export const AppSidebar: FC = () => {
   }
 
   return (
-    <div className="flex h-screen w-60 flex-col overflow-hidden border-r border-gray-700 bg-gray-800">
+    <div className="flex h-screen w-60 flex-col overflow-hidden border-r border-gray-700 bg-gray-900">
       <h1 className="mt-8 mb-12 text-center">
         <Link href="/" className="text-5xl font-thin">
           Decklyst

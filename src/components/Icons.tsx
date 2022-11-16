@@ -1,9 +1,11 @@
 import { BiImport } from 'react-icons/bi'
-import { FaRegClock, FaRegEye } from 'react-icons/fa'
+import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
+import { FaBug, FaDiscord, FaRegClock, FaRegEye } from 'react-icons/fa'
 import { GoRepoForked } from 'react-icons/go'
 import { IoIosBuild, IoIosShareAlt } from 'react-icons/io'
 import { IoCopyOutline, IoTrashOutline } from 'react-icons/io5'
 import { MdDone, MdDownload, MdDownloadDone, MdLink, MdSearch } from 'react-icons/md'
+import { RiChatSmile3Fill } from 'react-icons/ri'
 
 export const ImportIcon = BiImport
 export const BuildIcon = IoIosBuild
@@ -18,3 +20,9 @@ export const CopyIcon = IoCopyOutline
 export const TrashIcon = IoTrashOutline
 export const EyeIcon = FaRegEye
 export const ClockIcon = FaRegClock
+
+export const DiscordIcon = FaDiscord
+export const FeedbackIcon = RiChatSmile3Fill
+export const BugReportIcon = FaBug
+export const ExpandSidebarIcon = BsChevronBarRight
+export const CollapseSidebarIcon = BsChevronBarLeft

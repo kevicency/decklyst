@@ -127,7 +127,14 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
           </div>
         </div>
       </PageHeader>
-      <div className="flex flex-1 flex-col overflow-y-auto pb-8">
+      <div
+        className="flex flex-1 flex-col overflow-y-auto bg-gray-900 bg-fixed bg-no-repeat pb-8 bg-blend-overlay"
+        style={{
+          backgroundImage: 'url(/assets/backgrounds/default.png)',
+          backgroundPosition: 'center top',
+          backgroundSize: '100%',
+        }}
+      >
         <div className="content-container mt-8 flex flex-col">
           <DeckPreviewList decks={decks ?? []} />
         </div>

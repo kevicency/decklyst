@@ -47,15 +47,34 @@ module.exports = {
       legendary: '#e39f28',
 
       // shadow
-      dark: '#0c0c0cc0',
+      dark: colors.neutral['900'] + 'f0',
     },
+    /* prettier-ignore */
     extend: {
       fontFamily: {
         mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono],
       },
+      spacing: {
+        appbar: '3.5rem',
+      },
+      gridTemplateAreas: {
+        desktop: [
+          'logo  header header',
+          'nav-t main   aside',
+          'nav-b main   aside'
+        ],
+      },
+      gridTemplateColumns: {
+        desktop: 'auto minmax(0, 1fr) auto',
+      },
+      gridTemplateRows: {
+        desktop: `min-content
+                  minmax(0, 1fr)
+                  auto`,
+      },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('@savvywombat/tailwindcss-grid-areas')],
   safelist: [
     {
       pattern: /!?(text|bg|border)-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,
