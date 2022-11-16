@@ -138,7 +138,7 @@ export const AppNav: FC = () => {
     <>
       <div
         className={cx(
-          'z-30 flex flex-col gap-y-0.5 border-r border-gray-700 pt-20 shadow-nav grid-in-nav-t',
+          'z-30 flex flex-col gap-y-0.5 border-r border-gray-700 pt-6 shadow-nav grid-in-nav-t',
         )}
       >
         <AppNavLink href="/decks" icon={DeckLibraryIcon}>

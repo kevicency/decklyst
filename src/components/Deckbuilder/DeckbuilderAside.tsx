@@ -7,28 +7,11 @@ import cx from 'classnames'
 import { debounce, noop } from 'lodash'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { useCallback, useState } from 'react'
 import { Aside } from '../Aside'
+import { Filter } from '../Filter'
 import { CompareIcon, CopyIcon, DoneIcon, ShareIcon, TrashIcon } from '../Icons'
-
-const CardFilter: FC<{ title: ReactNode; onClear: () => void; children: ReactNode }> = ({
-  children,
-  title,
-  onClear,
-}) => {
-  return (
-    <div className="flex flex-col gap-y-2">
-      <div className="text-semibold flex items-center justify-between">
-        {title}
-        <button onClick={onClear} className="text-gray-500 hover:text-gray-300">
-          clear
-        </button>
-      </div>
-      {children}
-    </div>
-  )
-}
 
 export const DeckbuilderAside: FC = () => {
   const router = useRouter()
@@ -51,18 +34,18 @@ export const DeckbuilderAside: FC = () => {
     <Aside
       filters={
         <>
-          <CardFilter title="Mana cost" onClear={noop}>
+          <Filter title="Mana cost" onClear={noop}>
             NYI
-          </CardFilter>
-          <CardFilter title="Card Type" onClear={noop}>
+          </Filter>
+          <Filter title="Card Type" onClear={noop}>
             NYI
-          </CardFilter>
-          <CardFilter title="Rarity" onClear={noop}>
+          </Filter>
+          <Filter title="Rarity" onClear={noop}>
             NYI
-          </CardFilter>
-          <CardFilter title="Keyword" onClear={noop}>
+          </Filter>
+          <Filter title="Keyword" onClear={noop}>
             NYI
-          </CardFilter>
+          </Filter>
         </>
       }
     >

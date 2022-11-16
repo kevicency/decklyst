@@ -1,4 +1,6 @@
+import { Aside } from '@/components/Aside'
 import { DeckPreviewList } from '@/components/DeckPreviewList'
+import { Filter } from '@/components/Filter'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
 import { factions } from '@/data/cards'
@@ -83,63 +85,66 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
   )
 
   return (
-    <div className="flex flex-1 flex-col overflow-hidden">
-      <PageHeader>
-        <div className="flex flex-1 justify-between">
-          <div className="flex gap-x-4 text-3xl">
-            <PivotButton active={tab === 'trending'} onClick={() => handleTabChanged('trending')}>
-              Trending
-            </PivotButton>
-            <PivotButton
-              active={tab === 'most-viewed'}
-              onClick={() => handleTabChanged('most-viewed')}
-            >
-              Most Viewed
-            </PivotButton>
-            <PivotButton active={tab === 'latest'} onClick={() => handleTabChanged('latest')}>
-              Latest
-            </PivotButton>
+    <>
+      <div className="flex flex-1 flex-col overflow-hidden grid-in-main">
+        <PageHeader showFilterToggle>
+          <div className="flex flex-1 justify-between">
+            <div className="flex gap-x-4 text-3xl">
+              <PivotButton active={tab === 'trending'} onClick={() => handleTabChanged('trending')}>
+                Trending
+              </PivotButton>
+              <PivotButton
+                active={tab === 'most-viewed'}
+                onClick={() => handleTabChanged('most-viewed')}
+              >
+                Most Viewed
+              </PivotButton>
+              <PivotButton active={tab === 'latest'} onClick={() => handleTabChanged('latest')}>
+                Latest
+              </PivotButton>
+            </div>
+            <div className="flex gap-x-4">
+              <select
+                className="bg-slate-900 px-2 text-lg"
+                value={`${count}`}
+                onChange={(ev) => handleCountChanged(ev.target.value)}
+                aria-label="Count"
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+              </select>
+            </div>
           </div>
-          <div className="flex gap-x-4">
-            <select
-              className="bg-slate-900 px-2 text-lg"
-              value={`${faction}`}
-              onChange={(ev) => handleFactionChanged(ev.target.value)}
-              aria-label="Faction"
-            >
-              <option value="">All Factions</option>
-              {factions.map((faction) => (
-                <option key={faction} value={faction}>
-                  {startCase(faction)}
-                </option>
-              ))}
-            </select>
-            <select
-              className="bg-slate-900 px-2 text-lg"
-              value={`${count}`}
-              onChange={(ev) => handleCountChanged(ev.target.value)}
-              aria-label="Count"
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="25">25</option>
-            </select>
+        </PageHeader>
+        <div className="flex flex-1 flex-col overflow-y-auto bg-gray-900  pb-8">
+          <div className="content-container mt-8 flex flex-col">
+            <DeckPreviewList decks={decks ?? []} />
           </div>
-        </div>
-      </PageHeader>
-      <div
-        className="flex flex-1 flex-col overflow-y-auto bg-gray-900 bg-fixed bg-no-repeat pb-8 bg-blend-overlay"
-        style={{
-          backgroundImage: 'url(/assets/backgrounds/default.png)',
-          backgroundPosition: 'center top',
-          backgroundSize: '100%',
-        }}
-      >
-        <div className="content-container mt-8 flex flex-col">
-          <DeckPreviewList decks={decks ?? []} />
         </div>
       </div>
-    </div>
+      <Aside
+        filters={
+          <>
+            <Filter title="Faction" onClear={() => handleFactionChanged(undefined)}>
+              <select
+                className="bg-alt-1000 px-4 py-2 text-lg"
+                value={`${faction}`}
+                onChange={(ev) => handleFactionChanged(ev.target.value)}
+                aria-label="Faction"
+              >
+                <option value="">All Factions</option>
+                {factions.map((faction) => (
+                  <option key={faction} value={faction}>
+                    {startCase(faction)}
+                  </option>
+                ))}
+              </select>
+            </Filter>
+          </>
+        }
+      />
+    </>
   )
 }
 
