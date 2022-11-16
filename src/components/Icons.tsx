@@ -5,7 +5,7 @@ import { GiGearHammer } from 'react-icons/gi'
 import { GoRepoForked } from 'react-icons/go'
 import { HiOutlineLibrary } from 'react-icons/hi'
 import { IoIosBuild, IoIosShareAlt } from 'react-icons/io'
-import { IoCopyOutline, IoTrashOutline } from 'react-icons/io5'
+import { IoCopyOutline, IoFilterSharp, IoTrashOutline } from 'react-icons/io5'
 import { MdDone, MdDownload, MdDownloadDone, MdLink, MdSearch } from 'react-icons/md'
 import { RiChatSmile3Fill } from 'react-icons/ri'
 
@@ -30,3 +30,4 @@ export const ExpandSidebarIcon = BsChevronBarRight
 export const CollapseSidebarIcon = BsChevronBarLeft
 export const DeckLibraryIcon = HiOutlineLibrary
 export const DeckbuilderIcon = GiGearHammer
+export const FilterIcon = IoFilterSharp

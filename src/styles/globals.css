@@ -124,6 +124,11 @@ body {
   a[data-tip] {
     @apply cursor-help hover:text-inherit;
   }
+
+  .grid-in-aside > * {
+    width: var(--w-aside);
+    @apply border-l border-gray-700;
+  }
 }
 
 @layer utilities {
@@ -140,7 +145,10 @@ body {
   }
 
   .w-aside {
-    @apply w-[var(--w-aside)];
+    width: var(--w-aside);
+  }
+  .w-aside-2x {
+    width: calc(var(--w-aside) * 2);
   }
 
   .shadow-nav {

@@ -23,7 +23,7 @@ const appState = [
   { toggleNav: noop, toggleFilters: noop },
 ] as const
 export type AppState = typeof appState
-const AppContext = createContext<AppState>(appState)
+export const AppContext = createContext<AppState>(appState)
 
 export const AppLogo = () => {
   const [{ isNavExpanded }] = useContext(AppContext)
