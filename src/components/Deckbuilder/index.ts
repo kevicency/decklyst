@@ -1,1 +1,2 @@
-export { Deckbuilder } from './Deckbuilder'
+export { DeckbuilderAside } from './DeckbuilderAside'
+export { DeckbuilderMain } from './DeckbuilderMain'

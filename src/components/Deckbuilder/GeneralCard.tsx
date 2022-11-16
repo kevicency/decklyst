@@ -17,7 +17,7 @@ export const GeneralCard = ({
     onClick={() => onSelect(general)}
     className={cx(
       {
-        'mt-[-24px] mb-[-16px] ml-[-24px] w-48': size === 'md',
+        'mt-[-16px] mb-[-10px] ml-[-16px] w-32': size === 'md',
         'mt-[-10px] mb-[-6px] ml-[-12px] w-20': size === 'sm',
       },
       'flex flex-shrink-0 flex-col items-center',
@@ -35,9 +35,9 @@ export const GeneralCard = ({
     />
     {size === 'md' && (
       <div
-        className={cx(`flex-1 font-bold`, {
+        className={cx(`flex-1 font-semibold`, {
           // 'text-sm px-2': size === 'sm',
-          'px-4 text-lg': size === 'md',
+          'px-4': size === 'md',
         })}
       >
         {general.name}

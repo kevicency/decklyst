@@ -8,7 +8,7 @@ import { get, startCase } from 'lodash'
 import type { FC } from 'react'
 import colors from 'tailwindcss/colors'
 
-export const SidebarCardList: FC<{ cardType: CardType }> = ({ cardType }) => {
+export const CardsInDeck: FC<{ cardType: CardType }> = ({ cardType }) => {
   const deck = useDeck()
   const path = `${cardType.toLowerCase()}s`
   const cards: CardEntry[] = get(deck, path, [])
@@ -22,14 +22,14 @@ export const SidebarCardList: FC<{ cardType: CardType }> = ({ cardType }) => {
       </div>
       <ul>
         {cards.map((card) => (
-          <SidebarCardEntry key={card.id} card={card} />
+          <CardInDeck key={card.id} card={card} />
         ))}
       </ul>
     </div>
   )
 }
 
-export const SidebarCardEntry: FC<{ card: CardEntry }> = ({ card }) => {
+const CardInDeck: FC<{ card: CardEntry }> = ({ card }) => {
   const { data: sprite } = useSpriteQuery(card.id)
   const [, { removeCard, addCard }] = useDeckcode()
   return (

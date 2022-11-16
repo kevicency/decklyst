@@ -11,13 +11,10 @@ import { cards } from '@/data/cards'
 import useOnScreen from '@/hooks/useOnScreen'
 import cx from 'classnames'
 import { startCase } from 'lodash'
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { useDeferredValue, useMemo, useRef, useState } from 'react'
 
-export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: ReactNode }> = ({
-  onGeneralSelected,
-  sidebar,
-}) => {
+export const DeckbuilderMainBuild: FC<{ onSelectGeneral: CardHandler }> = ({ onSelectGeneral }) => {
   const [, { addCard, removeCard }] = useDeckcode()
   const deck = useDeck()
   const factionCardListRef = useRef<HTMLDivElement>(null)
@@ -69,7 +66,7 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
             <GeneralCard
               size="sm"
               general={general}
-              onSelect={onGeneralSelected}
+              onSelect={onSelectGeneral}
               key={general.id}
               className={cx(
                 'transition-all',
@@ -97,7 +94,6 @@ export const DeckbuilderBuild: FC<{ onGeneralSelected: CardHandler; sidebar: Rea
 
           <RelatedCardsTooltip />
         </div>
-        {sidebar}
       </div>
     </>
   )

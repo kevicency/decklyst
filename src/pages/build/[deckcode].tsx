@@ -1,4 +1,4 @@
-import { Deckbuilder } from '@/components/Deckbuilder/Deckbuilder'
+import { DeckbuilderAside, DeckbuilderMain } from '@/components/Deckbuilder'
 import { DeckMetadata } from '@/components/DeckMetadata'
 import { DeckProvider } from '@/context/useDeck'
 import type { DeckcodeContextValue } from '@/context/useDeckcode'
@@ -18,7 +18,7 @@ import type { InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -34,7 +34,7 @@ const useRouteQuery = (deckcode: string | null) => {
           pathname,
           query: {
             ...query,
-            base: baseDeckcode,
+            ...(baseDeckcode && { base: baseDeckcode }),
           },
         },
         undefined,
@@ -87,7 +87,8 @@ const BuildPage: FC<Props> = (props) => {
       <DeckProvider deck={deck}>
         <>
           <DeckMetadata />
-          <Deckbuilder />
+          <DeckbuilderMain />
+          <DeckbuilderAside />
         </>
       </DeckProvider>
     </DeckcodeProvider>

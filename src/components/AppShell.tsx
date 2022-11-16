@@ -12,7 +12,7 @@ import cx from 'classnames'
 import { noop } from 'lodash'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 import { createContext, useContext, useState } from 'react'
 import type { IconType } from 'react-icons'
 
@@ -26,11 +26,11 @@ export const AppLogo = () => {
   return (
     <Link
       href="/"
-      className="flex h-12 items-center gap-x-4 border-r border-b border-gray-700 py-1 pl-4 pr-6 text-3xl font-thin grid-in-logo"
+      className="flex h-12 items-center gap-x-4 border-r border-b border-gray-700 py-1 px-4 text-3xl font-thin grid-in-logo"
     >
-      <img src="/favicon.png" alt="logo" className="h-6 w-6" />
+      <img src="/favicon.png" alt="logo" className="ml-0.5 h-6 w-6" />
 
-      {isNavExpanded && <span className="animate-in fade-in">Decklyst</span>}
+      {isNavExpanded && <span className="pr-2 animate-in fade-in">Decklyst</span>}
     </Link>
   )
 }
@@ -58,7 +58,7 @@ export const AppHeader = () => {
           <SearchIcon className="pl-0.5" size={24} />
         </button>
         <input
-          className={cx('w-full bg-gray-900 py-2 pl-5 focus:bg-gray-850', 'pl-12 pr-2')}
+          className={cx('w-full bg-transparent py-2 pl-5 focus:bg-gray-850', 'pl-12 pr-2')}
           placeholder={'Enter deckcode or sharecode'}
           value={search ?? ''}
           onFocus={(ev) => ev.target.select()}
@@ -92,7 +92,7 @@ export const AppNavLink: FC<{
   onClick?: () => void
   icon: IconType
   iconClassName?: string
-  children: JSX.Element | string
+  children: ReactNode
   active?: boolean
   className?: string
 }> = ({ icon: Icon, iconClassName, active, className, href, onClick, children }) => {
@@ -110,7 +110,7 @@ export const AppNavLink: FC<{
       className={cx(
         className,
         'flex items-center gap-x-3 overflow-hidden whitespace-nowrap',
-        'border-r-2 py-4 pl-4 pr-6 font-semibold hover:cursor-pointer  hover:bg-gray-800',
+        'border-r-2 py-4 px-4 font-semibold hover:cursor-pointer  hover:bg-gray-800',
         'text-gray-400',
         isActive
           ? 'border-accent-400 bg-gray-850 text-accent-600 hover:border-accent-400 hover:text-accent-600'
@@ -134,7 +134,7 @@ export const AppNav: FC = () => {
     <>
       <div
         className={cx(
-          'z-20 flex flex-col gap-y-0.5 border-r border-gray-700 pt-6 shadow-lg shadow-dark grid-in-nav-t',
+          'z-20 flex flex-col gap-y-0.5 border-r border-gray-700 pt-20 shadow-lg shadow-dark grid-in-nav-t',
         )}
       >
         <AppNavLink href="/decks" icon={BuildIcon}>
@@ -167,6 +167,7 @@ export const AppNav: FC = () => {
           <AppNavLink
             href="discord://discord.com/channels/1041363184872857602/1041363436711465050"
             icon={BugReportIcon}
+            iconClassName="!text-xl"
           >
             Report a bug
           </AppNavLink>
@@ -184,14 +185,14 @@ export const AppNav: FC = () => {
     </>
   )
 }
-export const AppShell: FC<{ children: JSX.Element }> = ({ children }) => {
+export const AppShell: FC<{ children: ReactNode }> = ({ children }) => {
   const [isNavExpanded, setNavExpanded] = useState(true)
 
   return (
     <AppContext.Provider
       value={[{ isNavExpanded }, { toggleNav: () => setNavExpanded((value) => !value) }]}
     >
-      <div className="grid h-screen w-screen grid-cols-desktop grid-rows-desktop overflow-hidden grid-areas-desktop">
+      <div className="grid h-screen w-screen grid-cols-desktop grid-rows-desktop overflow-hidden bg-gray-1000 grid-areas-desktop">
         <AppLogo />
         <AppHeader />
         <AppNav />

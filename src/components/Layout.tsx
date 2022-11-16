@@ -7,5 +7,3 @@ export const Layout: FC<{ children: any; hideSidebar?: boolean }> = ({ children,
     <div className="flex flex-1 flex-col">{children}</div>
   </div>
 )
-
-export const AppLayout: FC<{ children: JSX.Element }> = ({ children }) => <div className=""></div>
