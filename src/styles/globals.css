@@ -4,35 +4,77 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .hexagon {
-    display: inline-block;
-    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-  }
+:root {
+  --w-aside: theme('spacing.72');
+}
 
-  .border-3 {
-    @apply border-[3px];
-  }
-
-  .flip-horizontal {
-    --transform-scale-x: -1;
-  }
-
-  .flip-vertical {
-    --transform-scale-y: -1;
-  }
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 @layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+    @apply transition-colors;
+  }
+
+  a:hover {
+    @apply text-accent-400;
+  }
+
+  button {
+    @apply transition-colors;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-gray-900;
+    @apply text-gray-100;
+  }
+
+  input {
+    @apply outline-none;
+  }
+
+  ::-webkit-scrollbar {
+    background-color: transparent;
+    width: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-alt-500;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-alt-700;
+  }
+}
+
+@layer components {
   .content-container {
     width: 100%;
     max-width: 68rem;
     @apply px-4 lg:px-8;
     @apply mx-auto;
   }
-}
 
-@layer components {
   .sprite {
     backface-visibility: hidden;
     transform-style: preserve-3d;
@@ -41,6 +83,11 @@
 
   .link {
     @apply text-gray-100 hover:text-accent-400;
+  }
+
+  .hexagon {
+    display: inline-block;
+    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
   }
 
   .btn {
@@ -70,84 +117,55 @@
   }
 
   .page-header-input {
-    @apply border-b-2 border-alt-500 bg-alt-800 transition-colors focus:border-alt-300;
+    @apply border-b-2 border-alt-600 bg-alt-800 transition-colors focus:border-alt-400;
     @apply w-full px-2 py-2;
   }
 
   a[data-tip] {
     @apply cursor-help hover:text-inherit;
   }
+}
 
-  #card-tooltip {
-    font-size: inherit !important;
-    padding: 0 !important;
+@layer utilities {
+  .disabled {
+    @apply text-gray-600;
   }
-  #related-cards-tooltip {
-    font-size: inherit !important;
-    padding: 0 !important;
+
+  .flip-horizontal {
+    --transform-scale-x: -1;
   }
-  #related-cards-tooltip.show {
-    opacity: 0.99;
+
+  .flip-vertical {
+    --transform-scale-y: -1;
+  }
+
+  .w-aside {
+    @apply w-[var(--w-aside)];
+  }
+
+  .shadow-nav {
+    clip-path: inset(0 -4rem -1px 0);
+  }
+  .shadow-header {
+    clip-path: inset(0 0 -4rem 0);
+  }
+
+  .bg-blur-image {
+    @apply bg-fixed bg-no-repeat bg-blend-overlay;
+    background-position: center top;
+    background-image: url('/assets/backgrounds/default.png');
+    background-size: 100%;
   }
 }
 
-html,
-body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  margin: 0;
-  padding: 0;
+#card-tooltip {
+  font-size: inherit !important;
+  padding: 0 !important;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-  @apply transition-colors;
+#related-cards-tooltip {
+  font-size: inherit !important;
+  padding: 0 !important;
 }
-
-a:hover {
-  @apply text-accent-400;
-}
-
-.disabled {
-  @apply text-gray-600;
-}
-
-button {
-  @apply transition-colors;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  color-scheme: dark;
-}
-
-body {
-  @apply bg-gray-900;
-  @apply text-gray-100;
-}
-
-input {
-  @apply outline-none;
-}
-
-::-webkit-scrollbar {
-  background-color: transparent;
-  width: 7px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-alt-500;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-alt-700;
+#related-cards-tooltip.show {
+  opacity: 0.99;
 }

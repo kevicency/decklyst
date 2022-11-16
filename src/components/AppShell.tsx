@@ -1,10 +1,12 @@
 import { isShareOrDeckcode } from '@/common/utils'
 import {
   BugReportIcon,
-  BuildIcon,
   CompareIcon,
+  DeckbuilderIcon,
+  DeckLibraryIcon,
   DiscordIcon,
   ExpandSidebarIcon,
+  EyeIcon,
   FeedbackIcon,
   SearchIcon,
 } from '@/components/Icons'
@@ -13,13 +15,15 @@ import { noop } from 'lodash'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { FC, ReactNode } from 'react'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import type { IconType } from 'react-icons'
 
-const AppContext = createContext<[{ isNavExpanded: boolean }, { toggleNav: () => void }]>([
-  { isNavExpanded: false },
-  { toggleNav: noop },
-])
+const appState = [
+  { isNavExpanded: false as boolean, showFilters: false as boolean },
+  { toggleNav: noop, toggleFilters: noop },
+] as const
+export type AppState = typeof appState
+const AppContext = createContext<AppState>(appState)
 
 export const AppLogo = () => {
   const [{ isNavExpanded }] = useContext(AppContext)
@@ -42,7 +46,7 @@ export const AppHeader = () => {
   const isSearchValid = isShareOrDeckcode(search)
 
   return (
-    <div className="z-20 flex w-full items-center border-b border-gray-700 bg-gradient-to-r from-gray-900 to-alt-900 shadow-lg shadow-dark grid-in-header">
+    <div className="z-20 flex w-full items-center border-b border-gray-700 bg-gradient-to-r from-gray-900 to-alt-900 shadow-header grid-in-header">
       <div className="relative flex h-full w-1/3 items-stretch border-r border-gray-600 transition-colors">
         <button
           aria-label="Search"
@@ -110,7 +114,7 @@ export const AppNavLink: FC<{
       className={cx(
         className,
         'flex items-center gap-x-3 overflow-hidden whitespace-nowrap',
-        'border-r-2 py-4 px-4 font-semibold hover:cursor-pointer  hover:bg-gray-800',
+        'border-r-2 py-4 px-4 font-semibold hover:cursor-pointer hover:bg-gray-800',
         'text-gray-400',
         isActive
           ? 'border-accent-400 bg-gray-850 text-accent-600 hover:border-accent-400 hover:text-accent-600'
@@ -134,30 +138,26 @@ export const AppNav: FC = () => {
     <>
       <div
         className={cx(
-          'z-20 flex flex-col gap-y-0.5 border-r border-gray-700 pt-20 shadow-lg shadow-dark grid-in-nav-t',
+          'z-30 flex flex-col gap-y-0.5 border-r border-gray-700 pt-20 shadow-nav grid-in-nav-t',
         )}
       >
-        <AppNavLink href="/decks" icon={BuildIcon}>
+        <AppNavLink href="/decks" icon={DeckLibraryIcon}>
           Deck Libray
         </AppNavLink>
-        <AppNavLink href="/build" icon={BuildIcon}>
+        <AppNavLink href="/build" icon={DeckbuilderIcon}>
           Deck Builder
         </AppNavLink>
         <AppNavLink href="/compare" icon={CompareIcon}>
           Deck Diff
         </AppNavLink>
-        <AppNavLink href="/test" icon={CompareIcon}>
+        <AppNavLink href="/test" icon={EyeIcon}>
           Test Page
         </AppNavLink>
       </div>
-      <div
-        className={cx(
-          'z-30 flex flex-col border-r border-gray-700 shadow-lg shadow-dark grid-in-nav-b',
-        )}
-      >
+      <div className={cx('z-30 flex flex-col border-r border-gray-700 shadow-nav grid-in-nav-b')}>
         <div className="border-t border-gray-800">
           <AppNavLink
-            href="https://discord.com/channels/1041363184872857602/1041363185707528208"
+            href="discord://discord.com/channels/1041363184872857602/1041363185707528208"
             icon={FeedbackIcon}
           >
             Feedback
@@ -187,10 +187,34 @@ export const AppNav: FC = () => {
 }
 export const AppShell: FC<{ children: ReactNode }> = ({ children }) => {
   const [isNavExpanded, setNavExpanded] = useState(true)
+  const [showFilters, setShowFilters] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleRouteChanged = (url: string, { shallow }: { shallow: boolean }) => {
+      console.log(`App is changing to ${url} ${shallow ? 'with' : 'without'} shallow routing`)
+      if (!shallow) {
+        setShowFilters(url === '/decks')
+      }
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChanged)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChanged)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <AppContext.Provider
-      value={[{ isNavExpanded }, { toggleNav: () => setNavExpanded((value) => !value) }]}
+      value={[
+        { isNavExpanded, showFilters },
+        {
+          toggleNav: () => setNavExpanded((value) => !value),
+          toggleFilters: () => setShowFilters((value) => !value),
+        },
+      ]}
     >
       <div className="grid h-screen w-screen grid-cols-desktop grid-rows-desktop overflow-hidden bg-gray-1000 grid-areas-desktop">
         <AppLogo />

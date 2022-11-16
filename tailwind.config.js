@@ -45,17 +45,18 @@ module.exports = {
       rare: '#396cfd',
       epic: '#bf20e1',
       legendary: '#e39f28',
-
-      // shadow
-      dark: colors.neutral['900'] + 'f0',
     },
     /* prettier-ignore */
     extend: {
       fontFamily: {
         mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono],
       },
-      spacing: {
-        appbar: '3.5rem',
+      boxShadow: {
+        'nav': `12px 1px 16px 4px rgba(16,16,16,0.5)`,
+        'header': `1px 1px 16px 4px rgba(16,16,16,0.5)`,
+      },
+      borderWidth:{
+        '3': '3px',
       },
       gridTemplateAreas: {
         desktop: [

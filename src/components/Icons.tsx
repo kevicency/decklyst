@@ -1,7 +1,9 @@
 import { BiImport } from 'react-icons/bi'
 import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
 import { FaBug, FaDiscord, FaRegClock, FaRegEye } from 'react-icons/fa'
+import { GiGearHammer } from 'react-icons/gi'
 import { GoRepoForked } from 'react-icons/go'
+import { HiOutlineLibrary } from 'react-icons/hi'
 import { IoIosBuild, IoIosShareAlt } from 'react-icons/io'
 import { IoCopyOutline, IoTrashOutline } from 'react-icons/io5'
 import { MdDone, MdDownload, MdDownloadDone, MdLink, MdSearch } from 'react-icons/md'
@@ -26,3 +28,5 @@ export const FeedbackIcon = RiChatSmile3Fill
 export const BugReportIcon = FaBug
 export const ExpandSidebarIcon = BsChevronBarRight
 export const CollapseSidebarIcon = BsChevronBarLeft
+export const DeckLibraryIcon = HiOutlineLibrary
+export const DeckbuilderIcon = GiGearHammer

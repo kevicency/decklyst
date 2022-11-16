@@ -27,14 +27,16 @@ const useRouteQuery = (deckcode: string | null) => {
   const deckcodeFromRoute = (query.deckcode as string | undefined) ?? deckcode ?? ''
   const [baseDeckcode] = useState((query.base as string | undefined) ?? deckcodeFromRoute)
 
+  const isValidBase = Object.keys(parseDeckcode(baseDeckcode).cards).length > 1
+
   useEffect(() => {
-    if (baseDeckcode !== query.base) {
+    if (isValidBase && baseDeckcode !== query.base) {
       replace(
         {
           pathname,
           query: {
             ...query,
-            ...(baseDeckcode && { base: baseDeckcode }),
+            base: baseDeckcode,
           },
         },
         undefined,
@@ -45,7 +47,7 @@ const useRouteQuery = (deckcode: string | null) => {
   return { deckcodeFromRoute, baseDeckcode }
 }
 
-const BuildPage: FC<Props> = (props) => {
+const DeckbuilderBuildPage: FC<Props> = (props) => {
   const router = useRouter()
   const { deckcodeFromRoute, baseDeckcode } = useRouteQuery(props.deckcode)
   const deckcode = useMemo(() => parseDeckcode(deckcodeFromRoute), [deckcodeFromRoute])
@@ -95,7 +97,7 @@ const BuildPage: FC<Props> = (props) => {
   )
 }
 
-export default BuildPage
+export default DeckbuilderBuildPage
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const deckcode = (ctx.query.deckcode as string | undefined) ?? null
