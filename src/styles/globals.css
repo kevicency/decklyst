@@ -162,7 +162,7 @@ body {
     @apply bg-fixed bg-no-repeat bg-blend-overlay;
     background-position: center top;
     background-image: url('/assets/backgrounds/default.png');
-    background-size: 100%;
+    background-size: cover;
   }
 }
 

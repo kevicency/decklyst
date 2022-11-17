@@ -113,7 +113,7 @@ export const AppNavLink: FC<{
       className={cx(
         className,
         'flex items-center gap-x-3 overflow-hidden whitespace-nowrap',
-        'border-r-2 py-4 px-4 font-semibold hover:cursor-pointer hover:bg-gray-800',
+        'border-l-2 py-4 px-4 font-semibold hover:cursor-pointer hover:bg-gray-800',
         'text-gray-400',
         isActive
           ? 'border-accent-400 bg-gray-850 text-accent-600 hover:border-accent-400 hover:text-accent-600'
