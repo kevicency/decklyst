@@ -2,11 +2,16 @@ import { CardSprite } from '@/components/CardSprite'
 import type { CardEntry } from '@/data/deck'
 import cx from 'classnames'
 import type { FC } from 'react'
+import type { Variant } from './variant'
 
-export const IconCardList: FC<{ cards: CardEntry[] }> = ({ cards }) => {
+export const IconCardList: FC<{ cards: CardEntry[]; variant?: Variant }> = ({ cards, variant }) => {
   return (
     <div
-      className={cx('grid bg-alt-800', cards.length && 'mt-6 h-24')}
+      className={cx(
+        'grid',
+        cards.length && 'mt-6 h-24',
+        variant === 'infograph' ? 'bg-alt-800' : 'bg-transparent',
+      )}
       style={{ gridTemplateColumns: `repeat(${cards.length}, minmax(0, 1fr))` }}
     >
       {cards.map((card) => (
@@ -15,7 +20,7 @@ export const IconCardList: FC<{ cards: CardEntry[] }> = ({ cards }) => {
     </div>
   )
 }
-export const IconCard: FC<{ card: CardEntry }> = ({ card }) => (
+export const IconCard: FC<{ card: CardEntry; variant?: Variant }> = ({ card, variant }) => (
   <div className="flex w-16 flex-col">
     <a
       className="relative flex flex-1"
@@ -23,8 +28,10 @@ export const IconCard: FC<{ card: CardEntry }> = ({ card }) => (
       data-for="card-tooltip"
       data-place="bottom"
     >
-      <CardSprite card={card} centered className="absolute left-1/2 bottom-4 scale-150" />
+      <CardSprite card={card} centered className="absolute left-1/2 bottom-5 scale-150" />
     </a>
-    <div className="bg-alt-700 py-0.5 text-center">{card.count}</div>
+    <div className={`${variant === 'infograph' ? 'bg-alt-700' : 'bg-alt-800'} py-0.5 text-center`}>
+      {card.count}
+    </div>
   </div>
 )
