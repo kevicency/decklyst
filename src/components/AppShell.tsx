@@ -6,7 +6,6 @@ import {
   DeckLibraryIcon,
   DiscordIcon,
   ExpandSidebarIcon,
-  EyeIcon,
   FeedbackIcon,
   SearchIcon,
 } from '@/components/Icons'
@@ -154,9 +153,6 @@ export const AppNav: FC = () => {
         </AppNavLink>
         <AppNavLink href="/compare" icon={CompareIcon}>
           Deck Diff
-        </AppNavLink>
-        <AppNavLink href="/test" icon={EyeIcon}>
-          Test Page
         </AppNavLink>
       </div>
       <div className={cx('z-30 flex flex-col border-r border-gray-700 shadow-nav grid-in-nav-b')}>
