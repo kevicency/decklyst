@@ -62,7 +62,7 @@ export const AppHeader = () => {
         </button>
         <input
           className={cx('w-full bg-transparent py-2 pl-5 focus:bg-gray-850', 'pl-12 pr-2')}
-          placeholder={'Enter deckcode or sharecode'}
+          placeholder={'Search for a deckcode or sharecode'}
           value={search ?? ''}
           onFocus={(ev) => ev.target.select()}
           onChange={(ev) => setSearch(ev.target.value)}
@@ -168,7 +168,7 @@ export const AppNav: FC = () => {
           <AppNavLink
             href="discord://discord.com/channels/1041363184872857602/1041363436711465050"
             icon={BugReportIcon}
-            iconClassName="!text-xl"
+            iconClassName="py-0.5"
           >
             Report a bug
           </AppNavLink>
@@ -193,7 +193,6 @@ export const AppShell: FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     const handleRouteChanged = (url: string, { shallow }: { shallow: boolean }) => {
-      console.log(`App is changing to ${url} ${shallow ? 'with' : 'without'} shallow routing`)
       if (!shallow) {
         setShowFilters(url === '/decks')
       }
