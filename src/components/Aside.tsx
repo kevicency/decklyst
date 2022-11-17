@@ -23,8 +23,8 @@ export const Aside: FC<{
         <div
           className={cx(
             'animate-in slide-in-from-right',
-            'absolute left-0 top-0 z-30 flex h-full flex-col gap-y-4 bg-alt-900 p-4',
-            '2xl:relative 2xl:animate-none',
+            'flex h-full flex-col gap-y-4 bg-alt-900 p-4',
+            children ? 'absolute left-0 top-0 2xl:relative 2xl:animate-none' : '',
           )}
         >
           <div className="-mx-4 flex items-center justify-between border-b border-gray-700 px-4 pt-2 pb-6">
