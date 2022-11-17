@@ -1,4 +1,4 @@
-import { AppShell } from '@/components/AppShell'
+import { AppShell } from '@/components/AppShell/AppShell'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import { trpc } from '@/utils/trpc'
 import { Analytics } from '@vercel/analytics/react'

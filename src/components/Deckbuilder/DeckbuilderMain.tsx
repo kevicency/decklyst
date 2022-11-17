@@ -12,13 +12,11 @@ import useOnScreen from '@/hooks/useOnScreen'
 import cx from 'classnames'
 import { startCase } from 'lodash'
 import type { FC } from 'react'
-import { useContext, useDeferredValue, useMemo, useRef, useState } from 'react'
-import { AppContext } from '../AppShell'
+import { useDeferredValue, useMemo, useRef, useState } from 'react'
 
 export const DeckbuilderMain: FC = () => {
   const [, { addCard, removeCard, replaceCard }] = useDeckcode()
   const deck = useDeck()
-  const [{}, { toggleFilters }] = useContext(AppContext)
   const factionCardListRef = useRef<HTMLDivElement>(null)
   const neutralCardListRef = useRef<HTMLDivElement>(null)
   const neutralCardsOnScreen = useOnScreen(neutralCardListRef)

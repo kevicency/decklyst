@@ -1,14 +1,14 @@
+import { useAppShell } from '@/context/useAppShell'
 import cx from 'classnames'
 import type { FC, ReactNode } from 'react'
-import { useContext, useEffect } from 'react'
-import { AppContext } from './AppShell'
+import { useEffect } from 'react'
 
 export const Aside: FC<{
   className?: string
   children?: ReactNode
   filters?: ReactNode | ReactNode[]
 }> = ({ className, children, filters }) => {
-  const [{ showFilters }, { toggleFilters }] = useContext(AppContext)
+  const [{ showFilters }, { toggleFilters }] = useAppShell()
 
   useEffect(() => {
     if (!children && !showFilters) {

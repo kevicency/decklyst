@@ -1,14 +1,13 @@
+import { useAppShell } from '@/context/useAppShell'
 import cx from 'classnames'
 import type { FC, ReactNode } from 'react'
-import { useContext } from 'react'
-import { AppContext } from './AppShell'
 import { FilterIcon } from './Icons'
 
 export const PageHeader: FC<{ children: ReactNode; showFilterToggle?: boolean }> = ({
   children,
   showFilterToggle,
 }) => {
-  const [, { toggleFilters }] = useContext(AppContext)
+  const [, { toggleFilters }] = useAppShell()
   return (
     <div
       className={cx(
