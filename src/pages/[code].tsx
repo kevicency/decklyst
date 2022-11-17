@@ -1,40 +1,17 @@
-import { getImageDataUri } from '@/common/getImageDataUri'
 import { transformer } from '@/common/transformer'
-import { deckImageUrl } from '@/common/urls'
-import { DeckInfograph } from '@/components/DeckInfograph'
-import { DeckMetadata } from '@/components/DeckMetadata'
-import {
-  BuildIcon,
-  ClockIcon,
-  CompareIcon,
-  CopyIcon,
-  DoneIcon,
-  DownloadDoneIcon,
-  DownloadIcon,
-  EyeIcon,
-  LinkIcon,
-} from '@/components/Icons'
-import { OneTimeButton } from '@/components/OneTimeButton'
-import { PageHeader } from '@/components/PageHeader'
+import { DeckDetailsAside, DeckDetailsMain } from '@/components/DeckDetails/DeckDetailsMain'
 import { DeckProvider } from '@/context/useDeck'
 import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import type { DeckExpanded } from '@/data/deck'
-import { createDeckExpanded, deckcodeWithoutTitle$, faction$, title$ } from '@/data/deck'
+import { createDeckExpanded } from '@/data/deck'
 import { appRouter } from '@/server'
 import { createContextInner } from '@/server/trpc/context'
 import { trpc } from '@/utils/trpc'
-import { useQuery } from '@tanstack/react-query'
 import { createProxySSGHelpers } from '@trpc/react-query/ssg'
-import { formatDistance } from 'date-fns'
-import { merge, noop, uniqBy } from 'lodash'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { merge, uniqBy } from 'lodash'
 import type { GetStaticPaths, GetStaticPropsContext } from 'next/types'
 import type { FC } from 'react'
-import React, { useEffect, useMemo } from 'react'
-import { BounceLoader } from 'react-spinners'
-import colors from 'tailwindcss/colors'
 
 type Props = {
   deck: DeckExpanded
@@ -42,175 +19,18 @@ type Props = {
 }
 
 const DeckPage: FC<Props> = ({ deck }) => {
-  const { query } = useRouter()
   const deckcode = deck.deckcode
   const meta = deck.meta ?? {}
-  const imageFilename = useMemo(
-    () => `${title$(deck)}_${faction$(deck)}_${deckcodeWithoutTitle$(deck)}.png`,
-    [deck],
-  )
-
   useRegisterView(deckcode)
   const { data: viewCount } = trpc.deckviews.get.useQuery({ deckcode })
-  const { mutateAsync: ensureDeckimage } = trpc.deckimage.ensure.useMutation()
-  const { data: imageDataUriFromQuery, refetch: refetchDeckimage } = useQuery(
-    ['deck-image', deckcode],
-    async () => {
-      const image = await ensureDeckimage({ code: deckcode })
-
-      return getImageDataUri(image)
-    },
-    {
-      staleTime: Infinity,
-      retry: true,
-      retryDelay: (retryCount) => 1000 * Math.pow(2, Math.max(0, retryCount - 5)),
-    },
-  )
-  const [imageDataUri, setImageDataUri] = React.useState<string | null>(
-    imageDataUriFromQuery ?? null,
-  )
-
-  useEffect(() => {
-    if (imageDataUriFromQuery && imageDataUri !== imageDataUriFromQuery) {
-      setImageDataUri(imageDataUriFromQuery)
-    }
-  }, [imageDataUri, imageDataUriFromQuery])
-
-  const copyDeckcode = async () => {
-    if (deckcode) {
-      await navigator.clipboard.writeText(deckcode)
-    }
-  }
-  const copyImageUrl = async () => {
-    if (deckcode) {
-      await navigator.clipboard.writeText(deckImageUrl(deckcode))
-    }
-  }
-
-  const handleRegenerateClick = () => async () => {
-    setImageDataUri(null)
-    try {
-      const image = await ensureDeckimage({ code: deckcode, forceRerender: true })
-      setImageDataUri(getImageDataUri(image))
-    } catch (e) {
-      await refetchDeckimage()
-    }
-  }
 
   if (!deck) return null
 
   return (
-    <DeckProvider deck={merge(deck, { meta: { viewCount: viewCount || 1 } })}>
+    <DeckProvider deck={merge(deck, { meta: { ...meta, viewCount: viewCount || 1 } })}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
-        <div className="flex flex-1 flex-col overflow-hidden">
-          <PageHeader>
-            <div className="text-sm text-gray-300">
-              {meta.viewCount && (
-                <div className="flex items-center gap-x-2">
-                  <EyeIcon />
-                  <span className="font-bold">{meta.viewCount}</span>
-                  <span>{meta.viewCount === 1 ? 'view' : 'views'}</span>
-                </div>
-              )}
-              {meta.createdAt && (
-                <div className="flex items-center gap-x-2">
-                  <ClockIcon />
-                  Created
-                  <span className="font-bold">
-                    {formatDistance(meta.createdAt, new Date(), { addSuffix: true })}
-                  </span>
-                </div>
-              )}
-            </div>
-            <div className="flex gap-x-4">
-              <OneTimeButton onClick={copyDeckcode} timeout={2500}>
-                {(copied) => (
-                  <>
-                    {copied ? <DoneIcon /> : <CopyIcon />}
-                    Copy deckcode
-                  </>
-                )}
-              </OneTimeButton>
-              <OneTimeButton onClick={copyImageUrl} timeout={2500}>
-                {(copied) => (
-                  <>
-                    {copied ? <DoneIcon /> : <LinkIcon />}
-                    Copy image url
-                  </>
-                )}
-              </OneTimeButton>
-              <OneTimeButton
-                href={imageDataUri ?? undefined}
-                download={imageFilename}
-                disabled={!imageDataUri}
-              >
-                {(isDownloading) =>
-                  imageDataUri ? (
-                    <>
-                      {isDownloading ? <DownloadDoneIcon /> : <DownloadIcon />}
-                      Download image &nbsp;
-                    </>
-                  ) : (
-                    <>
-                      <BounceLoader
-                        size={18}
-                        speedMultiplier={0.66}
-                        color={colors.gray['400']}
-                        className="mr-2"
-                      />
-                      <span className="text-alt-400">Generating image</span>
-                    </>
-                  )
-                }
-              </OneTimeButton>
-            </div>
-            <div className="flex gap-x-4">
-              <Link
-                href={{ pathname: '/compare', query: { left: deck.deckcode } }}
-                prefetch={false}
-                className="btn"
-              >
-                <CompareIcon /> Compare
-              </Link>
-              <Link
-                href={{
-                  pathname: '/build/[deckcode]',
-                  query: { deckcode: deck.deckcode },
-                }}
-                className="btn"
-              >
-                <BuildIcon /> Open in deckbuilder
-              </Link>
-            </div>
-          </PageHeader>
-          <DeckMetadata />
-          <div className="flex flex-1 flex-col overflow-y-auto">
-            <div className="content-container my-8">
-              <DeckInfograph />
-              <div>
-                <input
-                  name="deckcode"
-                  className="page-header-input w-full bg-alt-900 px-4 text-alt-200"
-                  value={deckcode}
-                  onFocus={(ev) => setTimeout(() => ev.target.select(), 50)}
-                  readOnly
-                  onChange={noop}
-                  aria-label="Deckcode"
-                />
-              </div>
-              <div className="mt-4 mr-4 flex items-center justify-end gap-x-2 text-sm text-alt-500">
-                <span>Image broken?</span>
-                <button
-                  disabled={!imageDataUri}
-                  onClick={handleRegenerateClick()}
-                  className="text-alt-400 hover:text-accent-400 disabled:hover:text-alt-400"
-                >
-                  Regenerate
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <DeckDetailsMain />
+        <DeckDetailsAside />
       </SpriteLoaderProvider>
     </DeckProvider>
   )
@@ -260,53 +80,5 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
       }
     : { notFound: true, revalidate: true }
 }
-
-// export const getServerSideProps = async ({ req, query }: GetServerSidePropsContext) => {
-//   const code = query.code as string | undefined
-//   const snapshot = +((query.snapshot as string | undefined) ?? '0') === 1
-
-//   const client = await createApiClient()
-
-//   let deckcode = code
-//   const meta: DeckMeta = {
-//     viewCount: 0,
-//   }
-
-//   if (code) {
-//     const deckinfo = snapshot
-//       ? await client.deckinfo.get({ code })
-//       : await client.deckinfo.ensure({ code })
-
-//     deckcode = deckinfo?.deckcode ?? deckcode
-//     meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
-//     meta.createdAt = deckinfo?.createdAt ?? meta.createdAt
-//   }
-
-//   if (!validateDeckcode(deckcode)) {
-//     return { notFound: true }
-//   }
-
-//   const deck = createDeck(deckcode)
-
-//   if (deck.cards.length === 0) {
-//     return { notFound: true }
-//   }
-
-//   if (!snapshot) {
-//     await client.deckviews.registerView({
-//       code: deck.deckcode!,
-//       ipAddress: getIpAddress(req),
-//     })
-//     const views = await client.deckviews.get({ deckcodes: [deckcode!] })
-//     meta.viewCount = views[0]?.viewCount ?? meta.viewCount
-//   }
-
-//   return {
-//     props: {
-//       deck: expandDeck(deck, meta),
-//       isSnapshot: Boolean(+snapshot),
-//     },
-//   }
-// }
 
 export default DeckPage

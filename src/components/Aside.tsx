@@ -18,7 +18,7 @@ export const Aside: FC<{
   }, [])
 
   return (
-    <div className={cx(className, 'relative z-30 flex shrink-0 bg-alt-900 grid-in-aside')}>
+    <aside className={cx(className, 'relative z-30 flex shrink-0 bg-alt-900 grid-in-aside')}>
       {showFilters && filters && (
         <div
           className={cx(
@@ -27,7 +27,7 @@ export const Aside: FC<{
             '2xl:relative 2xl:animate-none',
           )}
         >
-          <div className="flex items-center justify-between pt-2 pb-5">
+          <div className="-mx-4 flex items-center justify-between border-b border-gray-700 px-4 pt-2 pb-6">
             <h3 className="text-2xl">Filters</h3>
             <button onClick={toggleFilters}>X</button>
           </div>
@@ -35,6 +35,6 @@ export const Aside: FC<{
         </div>
       )}
       {children}
-    </div>
+    </aside>
   )
 }

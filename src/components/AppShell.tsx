@@ -132,6 +132,7 @@ export const AppNavLink: FC<{
 }
 
 export const AppNav: FC = () => {
+  const router = useRouter()
   const [{ isNavExpanded: isExpanded }, { toggleNav }] = useContext(AppContext)
 
   return (
@@ -141,7 +142,11 @@ export const AppNav: FC = () => {
           'z-30 flex flex-col gap-y-0.5 border-r border-gray-700 pt-6 shadow-nav grid-in-nav-t',
         )}
       >
-        <AppNavLink href="/decks" icon={DeckLibraryIcon}>
+        <AppNavLink
+          href="/decks"
+          icon={DeckLibraryIcon}
+          active={router.pathname === '/decks' || router.pathname === `/[code]`}
+        >
           Deck Libray
         </AppNavLink>
         <AppNavLink href="/build" icon={DeckbuilderIcon}>
