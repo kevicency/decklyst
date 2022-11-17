@@ -39,8 +39,20 @@ export const AppLogo = () => {
 }
 
 export const AppHeader = () => {
+  const router = useRouter()
   const [search, setSearch] = useState('')
-  const handleSearch = () => Promise.resolve(true)
+  const [navigating, setNavigating] = useState(false)
+
+  const handleSearch = async () => {
+    if (!navigating) {
+      setNavigating(true)
+      try {
+        await router.push(`/[code]`, `/${encodeURIComponent(search!)}`)
+      } finally {
+        setNavigating(false)
+      }
+    }
+  }
 
   const isSearchValid = isShareOrDeckcode(search)
 
@@ -64,8 +76,8 @@ export const AppHeader = () => {
           className={cx('w-full bg-transparent py-2 pl-5 focus:bg-gray-850', 'pl-12 pr-2')}
           placeholder={'Search for a deckcode or sharecode'}
           value={search ?? ''}
-          onFocus={(ev) => ev.target.select()}
-          onChange={(ev) => setSearch(ev.target.value)}
+          onFocus={(ev) => ev.currentTarget?.select()}
+          onChange={(ev) => setSearch(ev.target.value?.trim())}
           onKeyDown={async (ev) => {
             if (ev.key === 'Enter') {
               ev.preventDefault()
