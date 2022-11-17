@@ -12,7 +12,7 @@ export const PageHeader: FC<{ children: ReactNode; showFilterToggle?: boolean }>
   return (
     <div
       className={cx(
-        'relative flex items-end justify-between gap-x-8',
+        'relative flex shrink-0 items-end justify-between gap-x-8',
         'h-20 px-8 pb-4 ',
         'z-50 bg-gradient-to-r from-gray-850 to-alt-900 shadow-header',
         { 'pr-14': showFilterToggle },
