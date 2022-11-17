@@ -55,7 +55,7 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
   )
 
   return (
-    <div className="flex flex-1 flex-col overflow-hidden">
+    <div className="flex flex-1 flex-col overflow-hidden grid-in-main">
       <CompareMetadata leftDeck={leftDeck} rightDeck={rightDeck} deckDiff={deckDiff} />
       <PageHeader>
         <div className="flex-1">
