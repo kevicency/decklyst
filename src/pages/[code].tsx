@@ -1,5 +1,6 @@
 import { transformer } from '@/common/transformer'
-import { DeckDetailsAside, DeckDetailsMain } from '@/components/DeckDetails/DeckDetailsMain'
+import { DeckDetailsAside } from '@/components/DeckDetails/DeckDetailsAside'
+import { DeckDetailsMain } from '@/components/DeckDetails/DeckDetailsMain'
 import { DeckProvider } from '@/context/useDeck'
 import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'

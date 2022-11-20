@@ -25,7 +25,7 @@ export const AppHeader = () => {
 
   return (
     <div className="z-20 flex w-full items-center border-b border-gray-700 bg-gradient-to-r from-gray-900 to-alt-900 shadow-header grid-in-header">
-      <div className="relative flex h-full w-1/3 items-stretch border-r border-gray-600 transition-colors">
+      <div className="relative flex h-full flex-1 items-stretch transition-colors">
         <button
           aria-label="Search"
           disabled={!isSearchValid}
@@ -55,7 +55,7 @@ export const AppHeader = () => {
         />
       </div>
       <div className="flex justify-center gap-x-4 px-4 font-semibold"></div>
-      <div className="flex flex-1 items-center justify-end gap-x-4 px-4">
+      <div className="flex shrink-0 items-center justify-end gap-x-4 px-4">
         <Link href="https://discord.gg/zYx5bqZszj" className="text-xl" target="_blank">
           <DiscordIcon />
         </Link>
