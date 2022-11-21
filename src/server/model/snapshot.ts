@@ -21,9 +21,11 @@ export const snapshotLocal = async (code: string) => {
   })
 
   try {
+    const url = snapshotUrl(code)
+    console.log({ url })
     const page = await browser.newPage()
     await page.emulateMediaType('screen')
-    await page.goto(snapshotUrl(code), { waitUntil: 'networkidle0' })
+    await page.goto(url, { waitUntil: 'networkidle0' })
     const content = await page.$('#snap')
     const image = (await content!.screenshot({ omitBackground: true })) as Buffer
 

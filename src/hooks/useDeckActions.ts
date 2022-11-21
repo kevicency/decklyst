@@ -1,5 +1,5 @@
 import { getImageDataUri } from '@/common/getImageDataUri'
-import { deckImageUrl } from '@/common/urls'
+import { deckImageUrl, deckUrl } from '@/common/urls'
 import { useDeck } from '@/context/useDeck'
 import { deckcodeWithoutTitle$, faction$, title$ } from '@/data/deck'
 import { trpc } from '@/utils/trpc'
@@ -22,7 +22,14 @@ export const useDeckActions = () => {
         await navigator.clipboard.writeText(deckImageUrl(deckcode))
       }
     }
-    return { copyDeckcode, copyDeckImageUrl }
+    const copyDeckUrl = async () => {
+      const code = deck.meta?.sharecode ?? deckcode
+      if (deckcode) {
+        await navigator.clipboard.writeText(deckUrl(code))
+      }
+    }
+
+    return { copyDeckcode, copyDeckImageUrl, copyDeckUrl }
   }, [deck])
 }
 

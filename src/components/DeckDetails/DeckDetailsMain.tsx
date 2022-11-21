@@ -4,15 +4,21 @@ import { useDeck } from '@/context/useDeck'
 import { useDeckActions, useDeckImage } from '@/hooks/useDeckActions'
 import { formatDistance } from 'date-fns'
 import { noop } from 'lodash'
+import Link from 'next/link'
 import type { FC } from 'react'
+import { useState } from 'react'
 import { CardTooltip } from '../DeckInfograph/CardTooltip'
 import { DeckArtifactList } from '../DeckInfograph/DeckArtifactList'
 import { DeckCardList } from '../DeckInfograph/DeckCardList'
 import { DeckMinionList } from '../DeckInfograph/DeckMinionList'
 import { DeckSpellList } from '../DeckInfograph/DeckSpellList'
+import { CompareIcon, CopyIcon, DoneIcon, EditIcon, ShareIcon } from '../Icons'
+import { OneTimeButton } from '../OneTimeButton'
+import { ShareDeckDialog } from './ShareDeckDialog'
 
 export const DeckDetailsMain: FC = () => {
   const deck = useDeck()
+  const [isShareDialogOpen, setShareDialogOpen] = useState(true)
   const { imageDataUri, imageFilename, regenerateImage } = useDeckImage()
   const { copyDeckImageUrl, copyDeckcode } = useDeckActions()
 
@@ -49,6 +55,29 @@ export const DeckDetailsMain: FC = () => {
             </div>
           </div>
         </div>
+        <div className="flex items-center gap-x-2">
+          <Link
+            href={{ pathname: '/compare', query: { left: deck.deckcode } }}
+            className="btn-outline"
+          >
+            <CompareIcon />
+            Compare
+          </Link>
+          <Link
+            href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}
+            className="btn-outline"
+          >
+            <EditIcon />
+            Edit
+          </Link>
+          <button
+            className={`btn-outline border-${deck.faction} text-${deck.faction} hover:bg-${deck.faction} hover:text-gray-100`}
+            onClick={() => setShareDialogOpen(true)}
+          >
+            <ShareIcon />
+            Share
+          </button>
+        </div>
       </PageHeader>
       <div className="flex h-full flex-1 flex-col overflow-y-auto">
         <div className="content-container mt-8 ">
@@ -67,17 +96,31 @@ export const DeckDetailsMain: FC = () => {
         <div className="content-container absolute inset-x-0 bottom-0 flex shrink-0 gap-x-6 pt-2">
           <label className="font-sm flex-1 cursor-pointer text-gray-300">
             &nbsp;
-            <input
-              name="deckcode"
-              className="page-header-input mt-2 w-full bg-alt-900 px-4 text-alt-200"
-              value={deck.deckcode}
-              onFocus={(ev) => {
-                ev.target.select()
-              }}
-              readOnly
-              onChange={noop}
-              aria-label="Deckcode"
-            />
+            <div className="flex items-end">
+              <OneTimeButton
+                className={`btn border-b-2 border-alt-600 bg-alt-800 !py-2 hover:bg-${deck.faction}`}
+                onClick={copyDeckcode}
+                timeout={2500}
+              >
+                {(copied) => (
+                  <>
+                    {copied ? <DoneIcon /> : <CopyIcon />}
+                    Copy
+                  </>
+                )}
+              </OneTimeButton>
+              <input
+                name="deckcode"
+                className="page-header-input mt-2 w-full bg-alt-900 px-4 text-alt-200"
+                value={deck.deckcode}
+                onFocus={(ev) => {
+                  ev.target.select()
+                }}
+                readOnly
+                onChange={noop}
+                aria-label="Deckcode"
+              />
+            </div>
           </label>
           <div className="font-sm text-right text-gray-300">
             Sharecode
@@ -86,6 +129,7 @@ export const DeckDetailsMain: FC = () => {
         </div>
       </div>
       <CardTooltip />
+      <ShareDeckDialog open={isShareDialogOpen} onClose={() => setShareDialogOpen(false)} />
     </div>
   )
 }

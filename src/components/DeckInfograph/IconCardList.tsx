@@ -4,7 +4,10 @@ import cx from 'classnames'
 import type { FC } from 'react'
 import type { Variant } from './variant'
 
-export const IconCardList: FC<{ cards: CardEntry[]; variant?: Variant }> = ({ cards, variant }) => {
+export const IconCardList: FC<{ cards: CardEntry[]; variant?: Variant }> = ({
+  cards,
+  variant = 'infograph',
+}) => {
   return (
     <div
       className={cx(
@@ -15,7 +18,7 @@ export const IconCardList: FC<{ cards: CardEntry[]; variant?: Variant }> = ({ ca
       style={{ gridTemplateColumns: `repeat(${cards.length}, minmax(0, 1fr))` }}
     >
       {cards.map((card) => (
-        <IconCard card={card} key={card.id} />
+        <IconCard card={card} key={card.id} variant={variant} />
       ))}
     </div>
   )

@@ -98,7 +98,19 @@ body {
   }
 
   .btn > svg {
-    @apply mr-1;
+    @apply mr-1.5;
+  }
+
+  .btn-outline {
+    @apply flex items-center justify-center gap-x-2;
+    @apply py-1 px-3;
+    @apply bg-transparent hover:bg-alt-600;
+    @apply border-2 border-alt-400 hover:border-transparent;
+    @apply font-semibold text-alt-400 hover:text-gray-100;
+  }
+  .btn-outline.btn-accent {
+    @apply border-accent-400 text-accent-400;
+    @apply hover:bg-accent-400 hover:text-gray-100;
   }
 
   .btn:disabled,
@@ -155,7 +167,7 @@ body {
     clip-path: inset(0 -4rem -1px 0);
   }
   .shadow-header {
-    clip-path: inset(0 0 -4rem 0);
+    clip-path: inset(0 0 -4rem 0) gap-x-2;
   }
 
   .bg-blur-image {

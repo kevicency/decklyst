@@ -26,6 +26,7 @@ export const deckimageRouter = router({
         ? null
         : await ctx.deckimage.findByDeckcode(deckcode, timeout ?? 25000)
 
+      console.log('image', deckcode, image)
       if (image) return image
 
       await ctx.deckimage.startRendering(deckcode)

@@ -1,6 +1,6 @@
 import { BiImport } from 'react-icons/bi'
 import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
-import { FaBug, FaDiscord, FaRegClock, FaRegEye } from 'react-icons/fa'
+import { FaBug, FaDiscord, FaImage, FaPencilAlt, FaRegClock, FaRegEye } from 'react-icons/fa'
 import { GiGearHammer } from 'react-icons/gi'
 import { GoRepoForked } from 'react-icons/go'
 import { HiOutlineLibrary } from 'react-icons/hi'
@@ -22,6 +22,7 @@ export const CopyIcon = IoCopyOutline
 export const TrashIcon = IoTrashOutline
 export const EyeIcon = FaRegEye
 export const ClockIcon = FaRegClock
+export const EditIcon = FaPencilAlt
 
 export const DiscordIcon = FaDiscord
 export const FeedbackIcon = RiChatSmile3Fill
@@ -31,3 +32,4 @@ export const CollapseSidebarIcon = BsChevronBarLeft
 export const DeckLibraryIcon = HiOutlineLibrary
 export const DeckbuilderIcon = GiGearHammer
 export const FilterIcon = IoFilterSharp
+export const ImageIcon = FaImage
