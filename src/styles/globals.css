@@ -170,11 +170,22 @@ body {
     clip-path: inset(0 0 -4rem 0) gap-x-2;
   }
 
-  .bg-blur-image {
+  .bg-image {
     @apply bg-fixed bg-no-repeat bg-blend-overlay;
     background-position: center top;
-    background-image: url('/assets/backgrounds/default.png');
     background-size: cover;
+  }
+  .bg-image-deckbuilder {
+    @apply bg-image bg-gray-900;
+    background-image: url('/assets/backgrounds/bg5.jpg');
+  }
+  .bg-image-deckdetails {
+    @apply bg-image bg-gray-850;
+    background-image: url('/assets/backgrounds/bg2.jpg');
+  }
+  .bg-image-deckdiff {
+    @apply bg-image bg-gray-1000;
+    background-image: url('/assets/backgrounds/bg8.jpg');
   }
 }
 

@@ -35,7 +35,7 @@ export const DeckbuilderMain: FC = () => {
     removeCard(card.id, all ? 3 : 1)
   }
   return (
-    <div className="bg-blur-image flex flex-1 flex-col overflow-hidden bg-gray-900 grid-in-main">
+    <div className="bg-image-deckbuilder flex flex-1 flex-col overflow-hidden grid-in-main">
       <PageHeader showFilterToggle>
         <div className="flex gap-x-4 text-3xl">
           <PivotButton

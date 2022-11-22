@@ -25,7 +25,7 @@ export const DeckDetailsMain: FC = () => {
   const general = deck.general
 
   return (
-    <div className="bg-blur-image relative flex flex-1 flex-col overflow-hidden bg-gray-1000 grid-in-main">
+    <div className="bg-image-deckdetails relative flex flex-1 flex-col overflow-hidden grid-in-main">
       <PageHeader>
         <div className="absolute left-2 -top-4 z-40 h-32 flex-shrink-0">
           <img

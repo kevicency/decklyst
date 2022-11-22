@@ -12,7 +12,7 @@ export const DeckbuilderIndexPage: FC = () => {
   }, [])
 
   return (
-    <div className="bg-blur-image flex flex-1 flex-col overflow-hidden bg-gray-900 grid-in-main">
+    <div className="bg-image-deckbuilder flex flex-1 flex-col overflow-hidden grid-in-main">
       <PageHeader>
         <div className="text-3xl font-light">Deckbuilder</div>
         <div className="text-lg text-gray-200">Choose a general to start</div>
