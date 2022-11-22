@@ -10,6 +10,7 @@
     "test": "jest --passWithNoTests",
     "prepare": "husky install && cp -n .env.template .env.local | true",
     "prebuild": "prisma generate",
+    "migrate:dev": "dotenv -e .env.local -- prisma migrate dev",
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
     "studio:prod": "dotenv -e .env.production -- prisma studio",
     "generate:cards.json": "ts-node scripts/generateCardsJson.ts",
