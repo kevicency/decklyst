@@ -86,7 +86,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
 
   return (
     <>
-      <div className="flex flex-1 flex-col overflow-hidden grid-in-main">
+      <div className="bg-image-decksearch flex flex-1 flex-col overflow-hidden grid-in-main">
         <PageHeader showFilterToggle>
           <div className="flex flex-1 justify-between">
             <div className="flex gap-x-4 text-3xl">
@@ -117,7 +117,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
             </div>
           </div>
         </PageHeader>
-        <div className="flex flex-1 flex-col overflow-y-auto bg-gray-900  pb-8">
+        <div className="flex flex-1 flex-col overflow-y-auto  pb-8">
           <div className="content-container mt-8 flex flex-col">
             <DeckPreviewList decks={decks ?? []} />
           </div>

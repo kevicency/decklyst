@@ -187,6 +187,10 @@ body {
     @apply bg-image bg-gray-1000;
     background-image: url('/assets/backgrounds/bg8.jpg');
   }
+  .bg-image-decksearch {
+    @apply bg-image bg-gray-900;
+    background-image: url('/assets/backgrounds/bg6.jpg');
+  }
 }
 
 #card-tooltip {
