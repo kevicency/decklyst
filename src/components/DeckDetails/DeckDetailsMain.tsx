@@ -1,7 +1,7 @@
 import { DeckMetadata } from '@/components/DeckMetadata'
 import { PageHeader } from '@/components/PageHeader'
 import { useDeck } from '@/context/useDeck'
-import { useDeckActions, useDeckImage } from '@/hooks/useDeckActions'
+import { useDeckActions } from '@/hooks/useDeckActions'
 import { formatDistance } from 'date-fns'
 import { noop } from 'lodash'
 import Link from 'next/link'
@@ -18,9 +18,8 @@ import { ShareDeckDialog } from './ShareDeckDialog'
 
 export const DeckDetailsMain: FC = () => {
   const deck = useDeck()
-  const [isShareDialogOpen, setShareDialogOpen] = useState(true)
-  const { imageDataUri, imageFilename, regenerateImage } = useDeckImage()
-  const { copyDeckImageUrl, copyDeckcode } = useDeckActions()
+  const [isShareDialogOpen, setShareDialogOpen] = useState(false)
+  const { copyDeckcode } = useDeckActions()
 
   const meta = deck.meta!
   const general = deck.general
