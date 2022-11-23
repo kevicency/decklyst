@@ -5520,7 +5520,7 @@ styled-jsx@5.1.0:
   dependencies:
     client-only "0.0.1"
 
-superjson@1.11.0:
+superjson@1.11.0, superjson@^1.9.1:
   version "1.11.0"
   resolved "https://registry.npmjs.org/superjson/-/superjson-1.11.0.tgz"
   integrity sha512-6PfAg1FKhqkwWvPb2uXhH4MkMttdc17eJ91+Aoz4s1XUEDZFmLfFx/xVA3wgkPxAGy5dpozgGdK6V/n20Wj9yg==
@@ -5696,6 +5696,13 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
+
+trpc-client-devtools-link@^0.2.1-next:
+  version "0.2.1-next"
+  resolved "https://registry.yarnpkg.com/trpc-client-devtools-link/-/trpc-client-devtools-link-0.2.1-next.tgz#4bc0f56be9e75f35008dfdc20cb64786ce1ce60c"
+  integrity sha512-juHl8SSsVywR7U98KqcRb7/dYVnTcnZNboRF3l87zwtFcbVWz60R2dSAMrjD7jY2qAZ7VJYUbx1gvDKC2SaJvw==
+  dependencies:
+    superjson "^1.9.1"
 
 ts-morph@^15.0.0:
   version "15.1.0"

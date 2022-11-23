@@ -3,6 +3,7 @@ import { httpBatchLink, loggerLink } from '@trpc/client'
 import { createTRPCNext } from '@trpc/next'
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
 import type { NextPageContext } from 'next'
+import { devtoolsLink } from 'trpc-client-devtools-link'
 import { transformer } from '../common/transformer'
 import { trpcUrl } from '../common/urls'
 
@@ -40,6 +41,9 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
        * @link https://trpc.io/docs/links
        */
       links: [
+        devtoolsLink({
+          enabled: process.env.NODE_ENV === 'development',
+        }),
         // adds pretty logs to your console in development and logs errors in production
         loggerLink({
           enabled: (opts) =>
