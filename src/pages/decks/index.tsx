@@ -57,7 +57,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) =>
 
   const decks = useMemo(() => {
     return (data?.pages ?? [])
-      .flatMap((page) => page.decks)
+      .flatMap((page) => page.decks ?? [])
       .map(({ deckcode, meta }) => createDeckExpanded(deckcode, meta))
       .filter((x) => x.general)
   }, [data?.pages])

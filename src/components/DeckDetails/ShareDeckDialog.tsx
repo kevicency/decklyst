@@ -77,19 +77,19 @@ export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ op
                     {(copied) => (
                       <>
                         {copied ? <DoneIcon /> : <LinkIcon />}
-                        Link deck
+                        Copy decklink
                       </>
                     )}
                   </OneTimeButton>
-                  <div className="w-1" />
                   <OneTimeButton onClick={copyDeckImageUrl} timeout={2500}>
                     {(copied) => (
                       <>
                         {copied ? <DoneIcon /> : <LinkIcon />}
-                        Link image
+                        Copy imagelink
                       </>
                     )}
                   </OneTimeButton>
+                  <div className="w-2" />
                   <OneTimeButton
                     href={imageDataUri ?? undefined}
                     download={imageFilename}

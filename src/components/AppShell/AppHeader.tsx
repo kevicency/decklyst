@@ -59,7 +59,6 @@ export const AppHeader = () => {
         <Link href="https://discord.gg/zYx5bqZszj" className="text-xl" target="_blank">
           <DiscordIcon />
         </Link>
-        <span className="border border-gray-300 px-1.5 py-0.5 text-sm">Log In</span>
       </div>
     </div>
   )
