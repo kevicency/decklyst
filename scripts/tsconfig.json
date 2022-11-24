@@ -6,8 +6,5 @@
       "@/*": ["../src/*"]
     },
     "module": "CommonJS"
-  },
-  "ts-node": {
-    "require": ["tsconfig-paths/register"]
   }
 }

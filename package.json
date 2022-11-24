@@ -14,7 +14,7 @@
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
     "studio:prod": "dotenv -e .env.production -- prisma studio",
     "generate:cards.json": "ts-node scripts/generateCardsJson.ts",
-    "sync:db": "ts-node -p scripts/tsconfig.json scripts/syncDb.ts"
+    "sync:db": "ts-node scripts/syncDb.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",
