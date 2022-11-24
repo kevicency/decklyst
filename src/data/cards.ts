@@ -1,8 +1,7 @@
 import { memoize, partition, sortBy } from 'lodash'
+export const allCards: CardData[] = require('./carddata.json')
 
 const tokenSpells = [20424]
-
-export const allCards: CardData[] = require('./cards.json')
 
 export const cards = allCards.filter(
   (card) => card.rarity !== 'token' && !tokenSpells.includes(card.id),
@@ -111,3 +110,18 @@ export const highlightKeywords = memoize((description?: string) => {
     (match) => `<span class="font-bold text-zinc-100">${match}</span>`,
   )
 })
+
+export const rarityCraftingCost = (rarity: Rarity) => {
+  switch (rarity) {
+    case 'common':
+      return 40
+    case 'rare':
+      return 100
+    case 'epic':
+      return 350
+    case 'legendary':
+      return 900
+    default:
+      return 0
+  }
+}

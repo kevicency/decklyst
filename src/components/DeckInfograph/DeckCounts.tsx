@@ -10,7 +10,7 @@ const CardCount: FC<{ faction: Faction; label: string; count: number; of?: numbe
 }) => (
   <div className="flex flex-col text-center">
     <span className="mb-2 text-xl">{label}</span>
-    <span className={`text-${faction} text-xl font-bold`}>
+    <span className={`text-${faction} text-xl font-semibold`}>
       {of && count !== of ? `${count}/${of}` : count}
     </span>
   </div>
@@ -32,7 +32,7 @@ const CardCountAlt: FC<{ faction: Faction; label: string; count: number }> = ({
   count,
 }) => (
   <div className="flex ">
-    <span className={`text-${faction} mr-2 w-6 text-end text-xl font-bold`}>{count}</span>
+    <span className={`text-${faction} mr-2 w-6 text-end text-xl font-semibold`}>{count}</span>
     <span className="mb-1 text-xl">{label}</span>
   </div>
 )

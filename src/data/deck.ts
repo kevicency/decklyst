@@ -1,8 +1,8 @@
-import type { CardData, CardType, Faction } from '@/data/cards'
-import { cardsById, sortCards } from '@/data/cards'
+import type { CardData, CardType, Faction, Rarity } from '@/data/cards'
+import { cardsById, rarityCraftingCost, sortCards } from '@/data/cards'
 import type { Deckcode } from '@/data/deckcode'
 import { parseDeckcode, splitDeckcode } from '@/data/deckcode'
-import { groupBy, max, memoize, sumBy } from 'lodash'
+import { chain, groupBy, max, memoize, sumBy } from 'lodash'
 
 export type CardEntry = CardData & { count: number }
 export type Deck = {
@@ -29,6 +29,7 @@ export type DeckExpanded = Deck & {
     artifacts: number
   }
   manaCurve: ManaCurve
+  spiritCost: number
   meta?: {
     sharecode?: string
     viewCount?: number
@@ -91,6 +92,15 @@ export const totalCount$ = $((deck) => sumBy(deck.cards, (card) => card.count))
 export const minionCount$ = $((deck) => sumBy(minions$(deck), (card) => card.count))
 export const spellCount$ = $((deck) => sumBy(spells$(deck), (card) => card.count))
 export const artifactCount$ = $((deck) => sumBy(artifacts$(deck), (card) => card.count))
+export const spiritCost$ = $((deck) =>
+  chain(deck.cards)
+    .groupBy((card) => card.rarity)
+    .entries()
+    .map(([rarity, cards]) => [rarity as Rarity, sumBy(cards, ({ count }) => count)] as const)
+    .map(([rarity, count]) => rarityCraftingCost(rarity) * count)
+    .sum()
+    .value(),
+)
 
 export const expandDeck = (deck: Deck, meta?: DeckExpanded['meta']): DeckExpanded => ({
   ...deck,
@@ -106,6 +116,7 @@ export const expandDeck = (deck: Deck, meta?: DeckExpanded['meta']): DeckExpande
     artifacts: artifactCount$(deck),
   },
   manaCurve: manaCurve$(deck),
+  spiritCost: spiritCost$(deck),
   meta,
   get valid(): boolean {
     return !!this.general

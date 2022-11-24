@@ -6,7 +6,7 @@ import { EyeIcon } from '../Icons'
 
 export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
   const imageRef = useRef<HTMLImageElement>(null)
-  const { general, title, faction, meta } = useDeck()
+  const { general, title, faction, meta, spiritCost } = useDeck()
   const { setSpriteLoaded } = useSpriteLoader()
   const viewCount = meta?.viewCount
 
@@ -41,7 +41,7 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
           {title?.slice(0, 40) || 'Untitled'}
         </div>
         <div className={`flex content-center items-center gap-x-2 truncate text-xl`}>
-          <span className={`text-${faction} w-24`}>{startCase(faction)}</span>
+          <span className={`text-${faction}`}>{startCase(faction)}</span>
           {showMeta && viewCount ? (
             <span className="flex items-center text-gray-400 group-hover:text-accent-600">
               <EyeIcon size={24} className="mr-2" />
@@ -49,7 +49,14 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
                 {viewCount} {viewCount <= 1 ? 'view' : 'views'}
               </span>
             </span>
-          ) : null}
+          ) : (
+            <>
+              <span className="h-full w-0.5 bg-alt-300"></span>
+              <span className="flex items-center gap-x-1">
+                <span className={`text-${faction} font-semibold`}>{spiritCost}</span> Spirit
+              </span>
+            </>
+          )}
         </div>
       </div>
     </div>

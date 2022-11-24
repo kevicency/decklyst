@@ -1,7 +1,7 @@
-import type { Deckinfo } from '@prisma/client'
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
+import { createDeck, spiritCost$ } from '../src/data/deck'
 
 const prisma = new PrismaClient()
 
@@ -54,6 +54,13 @@ const main = async () => {
       skipDuplicates: true,
     })
     console.log(`Imported ${deckimages.length} deckviews from ${deckimageFile}`)
+  } else if (cmd === 'update') {
+    const deckinfos = await prisma.deckinfo.findMany({ where: { spiritCost: 0 } })
+    for (const deckinfo of deckinfos) {
+      const spiritCost = spiritCost$(createDeck(deckinfo.deckcode))
+      await prisma.deckinfo.update({ where: { deckcode: deckinfo.deckcode }, data: { spiritCost } })
+    }
+    console.log(`Updated ${deckinfos.length} deckinfos`)
   }
 }
 

@@ -18,6 +18,7 @@ model Deckinfo {
   spellCount    Int    @default(0)
   artifactCount Int    @default(0)
   totalCount    Int    @default(0)
+  spiritCost    Int    @default(0)
 
   createdAt DateTime @default(now())
 

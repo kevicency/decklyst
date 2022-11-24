@@ -66,7 +66,7 @@ async function main() {
       rarity: cardJson.rarity.toLowerCase() as Rarity,
     }))
 
-  const jsonFilePath = path.join(__dirname, '../src/data/cards.json')
+  const jsonFilePath = path.join(__dirname, '../src/data/carddata.json')
 
   fs.writeFileSync(jsonFilePath, JSON.stringify(cards))
 
