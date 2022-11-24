@@ -7,11 +7,14 @@ import { factions } from '@/data/cards'
 import { createDeckExpanded } from '@/data/deck'
 import { createApiClient } from '@/server'
 import { trpc } from '@/utils/trpc'
-import { startCase } from 'lodash'
+import { last, startCase } from 'lodash'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import type { GetServerSidePropsContext } from 'next/types'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { PacmanLoader } from 'react-spinners'
+import VisibilityObserver, { useVisibilityObserver } from 'react-visibility-observer'
+import colors from 'tailwindcss/colors'
 
 export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 type Tab = 'most-viewed' | 'trending' | 'latest'
@@ -56,33 +59,46 @@ const useRouterQuery = (initialQuery: Props['initialQuery']) => {
 
 const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
   const [{ tab, faction, count }, updateQuery] = useRouterQuery(initialQuery)
-  const [deckcodes, setDeckcodes] = useState<Props['initialDeckcodes']>(initialDeckcodes ?? [])
+  const [showEndlessScroll, setShowEndlessScroll] = useState(true)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const utils = trpc.useContext()
+
+  const updateFilter: typeof updateQuery = async (filters) => {
+    utils.decks.search.cancel()
+    scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+    setShowEndlessScroll(false)
+    updateQuery(filters)
+
+    setTimeout(() => {
+      setShowEndlessScroll(true)
+    }, 500)
+  }
+
+  const handleTabChanged = async (input: Tab) => await updateFilter({ tab: input })
+  const handleFactionChanged = async (faction?: string) => {
+    updateFilter({ faction })
+  }
+
+  const { data, fetchNextPage, isFetching, isLoading } = trpc.decks.search.useInfiniteQuery(
+    {
+      limit: count,
+      filters: {
+        faction: faction ? [faction] : [],
+      },
+    },
+    {
+      getNextPageParam: (_, allPages) => allPages.length,
+      initialData: initialDeckcodes ? { pages: [initialDeckcodes], pageParams: [] } : undefined,
+    },
+  )
+
   const decks = useMemo(() => {
-    return (deckcodes ?? [])
+    return (data?.pages ?? [])
+      .flatMap((page) => page)
       .map(({ deckcode, meta }) => createDeckExpanded(deckcode, meta))
       .filter((x) => x.general)
-  }, [deckcodes])
-
-  const handleTabChanged = async (input: Tab) => await updateQuery({ tab: input })
-  const handleCountChanged = async (count: string) => await updateQuery({ count: +count })
-  const handleFactionChanged = async (faction?: string) => await updateQuery({ faction })
-
-  trpc.decks.latest.useQuery(
-    { count, faction },
-    {
-      enabled: tab === 'latest',
-      initialData: tab === initialQuery.tab ? initialDeckcodes : [],
-      onSuccess: setDeckcodes,
-    },
-  )
-  trpc.decks.mostViewed.useQuery(
-    { count, faction, sinceDaysAgo: tab === 'trending' ? 3 : undefined },
-    {
-      enabled: tab !== 'latest',
-      initialData: tab === initialQuery.tab ? initialDeckcodes : [],
-      onSuccess: setDeckcodes,
-    },
-  )
+  }, [data?.pages])
+  const hasMore = useMemo(() => last(data?.pages ?? [])?.length === count, [data?.pages, count])
 
   return (
     <>
@@ -103,23 +119,25 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
                 Latest
               </PivotButton>
             </div>
-            <div className="flex gap-x-4">
-              <select
-                className="bg-slate-900 px-2 text-lg"
-                value={`${count}`}
-                onChange={(ev) => handleCountChanged(ev.target.value)}
-                aria-label="Count"
-              >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="25">25</option>
-              </select>
-            </div>
+            <div className="flex gap-x-4"></div>
           </div>
         </PageHeader>
-        <div className="flex flex-1 flex-col overflow-y-auto  pb-8">
+        <div className="flex flex-1 flex-col overflow-y-auto pb-8" ref={scrollContainerRef}>
           <div className="content-container mt-8 flex flex-col">
             <DeckPreviewList decks={decks ?? []} />
+            <div className="my-8 flex justify-center">
+              {showEndlessScroll &&
+                (hasMore ? (
+                  <VisibilityObserver root={scrollContainerRef.current} rootMargin="0px">
+                    <EndlessScroll
+                      fetch={() => fetchNextPage()}
+                      isFetching={isFetching || isLoading}
+                    />
+                  </VisibilityObserver>
+                ) : (
+                  <div className="flex justify-center font-semibold">No more decks found</div>
+                ))}
+            </div>
           </div>
         </div>
       </div>
@@ -150,22 +168,26 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => {
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const client = await createApiClient()
-  const count = +(query.count as string) || 5
+  const count = +(query.count as string) || 10
   const tab: Tab = allTabs.find((tab) => tab === (query.tab as string)) ?? 'trending'
   const faction: string | undefined =
     (query.faction as string | undefined)?.toLowerCase() || undefined
 
-  const initialDeckcodes = await ((tab: Tab) => {
-    if (tab === 'trending') {
-      return client.decks.mostViewed({
-        count,
-        faction,
-        sinceDaysAgo: 3,
-      })
-    } else if (tab === 'most-viewed') {
-      return client.decks.mostViewed({ count, faction })
-    } else return client.decks.latest({ count, faction })
-  })(tab)
+  // const initialDeckcodes = await ((tab: Tab) => {
+  //   if (tab === 'trending') {
+  //     return client.decks.mostViewed({
+  //       count,
+  //       faction,
+  //       sinceDaysAgo: 3,
+  //     })
+  //   } else if (tab === 'most-viewed') {
+  //     return client.decks.mostViewed({ count, faction })
+  //   } else return client.decks.latest({ count, faction })
+  // })(tab)
+
+  const initialDeckcodes = await client.decks.search({
+    limit: count,
+  })
 
   return {
     props: {
@@ -173,6 +195,21 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
       initialDeckcodes,
     },
   }
+}
+
+const EndlessScroll: React.FC<{ fetch: () => void; isFetching?: boolean }> = ({
+  fetch,
+  isFetching,
+}) => {
+  const { isVisible } = useVisibilityObserver()
+
+  useEffect(() => {
+    if (isVisible && !isFetching) {
+      fetch()
+    }
+  }, [fetch, isFetching, isVisible])
+
+  return <PacmanLoader size={24} color={colors.teal['400']} />
 }
 
 export default DecksPage

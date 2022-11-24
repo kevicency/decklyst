@@ -5030,6 +5030,11 @@ react-transition-group@2.9.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react-visibility-observer@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-visibility-observer/-/react-visibility-observer-1.0.4.tgz#6fe7fa9cbeaef3dd7bb7980d89bb9727542e55c2"
+  integrity sha512-6LYIqIFDhJihXwKLLmT3HqogwD4E6mqI/p/MIl6GUyH+qGplMCKdbkQhA9NK40L2H4vwoHYacpHbFhInuzGZPg==
+
 react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
