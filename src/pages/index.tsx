@@ -5,8 +5,8 @@ import type { NextPage } from 'next'
 import type { Props } from './decks'
 import DecksPage from './decks'
 
-const Home: NextPage<Props> = ({ initialDeckcodes, initialQuery }) => (
-  <DecksPage initialDeckcodes={initialDeckcodes} initialQuery={initialQuery} />
+const Home: NextPage<Props> = ({ initialDeckcodes, initialFilters: initialQuery }) => (
+  <DecksPage initialDeckcodes={initialDeckcodes} initialFilters={initialQuery} />
 )
 
 export const getStaticProps = async () => {

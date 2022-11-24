@@ -52,38 +52,75 @@ export const decksRouter = router({
       z.object({
         limit: z.number().gt(0).lte(50).optional(),
         cursor: z.number().optional(),
+        sorting: z.enum(['date:created', 'views:all', 'views:recent']).optional(),
         filters: z
           .object({
-            faction: z.array(z.enum(factions as [string, ...string[]])).optional(),
+            factions: z.array(z.enum(factions as [string, ...string[]])),
           })
           .optional(),
-        // faction: z.enum(factions as [string, ...string[]]).optional(),
       }),
     )
-    .query(async ({ ctx, input: { limit = 50, cursor: page = 0, filters = {} } }) => {
-      const skip = limit * page
+    .query(
+      async ({
+        ctx,
+        input: { limit = 10, cursor: page = 0, filters = { factions: [] }, sorting },
+      }) => {
+        const skip = limit * page
 
-      const deckinfos = await ctx.deckinfo.findMany({
-        select: { deckcode: true, createdAt: true },
-        where: {
-          totalCount: 40,
-          faction: filters.faction?.length ? { in: filters.faction } : undefined,
-        },
-        orderBy: {
-          createdAt: 'desc',
-        },
-        skip,
-        take: limit,
-      })
-      const viewCounts = await ctx.deckviews.getDeckviews(
-        ...deckinfos.map(({ deckcode }) => deckcode),
-      )
+        if (sorting === 'date:created' || sorting === undefined) {
+          const deckinfos = await ctx.deckinfo.findMany({
+            select: { deckcode: true, createdAt: true, views: {} },
+            where: {
+              totalCount: 40,
+              faction: filters.factions?.length ? { in: filters.factions } : undefined,
+            },
+            orderBy: {
+              createdAt: 'desc',
+            },
+            skip,
+            take: limit + 1,
+          })
+          const viewCounts = await ctx.deckviews.getDeckviews(
+            ...deckinfos.map(({ deckcode }) => deckcode),
+          )
+          const hasMore = deckinfos.length === limit + 1
 
-      return deckinfos.map(({ deckcode, createdAt }) => ({
-        deckcode,
-        meta: { createdAt, viewCount: viewCounts[deckcode] || 1 },
-      }))
-    }),
+          return {
+            hasMore,
+            decks: deckinfos.slice(0, hasMore ? -1 : undefined).map(({ deckcode, createdAt }) => ({
+              deckcode,
+              meta: { createdAt, viewCount: viewCounts[deckcode] || 1 },
+            })),
+          }
+        } else {
+          const mostViewedDeckcodes = await ctx.deckviews.mostViewed({
+            count: limit + 1,
+            sinceDaysAgo: sorting === 'views:recent' ? 7 : undefined,
+            factions: filters.factions,
+          })
+          const deckinfos = await ctx.deckinfo.findMany({
+            select: { deckcode: true, createdAt: true },
+            where: {
+              deckcode: { in: mostViewedDeckcodes.map(({ deckcode }) => deckcode) },
+            },
+          })
+          const createdDates = new Map(
+            deckinfos.map(({ deckcode, createdAt }) => [deckcode, createdAt]),
+          )
+          const hasMore = mostViewedDeckcodes.length === limit + 1
+
+          return {
+            decks: mostViewedDeckcodes
+              .slice(0, hasMore ? -1 : undefined)
+              .map(({ deckcode, viewCount }) => ({
+                deckcode,
+                meta: { viewCount, createdAt: createdDates.get(deckcode) },
+              })),
+            hasMore,
+          }
+        }
+      },
+    ),
   // mostViewedInfinite: proc
   //   .input(
   //     z.object({
