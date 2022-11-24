@@ -5,7 +5,6 @@ import { Fragment } from 'react'
 export const FactionChart = () => {
   const deck = useDeck()
   const data = chain(deck.cards)
-    .filter((card) => card.cardType !== 'General')
     .groupBy((card) => card.faction)
     .reduce(
       (memo, cards, faction) => ({
