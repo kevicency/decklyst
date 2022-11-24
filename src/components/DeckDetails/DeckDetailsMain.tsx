@@ -92,9 +92,8 @@ export const DeckDetailsMain: FC = () => {
             </div>
           </div>
         </div>
-        <div className="content-container absolute inset-x-0 bottom-0 flex shrink-0 gap-x-6 pt-2">
-          <label className="font-sm flex-1 cursor-pointer text-gray-300">
-            &nbsp;
+        <div className="content-container absolute inset-x-0 bottom-0 flex shrink-0 items-end gap-x-6 pt-2">
+          <div className="font-sm flex-1 cursor-pointer text-gray-300">
             <div className="flex items-end">
               <OneTimeButton
                 className={`btn border-b-2 border-alt-600 bg-alt-800 !py-2 hover:bg-${deck.faction}`}
@@ -120,7 +119,7 @@ export const DeckDetailsMain: FC = () => {
                 aria-label="Deckcode"
               />
             </div>
-          </label>
+          </div>
           <div className="font-sm text-right text-gray-300">
             Sharecode
             <div className={`mt-2 font-mono text-3xl text-${deck.faction}`}>{meta.sharecode}</div>
