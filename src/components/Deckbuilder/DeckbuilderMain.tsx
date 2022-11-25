@@ -4,7 +4,7 @@ import { CardList } from '@/components/Deckbuilder/CardList'
 import { GeneralCard } from '@/components/Deckbuilder/GeneralCard'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
-import { CardFilterContext } from '@/context/useCardFilter'
+import { CardFiltersContext, useCardFilters } from '@/context/useCardFilters'
 import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
 import { cards } from '@/data/cards'
@@ -12,16 +12,15 @@ import useOnScreen from '@/hooks/useOnScreen'
 import cx from 'classnames'
 import { startCase } from 'lodash'
 import type { FC } from 'react'
-import { useDeferredValue, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef } from 'react'
 
 export const DeckbuilderMain: FC = () => {
   const [, { addCard, removeCard, replaceCard }] = useDeckcode()
   const deck = useDeck()
+  const [cardFilters, { updateCardFilters }] = useCardFilters()
   const factionCardListRef = useRef<HTMLDivElement>(null)
   const neutralCardListRef = useRef<HTMLDivElement>(null)
   const neutralCardsOnScreen = useOnScreen(neutralCardListRef)
-  const [cardQuery, setCardQuery] = useState('')
-  const deferredCardQuery = useDeferredValue(cardQuery)
   const generals = useMemo(
     () =>
       cards.filter(({ cardType, faction }) => faction === deck.faction && cardType === 'General'),
@@ -57,11 +56,11 @@ export const DeckbuilderMain: FC = () => {
           <input
             className="page-header-input max-w-md"
             placeholder="Search"
-            value={cardQuery}
-            onChange={(ev) => setCardQuery(ev.target.value)}
+            value={cardFilters.query ?? ''}
+            onChange={(ev) => updateCardFilters({ query: ev.target.value })}
           />
         </div>
-        <div className="z-10 mr-7 mt-4 -mb-8 flex justify-around">
+        <div className="z-10 mr-2 mt-4 -mb-8 flex justify-around">
           {generals.map((general) => (
             <GeneralCard
               size="sm"
@@ -82,14 +81,18 @@ export const DeckbuilderMain: FC = () => {
       <div className="flex flex-1 overflow-hidden">
         <div className="relative mt-0.5 flex flex-1 flex-col overflow-y-scroll pl-8 pr-4 pt-3.5">
           <div ref={factionCardListRef}>
-            <CardFilterContext.Provider value={{ faction: deck.faction, query: deferredCardQuery }}>
+            <CardFiltersContext.Provider
+              value={[{ ...cardFilters, faction: deck.faction }, { updateCardFilters }]}
+            >
               <CardList onSelectCard={handleCardSelected} onDeselectCard={handleCardDeselected} />
-            </CardFilterContext.Provider>
+            </CardFiltersContext.Provider>
           </div>
           <div ref={neutralCardListRef}>
-            <CardFilterContext.Provider value={{ faction: 'neutral', query: deferredCardQuery }}>
+            <CardFiltersContext.Provider
+              value={[{ ...cardFilters, faction: 'neutral' }, { updateCardFilters }]}
+            >
               <CardList onSelectCard={handleCardSelected} onDeselectCard={handleCardDeselected} />
-            </CardFilterContext.Provider>
+            </CardFiltersContext.Provider>
           </div>
 
           <RelatedCardsTooltip />

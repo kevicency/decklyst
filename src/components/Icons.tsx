@@ -1,7 +1,7 @@
 import { BiImport } from 'react-icons/bi'
 import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
 import { FaBug, FaDiscord, FaImage, FaPencilAlt, FaRegClock, FaRegEye } from 'react-icons/fa'
-import { GiGearHammer } from 'react-icons/gi'
+import { GiArtificialHive, GiEvilMinion, GiGearHammer, GiSpellBook } from 'react-icons/gi'
 import { GoRepoForked } from 'react-icons/go'
 import { HiOutlineLibrary } from 'react-icons/hi'
 import { IoIosBuild, IoIosShareAlt } from 'react-icons/io'
@@ -33,3 +33,6 @@ export const DeckLibraryIcon = HiOutlineLibrary
 export const DeckbuilderIcon = GiGearHammer
 export const FilterIcon = IoFilterSharp
 export const ImageIcon = FaImage
+export const MinionIcon = GiEvilMinion
+export const SpellIcon = GiSpellBook
+export const ArtifactIcon = GiArtificialHive

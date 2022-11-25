@@ -1,5 +1,6 @@
 import { DeckbuilderAside, DeckbuilderMain } from '@/components/Deckbuilder'
 import { DeckMetadata } from '@/components/DeckMetadata'
+import { CardFiltersProvider } from '@/context/useCardFilters'
 import { DeckProvider } from '@/context/useDeck'
 import type { DeckcodeContextValue } from '@/context/useDeckcode'
 import { DeckcodeProvider } from '@/context/useDeckcode'
@@ -87,11 +88,13 @@ const DeckbuilderBuildPage: FC<Props> = (props) => {
   return (
     <DeckcodeProvider deckcode={deckcode} baseDeckcode={baseDeckcode} {...handlers}>
       <DeckProvider deck={deck}>
-        <>
-          <DeckMetadata />
-          <DeckbuilderMain />
-          <DeckbuilderAside />
-        </>
+        <CardFiltersProvider>
+          <>
+            <DeckMetadata />
+            <DeckbuilderMain />
+            <DeckbuilderAside />
+          </>
+        </CardFiltersProvider>
       </DeckProvider>
     </DeckcodeProvider>
   )

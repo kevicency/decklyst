@@ -73,13 +73,17 @@ module.exports = {
                   minmax(0, 1fr)
                   auto`,
       },
+      scale: {
+        '130': '1.3',
+        '135': '1.35',
+      }
     },
   },
   plugins: [require('tailwindcss-animate'), require('@savvywombat/tailwindcss-grid-areas')],
   safelist: [
     {
       pattern: /!?(text|bg|border)-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,
-      variants: ['hover'],
+      variants: ['hover', 'group-hover'],
     },
     {
       pattern: /!?(text)-(common|basic|rare|epic|legendary)/,

@@ -1,5 +1,5 @@
 import { Card } from '@/components/Deckbuilder/Card'
-import { useCardFilter } from '@/context/useCardFilter'
+import { useCardFilters } from '@/context/useCardFilters'
 import { useDeck } from '@/context/useDeck'
 import type { CardData } from '@/data/cards'
 import { cardCompareFn, cards } from '@/data/cards'
@@ -13,12 +13,19 @@ export const CardList: FC<{
   onDeselectCard: CardHandler
 }> = ({ onSelectCard, onDeselectCard }) => {
   const deck = useDeck()
-  const { faction, query } = useCardFilter()
+  const [{ faction, query, mana, rarity, cardType, keyword }] = useCardFilters()
+  const keywordRegex = useMemo(() => (keyword ? new RegExp(keyword, 'i') : null), [keyword])
   const filteredCards = useMemo(
     () =>
       cards
         .filter((card) => card.cardType !== 'General' && card.rarity !== 'token')
         .filter((card) => (faction ? card.faction === faction : true))
+        .filter((card) =>
+          mana?.length ? mana.includes(card.mana) || (mana.includes(9) && card.mana > 9) : true,
+        )
+        .filter((card) => (rarity?.length ? rarity.includes(card.rarity) : true))
+        .filter((card) => (cardType?.length ? cardType.includes(card.cardType) : true))
+        .filter((card) => keywordRegex?.test(card.description) ?? true)
         .filter((card) =>
           query
             ? [card.name, card.description, card.cardType, ...card.tribes]
@@ -28,7 +35,7 @@ export const CardList: FC<{
             : true,
         )
         .sort(cardCompareFn),
-    [faction, query],
+    [faction, mana, query, rarity, cardType, keyword],
   )
 
   return (

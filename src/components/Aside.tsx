@@ -23,11 +23,11 @@ export const Aside: FC<{
         <div
           className={cx(
             'animate-in slide-in-from-right',
-            'flex h-full flex-col gap-y-4 bg-alt-900 p-4',
+            'flex h-full flex-col gap-y-6 bg-alt-900 p-4',
             children ? 'absolute left-0 top-0 2xl:relative 2xl:animate-none' : '',
           )}
         >
-          <div className="-mx-4 flex items-center justify-between border-b border-gray-700 px-4 pt-2 pb-6">
+          <div className="-mx-4 -mb-2 flex items-center justify-between border-b border-gray-700 px-4 pt-2 pb-6">
             <h3 className="text-2xl">Filters</h3>
             <button onClick={toggleFilters}>X</button>
           </div>
