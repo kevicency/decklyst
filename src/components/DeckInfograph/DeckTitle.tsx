@@ -3,11 +3,10 @@ import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { startCase } from 'lodash'
 import { useEffect, useRef } from 'react'
 
-export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
+export const DeckTitle = () => {
   const imageRef = useRef<HTMLImageElement>(null)
-  const { general, title, faction, meta, spiritCost } = useDeck()
+  const { general, title, faction, spiritCost } = useDeck()
   const { setSpriteLoaded } = useSpriteLoader()
-  const viewCount = meta?.viewCount
 
   useEffect(() => {
     if (imageRef.current) {

@@ -29,7 +29,7 @@ const DeckPreview: FC = () => {
         )}
       >
         <div className="flex-1 scale-90">
-          <DeckTitle showMeta />
+          <DeckTitle />
         </div>
         <DeckCounts />
         <DeckManaCurve />
