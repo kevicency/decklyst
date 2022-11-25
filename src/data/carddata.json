@@ -5767,12 +5767,12 @@
     "description": "Opening Gambit: Refresh all Mana tiles.",
     "relatedCards": [40001],
     "resource": {
-      "breathing": "resources/card_gifs/neutralTethermancerBreathing.gif",
-      "idle": "resources/card_gifs/neutralTethermancerIdle.gif",
-      "walk": "resources/card_gifs/neutralTethermancerRun.gif",
-      "attack": "resources/card_gifs/neutralTethermancerAttack.gif",
-      "damage": "resources/card_gifs/neutralTethermancerHit.gif",
-      "death": "resources/card_gifs/neutralTethermancerDeath.gif"
+      "breathing": "resources/card_gifs/neutralD2TethermancerBreathing.gif",
+      "idle": "resources/card_gifs/neutralD2TethermancerIdle.gif",
+      "walk": "resources/card_gifs/neutralD2TethermancerRun.gif",
+      "attack": "resources/card_gifs/neutralD2TethermancerAttack.gif",
+      "damage": "resources/card_gifs/neutralD2TethermancerHit.gif",
+      "death": "resources/card_gifs/neutralD2TethermancerDeath.gif"
     },
     "mana": 4,
     "attack": 2,
@@ -7305,7 +7305,7 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "epic",
-    "description": "Your action bar becomes a copy your opponent's action bar.",
+    "description": "Your action bar becomes a copy of your opponent's action bar.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2MindStealIdle.gif",
