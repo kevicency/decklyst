@@ -19,10 +19,20 @@
       }
     },
     {
-      "name": "Next.js: attach client-side",
+      "name": "Next.js: launch client-side",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "userDataDir": false,
+      "webRoot": "${workspaceFolder}",
+      "cleanUp": "onlyTab"
+    },
+    {
+      "name": "Next.js: attach client-side",
+      "type": "chrome",
+      "request": "attach",
+      "url": "http://localhost:3000/*",
+      "webRoot": "${workspaceFolder}"
     },
     {
       "name": "Next.js: attach server-side",
