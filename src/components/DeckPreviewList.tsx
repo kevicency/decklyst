@@ -58,9 +58,9 @@ const DeckPreview: FC = () => {
             <div className="flex items-center gap-x-1">
               <span className={`font-semibold text-gray-300`}>
                 <EyeIcon size={14} className="mx-1 inline-block pb-0.5" />
-                {meta?.viewCount}
+                {meta.viewCount}
               </span>
-              <span>views</span>
+              <span>{meta.viewCount === 1 ? 'view' : 'views'}</span>
             </div>
           </>
         )}
