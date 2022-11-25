@@ -1,3 +1,5 @@
+import { debase64 } from '@/data/base64'
+import { splitDeckcode } from '@/data/deckcode'
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
@@ -55,12 +57,25 @@ const main = async () => {
     })
     console.log(`Imported ${deckimages.length} deckviews from ${deckimageFile}`)
   } else if (cmd === 'update') {
-    const deckinfos = await prisma.deckinfo.findMany({ where: { spiritCost: 0 } })
+    const deckinfos = await prisma.deckinfo.findMany({
+      where: { OR: [{ spiritCost: 0 }, { deckcodeDecoded: '' }] },
+    })
     for (const deckinfo of deckinfos) {
       const spiritCost = spiritCost$(createDeck(deckinfo.deckcode))
-      await prisma.deckinfo.update({ where: { deckcode: deckinfo.deckcode }, data: { spiritCost } })
+      const decoded = debase64(splitDeckcode(deckinfo.deckcode)[1]) + ','
+      await prisma.deckinfo.update({
+        where: { deckcode: deckinfo.deckcode },
+        data: { spiritCost, deckcodeDecoded: decoded },
+      })
     }
     console.log(`Updated ${deckinfos.length} deckinfos`)
+    // } else if (cmd === 'test') {
+    //   const deckinfos = await prisma.deckinfo.findMany({
+    //     where: {
+    //       AND: [{ AND: [{ deckcodeDecoded: { contains: ':162,' } }] }],
+    //     },
+    //   })
+    //   console.log('Found', deckinfos.length, 'decks')
   }
 }
 

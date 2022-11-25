@@ -56,6 +56,7 @@ export const decksRouter = router({
         filters: z
           .object({
             factions: z.array(z.enum(factions as [string, ...string[]])),
+            cardIds: z.array(z.number().int().positive()),
           })
           .optional(),
       }),
@@ -69,10 +70,19 @@ export const decksRouter = router({
 
         if (sorting === 'date:created' || sorting === undefined) {
           const deckinfos = await ctx.deckinfo.findMany({
-            select: { deckcode: true, createdAt: true, views: {} },
+            select: { deckcode: true, createdAt: true, views: {}, deckcodeDecoded: true },
             where: {
-              totalCount: 40,
-              faction: filters.factions?.length ? { in: filters.factions } : undefined,
+              AND: [
+                {
+                  totalCount: 40,
+                },
+                { faction: filters.factions?.length ? { in: filters.factions } : undefined },
+                {
+                  AND: filters.cardIds?.map((cardId) => ({
+                    deckcodeDecoded: { contains: `:${cardId},` },
+                  })),
+                },
+              ],
             },
             orderBy: {
               createdAt: 'desc',
@@ -80,6 +90,7 @@ export const decksRouter = router({
             skip,
             take: limit + 1,
           })
+
           const viewCounts = await ctx.deckviews.getDeckviews(
             ...deckinfos.map(({ deckcode }) => deckcode),
           )
@@ -97,6 +108,7 @@ export const decksRouter = router({
             count: limit + 1,
             sinceDaysAgo: sorting === 'views:recent' ? 7 : undefined,
             factions: filters.factions,
+            cardIds: filters.cardIds,
           })
           const deckinfos = await ctx.deckinfo.findMany({
             select: { deckcode: true, createdAt: true },

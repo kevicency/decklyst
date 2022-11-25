@@ -24,16 +24,27 @@ export const extendDeckviews = (deckviews: Deckviews) =>
       count: take,
       sinceDaysAgo,
       factions,
+      cardIds,
     }: {
       count: number
       sinceDaysAgo?: number
       factions?: string[]
+      cardIds?: number[]
     }): Promise<DeckviewResult[]> => {
       const result = await deckviews.groupBy({
         where: {
           info: {
-            totalCount: 40,
-            faction: factions?.length ? { in: factions } : undefined,
+            AND: [
+              {
+                totalCount: 40,
+              },
+              { faction: factions?.length ? { in: factions } : undefined },
+              {
+                AND: cardIds?.map((cardId) => ({
+                  deckcodeDecoded: { contains: `:${cardId},` },
+                })),
+              },
+            ],
           },
           ...(sinceDaysAgo && {
             updatedAt: {

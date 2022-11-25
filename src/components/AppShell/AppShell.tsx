@@ -13,9 +13,9 @@ export const AppShell: FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     const handleRouteChanged = (url: string, { shallow }: { shallow: boolean }) => {
-      if (!shallow) {
-        setShowFilters(url === '/decks')
-      }
+      // if (!shallow) {
+      //   setShowFilters(url '/decks')
+      // }
     }
 
     router.events.on('routeChangeComplete', handleRouteChanged)

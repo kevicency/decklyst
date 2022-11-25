@@ -13,10 +13,13 @@ export const parseRouteParams = (query: ParsedUrlQuery) => {
   const factions = (Array.isArray(query.factions) ? query.factions : [query.factions])
     .filter(isString)
     .map((faction) => faction.toLowerCase())
+  const cardIds = (Array.isArray(query.cardIds) ? query.cardIds : [query.cardIds])
+    .filter(isString)
+    .map((cardId) => +cardId)
 
   return {
     listing,
-    filters: { factions },
+    filters: { factions, cardIds },
   } as const
 }
 

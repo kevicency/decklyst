@@ -11,14 +11,15 @@ datasource db {
 }
 
 model Deckinfo {
-  deckcode      String @id
-  sharecode     String @unique
-  faction       String @default("neutral")
-  minionCount   Int    @default(0)
-  spellCount    Int    @default(0)
-  artifactCount Int    @default(0)
-  totalCount    Int    @default(0)
-  spiritCost    Int    @default(0)
+  deckcode        String @id
+  sharecode       String @unique
+  faction         String @default("neutral")
+  minionCount     Int    @default(0)
+  spellCount      Int    @default(0)
+  artifactCount   Int    @default(0)
+  totalCount      Int    @default(0)
+  spiritCost      Int    @default(0)
+  deckcodeDecoded String @default("")
 
   createdAt DateTime @default(now())
 
