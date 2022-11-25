@@ -2,7 +2,6 @@ import { useDeck } from '@/context/useDeck'
 import { useSpriteLoader } from '@/context/useSpriteLoader'
 import { startCase } from 'lodash'
 import { useEffect, useRef } from 'react'
-import { EyeIcon } from '../Icons'
 
 export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
   const imageRef = useRef<HTMLImageElement>(null)
@@ -42,21 +41,10 @@ export const DeckTitle = ({ showMeta }: { showMeta?: boolean }) => {
         </div>
         <div className={`flex content-center items-center gap-x-2 truncate text-xl`}>
           <span className={`text-${faction}`}>{startCase(faction)}</span>
-          {showMeta && viewCount ? (
-            <span className="flex items-center text-gray-400 group-hover:text-accent-600">
-              <EyeIcon size={24} className="mr-2" />
-              <span>
-                {viewCount} {viewCount <= 1 ? 'view' : 'views'}
-              </span>
-            </span>
-          ) : (
-            <>
-              <span className="h-full w-0.5 bg-alt-300"></span>
-              <span className="flex items-center gap-x-1">
-                <span className={`text-${faction} font-semibold`}>{spiritCost}</span> Spirit
-              </span>
-            </>
-          )}
+          <span className="mx-1 h-full w-0.5 bg-alt-300"></span>
+          <span className="flex items-center gap-x-1">
+            <span className={`text-${faction} font-semibold`}>{spiritCost}</span> Spirit
+          </span>
         </div>
       </div>
     </div>

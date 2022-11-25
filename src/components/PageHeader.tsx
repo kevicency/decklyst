@@ -22,7 +22,7 @@ export const PageHeader: FC<{
       {children}
       {showFilterToggle && (
         <button
-          className=" absolute right-6 top-1/2 z-50 -mt-6 flex bg-transparent px-3 py-3 text-2xl text-accent-200 transition-colors hover:bg-accent-700 hover:text-gray-100"
+          className="absolute right-4 top-1/2 z-50 -mt-6 flex bg-transparent px-3 py-3 text-2xl text-accent-200 transition-colors hover:bg-accent-700 hover:text-gray-100"
           onClick={toggleFilters}
           aria-label="Filters"
         >
