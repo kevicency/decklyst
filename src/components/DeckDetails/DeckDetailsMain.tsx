@@ -43,7 +43,11 @@ export const DeckDetailsMain: FC = () => {
           <div className="flex items-center gap-x-4 text-sm text-gray-400">
             <div>
               <span>shared by </span>
-              <span className="font-semibold text-gray-300">Anonymous</span>
+              {meta.author ? (
+                <span className="font-semibold text-accent-400">{meta.author.name}</span>
+              ) : (
+                <span className="font-semibold text-gray-300">Anonymous</span>
+              )}
             </div>
             <div className={`text-lg font-bold text-${deck.faction}`}>•</div>
             <div>

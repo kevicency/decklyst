@@ -15,6 +15,7 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    nanoid: '<rootDir>/node_modules/nanoid/index.cjs',
   },
 }
 

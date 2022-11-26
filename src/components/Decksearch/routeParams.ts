@@ -30,8 +30,8 @@ export const useRouteParams = (initialRouteParams: RouteParams) => {
   const updateRouteParams = async ({ filters, listing }: RouteParams) => {
     await router.push(
       {
-        pathname: `/decks${listing ? `/${listing}` : ''}`,
-        query: omitBy(filters, isUndefined),
+        pathname: '/decks',
+        query: { listing, ...omitBy(filters, isUndefined) },
       },
       undefined,
       { shallow: true },

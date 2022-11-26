@@ -1,12 +1,15 @@
 import type * as trpc from '@trpc/server'
 import type { CreateNextContextOptions } from '@trpc/server/adapters/next'
+import type { Session } from 'next-auth'
+import { getServerAuthSession } from '../auth'
 import { prisma } from '../db/client'
 import { extendDeckimage } from '../model/deckimage'
-import { extendDeckinfo } from '../model/deckinfo'
+import { extendDeckinfo, extendDecklyst } from '../model/deckinfo'
 import { extendDeckviews } from '../model/deckviews'
 import { getIpAddress } from '../utils'
 
 type CreateContextOptions = {
+  session: Session | null
   ipAddress?: string
 }
 
@@ -15,12 +18,13 @@ type CreateContextOptions = {
  * - trpc's `createSSGHelpers` where we don't have req/res
  * @see https://beta.create.t3.gg/en/usage/trpc#-servertrpccontextts
  **/
-export const createContextInner = async (opts: CreateContextOptions = {}) => ({
+export const createContextInner = async (opts: CreateContextOptions = { session: null }) => ({
   ...opts,
-  prisma: prisma,
+  prisma,
   deckimage: extendDeckimage(prisma.deckimage),
   deckinfo: extendDeckinfo(prisma.deckinfo),
   deckviews: extendDeckviews(prisma.deckviews),
+  decklyst: extendDecklyst(prisma.decklyst, opts.session),
 })
 
 /**
@@ -29,9 +33,11 @@ export const createContextInner = async (opts: CreateContextOptions = {}) => ({
  **/
 export async function createContext(opts: CreateNextContextOptions) {
   const ipAddress = getIpAddress(opts.req)
+  const session = await getServerAuthSession(opts)
 
   return createContextInner({
     ipAddress,
+    session,
   })
 }
 

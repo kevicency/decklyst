@@ -31,9 +31,19 @@ export type DeckExpanded = Deck & {
   manaCurve: ManaCurve
   spiritCost: number
   meta?: {
-    sharecode?: string
+    sharecode: string
+    version: number
+    views: number
+    likes: number
+    archetype?: string | null
+    author?: {
+      id: string
+      name: string | null
+    } | null
+    createdAt: Date
+    updatedAt: Date
+
     viewCount?: number
-    createdAt?: Date
   }
 }
 export type DeckMeta = DeckExpanded['meta']

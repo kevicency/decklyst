@@ -11,3 +11,14 @@ export const deckinfoRouter = router({
     .input(z.object({ code: z.string() }))
     .mutation(({ ctx, input }) => ctx.deckinfo.ensureByCode(input.code)),
 })
+
+export const decklystRouter = router({
+  get: proc
+    .input(z.object({ code: z.string(), ensure: z.boolean().optional() }))
+    .query(({ ctx, input }) =>
+      input.ensure ? ctx.decklyst.ensureByCode(input.code) : ctx.decklyst.findByCode(input.code),
+    ),
+  ensure: proc
+    .input(z.object({ code: z.string() }))
+    .mutation(({ ctx, input }) => ctx.decklyst.ensureByCode(input.code)),
+})
