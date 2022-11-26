@@ -6,11 +6,11 @@ import { useDeck } from '@/context/useDeck'
 import { useDeckcode } from '@/context/useDeckcode'
 import type { CardType, Rarity } from '@/data/cards'
 import { keywords } from '@/data/cards'
+import type { DeckDiff } from '@/hooks/useDeckDiff'
 import { Switch } from '@headlessui/react'
 import cx from 'classnames'
 import { debounce, noop, range, startCase } from 'lodash'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import type { FC } from 'react'
 import { useCallback, useState } from 'react'
 import { Aside } from '../Aside'
@@ -18,118 +18,127 @@ import { ManaIcon } from '../DeckInfograph/ManaIcon'
 import { Filter } from '../Filter'
 import {
   ArtifactIcon,
-  CompareIcon,
+  ChangesIcon,
   CopyIcon,
   DoneIcon,
   MinionIcon,
-  ShareIcon,
+  SaveIcon,
   SpellIcon,
   TrashIcon,
 } from '../Icons'
+import { DeckDiffDialog } from './DeckDiffDialog'
 
-export const DeckbuilderAside: FC = () => {
-  const router = useRouter()
+export const DeckbuilderAside: FC<{ deckDiff?: DeckDiff }> = ({ deckDiff }) => {
   const deck = useDeck()
-  const [{ title, cards, $encoded: encodedDeckcode }, { baseDeckcode, updateTitle, clear }] =
-    useDeckcode()
+  const [{ title, cards, $encoded: encodedDeckcode }, { updateTitle, clear }] = useDeckcode()
   const [titleValue, setTitleValue] = useState(title)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateTitleDebounced = useCallback(debounce(updateTitle, 500), [updateTitle])
-
-  const canCompare = Boolean(
-    baseDeckcode && Object.keys(cards).length && encodedDeckcode !== baseDeckcode,
-  )
+  const [showDeckDiff, setShowDeckDiff] = useState(false)
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(encodedDeckcode!)
   }
 
   return (
-    <Aside filters={<DeckbuilderAsideFilters />}>
-      <div className="flex flex-col gap-y-2 p-2">
-        <div className="flex gap-2">
-          <input
-            className="w-full bg-alt-800 px-2 py-2"
-            placeholder="Untitled"
-            autoFocus
-            value={titleValue}
-            onChange={(ev) => {
-              setTitleValue(ev.target.value)
-              updateTitleDebounced(ev.target.value)
-            }}
-          />
+    <>
+      <Aside filters={<DeckbuilderAsideFilters />}>
+        <div className="flex flex-col gap-y-4">
+          <div className="flex gap-2 p-2">
+            <input
+              className="w-full bg-alt-800 px-2 py-2"
+              placeholder="Untitled"
+              autoFocus
+              value={titleValue}
+              onChange={(ev) => {
+                setTitleValue(ev.target.value)
+                updateTitleDebounced(ev.target.value)
+              }}
+            />
 
-          <button
-            className="flex bg-red-900 px-3 py-2 text-xl hover:bg-red-700"
-            onClick={clear}
-            aria-label="Delete"
-          >
-            <TrashIcon />
-          </button>
-        </div>
-        <div className="mx-auto mb-2 ">
-          <DeckManaCurve />
-        </div>
-        <div className="-mr-1.5 flex flex-1 overflow-y-hidden py-2">
-          <div className="flex-1 overflow-y-scroll px-2">
-            <CardsInDeck cardType="Minion" />
-            <CardsInDeck cardType="Spell" />
-            <CardsInDeck cardType="Artifact" />
-          </div>
-        </div>
-        <div className="-mx-2 -mb-2 grid grid-cols-2 gap-2 border-t border-alt-700 bg-alt-900 px-2 py-2">
-          <div className={cx(`flex flex-1 justify-center font-mono text-xl font-bold`)}>
-            <span className={` text-${deck.faction}`}>{deck.counts.total}</span>/
-            <span
-              className={cx({
-                'text-red-400': deck.counts.total > 40,
-                [`text-${deck.faction}`]: deck.counts.total === 40,
-              })}
+            <button
+              className="flex bg-red-900 px-3 py-2 text-xl hover:bg-red-700"
+              onClick={clear}
+              aria-label="Delete"
             >
-              40
-            </span>
+              <TrashIcon />
+            </button>
           </div>
-          <OneTimeButton onClick={handleCopy} timeout={2500} className="flex-1">
-            {(copied) => (
-              <>
-                {copied ? <DoneIcon /> : <CopyIcon />}
-                {copied ? 'Copied' : 'Copy'}
-              </>
-            )}
-          </OneTimeButton>
-          <button
-            className={cx('btn flex-1 px-3 py-1', !canCompare && 'btn--disabled')}
-            disabled={!canCompare}
-            onClick={async () => {
-              await router.push({
-                pathname: '/compare',
-                query: { left: baseDeckcode, right: encodedDeckcode },
-              })
-            }}
-          >
-            <CompareIcon />
-            Compare
-          </button>
-          <Link
-            href={{ pathname: '/[code]', query: { code: encodedDeckcode } }}
-            prefetch={false}
-            className={cx('btn flex-1 px-3 py-1', deck.counts.total > 40 && 'btn--disabled')}
-          >
-            <ShareIcon /> Share
-          </Link>
+          <div className="mx-auto px-2 pb-2">
+            <DeckManaCurve />
+          </div>
+          <div className="-mb-4 flex flex-1 overflow-y-hidden">
+            <div className="flex-1 overflow-y-scroll pl-4 pr-2">
+              <CardsInDeck cardType="Minion" />
+              <CardsInDeck cardType="Spell" />
+              <CardsInDeck cardType="Artifact" />
+            </div>
+          </div>
+          {deckDiff && (
+            <div className="-mb-4 grid grid-cols-2 gap-2 border-t border-alt-700 bg-alt-900 px-2 py-2">
+              <div className={cx(`flex justify-center gap-1 text-lg`)}>
+                <span className={`text-${deck.faction} font-mono font-semibold`}>
+                  {deckDiff.changes}
+                </span>
+                <span>changes</span>
+              </div>
+              <button className={cx('btn px-2 py-1')} onClick={() => setShowDeckDiff(true)}>
+                <ChangesIcon size={20} /> Show
+              </button>
+            </div>
+          )}
+          <div className="-mb-4 grid grid-cols-2 gap-2 border-t border-alt-700 bg-alt-900 px-2 py-2">
+            <div className={cx(`flex justify-center font-mono text-xl font-bold`)}>
+              <span className={`text-${deck.faction}`}>{deck.counts.total}</span>/
+              <span
+                className={cx({
+                  'text-red-600': deck.counts.total > 40,
+                  [`text-${deck.faction}`]: deck.counts.total === 40,
+                })}
+              >
+                40
+              </span>
+            </div>
+            <Link
+              href={{ pathname: '/[code]', query: { code: encodedDeckcode } }}
+              prefetch={false}
+              className={cx('btn px-2 py-1')}
+            >
+              <SaveIcon /> Save
+            </Link>
+          </div>
+          <div className="flex border-t border-alt-700 bg-alt-1000">
+            <OneTimeButton
+              onClick={handleCopy}
+              timeout={2500}
+              className="shrink-0 border-b-2 border-alt-600 bg-gray-900"
+            >
+              {(copied) => (
+                <>
+                  {copied ? <DoneIcon /> : <CopyIcon />}
+                  Copy
+                </>
+              )}
+            </OneTimeButton>
+            <input
+              className="page-header-input w-full bg-alt-1000 px-3 text-alt-200"
+              readOnly
+              value={deck.deckcode}
+              onChange={noop}
+              onFocus={(ev) => setTimeout(() => ev.target.select(), 50)}
+              aria-label="Deckcode"
+            />
+          </div>
         </div>
-        <div className="-mx-2 -mb-2 border-t border-alt-700 bg-alt-1000 px-1">
-          <input
-            className="page-header-input w-full bg-alt-1000 px-4 text-alt-200"
-            readOnly
-            value={deck.deckcode}
-            onChange={noop}
-            onFocus={(ev) => setTimeout(() => ev.target.select(), 50)}
-            aria-label="Deckcode"
-          />
-        </div>
-      </div>
-    </Aside>
+      </Aside>
+      {deckDiff && (
+        <DeckDiffDialog
+          open={showDeckDiff}
+          onClose={() => setShowDeckDiff(false)}
+          deckDiff={deckDiff}
+        />
+      )}
+    </>
   )
 }
 

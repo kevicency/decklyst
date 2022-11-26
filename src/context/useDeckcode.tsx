@@ -5,7 +5,6 @@ import { createContext, useContext } from 'react'
 export type DeckcodeContextValue = [
   Deckcode,
   {
-    baseDeckcode?: string
     addCard: (cardId: number, count?: number) => Deckcode | Promise<Deckcode>
     removeCard: (cardId: number, count?: number) => Deckcode | Promise<Deckcode>
     replaceCard: (cardId: number, replaceWithCardId: number) => Deckcode | Promise<Deckcode>

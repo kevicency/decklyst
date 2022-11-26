@@ -1,6 +1,15 @@
 import { BiImport } from 'react-icons/bi'
 import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
-import { FaBug, FaDiscord, FaImage, FaPencilAlt, FaRegClock, FaRegEye } from 'react-icons/fa'
+import { CgArrowsExchangeAlt } from 'react-icons/cg'
+import {
+  FaBug,
+  FaDiscord,
+  FaImage,
+  FaPencilAlt,
+  FaRegClock,
+  FaRegEye,
+  FaSave,
+} from 'react-icons/fa'
 import { GiArtificialHive, GiEvilMinion, GiGearHammer, GiSpellBook } from 'react-icons/gi'
 import { GoRepoForked } from 'react-icons/go'
 import { HiOutlineLibrary } from 'react-icons/hi'
@@ -36,3 +45,5 @@ export const ImageIcon = FaImage
 export const MinionIcon = GiEvilMinion
 export const SpellIcon = GiSpellBook
 export const ArtifactIcon = GiArtificialHive
+export const SaveIcon = FaSave
+export const ChangesIcon = CgArrowsExchangeAlt

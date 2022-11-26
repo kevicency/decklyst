@@ -1,10 +1,13 @@
 import type { CardData, CardType } from '@/data/cards'
 import { cardCompareFn } from '@/data/cards'
 import type { CardEntry, DeckExpanded } from '@/data/deck'
+import { spiritCost$ } from '@/data/deck'
 import { merge, sumBy } from 'lodash'
 import { useMemo } from 'react'
 
 export type DeckDiff = {
+  $left: DeckExpanded
+  $right: DeckExpanded
   minions: CardDiff[]
   spells: CardDiff[]
   artifacts: CardDiff[]
@@ -14,6 +17,7 @@ export type DeckDiff = {
     artifacts: number
   }
   changes: number
+  spirit: number
 }
 
 export type CardDiff = {
@@ -48,11 +52,11 @@ const diffCards = (leftCards: CardEntry[], rightCards: CardEntry[]): CardDiff[] 
   return Array.from(diffMap.values()).sort((a, b) => cardCompareFn(a.card, b.card))
 }
 
-export const useDeckDiff = (left: DeckExpanded, right: DeckExpanded) =>
-  useMemo(() => {
-    const cardTypes = ['Minion', 'Spell', 'Artifact'] as CardType[]
+export const createDeckDiff = (left: DeckExpanded, right: DeckExpanded) => {
+  const cardTypes = ['Minion', 'Spell', 'Artifact'] as CardType[]
 
-    const deckDiff = cardTypes.reduce((acc, cardType) => {
+  const deckDiff = cardTypes.reduce(
+    (acc, cardType) => {
       const cardsPath = `${cardType.toLowerCase()}s` as keyof DeckExpanded
       const diff = diffCards(left[cardsPath] as CardEntry[], right[cardsPath] as CardEntry[])
 
@@ -63,7 +67,16 @@ export const useDeckDiff = (left: DeckExpanded, right: DeckExpanded) =>
         },
         changes: (acc.changes ?? 0) + sumBy(diff, (x) => Math.abs(x.delta)),
       })
-    }, {} as Partial<DeckDiff>)
+    },
+    {
+      spirit: spiritCost$(right) - spiritCost$(left),
+      $left: left,
+      $right: right,
+    } as Partial<DeckDiff>,
+  )
 
-    return deckDiff as DeckDiff
-  }, [left, right])
+  return deckDiff as DeckDiff
+}
+
+export const useDeckDiff = (left: DeckExpanded, right: DeckExpanded) =>
+  useMemo(() => createDeckDiff(left, right), [left, right])

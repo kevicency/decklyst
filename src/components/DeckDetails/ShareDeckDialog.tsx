@@ -1,56 +1,27 @@
 import { useDeck } from '@/context/useDeck'
 import { useDeckActions, useDeckImage } from '@/hooks/useDeckActions'
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog } from '@headlessui/react'
 import cx from 'classnames'
 import type { FC } from 'react'
-import { Fragment } from 'react'
 import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
 import { DeckInfograph } from '../DeckInfograph'
+import { Backdrop, InnerTransition, OuterTransition } from '../Dialog'
 import { CopyIcon, DoneIcon, DownloadDoneIcon, ImageIcon, LinkIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
 
-const Backdrop = () => (
-  <Transition.Child
-    as={Fragment}
-    enter="ease-out duration-300"
-    enterFrom="opacity-0"
-    enterTo="opacity-100"
-    leave="ease-in duration-200"
-    leaveFrom="opacity-100"
-    leaveTo="opacity-0"
-  >
-    <div className="fixed inset-0 bg-gray-900/75" aria-hidden="true" />
-  </Transition.Child>
-)
 export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
   const deck = useDeck()
   const { imageDataUri, imageFilename } = useDeckImage()
   const { copyDeckImageUrl, copyDeckcode, copyDeckUrl } = useDeckActions()
 
   return (
-    <Transition
-      show={open}
-      enter="transition duration-100 ease-out"
-      enterFrom="transform scale-95 opacity-0"
-      enterTo="transform scale-100 opacity-100"
-      leave="transition duration-75 ease-out"
-      leaveFrom="transform scale-100 opacity-100"
-      leaveTo="transform scale-95 opacity-0"
-    >
+    <OuterTransition show={open}>
       <Dialog onClose={onClose} className="relative z-50">
         {/* The backdrop, rendered as a fixed sibling to the panel container */}
         <Backdrop />
         {/* Full-screen container to center the panel */}
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
+        <InnerTransition>
           <div className="fixed inset-0 flex items-center justify-center p-4">
             {/* The actual dialog panel  */}
             <Dialog.Panel className="mx-auto flex max-h-full min-w-fit max-w-min flex-col overflow-hidden bg-gray-1000">
@@ -121,8 +92,8 @@ export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ op
               </div>
             </Dialog.Panel>
           </div>
-        </Transition.Child>
+        </InnerTransition>
       </Dialog>
-    </Transition>
+    </OuterTransition>
   )
 }
