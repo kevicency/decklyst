@@ -5,7 +5,6 @@ import type { CardEntry } from '@/data/deck'
 import { memoize } from 'lodash'
 
 export type Deckcode = {
-  readonly $encoded?: string
   title: string
   cards: Record<number, number>
 }
@@ -43,11 +42,10 @@ export const replaceCard = (deckdata: Deckcode, cardId: number, replaceWithCardI
 })
 export const updateTitle = (deckdata: Deckcode, title: string) => ({ ...deckdata, title })
 
-export const parseDeckcode = memoize((deckcode: string) => {
+export const parseDeckcode = memoize((deckcode: string): Deckcode => {
   const [title, base64] = splitDeckcode(deckcode)
   return {
     title: title ?? '',
-    $encoded: deckcode,
     cards: debase64(base64)
       .split(',')
       .map((pair) => pair.split(':'))

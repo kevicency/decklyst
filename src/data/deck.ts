@@ -1,8 +1,8 @@
 import type { CardData, CardType, Faction, Rarity } from '@/data/cards'
 import { cardsById, rarityCraftingCost, sortCards } from '@/data/cards'
 import type { Deckcode } from '@/data/deckcode'
-import { parseDeckcode, splitDeckcode } from '@/data/deckcode'
-import type { Decklyst } from '@/server/model/deckinfo'
+import { encodeDeckcode, parseDeckcode, splitDeckcode } from '@/data/deckcode'
+import type { Decklyst, User } from '@prisma/client'
 import { chain, groupBy, max, memoize, sumBy } from 'lodash'
 
 export const archetypes = ['aggro', 'midrange', 'control', 'combo'] as const
@@ -34,7 +34,9 @@ export type DeckExpanded = Deck & {
   }
   manaCurve: ManaCurve
   spiritCost: number
-  meta?: Omit<Decklyst, 'id' | 'deckcode' | 'title' | 'cardcode' | 'metadataId'>
+  meta?: Omit<Decklyst, 'id' | 'deckcode' | 'title' | 'cardcode' | 'statsId'> & {
+    author?: User | null
+  }
 }
 export type DeckMeta = DeckExpanded['meta']
 
@@ -45,12 +47,11 @@ const $ = <T>(fn: DeckLens<T>) => memoize(fn)
 export const createDeck = (deckcode?: string | Deckcode): Deck => {
   if (!deckcode) return { title: '', cards: [], deckcode: '' }
 
-  const { title, $encoded, cards } =
-    typeof deckcode === 'string' ? parseDeckcode(deckcode) : deckcode
+  const { title, cards } = typeof deckcode === 'string' ? parseDeckcode(deckcode) : deckcode
 
   return {
     title,
-    deckcode: $encoded!,
+    deckcode: encodeDeckcode({ title, cards }),
     cards: sortCards(
       Object.keys(cards)
         .map((id) => +id)

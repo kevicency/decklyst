@@ -27,12 +27,12 @@ model Decklyst {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  authorId   String?
-  author     User?         @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  metadataId Int           @unique
-  metadata   DeckMetadata  @relation(fields: [metadataId], references: [id], onDelete: Cascade)
-  history    DeckHistory[]
-  viewers    DeckView[]
+  authorId String?
+  author   User?         @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  statsId  Int           @unique
+  stats    DeckStats     @relation(fields: [statsId], references: [id], onDelete: Cascade)
+  history  DeckHistory[]
+  viewers  DeckView[]
 
   @@map("deck")
 }
@@ -64,7 +64,7 @@ model DeckView {
   @@map("deckview")
 }
 
-model DeckMetadata {
+model DeckStats {
   id            Int    @id @default(autoincrement())
   faction       String @default("neutral")
   minionCount   Int    @default(0)
@@ -76,7 +76,7 @@ model DeckMetadata {
 
   deck Decklyst?
 
-  @@map("deckmetadata")
+  @@map("deckstats")
 }
 
 model Deckinfo {

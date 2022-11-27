@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pretest": "dotenv -e .env.test -- prisma db push --force-reset",
     "test": "jest --passWithNoTests",
     "prepare": "husky install && cp -n .env.template .env.local | true",
     "prebuild": "prisma generate",
@@ -15,7 +14,7 @@
     "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
     "studio:prod": "dotenv -e .env.production -- prisma studio",
     "generate:cards.json": "ts-node scripts/generateCardsJson.ts",
-    "sync:db": "ts-node scripts/syncDb.ts"
+    "sync:db": "dotenv -e .env -e .env.local -- ts-node scripts/syncDb.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",

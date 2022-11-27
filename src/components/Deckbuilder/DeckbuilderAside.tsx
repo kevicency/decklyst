@@ -24,12 +24,12 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
     () => (baseDeck ? createDeckDiff(baseDeck, deck) : null),
     [baseDeck, deck],
   )
-  const [{ $encoded: deckcode }, { clear }] = useDeckcode()
+  const [, { clear }] = useDeckcode()
   const [activeDialog, setActiveDialog] = useState<'diff' | 'save' | null>(null)
   const authenticated = useSession()?.status === 'authenticated'
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(deckcode!)
+    await navigator.clipboard.writeText(deck.deckcode!)
   }
 
   console.log(baseDeck?.meta)
@@ -90,7 +90,7 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
               </button>
             ) : (
               <Link
-                href={{ pathname: '/[code]', query: { code: deckcode } }}
+                href={{ pathname: '/[code]', query: { code: deck.deckcode } }}
                 prefetch={false}
                 className={cx('btn px-2 py-1')}
               >
