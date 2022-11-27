@@ -11,15 +11,15 @@ datasource db {
 }
 
 model Decklyst {
-  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  sharecode String  @unique
+  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sharecode String     @unique
   deckcode  String
   title     String
   cardcode  String
-  private   Boolean @default(false)
-  version   Int     @default(1)
-  draft     Boolean @default(false)
-  archetype String?
+  privacy   Privacy    @default(unlisted)
+  version   Int        @default(1)
+  draft     Boolean    @default(false)
+  archetype Archetype?
 
   views Int @default(0)
   likes Int @default(0)
@@ -35,6 +35,19 @@ model Decklyst {
   viewers  DeckView[]
 
   @@map("deck")
+}
+
+enum Privacy {
+  private
+  unlisted
+  public
+}
+
+enum Archetype {
+  aggro
+  midrange
+  control
+  combo
 }
 
 model DeckHistory {

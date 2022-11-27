@@ -4,7 +4,6 @@ import type { Session } from 'next-auth'
 import { getServerAuthSession } from '../auth'
 import { prisma } from '../db/client'
 import { extendDeckimage } from '../model/deckimage'
-import { extendDeckinfo } from '../model/deckinfo'
 import { extendDecklyst } from '../model/decklyst'
 import { extendDeckviews } from '../model/deckviews'
 import { getIpAddress } from '../utils'
@@ -23,7 +22,6 @@ export const createContextInner = async (opts: CreateContextOptions = { session:
   ...opts,
   prisma,
   deckimage: extendDeckimage(prisma.deckimage),
-  deckinfo: extendDeckinfo(prisma.deckinfo),
   deckviews: extendDeckviews(prisma.deckviews),
   decklyst: extendDecklyst(prisma.decklyst, opts.session),
 })

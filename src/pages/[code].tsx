@@ -1,13 +1,7 @@
-import type { DeckExpanded } from '@/data/deck'
 import { createApiClient } from '@/server'
 import { createContext } from '@/server/trpc/context'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
-
-type Props = {
-  deck: DeckExpanded
-  isSnapshot: boolean
-}
 
 const DeckRedirectPage: FC = () => null
 
@@ -19,14 +13,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext<{ code?:
   const clientContext = await createContext(ctx as any)
   const client = await createApiClient(clientContext)
 
-  await client.decklyst.ensure({ code })
+  const deck = await client.deck.ensure({ code })
 
-  return {
-    redirect: {
-      destination: `/decks/${encodeURIComponent(code)}`,
-      permanent: true,
-    },
-  }
+  return deck
+    ? {
+        redirect: {
+          destination: `/decks/${encodeURIComponent(code)}`,
+          permanent: true,
+        },
+      }
+    : { notFound: true }
 }
 
 export default DeckRedirectPage

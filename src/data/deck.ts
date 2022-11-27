@@ -2,11 +2,9 @@ import type { CardData, CardType, Faction, Rarity } from '@/data/cards'
 import { cardsById, rarityCraftingCost, sortCards } from '@/data/cards'
 import type { Deckcode } from '@/data/deckcode'
 import { encodeDeckcode, parseDeckcode, splitDeckcode } from '@/data/deckcode'
+import type { WithRequired } from '@/types'
 import type { Decklyst, User } from '@prisma/client'
 import { chain, groupBy, max, memoize, sumBy } from 'lodash'
-
-export const archetypes = ['aggro', 'midrange', 'control', 'combo'] as const
-export type Archetype = typeof archetypes[number]
 
 export type CardEntry = CardData & { count: number }
 export type Deck = {
@@ -123,12 +121,23 @@ export const expandDeck = (deck: Deck, meta?: DeckExpanded['meta']): DeckExpande
     return !!this.general
   },
 })
-export const createDeckExpanded = (
-  deckcode?: string | Deckcode,
-  meta?: DeckExpanded['meta'] | null,
-): DeckExpanded => expandDeck(createDeck(deckcode), meta ?? undefined)
 
-export const createDeckFromDecklyst = ({ deckcode, ...decklyst }: Decklyst): DeckExpanded =>
+export function createDeckExpanded(
+  deckcode: string | Deckcode,
+  meta: DeckExpanded['meta'],
+): WithRequired<DeckExpanded, 'meta'>
+export function createDeckExpanded(
+  deckcode: string | Deckcode,
+  meta?: DeckExpanded['meta'] | null,
+): DeckExpanded
+export function createDeckExpanded(
+  deckcode: string | Deckcode,
+  meta?: DeckExpanded['meta'] | null,
+) {
+  return expandDeck(createDeck(deckcode), meta ?? undefined)
+}
+
+export const createDeckFromDecklyst = ({ deckcode, ...decklyst }: Decklyst) =>
   createDeckExpanded(deckcode, decklyst)
 
 export const isDeckExpanded = (deck: Deck | DeckExpanded): deck is DeckExpanded => 'valid' in deck

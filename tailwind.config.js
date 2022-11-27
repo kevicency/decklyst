@@ -79,7 +79,7 @@ module.exports = {
       }
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@savvywombat/tailwindcss-grid-areas')],
+  plugins: [require('@tailwindcss/forms'), require('tailwindcss-animate'), require('@savvywombat/tailwindcss-grid-areas')],
   safelist: [
     {
       pattern: /!?(text|bg|border)-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,

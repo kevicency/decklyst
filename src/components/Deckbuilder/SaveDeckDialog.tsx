@@ -1,12 +1,13 @@
 import { useDeck } from '@/context/useDeck'
-import type { Archetype, DeckExpanded } from '@/data/deck'
-import { archetypes } from '@/data/deck'
+import type { DeckExpanded } from '@/data/deck'
 import { trpc } from '@/utils/trpc'
-import { Dialog } from '@headlessui/react'
-import { identity, startCase } from 'lodash'
+import { Dialog, RadioGroup } from '@headlessui/react'
+import { Archetype, Privacy } from '@prisma/client'
+import cx from 'classnames'
+import { startCase } from 'lodash'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Backdrop, InnerTransition, OuterTransition } from '../Dialog'
 import { NewIcon, SaveIcon } from '../Icons'
 import { DeckTitleInput } from './DeckTitleInput'
@@ -18,23 +19,30 @@ export const SaveDeckDialog: FC<{
 }> = ({ open, onClose, baseDeck }) => {
   const router = useRouter()
   const deck = useDeck()
-  const { mutateAsync: upsertDecklyst, isLoading: isSaving } = trpc.decklyst.upsert.useMutation()
+  const { mutateAsync: upsertDeck, isLoading: isSaving } = trpc.deck.upsert.useMutation()
 
   const [archetype, setArchetype] = useState<Archetype | null>(
     (baseDeck?.meta?.archetype as Archetype) ?? null,
   )
-  const [visible, setVisible] = useState<boolean>(baseDeck?.meta?.private ?? false)
+  const [privacy, setPrivacy] = useState<Privacy>(baseDeck?.meta?.privacy ?? 'unlisted')
+
+  useEffect(() => {
+    if (open) {
+      setArchetype(baseDeck?.meta?.archetype ?? null)
+      setPrivacy(baseDeck?.meta?.privacy ?? 'unlisted')
+    }
+  }, [baseDeck?.meta?.archetype, baseDeck?.meta?.privacy, open])
 
   const createSaveHandler =
     (update: boolean = false) =>
     async () => {
-      await upsertDecklyst({
+      const updated = await upsertDeck({
         sharecode: update ? baseDeck?.meta?.sharecode : undefined,
         deckcode: deck.deckcode,
         archetype,
-        private: !visible,
+        privacy,
       })
-      await router.push({ pathname: '/decks/[code]', query: { code: deck.deckcode } })
+      await router.push({ pathname: '/decks/[code]', query: { code: updated.meta.sharecode } })
       onClose()
     }
 
@@ -58,6 +66,34 @@ export const SaveDeckDialog: FC<{
                   Title
                   <DeckTitleInput />
                 </label>
+
+                <div>
+                  <RadioGroup value={privacy} onChange={setPrivacy}>
+                    <RadioGroup.Label>Privacy</RadioGroup.Label>
+                    <div className="flex justify-center gap-x-1 py-2">
+                      {Object.values(Privacy).map((value) => (
+                        <RadioGroup.Option key={value} value={value} className="">
+                          {({ checked }) => (
+                            <span
+                              className={cx(
+                                'inline-block px-4 py-2',
+                                checked ? 'bg-accent-600' : 'bg-gray-600',
+                              )}
+                            >
+                              {startCase(value.toLocaleLowerCase())}
+                            </span>
+                          )}
+                        </RadioGroup.Option>
+                      ))}
+                    </div>
+                  </RadioGroup>
+                  <div className="text-xs text-gray-400">
+                    {privacy === 'private' && 'Private decks are not visible to other users'}
+                    {privacy === 'unlisted' &&
+                      'Unlisted decks are hidden from the deck library but can be shared'}
+                    {privacy === 'public' && 'Public decks are visible to all users'}
+                  </div>
+                </div>
                 <label>
                   Archetype
                   <select
@@ -66,8 +102,7 @@ export const SaveDeckDialog: FC<{
                     onChange={(ev) => setArchetype(ev.target.value as Archetype)}
                   >
                     <option value="">None</option>
-                    {archetypes
-                      .map(identity)
+                    {Object.values(Archetype)
                       .sort()
                       .map((value) => (
                         <option key={value} value={value}>
@@ -80,21 +115,6 @@ export const SaveDeckDialog: FC<{
                   Tags
                   <input disabled placeholder="TODO" className="w-full bg-alt-800 px-2 py-2" />
                 </label>
-                <div>
-                  Visibility
-                  <div className="text-xs text-gray-400">
-                    Private decks are not visible to other users
-                  </div>
-                  <label className="mt-1 block">
-                    <input
-                      type="checkbox"
-                      className="mx-2"
-                      checked={!visible}
-                      onChange={(ev) => setVisible(!ev.target.checked)}
-                    />
-                    Private
-                  </label>
-                </div>
               </div>
               <div className="flex justify-end gap-x-2 border-t border-gray-600 p-4">
                 {baseDeck?.meta?.sharecode ? (

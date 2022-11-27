@@ -1,15 +1,11 @@
 import { DeckInfograph } from '@/components/DeckInfograph'
 import { DeckProvider } from '@/context/useDeck'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
-import type { DeckExpanded, DeckMeta } from '@/data/deck'
-import { createDeck, expandDeck } from '@/data/deck'
 import { createApiClient } from '@/server'
-import type { GetServerSidePropsContext } from 'next/types'
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next/types'
 import type { FC } from 'react'
 
-type Props = {
-  deck: DeckExpanded
-}
+type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const DeckPage: FC<Props> = ({ deck }) => {
   if (!deck) return null
@@ -26,29 +22,17 @@ const DeckPage: FC<Props> = ({ deck }) => {
 }
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const code = query.code as string | undefined
+  const code = (query.code as string | undefined) ?? ''
+  const renderSecret = (query.renderSecret as string | undefined) ?? ''
   const client = await createApiClient()
 
-  let deckcode = code
-  const meta: DeckMeta = {
-    viewCount: 0,
-  }
+  const deck = await client.deck.ensure({ code, renderSecret })
 
-  if (code) {
-    const deckinfo = await client.deckinfo.get({ code })
-
-    deckcode = deckinfo?.deckcode ?? deckcode
-    meta.sharecode = deckinfo?.sharecode ?? meta.sharecode
-    meta.createdAt = deckinfo?.createdAt ?? meta.createdAt
-  }
-
-  const deck = createDeck(deckcode)
-
-  return {
-    props: {
-      deck: expandDeck(deck, meta),
-    },
-  }
+  return deck
+    ? {
+        props: { deck },
+      }
+    : { notFound: true }
 }
 
 export default DeckPage

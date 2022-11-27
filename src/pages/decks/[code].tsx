@@ -1,34 +1,41 @@
 import { transformer } from '@/common/transformer'
 import { DeckDetailsAside } from '@/components/DeckDetails/DeckDetailsAside'
 import { DeckDetailsMain } from '@/components/DeckDetails/DeckDetailsMain'
+import { PageLoader } from '@/components/PageLoader'
 import { DeckProvider } from '@/context/useDeck'
 import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
-import type { DeckExpanded } from '@/data/deck'
-import { createDeckFromDecklyst } from '@/data/deck'
 import { appRouter } from '@/server'
 import { createContextInner } from '@/server/trpc/context'
 import { trpc } from '@/utils/trpc'
 import { createProxySSGHelpers } from '@trpc/react-query/ssg'
-import { merge, uniqBy } from 'lodash'
-import type { GetStaticPaths, GetStaticPropsContext } from 'next/types'
+import { uniqBy } from 'lodash'
+import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from 'next/types'
 import type { FC } from 'react'
 
-type Props = {
-  deck: DeckExpanded
-  isSnapshot: boolean
-}
+type Props = InferGetStaticPropsType<typeof getStaticProps>
 
-const DeckPage: FC<Props> = ({ deck }) => {
-  const deckcode = deck.deckcode
-  const meta = deck.meta ?? {}
-  useRegisterView(deckcode)
-  const { data: viewCount } = trpc.deckviews.get.useQuery({ deckcode })
+const DeckPage: FC<Props> = ({ deck: initialDeck, sharecode }) => {
+  useRegisterView(sharecode)
 
-  if (!deck) return null
+  const { data: deck, error } = trpc.deck.get.useQuery(
+    { code: sharecode },
+    {
+      initialData: initialDeck,
+      retry: (count, error) => (error.data?.code === 'UNAUTHORIZED' ? false : count < 3),
+    },
+  )
+
+  if (error)
+    return (
+      <div className="flex h-full w-full items-center justify-center grid-in-main">
+        <div className="text-xl">Deck is private</div>
+      </div>
+    )
+  if (!deck) return <PageLoader />
 
   return (
-    <DeckProvider deck={merge(deck, { meta: { ...meta, viewCount: viewCount || 1 } })}>
+    <DeckProvider deck={deck}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
         <DeckDetailsMain />
         <DeckDetailsAside />
@@ -41,6 +48,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { prisma } = await createContextInner()
   const decklysts = await prisma.decklyst.findMany({
     select: { deckcode: true, sharecode: true },
+    where: { privacy: { not: 'private' } },
   })
 
   return {
@@ -67,13 +75,14 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
     ctx: await createContextInner(),
     transformer,
   })
-  const decklyst = await ssg.decklyst.get.fetch({ code, ensure: true })
+  const deck = await ssg.deck.get.fetch({ code })
 
-  return decklyst
+  return deck
     ? {
         props: {
           trpcState: ssg.dehydrate(),
-          deck: createDeckFromDecklyst(decklyst),
+          sharecode: deck.meta.sharecode,
+          deck: deck.meta.privacy === 'private' ? null : deck,
         },
       }
     : { notFound: true, revalidate: true }

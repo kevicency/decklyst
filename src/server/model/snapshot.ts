@@ -2,7 +2,9 @@ import { env } from '@/env/server.mjs'
 import { Buffer } from 'node:buffer'
 
 export const snapshotUrl = (code: string, relative = false) =>
-  `${relative ? '' : env.NEXT_PUBLIC_SITE_URL}/deckimage/${encodeURIComponent(code)}`
+  `${relative ? '' : env.NEXT_PUBLIC_SITE_URL}/deckimage/${encodeURIComponent(
+    code,
+  )}?renderSecret=${encodeURIComponent(env.RENDER_SECRET)}`
 
 export const remoteSnapshotUrl = (deckcode: string) =>
   `${
@@ -22,7 +24,6 @@ export const snapshotLocal = async (code: string) => {
 
   try {
     const url = snapshotUrl(code)
-    console.log({ url })
     const page = await browser.newPage()
     await page.emulateMediaType('screen')
     await page.goto(url, { waitUntil: 'networkidle0' })

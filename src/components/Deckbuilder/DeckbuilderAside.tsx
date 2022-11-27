@@ -32,8 +32,6 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
     await navigator.clipboard.writeText(deck.deckcode!)
   }
 
-  console.log(baseDeck?.meta)
-
   return (
     <>
       <Aside filters={<DeckbuilderAsideFilters />}>
@@ -61,7 +59,7 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
           </div>
           {deckDiff && (
             <div className="-mb-4 grid grid-cols-2 gap-2 border-t border-alt-700 bg-alt-900 px-2 py-2">
-              <div className={cx(`flex justify-center gap-1 text-lg`)}>
+              <div className={cx(`flex items-end justify-center gap-1 text-lg`)}>
                 <span className={`text-${deck.faction} font-mono font-semibold`}>
                   {deckDiff.changes}
                 </span>
@@ -131,6 +129,7 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
       )}
       {authenticated && (
         <SaveDeckDialog
+          key={baseDeck?.deckcode}
           open={activeDialog === 'save'}
           onClose={() => setActiveDialog(null)}
           baseDeck={baseDeck}

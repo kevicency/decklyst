@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
     transformer,
   })
 
-  const decks = await ssg.decks.search.fetch({
+  const decks = await ssg.deck.search.fetch({
     sorting: 'views:recent',
   })
 

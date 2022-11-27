@@ -6,7 +6,7 @@ export const deckimageRouter = router({
   get: proc
     .input(z.object({ code: z.string(), timeout: z.number().optional() }))
     .query(async ({ ctx, input }) => {
-      const deckcode = await ctx.deckinfo.unwrapCode(input.code)
+      const deckcode = await ctx.decklyst.unwrapCode(input.code)
       return deckcode ? ctx.deckimage.findByDeckcode(deckcode, input.timeout) : null
     }),
   ensure: proc
@@ -18,7 +18,7 @@ export const deckimageRouter = router({
       }),
     )
     .mutation(async ({ ctx, input: { code, forceRerender, timeout } }) => {
-      const { deckcode } = (await ctx.deckinfo.ensureByCode(code)) ?? { deckcode: null }
+      const { deckcode } = (await ctx.decklyst.ensureByCode(code)) ?? { deckcode: null }
 
       if (!deckcode) return null
 
@@ -26,7 +26,6 @@ export const deckimageRouter = router({
         ? null
         : await ctx.deckimage.findByDeckcode(deckcode, timeout ?? 25000)
 
-      console.log('image', deckcode, image)
       if (image) return image
 
       await ctx.deckimage.startRendering(deckcode)

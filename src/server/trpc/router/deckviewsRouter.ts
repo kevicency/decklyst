@@ -12,7 +12,7 @@ export const deckviewsRouter = router({
     .input(z.object({ deckcodes: z.array(z.string()) }))
     .query(async ({ input: { deckcodes }, ctx }) => await ctx.deckviews.getDeckviews(...deckcodes)),
   registerView: proc.input(z.object({ code: z.string() })).mutation(async ({ ctx, input }) => {
-    const deckcode = await ctx.deckinfo.unwrapCode(input.code)
+    const deckcode = await ctx.decklyst.unwrapCode(input.code)
 
     return deckcode && ctx.ipAddress
       ? ctx.deckviews.incrementViewCount(deckcode, ctx.ipAddress)

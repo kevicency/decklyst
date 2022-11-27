@@ -28,9 +28,9 @@ const useRouteQuery = (initialDeckcode: string | null) => {
   const { query, replace, pathname } = useRouter()
   const deckcodeQuery = (query.deckcode as string | undefined) ?? initialDeckcode ?? ''
   const baseQuery = query.base as string | undefined
-  const { data: decklyst } = trpc.decklyst.get.useQuery(
+  const { data: baseDeck } = trpc.deck.get.useQuery(
     { code: baseQuery!, scope: 'user' },
-    { enabled: !!baseQuery },
+    { enabled: !!baseQuery, initialData: baseQuery ? createDeckExpanded(baseQuery) : undefined },
   )
 
   useEffect(() => {
@@ -51,10 +51,6 @@ const useRouteQuery = (initialDeckcode: string | null) => {
 
   const deckcode = useMemo(() => parseDeckcode(deckcodeQuery), [deckcodeQuery])
   const deck = useMemo(() => createDeckExpanded(deckcode), [deckcode])
-  const baseDeck = useMemo(
-    () => (baseQuery ? createDeckExpanded(baseQuery, decklyst ?? undefined) : undefined),
-    [baseQuery, decklyst],
-  )
 
   return { deckcode, deck, baseDeck }
 }

@@ -10,11 +10,11 @@ import {
 } from '@/data/deck'
 import { splitDeckcode, validateDeckcode } from '@/data/deckcode'
 import type { Decklyst, PrismaClient } from '@prisma/client'
-import { identity } from 'lodash'
+import { difference, identity } from 'lodash'
+import { customAlphabet } from 'nanoid'
 import type { Session } from 'next-auth'
-import { generateSharecodeX } from './deckinfo'
 
-export type DeckSettings = Partial<Pick<Decklyst, 'archetype' | 'private' | 'views'>>
+export type DeckSettings = Partial<Pick<Decklyst, 'archetype' | 'privacy' | 'views'>>
 
 export const extendDecklyst = (
   decklyst: PrismaClient['decklyst'],
@@ -27,7 +27,7 @@ export const extendDecklyst = (
     deck: Deck,
     settings: DeckSettings = {},
   ) => {
-    sharecode ??= await generateSharecodeX(decklyst)
+    sharecode ??= await generateSharecode(decklyst)
     const deckcode = deck.deckcode
     const [title = '', cardcode] = splitDeckcode(deck.deckcode)
 
@@ -85,12 +85,12 @@ export const extendDecklyst = (
   const findByCode = async (code: string, userOnly?: boolean) => {
     const candidates = await Promise.all([
       decklyst.findFirst({
-        where: { OR: [{ deckcode: code, authorId: user?.id }, { sharecode: code }] },
+        where: { OR: [{ deckcode: code }, { sharecode: code }], authorId: user?.id },
         include: { author: true },
       }),
       user && !userOnly
         ? decklyst.findFirst({
-            where: { deckcode: code, private: false },
+            where: { OR: [{ deckcode: code }, { sharecode: code }], privacy: { not: 'private' } },
             orderBy: { createdAt: 'asc' },
             include: { author: true },
           })
@@ -103,11 +103,36 @@ export const extendDecklyst = (
     upsertDeck,
     findByCode,
     ensureByCode: async (code: string) => {
-      const result = await findByCode(code)
+      let decklyst = await findByCode(code)
 
-      if (result) return result
+      if (!decklyst) {
+        decklyst = validateDeckcode(code) ? await upsertDeck(null, createDeck(code)) : null
+      }
 
-      return validateDeckcode(code) ? await upsertDeck(null, createDeck(code)) : null
+      return decklyst
+    },
+    unwrapCode: async (code: string) =>
+      validateDeckcode(code) ? code : (await findByCode(code))?.deckcode ?? null,
+  })
+}
+
+const alphabet = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz'
+const nanoid = customAlphabet(alphabet, 3)
+export const generateSharecode = async (
+  decklyst: PrismaClient['decklyst'],
+  size = 3,
+): Promise<string> => {
+  const candidates = new Array(25).fill(0).map(() => nanoid(size))
+  const taken = await decklyst.findMany({
+    select: { sharecode: true },
+    where: {
+      sharecode: { in: candidates },
     },
   })
+  const sharecode = difference(
+    candidates,
+    taken.map((d) => d.sharecode),
+  )[0]
+
+  return sharecode ?? (await generateSharecode(decklyst, size + 1))
 }

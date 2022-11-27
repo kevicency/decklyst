@@ -24,6 +24,8 @@ export const serverSchema = z.object({
   ),
   DISCORD_CLIENT_ID: z.string(),
   DISCORD_CLIENT_SECRET: process.env.NODE_ENV !== 'test' ? z.string() : z.string().optional(),
+  // used to snapshot private decklysts
+  RENDER_SECRET: z.string(),
 })
 
 /**

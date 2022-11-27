@@ -4,7 +4,6 @@ import { listings, parseRouteParams, useRouteParams } from '@/components/Decksea
 import { EndlessScroll } from '@/components/Decksearch/EndlessScroll'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
-import { createDeckExpanded } from '@/data/deck'
 import { createApiClient } from '@/server'
 import type { RouterInputs } from '@/utils/trpc'
 import { trpc } from '@/utils/trpc'
@@ -20,7 +19,7 @@ export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 const toSorting = (listing: Listing): RouterInputs['decks']['search']['sorting'] => {
   switch (listing) {
     case 'hot':
-      return 'views:recent'
+      return 'views:all'
     case 'popular':
       return 'views:all'
     case 'new':
@@ -35,7 +34,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) =>
   const utils = trpc.useContext()
 
   const updateFilters = async (partialFilters: Partial<Filters>) => {
-    utils.decks.search.cancel()
+    utils.deck.search.cancel()
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
     setShowEndlessScroll(false)
     updateRouteParams({ ...routeParams, filters: { ...routeParams.filters, ...partialFilters } })
@@ -47,7 +46,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) =>
   const createListingChangedHandler = (listing: Listing) => () =>
     updateRouteParams({ ...routeParams, listing })
 
-  const { data, fetchNextPage, isFetching, isLoading } = trpc.decks.search.useInfiniteQuery(
+  const { data, fetchNextPage, isFetching, isLoading } = trpc.deck.search.useInfiniteQuery(
     { sorting: toSorting(routeParams.listing), filters: routeParams.filters },
     {
       getNextPageParam: (_, allPages) => allPages.length,
@@ -56,10 +55,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) =>
   )
 
   const decks = useMemo(() => {
-    return (data?.pages ?? [])
-      .flatMap((page) => page.decks ?? [])
-      .map(({ deckcode, meta }) => createDeckExpanded(deckcode))
-      .filter((x) => x.general)
+    return (data?.pages ?? []).flatMap((page) => page.decks ?? []).filter((x) => x.general)
   }, [data?.pages])
   const hasMore = useMemo(() => last(data?.pages ?? [])?.hasMore ?? false, [data?.pages])
 
@@ -111,7 +107,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) =>
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const client = await createApiClient()
   const routeParams = parseRouteParams(query)
-  const initialDeckcodes = await client.decks.search({
+  const initialDeckcodes = await client.deck.search({
     filters: routeParams.filters,
     sorting: toSorting(routeParams.listing),
   })
