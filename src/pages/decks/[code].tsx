@@ -5,12 +5,12 @@ import { DeckProvider } from '@/context/useDeck'
 import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import type { DeckExpanded } from '@/data/deck'
-import { createDeckExpanded } from '@/data/deck'
+import { createDeckFromDecklyst } from '@/data/deck'
 import { appRouter } from '@/server'
 import { createContextInner } from '@/server/trpc/context'
 import { trpc } from '@/utils/trpc'
 import { createProxySSGHelpers } from '@trpc/react-query/ssg'
-import { merge, pick, uniqBy } from 'lodash'
+import { merge, uniqBy } from 'lodash'
 import type { GetStaticPaths, GetStaticPropsContext } from 'next/types'
 import type { FC } from 'react'
 
@@ -73,19 +73,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
     ? {
         props: {
           trpcState: ssg.dehydrate(),
-          deck: createDeckExpanded(decklyst.deckcode, {
-            ...pick(decklyst, [
-              'sharecode',
-              'version',
-              'views',
-              'likes',
-              'archetype',
-              'author',
-              'createdAt',
-              'updatedAt',
-            ]),
-            viewCount: 0,
-          }),
+          deck: createDeckFromDecklyst(decklyst),
         },
       }
     : { notFound: true, revalidate: true }

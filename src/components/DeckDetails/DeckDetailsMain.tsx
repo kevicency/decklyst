@@ -100,7 +100,7 @@ export const DeckDetailsMain: FC = () => {
           <div className="font-sm flex-1 cursor-pointer text-gray-300">
             <div className="flex items-end">
               <OneTimeButton
-                className={`btn border-b-2 border-alt-600 bg-alt-800 !py-2 hover:bg-${deck.faction}`}
+                className={`btn border-b-2 border-alt-600 bg-gray-900 !py-2 `}
                 onClick={copyDeckcode}
                 timeout={2500}
               >
@@ -113,7 +113,7 @@ export const DeckDetailsMain: FC = () => {
               </OneTimeButton>
               <input
                 name="deckcode"
-                className="page-header-input mt-2 w-full bg-alt-900 px-4 text-alt-200"
+                className="page-header-input mt-2 w-full bg-gray-1000 px-4 text-alt-200"
                 value={deck.deckcode}
                 onFocus={(ev) => {
                   ev.target.select()

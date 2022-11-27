@@ -14,7 +14,7 @@ import {
   replaceCard,
   updateTitle,
 } from '@/data/deckcode'
-import { createDeckDiff } from '@/hooks/useDeckDiff'
+import { trpc } from '@/utils/trpc'
 import { noop } from 'lodash'
 import type { InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
@@ -24,24 +24,23 @@ import { useCallback, useEffect, useMemo } from 'react'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const useRouteQuery = (deckcode: string | null) => {
+const useRouteQuery = (initialDeckcode: string | null) => {
   const { query, replace, pathname } = useRouter()
-  const deckcodeFromRoute = (query.deckcode as string | undefined) ?? deckcode ?? ''
-  const baseDeckcode = query.base as string | undefined
-
-  const isValidBaseDeckcode =
-    baseDeckcode &&
-    baseDeckcode !== deckcodeFromRoute &&
-    Object.keys(parseDeckcode(baseDeckcode).cards).length > 1
+  const deckcodeQuery = (query.deckcode as string | undefined) ?? initialDeckcode ?? ''
+  const baseQuery = query.base as string | undefined
+  const { data: decklyst } = trpc.decklyst.get.useQuery(
+    { code: baseQuery!, scope: 'user' },
+    { enabled: !!baseQuery },
+  )
 
   useEffect(() => {
-    if (isValidBaseDeckcode) {
+    if (!baseQuery && deckcodeQuery && Object.keys(parseDeckcode(deckcodeQuery).cards).length > 1) {
       replace(
         {
           pathname,
           query: {
             ...query,
-            base: baseDeckcode,
+            base: deckcodeQuery,
           },
         },
         undefined,
@@ -50,18 +49,19 @@ const useRouteQuery = (deckcode: string | null) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { deckcodeFromRoute, baseDeckcode }
+  const deckcode = useMemo(() => parseDeckcode(deckcodeQuery), [deckcodeQuery])
+  const deck = useMemo(() => createDeckExpanded(deckcode), [deckcode])
+  const baseDeck = useMemo(
+    () => (baseQuery ? createDeckExpanded(baseQuery, decklyst ?? undefined) : undefined),
+    [baseQuery, decklyst],
+  )
+
+  return { deckcode, deck, baseDeck }
 }
 
 const DeckbuilderBuildPage: FC<Props> = (props) => {
   const router = useRouter()
-  const { deckcodeFromRoute, baseDeckcode } = useRouteQuery(props.deckcode)
-  const deckcode = useMemo(() => parseDeckcode(deckcodeFromRoute), [deckcodeFromRoute])
-  const deck = useMemo(() => createDeckExpanded(deckcode), [deckcode])
-  const deckDiff = useMemo(
-    () => (baseDeckcode ? createDeckDiff(createDeckExpanded(baseDeckcode), deck) : undefined),
-    [baseDeckcode, deck],
-  )
+  const { deck, deckcode, baseDeck } = useRouteQuery(props.deckcode)
 
   const updateDeckcode = useCallback(
     async (deckcode: Deckcode) => {
@@ -101,7 +101,7 @@ const DeckbuilderBuildPage: FC<Props> = (props) => {
           <>
             <DeckMetadata />
             <DeckbuilderMain />
-            <DeckbuilderAside deckDiff={deckDiff} />
+            <DeckbuilderAside baseDeck={baseDeck} />
           </>
         </CardFiltersProvider>
       </DeckProvider>

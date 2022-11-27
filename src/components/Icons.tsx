@@ -9,6 +9,7 @@ import {
   FaRegClock,
   FaRegEye,
   FaSave,
+  FaStarOfLife,
 } from 'react-icons/fa'
 import { GiArtificialHive, GiEvilMinion, GiGearHammer, GiSpellBook } from 'react-icons/gi'
 import { GoRepoForked } from 'react-icons/go'
@@ -47,3 +48,4 @@ export const SpellIcon = GiSpellBook
 export const ArtifactIcon = GiArtificialHive
 export const SaveIcon = FaSave
 export const ChangesIcon = CgArrowsExchangeAlt
+export const NewIcon = FaStarOfLife

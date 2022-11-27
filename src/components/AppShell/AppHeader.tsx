@@ -16,9 +16,10 @@ export const AppHeader = () => {
     if (!navigating) {
       setNavigating(true)
       try {
-        await router.push(`/[code]`, `/${encodeURIComponent(search!)}`)
+        await router.push({ pathname: '/[code]', query: { code: search } })
       } finally {
         setNavigating(false)
+        setSearch('')
       }
     }
   }
@@ -42,7 +43,10 @@ export const AppHeader = () => {
           <SearchIcon className="pl-0.5" size={24} />
         </button>
         <input
-          className={cx('w-full bg-transparent py-2 pl-5 focus:bg-gray-850', 'pl-12 pr-2')}
+          className={cx(
+            'w-full bg-transparent py-2 pl-5 focus:bg-gray-850 focus:bg-opacity-30',
+            'pl-12 pr-2',
+          )}
           placeholder={'Search for a deckcode or sharecode'}
           value={search ?? ''}
           onFocus={(ev) => ev.currentTarget?.select()}

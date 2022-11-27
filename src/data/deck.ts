@@ -2,7 +2,11 @@ import type { CardData, CardType, Faction, Rarity } from '@/data/cards'
 import { cardsById, rarityCraftingCost, sortCards } from '@/data/cards'
 import type { Deckcode } from '@/data/deckcode'
 import { parseDeckcode, splitDeckcode } from '@/data/deckcode'
+import type { Decklyst } from '@/server/model/deckinfo'
 import { chain, groupBy, max, memoize, sumBy } from 'lodash'
+
+export const archetypes = ['aggro', 'midrange', 'control', 'combo'] as const
+export type Archetype = typeof archetypes[number]
 
 export type CardEntry = CardData & { count: number }
 export type Deck = {
@@ -30,21 +34,7 @@ export type DeckExpanded = Deck & {
   }
   manaCurve: ManaCurve
   spiritCost: number
-  meta?: {
-    sharecode: string
-    version: number
-    views: number
-    likes: number
-    archetype?: string | null
-    author?: {
-      id: string
-      name: string | null
-    } | null
-    createdAt: Date
-    updatedAt: Date
-
-    viewCount?: number
-  }
+  meta?: Omit<Decklyst, 'id' | 'deckcode' | 'title' | 'cardcode' | 'metadataId'>
 }
 export type DeckMeta = DeckExpanded['meta']
 
@@ -134,7 +124,10 @@ export const expandDeck = (deck: Deck, meta?: DeckExpanded['meta']): DeckExpande
 })
 export const createDeckExpanded = (
   deckcode?: string | Deckcode,
-  meta?: DeckExpanded['meta'],
-): DeckExpanded => expandDeck(createDeck(deckcode), meta)
+  meta?: DeckExpanded['meta'] | null,
+): DeckExpanded => expandDeck(createDeck(deckcode), meta ?? undefined)
+
+export const createDeckFromDecklyst = ({ deckcode, ...decklyst }: Decklyst): DeckExpanded =>
+  createDeckExpanded(deckcode, decklyst)
 
 export const isDeckExpanded = (deck: Deck | DeckExpanded): deck is DeckExpanded => 'valid' in deck

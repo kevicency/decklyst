@@ -9,57 +9,77 @@ import {
   totalCount$,
 } from '@/data/deck'
 import { splitDeckcode, validateDeckcode } from '@/data/deckcode'
-import type { PrismaClient } from '@prisma/client'
+import type { Decklyst as _Decklyst, PrismaClient, User } from '@prisma/client'
 import { difference, identity } from 'lodash'
 import { customAlphabet } from 'nanoid'
 import type { Session } from 'next-auth'
 
 type Deckinfo = PrismaClient['deckinfo']
-type Decklyst = PrismaClient['decklyst']
 
-export const extendDecklyst = (decklyst: Decklyst, session: Session | null = null) => {
+export type Decklyst = _Decklyst & { author: User | null }
+type DeckSettings = Partial<Pick<Decklyst, 'archetype' | 'private'>>
+
+export const extendDecklyst = (
+  decklyst: PrismaClient['decklyst'],
+  session: Session | null = null,
+) => {
   const user = session?.user
 
-  const createForDeck = async (deck: Deck) => {
-    const faction = faction$(deck)
-    if (!faction) return null
+  const upsertDeck = async (
+    sharecode: string | undefined | null,
+    deck: Deck,
+    settings: DeckSettings = {},
+  ) => {
+    sharecode ??= await generateSharecodeX(decklyst)
+    const deckcode = deck.deckcode
+    const [title = '', cardcode] = splitDeckcode(deck.deckcode)
 
-    const sharecode = await generateSharecodeX(decklyst)
-    const [title, cardcode] = splitDeckcode(deck.deckcode)
+    const data = {
+      deckcode,
+      title,
+      cardcode,
+      draft: totalCount$(deck) !== 40,
+      ...settings,
+    }
+    const metadata = {
+      faction: faction$(deck),
+      minionCount: minionCount$(deck),
+      spellCount: spellCount$(deck),
+      artifactCount: artifactCount$(deck),
+      totalCount: totalCount$(deck),
+      spiritCost: spiritCost$(deck),
+      cardCounts: Object.fromEntries(deck.cards.map((card) => [card.id, card.count])),
+    }
 
-    return await decklyst.create({
+    return await decklyst.upsert({
+      where: { sharecode },
       include: { author: true },
-      data: {
+      create: {
+        ...data,
         sharecode,
-        deckcode: deck.deckcode,
-        title: title ?? '',
-        cardcode,
-        draft: totalCount$(deck) !== 40,
         author: user?.id ? { connect: { id: user.id } } : undefined,
         metadata: {
-          create: {
-            faction,
-            minionCount: minionCount$(deck),
-            spellCount: spellCount$(deck),
-            artifactCount: artifactCount$(deck),
-            totalCount: totalCount$(deck),
-            spiritCost: spiritCost$(deck),
-            cardCounts: Object.fromEntries(deck.cards.map((card) => [card.id, card.count])),
-          },
+          create: metadata,
+        },
+      },
+      update: {
+        ...data,
+        metadata: {
+          update: metadata,
         },
       },
     })
   }
-  const createForDeckcode = (deckcode: string) => createForDeck(createDeck(deckcode))
-  const findByCode = async (code: string) => {
+
+  const findByCode = async (code: string, userOnly?: boolean) => {
     const candidates = await Promise.all([
       decklyst.findFirst({
         where: { OR: [{ deckcode: code, authorId: user?.id }, { sharecode: code }] },
         include: { author: true },
       }),
-      user
+      user && !userOnly
         ? decklyst.findFirst({
-            where: { deckcode: code },
+            where: { deckcode: code, private: false },
             orderBy: { createdAt: 'asc' },
             include: { author: true },
           })
@@ -69,15 +89,14 @@ export const extendDecklyst = (decklyst: Decklyst, session: Session | null = nul
   }
 
   return Object.assign(decklyst, {
-    createForDeck,
-    createForDeckcode,
+    upsertDeck,
     findByCode,
     ensureByCode: async (code: string) => {
       const result = await findByCode(code)
 
       if (result) return result
 
-      return validateDeckcode(code) ? await createForDeckcode(code) : null
+      return validateDeckcode(code) ? await upsertDeck(null, createDeck(code)) : null
     },
   })
 }
@@ -142,7 +161,10 @@ export const generateSharecode = async (deckinfo: Deckinfo, size = 3): Promise<s
   return sharecode ?? (await generateSharecode(deckinfo, size + 1))
 }
 
-export const generateSharecodeX = async (decklyst: Decklyst, size = 3): Promise<string> => {
+export const generateSharecodeX = async (
+  decklyst: PrismaClient['decklyst'],
+  size = 3,
+): Promise<string> => {
   const candidates = new Array(25).fill(0).map(() => nanoid(size))
   const taken = await decklyst.findMany({
     select: { sharecode: true },
