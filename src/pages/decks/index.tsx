@@ -4,6 +4,7 @@ import { listings, parseRouteParams, useRouteParams } from '@/components/Decksea
 import { EndlessScroll } from '@/components/Decksearch/EndlessScroll'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
+import { createDeckFromDecklyst } from '@/data/deck'
 import { createApiClient } from '@/server'
 import type { RouterInputs } from '@/utils/trpc'
 import { trpc } from '@/utils/trpc'
@@ -16,7 +17,7 @@ import { DecksearchAside } from '../../components/Decksearch/DecksearchAside'
 
 export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const toSorting = (listing: Listing): RouterInputs['decks']['search']['sorting'] => {
+const toSorting = (listing: Listing): RouterInputs['decklyst']['search']['sorting'] => {
   switch (listing) {
     case 'hot':
       return 'views:all'
@@ -27,14 +28,14 @@ const toSorting = (listing: Listing): RouterInputs['decks']['search']['sorting']
   }
 }
 
-const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) => {
+const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) => {
   const [routeParams, updateRouteParams] = useRouteParams(initialRouteParams)
   const [showEndlessScroll, setShowEndlessScroll] = useState(true)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const utils = trpc.useContext()
 
   const updateFilters = async (partialFilters: Partial<Filters>) => {
-    utils.deck.search.cancel()
+    utils.decklyst.search.cancel()
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
     setShowEndlessScroll(false)
     updateRouteParams({ ...routeParams, filters: { ...routeParams.filters, ...partialFilters } })
@@ -46,16 +47,19 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) =>
   const createListingChangedHandler = (listing: Listing) => () =>
     updateRouteParams({ ...routeParams, listing })
 
-  const { data, fetchNextPage, isFetching, isLoading } = trpc.deck.search.useInfiniteQuery(
+  const { data, fetchNextPage, isFetching, isLoading } = trpc.decklyst.search.useInfiniteQuery(
     { sorting: toSorting(routeParams.listing), filters: routeParams.filters },
     {
       getNextPageParam: (_, allPages) => allPages.length,
-      initialData: initialDeckcodes ? { pages: [initialDeckcodes], pageParams: [] } : undefined,
+      initialData: initialDecklysts ? { pages: [initialDecklysts], pageParams: [] } : undefined,
     },
   )
 
   const decks = useMemo(() => {
-    return (data?.pages ?? []).flatMap((page) => page.decks ?? []).filter((x) => x.general)
+    return (data?.pages ?? [])
+      .flatMap((page) => page.decklysts ?? [])
+      .map((decklyst) => createDeckFromDecklyst(decklyst))
+      .filter((x) => x.general)
   }, [data?.pages])
   const hasMore = useMemo(() => last(data?.pages ?? [])?.hasMore ?? false, [data?.pages])
 
@@ -107,7 +111,7 @@ const DecksPage: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) =>
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const client = await createApiClient()
   const routeParams = parseRouteParams(query)
-  const initialDeckcodes = await client.deck.search({
+  const decklysts = await client.decklyst.search({
     filters: routeParams.filters,
     sorting: toSorting(routeParams.listing),
   })
@@ -115,7 +119,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
   return {
     props: {
       initialRouteParams: routeParams,
-      initialDeckcodes,
+      initialDecklysts: decklysts,
     },
   }
 }

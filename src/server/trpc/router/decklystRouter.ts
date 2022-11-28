@@ -1,5 +1,5 @@
 import { factions } from '@/data/cards'
-import { createDeck, createDeckFromDecklyst, faction$ } from '@/data/deck'
+import { createDeck, faction$ } from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
 import { env } from '@/env/server.mjs'
 import { Archetype, Privacy } from '@prisma/client'
@@ -7,7 +7,7 @@ import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
 import { proc, router, secureProc } from '../trpc'
 
-export const deckRouter = router({
+export const decklystRouter = router({
   get: proc
     .input(
       z.object({
@@ -38,7 +38,7 @@ export const deckRouter = router({
           throw new TRPCError({ message: 'Unauthorized', code: 'UNAUTHORIZED' })
         }
       }
-      return createDeckFromDecklyst(decklyst)
+      return decklyst
     }),
   search: proc
     .input(
@@ -66,7 +66,7 @@ export const deckRouter = router({
         const cardIds = filters.cardIds ?? []
 
         const decklysts = await ctx.decklyst.findMany({
-          include: { author: true, stats: true },
+          include: { author: true },
           skip,
           take: limit + 1,
           where: {
@@ -99,7 +99,7 @@ export const deckRouter = router({
 
         return {
           hasMore,
-          decks: decklysts.slice(0, hasMore ? -1 : undefined).map(createDeckFromDecklyst),
+          decklysts: decklysts.slice(0, hasMore ? -1 : undefined),
         }
       },
     ),
@@ -149,7 +149,6 @@ export const deckRouter = router({
         throw new TRPCError({ message: 'Unauthorized', code: 'UNAUTHORIZED' })
       }
 
-      const decklyst = await ctx.decklyst.upsertDeck(sharecode, deck, settings)
-      return createDeckFromDecklyst(decklyst)
+      return await ctx.decklyst.upsertDeck(sharecode, deck, settings)
     }),
 })

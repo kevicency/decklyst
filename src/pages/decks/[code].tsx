@@ -5,6 +5,7 @@ import { PageLoader } from '@/components/PageLoader'
 import { DeckProvider } from '@/context/useDeck'
 import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
+import { createDeckFromDecklyst } from '@/data/deck'
 import { appRouter } from '@/server'
 import { createContextInner } from '@/server/trpc/context'
 import { trpc } from '@/utils/trpc'
@@ -15,19 +16,20 @@ import type { FC } from 'react'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
-const DeckPage: FC<Props> = ({ deck: initialDeck, code }) => {
+const DeckPage: FC<Props> = ({ decklyst, code }) => {
   const {
     data: deck,
     error,
     isSuccess,
-  } = trpc.deck.get.useQuery(
+  } = trpc.decklyst.get.useQuery(
     { code },
     {
-      initialData: initialDeck,
+      initialData: decklyst,
       retry: (count, error) => (error.data?.code === 'UNAUTHORIZED' ? false : count < 3),
+      select: (data) => createDeckFromDecklyst(data),
     },
   )
-  useRegisterView(deck?.meta.sharecode, { enabled: deck && isSuccess })
+  useRegisterView(deck?.meta.sharecode, { enabled: !!deck && isSuccess })
 
   if (error)
     return (
@@ -79,16 +81,16 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
     ctx: await createContextInner(),
     transformer,
   })
-  const deck = await ssg.deck.get.fetch({ code, ssrSecret: env.SSR_SECRET })
+  const decklyst = await ssg.decklyst.get.fetch({ code, ssrSecret: env.SSR_SECRET })
 
-  const isPrivate = deck?.meta?.privacy === 'private'
+  const isPrivate = decklyst?.privacy === 'private'
 
-  return deck
+  return decklyst
     ? {
         props: {
           code,
           trpcState: ssg.dehydrate({ shouldDehydrateQuery: () => !isPrivate }),
-          deck: isPrivate ? null : deck,
+          decklyst: isPrivate ? null : decklyst,
         },
       }
     : { notFound: true, revalidate: true }

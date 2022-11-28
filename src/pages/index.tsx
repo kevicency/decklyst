@@ -5,8 +5,8 @@ import type { NextPage } from 'next'
 import type { Props } from './decks'
 import DecksPage from './decks'
 
-const Home: NextPage<Props> = ({ initialDeckcodes, initialRouteParams }) => (
-  <DecksPage initialDeckcodes={initialDeckcodes} initialRouteParams={initialRouteParams} />
+const Home: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) => (
+  <DecksPage initialDecklysts={initialDecklysts} initialRouteParams={initialRouteParams} />
 )
 
 export const getStaticProps = async () => {
@@ -16,13 +16,13 @@ export const getStaticProps = async () => {
     transformer,
   })
 
-  const decks = await ssg.deck.search.fetch({
+  const decklysts = await ssg.decklyst.search.fetch({
     sorting: 'views:recent',
   })
 
   return {
     props: {
-      initialDeckcodes: decks,
+      initialDeckcodes: decklysts,
       initialRouteParams: {
         listing: 'hot',
         filters: { factions: [] },

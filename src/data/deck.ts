@@ -137,7 +137,12 @@ export function createDeckExpanded(
   return expandDeck(createDeck(deckcode), meta ?? undefined)
 }
 
-export const createDeckFromDecklyst = ({ deckcode, ...decklyst }: Decklyst) =>
-  createDeckExpanded(deckcode, decklyst)
+export function createDeckFromDecklyst(decklyst: Decklyst): WithRequired<DeckExpanded, 'meta'>
+export function createDeckFromDecklyst(
+  decklyst?: Decklyst | null,
+): WithRequired<DeckExpanded, 'meta'> | null
+export function createDeckFromDecklyst(decklyst?: Decklyst | null) {
+  return decklyst ? createDeckExpanded(decklyst.deckcode, decklyst) : null
+}
 
 export const isDeckExpanded = (deck: Deck | DeckExpanded): deck is DeckExpanded => 'valid' in deck

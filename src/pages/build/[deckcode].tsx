@@ -4,7 +4,7 @@ import { CardFiltersProvider } from '@/context/useCardFilters'
 import { DeckProvider } from '@/context/useDeck'
 import type { DeckcodeContextValue } from '@/context/useDeckcode'
 import { DeckcodeProvider } from '@/context/useDeckcode'
-import { createDeckExpanded } from '@/data/deck'
+import { createDeckExpanded, createDeckFromDecklyst } from '@/data/deck'
 import type { Deckcode } from '@/data/deckcode'
 import {
   addCard,
@@ -27,14 +27,21 @@ type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 const useRouteQuery = (initialDeckcode: string | null) => {
   const { query, replace, pathname } = useRouter()
   const deckcodeQuery = (query.deckcode as string | undefined) ?? initialDeckcode ?? ''
-  const baseQuery = query.base as string | undefined
-  const { data: baseDeck } = trpc.deck.get.useQuery(
-    { code: baseQuery!, scope: 'user' },
-    { enabled: !!baseQuery, initialData: baseQuery ? createDeckExpanded(baseQuery) : undefined },
+  const baseDeckcodeQuery = query.base as string | undefined
+  const { data: baseDeck } = trpc.decklyst.get.useQuery(
+    { code: baseDeckcodeQuery!, scope: 'user' },
+    {
+      enabled: !!baseDeckcodeQuery,
+      select: createDeckFromDecklyst,
+    },
   )
 
   useEffect(() => {
-    if (!baseQuery && deckcodeQuery && Object.keys(parseDeckcode(deckcodeQuery).cards).length > 1) {
+    if (
+      !baseDeckcodeQuery &&
+      deckcodeQuery &&
+      Object.keys(parseDeckcode(deckcodeQuery).cards).length > 1
+    ) {
       replace(
         {
           pathname,

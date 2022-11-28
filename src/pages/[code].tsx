@@ -12,9 +12,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext<{ code?:
   if (!code) return { notFound: true }
 
   const client = await createApiClient(await createContext(ctx as any))
-  const deck = await client.deck.get({ code, ssrSecret: env.SSR_SECRET })
+  const decklyst = await client.decklyst.get({ code, ssrSecret: env.SSR_SECRET })
 
-  return deck
+  return decklyst
     ? {
         redirect: {
           destination: `/decks/${encodeURIComponent(code)}`,

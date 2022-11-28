@@ -19,7 +19,7 @@ export const SaveDeckDialog: FC<{
 }> = ({ open, onClose, baseDeck }) => {
   const router = useRouter()
   const deck = useDeck()
-  const { mutateAsync: upsertDeck, isLoading: isSaving } = trpc.deck.upsert.useMutation()
+  const { mutateAsync: upsertDecklyst, isLoading: isSaving } = trpc.decklyst.upsert.useMutation()
 
   const [archetype, setArchetype] = useState<Archetype | null>(
     (baseDeck?.meta?.archetype as Archetype) ?? null,
@@ -36,13 +36,13 @@ export const SaveDeckDialog: FC<{
   const createSaveHandler =
     (update: boolean = false) =>
     async () => {
-      const updated = await upsertDeck({
+      const updated = await upsertDecklyst({
         sharecode: update ? baseDeck?.meta?.sharecode : undefined,
         deckcode: deck.deckcode,
         archetype,
         privacy,
       })
-      await router.push({ pathname: '/decks/[code]', query: { code: updated.meta.sharecode } })
+      await router.push({ pathname: '/decks/[code]', query: { code: updated.sharecode } })
       onClose()
     }
 

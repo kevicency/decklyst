@@ -1,12 +1,12 @@
 import { router } from '../trpc'
 import { deckimageRouter } from './deckimageRouter'
-import { deckRouter } from './deckRouter'
+import { decklystRouter } from './decklystRouter'
 import { deckViewRouter } from './deckViewRouter'
 
 export const appRouter = router({
   deckimage: deckimageRouter,
   deckView: deckViewRouter,
-  deck: deckRouter,
+  decklyst: decklystRouter,
 })
 
 export type AppRouter = typeof appRouter
