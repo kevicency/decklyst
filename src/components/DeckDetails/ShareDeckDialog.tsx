@@ -7,7 +7,7 @@ import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
 import { DeckInfograph } from '../DeckInfograph'
 import { Backdrop, InnerTransition, OuterTransition } from '../Dialog'
-import { CopyIcon, DoneIcon, DownloadDoneIcon, ImageIcon, LinkIcon } from '../Icons'
+import { DoneIcon, DownloadDoneIcon, ImageIcon, LinkIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
 
 export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
@@ -36,14 +36,6 @@ export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ op
               >
                 <Dialog.Title className="text-2xl">Share this deck</Dialog.Title>
                 <div className="flex gap-x-2">
-                  <OneTimeButton onClick={copyDeckcode} timeout={2500}>
-                    {(copied) => (
-                      <>
-                        {copied ? <DoneIcon /> : <CopyIcon />}
-                        Copy deckcode
-                      </>
-                    )}
-                  </OneTimeButton>
                   <OneTimeButton onClick={copyDeckUrl} timeout={2500}>
                     {(copied) => (
                       <>
