@@ -44,7 +44,7 @@ export const AppHeader = () => {
         </button>
         <input
           className={cx(
-            'w-full bg-transparent py-2 pl-5 focus:bg-gray-850 focus:bg-opacity-30',
+            'w-full bg-transparent py-2 focus:bg-gray-850 focus:bg-opacity-30',
             'pl-12 pr-2',
           )}
           placeholder={'Search for a deckcode or sharecode'}

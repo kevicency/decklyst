@@ -4,6 +4,8 @@ import colors from 'tailwindcss/colors'
 
 export const PageLoader: FC = () => (
   <div className="flex h-full w-full items-center justify-center grid-in-main">
-    <PacmanLoader size={48} color={colors.teal['400']} />
+    <div className="">
+      <PacmanLoader size={32} color={colors.teal['400']} />
+    </div>
   </div>
 )
