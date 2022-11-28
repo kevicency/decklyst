@@ -91,18 +91,14 @@ body {
   }
 
   .btn {
-    @apply flex items-center justify-center;
+    @apply flex items-center justify-center gap-x-1.5;
     @apply bg-alt-700 hover:bg-accent-600;
     @apply text-gray-100 hover:text-gray-100;
     @apply py-1 px-3;
   }
 
-  .btn > svg {
-    @apply mr-1.5;
-  }
-
   .btn-outline {
-    @apply flex items-center justify-center gap-x-2;
+    @apply flex items-center justify-center gap-x-1.5;
     @apply py-1 px-3;
     @apply bg-transparent hover:bg-alt-600;
     @apply border-2 border-alt-400 hover:border-transparent;
@@ -125,7 +121,7 @@ body {
   }
 
   .btn--large > svg {
-    @apply mr-2;
+    @apply mr-1;
   }
 
   .page-header-input {

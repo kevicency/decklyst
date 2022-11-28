@@ -38,12 +38,14 @@ export const OneTimeButton: FC<{
       onClick={handleClick}
       disabled={disabled}
       className={cx(
-        'btn transition-colors',
+        'transition-colors',
+        className?.includes('btn') ? '' : 'btn',
         className,
         clickedClassName
           ? { clickedClassName: isClicked }
           : {
-              'cursor-default !bg-green-600 hover:!bg-green-600': isClicked,
+              'cursor-default border-green-600 !bg-green-600 text-gray-100 hover:!bg-green-600':
+                isClicked,
             },
       )}
     >

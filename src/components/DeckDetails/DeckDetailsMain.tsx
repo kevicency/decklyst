@@ -12,7 +12,7 @@ import { DeckArtifactList } from '../DeckInfograph/DeckArtifactList'
 import { DeckCardList } from '../DeckInfograph/DeckCardList'
 import { DeckMinionList } from '../DeckInfograph/DeckMinionList'
 import { DeckSpellList } from '../DeckInfograph/DeckSpellList'
-import { CompareIcon, CopyIcon, DoneIcon, EditIcon, ShareIcon } from '../Icons'
+import { CopyIcon, DoneIcon, EditIcon, ShareIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
 import { ShareDeckDialog } from './ShareDeckDialog'
 
@@ -63,14 +63,15 @@ export const DeckDetailsMain: FC = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-x-2">
-          <Link
-            href={{ pathname: '/compare', query: { left: deck.deckcode } }}
-            className="btn-outline"
-          >
-            <CompareIcon />
-            Compare
-          </Link>
+        <div className="grid grid-cols-3 items-center gap-x-2">
+          <OneTimeButton className={`btn-outline`} onClick={copyDeckcode} timeout={2500}>
+            {(copied) => (
+              <>
+                {copied ? <DoneIcon /> : <CopyIcon />}
+                Copy
+              </>
+            )}
+          </OneTimeButton>
           <Link
             href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}
             className="btn-outline"
