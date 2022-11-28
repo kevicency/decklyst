@@ -1,7 +1,7 @@
 import { isShareOrDeckcode } from '@/common/utils'
 import { DiscordIcon, SearchIcon } from '@/components/Icons'
 import cx from 'classnames'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -65,7 +65,7 @@ export const AppHeader = () => {
         <Link href="https://discord.gg/zYx5bqZszj" className="text-xl" target="_blank">
           <DiscordIcon />
         </Link>
-        <button
+        {/* <button
           className="btn btn-outline"
           onClick={
             session
@@ -77,7 +77,7 @@ export const AppHeader = () => {
           }
         >
           {session ? 'Sign out' : 'Sign in'}
-        </button>
+        </button> */}
       </div>
     </div>
   )

@@ -74,12 +74,17 @@ module.exports = {
                   auto`,
       },
       scale: {
+        '101': '1.01',
         '130': '1.3',
         '135': '1.35',
       }
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('tailwindcss-animate'), require('@savvywombat/tailwindcss-grid-areas')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('tailwindcss-animate'),
+    require('@savvywombat/tailwindcss-grid-areas'),
+  ],
   safelist: [
     {
       pattern: /!?(text|bg|border)-(lyonar|songhai|vetruvian|abyssian|magmar|vanar|neutral)/,

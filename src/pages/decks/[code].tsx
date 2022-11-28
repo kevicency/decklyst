@@ -1,4 +1,3 @@
-import { transformer } from '@/common/transformer'
 import { DeckDetailsAside } from '@/components/DeckDetails/DeckDetailsAside'
 import { DeckDetailsMain } from '@/components/DeckDetails/DeckDetailsMain'
 import { PageLoader } from '@/components/PageLoader'
@@ -6,10 +5,9 @@ import { DeckProvider } from '@/context/useDeck'
 import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import { createDeckFromDecklyst } from '@/data/deck'
-import { appRouter } from '@/server'
+import { createSSGClient } from '@/server'
 import { createContextInner } from '@/server/trpc/context'
 import { trpc } from '@/utils/trpc'
-import { createProxySSGHelpers } from '@trpc/react-query/ssg'
 import { uniqBy } from 'lodash'
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from 'next/types'
 import type { FC } from 'react'
@@ -76,11 +74,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
     return { notFound: true }
   }
 
-  const ssg = createProxySSGHelpers({
-    router: appRouter,
-    ctx: await createContextInner(),
-    transformer,
-  })
+  const ssg = await createSSGClient()
   const decklyst = await ssg.decklyst.get.fetch({ code, ssrSecret: env.SSR_SECRET })
 
   const isPrivate = decklyst?.privacy === 'private'

@@ -165,6 +165,9 @@ body {
   .shadow-header {
     clip-path: inset(0 0 -4rem 0) gap-x-2;
   }
+  .shadow-deck {
+    box-shadow: 0px 0px 12px 4px var(--tw-shadow-color);
+  }
 
   .bg-image {
     @apply bg-fixed bg-no-repeat bg-blend-overlay;
@@ -186,6 +189,19 @@ body {
   .bg-image-decksearch {
     @apply bg-image bg-gray-900;
     background-image: url('/assets/backgrounds/bg6.jpg');
+  }
+
+  .cover-parent::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    transition: background-color 0.1s ease-out 0s;
+    background-color: transparent;
   }
 }
 

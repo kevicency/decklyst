@@ -170,8 +170,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  decks         Decklyst[]
-  DeckView      DeckView[]
+  decklysts     Decklyst[]
+  deckviews     DeckView[]
 }
 
 model VerificationToken {

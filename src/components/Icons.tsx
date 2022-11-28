@@ -1,4 +1,4 @@
-import { BiImport } from 'react-icons/bi'
+import { BiImport, BiLogInCircle, BiUserCircle } from 'react-icons/bi'
 import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
 import { CgArrowsExchangeAlt } from 'react-icons/cg'
 import {
@@ -47,3 +47,5 @@ export const ArtifactIcon = GiArtificialHive
 export const SaveIcon = FaSave
 export const ChangesIcon = CgArrowsExchangeAlt
 export const NewIcon = FaStarOfLife
+export const LogInIcon = BiLogInCircle
+export const ProfileIcon = BiUserCircle

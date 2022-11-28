@@ -9,17 +9,17 @@ import { formatDistance } from 'date-fns'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { EyeIcon } from './Icons'
+import { ProfileLink } from './ProfileLink'
 
 const DeckPreview: FC = () => {
   const { faction, deckcode, meta } = useDeck()
   return (
-    <Link
-      href={deckUrl(deckcode, true)}
+    <div
       className={cx(
         'group',
-        'flex flex-col',
+        'relative flex flex-col',
         'border-[3px] border-alt-700',
-        `hover:border-${faction} hover:text-gray-100`,
+        `hover:border-${faction}  hover:scale-101 hover:text-gray-100`,
       )}
     >
       <div
@@ -34,12 +34,13 @@ const DeckPreview: FC = () => {
         <DeckCounts />
         <DeckManaCurve />
       </div>
+      <Link href={deckUrl(deckcode, true)} className="cover-parent" />
       <div
-        className={`flex items-center gap-x-3 border-t-2 border-gray-800 bg-alt-850 px-4 py-1 text-sm text-gray-400`}
+        className={`relative flex items-center gap-x-3 border-t-2 border-gray-800 bg-alt-850 px-4 py-1 text-gray-400`}
       >
         <div>
           <span>created by </span>
-          <span className="font-semibold text-gray-300">Anonymous</span>
+          <ProfileLink user={meta?.author} />
         </div>
         {meta?.createdAt && (
           <>
@@ -53,19 +54,19 @@ const DeckPreview: FC = () => {
           </>
         )}
         <div className="flex-1" />
-        {meta?.viewCount && (
+        {meta?.views && (
           <>
             <div className="flex items-center gap-x-1">
               <span className={`font-semibold text-gray-300`}>
-                <EyeIcon size={14} className="mx-1 inline-block pb-0.5" />
-                {meta.viewCount}
+                <EyeIcon size={18} className="mx-1 inline-block pb-0.5" />
+                {meta.views}
               </span>
-              <span>{meta.viewCount === 1 ? 'view' : 'views'}</span>
+              <span>{meta.views === 1 ? 'view' : 'views'}</span>
             </div>
           </>
         )}
       </div>
-    </Link>
+    </div>
   )
 }
 
@@ -77,7 +78,7 @@ export const DeckPreviewList: FC<{
   if (!decks.length) return null
 
   return (
-    <div className={cx(className)}>
+    <div className={cx(className, 'pb-2')}>
       {title && <h3 className="mb-6 text-3xl">{title}</h3>}
       <ul className="flex flex-col gap-y-4">
         {decks.map((deck) => (

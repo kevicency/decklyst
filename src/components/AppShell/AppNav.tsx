@@ -5,9 +5,12 @@ import {
   DeckLibraryIcon,
   ExpandSidebarIcon,
   FeedbackIcon,
+  LogInIcon,
+  ProfileIcon,
 } from '@/components/Icons'
 import { useAppShell } from '@/context/useAppShell'
 import cx from 'classnames'
+import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { FC, ReactNode } from 'react'
@@ -16,7 +19,7 @@ import type { IconType } from 'react-icons'
 const AppNavLink: FC<{
   href?: string
   onClick?: () => void
-  icon: IconType
+  icon: IconType | FC<{ className?: string }>
   iconClassName?: string
   children: ReactNode
   active?: boolean
@@ -54,8 +57,20 @@ const AppNavLink: FC<{
   )
 }
 
+const AvatarIcon: FC<{ className?: string }> = () => {
+  const session = useSession()
+  const user = session.data?.user
+
+  return user?.image ? (
+    <img className="h-6 w-6 rounded-full" src={user.image} alt={user.name ?? ''} />
+  ) : (
+    <ProfileIcon />
+  )
+}
+
 export const AppNav: FC = () => {
   const router = useRouter()
+  const session = useSession()
   const [{ isNavExpanded: isExpanded }, { toggleNav }] = useAppShell()
 
   return (
@@ -80,6 +95,22 @@ export const AppNav: FC = () => {
         </AppNavLink>
       </div>
       <div className={cx('z-30 flex flex-col border-r border-gray-700 shadow-nav grid-in-nav-b')}>
+        {session?.data?.user ? (
+          <AppNavLink href={`/profile/${session.data.user?.id}`} icon={AvatarIcon}>
+            Profile
+          </AppNavLink>
+        ) : (
+          <AppNavLink
+            onClick={() =>
+              signIn('discord', {
+                callbackUrl: window.location.href,
+              })
+            }
+            icon={LogInIcon}
+          >
+            Sign In
+          </AppNavLink>
+        )}
         <div className="border-t border-gray-800">
           <AppNavLink
             href="discord://discord.com/channels/1041363184872857602/1041363185707528208"

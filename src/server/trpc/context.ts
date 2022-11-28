@@ -24,6 +24,7 @@ export const createContextInner = async (opts: CreateContextOptions = { session:
   deckimage: extendDeckimage(prisma.deckimage),
   deckviews: extendDeckviews(prisma.deckviews),
   decklyst: extendDecklyst(prisma.decklyst, opts.session),
+  user: prisma.user,
 })
 
 /**
