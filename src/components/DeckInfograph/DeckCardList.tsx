@@ -40,7 +40,7 @@ export const DeckCardList = () => {
             <div key={card.id} className="mt-2 flex items-center">
               <ManaIcon mana={card.mana} />
               <a
-                className="ml-2 mt-[-1px] flex-1 truncate text-sm"
+                className="ml-2 mt-[-1px] flex-1 truncate"
                 data-tip={card.id}
                 data-for="card-tooltip"
               >

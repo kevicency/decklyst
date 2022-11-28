@@ -24,7 +24,7 @@ export const IconCardList: FC<{ cards: CardEntry[]; variant?: Variant }> = ({
   )
 }
 export const IconCard: FC<{ card: CardEntry; variant?: Variant }> = ({ card, variant }) => (
-  <div className="flex w-16 flex-col">
+  <div className="flex w-[4.5rem] flex-col">
     <a
       className="relative flex flex-1"
       data-tip={card.id}
