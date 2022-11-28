@@ -23,10 +23,10 @@ const DeckPage: FC<Props> = ({ deck }) => {
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const code = (query.code as string | undefined) ?? ''
-  const renderSecret = (query.renderSecret as string | undefined) ?? ''
+  const ssrSecret = (query.ssrSecret as string | undefined) ?? ''
   const client = await createApiClient()
 
-  const deck = await client.deck.ensure({ code, renderSecret })
+  const deck = await client.deck.get({ code, ssrSecret: ssrSecret })
 
   return deck
     ? {

@@ -65,7 +65,11 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
                 </span>
                 <span>changes</span>
               </div>
-              <button className={cx('btn px-2 py-1')} onClick={() => setActiveDialog('diff')}>
+              <button
+                className={cx('btn px-2 py-1')}
+                onClick={() => setActiveDialog('diff')}
+                disabled={deckDiff.changes === 0}
+              >
                 <ChangesIcon size={20} /> Show
               </button>
             </div>

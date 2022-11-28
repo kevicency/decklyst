@@ -13,17 +13,26 @@ export const deckRouter = router({
       z.object({
         code: z.string(),
         scope: z.enum(['public', 'user']).optional(),
+        ssrSecret: z.string().optional(),
       }),
     )
     .query(async ({ ctx, input }) => {
-      const decklyst = await ctx.decklyst.findByCode(input.code, input.scope === 'user')
+      const isSSG = input.ssrSecret === env.SSR_SECRET
+
+      let decklyst = await ctx.decklyst.findByCode(input.code)
+
+      if (decklyst === null && isSSG && validateDeckcode(input.code)) {
+        decklyst = await ctx.decklyst.upsertDeck(null, createDeck(input.code), {
+          privacy: 'public',
+        })
+      }
 
       if (decklyst === null) {
         throw new TRPCError({ message: 'Deck not found', code: 'NOT_FOUND' })
       }
 
       if (decklyst?.privacy === 'private') {
-        const authorized = decklyst.authorId === ctx.session?.user?.id
+        const authorized = decklyst.authorId === ctx.session?.user?.id || isSSG
 
         if (!authorized) {
           throw new TRPCError({ message: 'Unauthorized', code: 'UNAUTHORIZED' })
@@ -94,28 +103,28 @@ export const deckRouter = router({
         }
       },
     ),
-  ensure: proc
-    .input(z.object({ code: z.string(), renderSecret: z.string().optional() }))
-    .mutation(async ({ ctx, input }) => {
-      const decklysts = await ctx.decklyst.findMany({
-        where: { OR: [{ deckcode: input.code }, { sharecode: input.code }] },
-        orderBy: { createdAt: 'asc' },
-        include: { author: true },
-      })
+  // ensure: proc
+  //   .input(z.object({ code: z.string(), ssrSecret: z.string().optional() }))
+  //   .query(async ({ ctx, input }) => {
+  //     const decklysts = await ctx.decklyst.findMany({
+  //       where: { OR: [{ deckcode: input.code }, { sharecode: input.code }] },
+  //       orderBy: { createdAt: 'asc' },
+  //       include: { author: true },
+  //     })
 
-      let decklyst = decklysts.find(
-        ({ author, privacy, sharecode }) =>
-          author &&
-          (privacy !== 'private' ||
-            (sharecode === input.code && input.renderSecret === env.RENDER_SECRET)),
-      )
-      decklyst ??= decklysts.find((decklyst) => decklyst.privacy !== 'private')
-      decklyst ??= validateDeckcode(input.code)
-        ? await ctx.decklyst.upsertDeck(null, createDeck(input.code), { privacy: 'public' })
-        : undefined
+  //     let decklyst = decklysts.find(
+  //       ({ author, privacy, sharecode }) =>
+  //         author &&
+  //         (privacy !== 'private' ||
+  //           (sharecode === input.code && input.ssrSecret === env.SSR_SECRET)),
+  //     )
+  //     decklyst ??= decklysts.find((decklyst) => decklyst.privacy !== 'private')
+  //     decklyst ??= validateDeckcode(input.code)
+  //       ? await ctx.decklyst.upsertDeck(null, createDeck(input.code), { privacy: 'public' })
+  //       : undefined
 
-      return decklyst ? createDeckFromDecklyst(decklyst) : null
-    }),
+  //     return decklyst ? createDeckFromDecklyst(decklyst) : null
+  //   }),
   upsert: secureProc
     .input(
       z.object({

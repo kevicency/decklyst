@@ -27,7 +27,7 @@ export const DeckDiffDialog: FC<{ open: boolean; onClose: () => void; deckDiff: 
               <Dialog.Title className="bg-alt-1000 py-3 px-6 text-3xl font-thin text-gray-100">
                 Deck changes
               </Dialog.Title>
-              <div className="flex-1 overflow-y-auto">
+              <div className="flex-1 overflow-y-auto p-4">
                 {['minions', 'spells', 'artifacts'].map((path) => {
                   const diffCards = (get(deckDiff, path) as CardDiff[]).filter(
                     (diff) => diff.delta !== 0,

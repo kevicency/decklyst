@@ -1,10 +1,15 @@
 import { trpc } from '@/utils/trpc'
 import { useEffect } from 'react'
 
-export const useRegisterView = (code: string) => {
-  const { mutate: registerView } = trpc.deckviews.registerView.useMutation()
+export const useRegisterView = (
+  sharecode: string | undefined,
+  { enabled }: { enabled?: boolean } = {},
+) => {
+  const { mutate: registerView } = trpc.deckView.registerView.useMutation()
 
   useEffect(() => {
-    registerView({ code })
-  }, [code, registerView])
+    if (sharecode && enabled !== false) {
+      registerView({ sharecode })
+    }
+  }, [sharecode, registerView, enabled])
 }

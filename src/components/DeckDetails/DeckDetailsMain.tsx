@@ -40,7 +40,7 @@ export const DeckDetailsMain: FC = () => {
         </div>
         <div className="ml-24 -mb-12 flex flex-1 flex-col gap-y-4">
           <div className="flex flex-1 truncate text-3xl font-light">{deck.title || 'Untitled'}</div>
-          <div className="flex items-center gap-x-4 text-sm text-gray-400">
+          <div className="flex items-center gap-x-3 text-sm text-gray-400">
             <div>
               <span>shared by </span>
               {meta.author ? (
@@ -49,12 +49,17 @@ export const DeckDetailsMain: FC = () => {
                 <span className="font-semibold text-gray-300">Anonymous</span>
               )}
             </div>
-            <div className={`text-lg font-bold text-${deck.faction}`}>•</div>
+            <div className={`text-lg font-bold text-gray-600`}>•</div>
             <div>
               <span>created </span>
               <span className="font-semibold text-gray-300">
                 {formatDistance(meta.createdAt!, new Date(), { addSuffix: true })}
               </span>
+            </div>
+            <div className={`text-lg font-bold text-gray-600`}>•</div>
+            <div>
+              <span className="font-semibold text-gray-300">{meta.views}</span>
+              <span> {meta.views === 1 ? 'view' : 'views'}</span>
             </div>
           </div>
         </div>

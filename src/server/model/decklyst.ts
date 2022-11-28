@@ -82,15 +82,37 @@ export const extendDecklyst = (
     })
   }
 
+  const findByDeckcode = async (deckcode: string, onlyUserDecklysts: boolean = false) => {
+    const candidates = await Promise.all([
+      user
+        ? decklyst.findFirst({
+            where: { deckcode, authorId: user?.id },
+            include: { author: true },
+          })
+        : null,
+      !onlyUserDecklysts
+        ? decklyst.findFirst({
+            where: { deckcode, privacy: 'public' },
+            orderBy: { createdAt: 'asc' },
+            include: { author: true },
+          })
+        : null,
+    ])
+    return candidates.find(identity) ?? null
+  }
+
   const findByCode = async (code: string, userOnly?: boolean) => {
     const candidates = await Promise.all([
-      decklyst.findFirst({
-        where: { OR: [{ deckcode: code }, { sharecode: code }], authorId: user?.id },
-        include: { author: true },
-      }),
-      user && !userOnly
+      user
         ? decklyst.findFirst({
-            where: { OR: [{ deckcode: code }, { sharecode: code }], privacy: { not: 'private' } },
+            where: { OR: [{ deckcode: code }, { sharecode: code }], authorId: user?.id },
+            orderBy: { createdAt: 'asc' },
+            include: { author: true },
+          })
+        : null,
+      !userOnly
+        ? decklyst.findFirst({
+            where: { OR: [{ deckcode: code, privacy: 'public' }, { sharecode: code }] },
             orderBy: { createdAt: 'asc' },
             include: { author: true },
           })
@@ -102,6 +124,7 @@ export const extendDecklyst = (
   return Object.assign(decklyst, {
     upsertDeck,
     findByCode,
+    findByDeckcode,
     ensureByCode: async (code: string) => {
       let decklyst = await findByCode(code)
 

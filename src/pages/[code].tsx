@@ -6,14 +6,13 @@ import type { FC } from 'react'
 const DeckRedirectPage: FC = () => null
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext<{ code?: string }>) => {
+  const { env } = await import('@/env/server.mjs')
   const code = ctx.params?.code as string | undefined
 
   if (!code) return { notFound: true }
 
-  const clientContext = await createContext(ctx as any)
-  const client = await createApiClient(clientContext)
-
-  const deck = await client.deck.ensure({ code })
+  const client = await createApiClient(await createContext(ctx as any))
+  const deck = await client.deck.get({ code, ssrSecret: env.SSR_SECRET })
 
   return deck
     ? {

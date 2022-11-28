@@ -15,16 +15,19 @@ import type { FC } from 'react'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
-const DeckPage: FC<Props> = ({ deck: initialDeck, sharecode }) => {
-  useRegisterView(sharecode)
-
-  const { data: deck, error } = trpc.deck.get.useQuery(
-    { code: sharecode },
+const DeckPage: FC<Props> = ({ deck: initialDeck, code }) => {
+  const {
+    data: deck,
+    error,
+    isSuccess,
+  } = trpc.deck.get.useQuery(
+    { code },
     {
       initialData: initialDeck,
       retry: (count, error) => (error.data?.code === 'UNAUTHORIZED' ? false : count < 3),
     },
   )
+  useRegisterView(deck?.meta.sharecode, { enabled: deck && isSuccess })
 
   if (error)
     return (
@@ -64,6 +67,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string }>) => {
+  const { env } = await import('@/env/server.mjs')
   const code = ctx.params?.code as string | undefined
 
   if (!code) {
@@ -75,14 +79,16 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
     ctx: await createContextInner(),
     transformer,
   })
-  const deck = await ssg.deck.get.fetch({ code })
+  const deck = await ssg.deck.get.fetch({ code, ssrSecret: env.SSR_SECRET })
+
+  const isPrivate = deck?.meta?.privacy === 'private'
 
   return deck
     ? {
         props: {
-          trpcState: ssg.dehydrate(),
-          sharecode: deck.meta.sharecode,
-          deck: deck.meta.privacy === 'private' ? null : deck,
+          code,
+          trpcState: ssg.dehydrate({ shouldDehydrateQuery: () => !isPrivate }),
+          deck: isPrivate ? null : deck,
         },
       }
     : { notFound: true, revalidate: true }

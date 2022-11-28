@@ -34,6 +34,7 @@ model Decklyst {
   history  DeckHistory[]
   viewers  DeckView[]
 
+  @@index([deckcode], name: "deck_deckcode")
   @@map("deck")
 }
 
@@ -61,19 +62,19 @@ model DeckHistory {
 }
 
 model DeckView {
-  id        Int     @id @default(autoincrement())
-  deckId    String  @db.Uuid
-  ipAddress String?
-  userId    String?
-  viewCount Int     @default(1)
+  id        Int    @id @default(autoincrement())
+  sharecode String
+  ipAddress String @default("")
+  userId    String @default("")
+  views     Int    @default(1)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  deck Decklyst @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  deck Decklyst @relation(fields: [sharecode], references: [sharecode], onDelete: Cascade)
   user User?    @relation(fields: [userId], references: [id])
 
-  @@unique([deckId, ipAddress, userId])
+  @@unique([sharecode, ipAddress, userId])
   @@map("deckview")
 }
 

@@ -4,7 +4,7 @@ import { Buffer } from 'node:buffer'
 export const snapshotUrl = (code: string, relative = false) =>
   `${relative ? '' : env.NEXT_PUBLIC_SITE_URL}/deckimage/${encodeURIComponent(
     code,
-  )}?renderSecret=${encodeURIComponent(env.RENDER_SECRET)}`
+  )}?ssrSecret=${encodeURIComponent(env.SSR_SECRET)}`
 
 export const remoteSnapshotUrl = (deckcode: string) =>
   `${
