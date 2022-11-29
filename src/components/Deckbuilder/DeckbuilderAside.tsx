@@ -25,7 +25,7 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
     [baseDeck, deck],
   )
   const [, { clear }] = useDeckcode()
-  const [activeDialog, setActiveDialog] = useState<'diff' | 'save' | null>(null)
+  const [activeDialog, setActiveDialog] = useState<'diff' | 'save' | null>('save')
   const authenticated = useSession()?.status === 'authenticated'
 
   const handleCopy = async () => {

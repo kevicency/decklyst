@@ -4,7 +4,7 @@ import type { Deckcode } from '@/data/deckcode'
 import { encodeDeckcode, parseDeckcode, splitDeckcode } from '@/data/deckcode'
 import type { WithRequired } from '@/types'
 import type { Decklyst, User } from '@prisma/client'
-import { chain, groupBy, max, memoize, sumBy } from 'lodash'
+import { chain, groupBy, max, memoize, startCase, sumBy } from 'lodash'
 
 export type CardEntry = CardData & { count: number }
 export type Deck = {
@@ -150,3 +150,23 @@ export function createDeckFromDecklyst(decklyst?: Decklyst | null) {
 }
 
 export const isDeckExpanded = (deck: Deck | DeckExpanded): deck is DeckExpanded => 'valid' in deck
+
+export const allTags = [
+  'ladder',
+  'tournament',
+  'meta',
+  'off-meta',
+  'budget',
+  'starter',
+  's-rank',
+  'swarm',
+  'mechazor',
+  'walls',
+  'dying wish',
+  'creep',
+  'ranged',
+  'obelysk',
+  'arcanyst',
+].sort()
+
+export const humanizeTag = (tag: string) => tag.split('-').map(startCase).join('-')

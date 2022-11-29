@@ -14,6 +14,7 @@ import { DeckMinionList } from '../DeckInfograph/DeckMinionList'
 import { DeckSpellList } from '../DeckInfograph/DeckSpellList'
 import { CopyIcon, DoneIcon, EditIcon, EyeIcon, ShareIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
+import { Tag } from '../Tag'
 import { ShareDeckDialog } from './ShareDeckDialog'
 
 export const DeckDetailsMain: FC = () => {
@@ -91,6 +92,11 @@ export const DeckDetailsMain: FC = () => {
                   </span>
                 </div>
               </div>
+              {/* <div className="flex flex-wrap items-end justify-center gap-2 px-4">
+                {deck.meta?.tags?.map((tag) => (
+                  <Tag tag={tag} key={tag} size={deck.meta?.tags.length! > 4 ? 'sm' : 'default'} />
+                ))}
+              </div> */}
               <div className="flex items-center justify-end">
                 <div className={`font-mono text-3xl text-${deck.faction}`}>{meta.sharecode}</div>
               </div>
@@ -119,6 +125,11 @@ export const DeckDetailsMain: FC = () => {
                   </>
                 )}
               </OneTimeButton>
+            </div>
+            <div className="flex flex-wrap items-end gap-2 ">
+              {deck.meta?.tags?.map((tag) => (
+                <Tag tag={tag} key={tag} size="sm" faction={deck.faction} />
+              ))}
             </div>
             <DeckMinionList variant="details" />
             <div className="mb-8 flex justify-between">

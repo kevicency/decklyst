@@ -20,6 +20,7 @@ model Decklyst {
   version            Int        @default(1)
   draft              Boolean    @default(false)
   archetype          Archetype?
+  tags               String[]   @default([])
 
   views Int @default(0)
   likes Int @default(0)

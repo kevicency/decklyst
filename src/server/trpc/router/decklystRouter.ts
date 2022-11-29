@@ -132,28 +132,6 @@ export const decklystRouter = router({
         }
       },
     ),
-  // ensure: proc
-  //   .input(z.object({ code: z.string(), ssrSecret: z.string().optional() }))
-  //   .query(async ({ ctx, input }) => {
-  //     const decklysts = await ctx.decklyst.findMany({
-  //       where: { OR: [{ deckcode: input.code }, { sharecode: input.code }] },
-  //       orderBy: { createdAt: 'asc' },
-  //       include: { author: true },
-  //     })
-
-  //     let decklyst = decklysts.find(
-  //       ({ author, privacy, sharecode }) =>
-  //         author &&
-  //         (privacy !== 'private' ||
-  //           (sharecode === input.code && input.ssrSecret === env.SSR_SECRET)),
-  //     )
-  //     decklyst ??= decklysts.find((decklyst) => decklyst.privacy !== 'private')
-  //     decklyst ??= validateDeckcode(input.code)
-  //       ? await ctx.decklyst.upsertDeck(null, createDeck(input.code), { privacy: 'public' })
-  //       : undefined
-
-  //     return decklyst ? createDeckFromDecklyst(decklyst) : null
-  //   }),
   upsert: secureProc
     .input(
       z.object({
@@ -161,6 +139,7 @@ export const decklystRouter = router({
         sharecode: z.string().optional(),
         archetype: z.nativeEnum(Archetype).nullable().optional(),
         privacy: z.nativeEnum(Privacy).optional(),
+        tags: z.array(z.string()).optional(),
       }),
     )
     .mutation(async ({ ctx, input: { sharecode, deckcode, ...settings } }) => {

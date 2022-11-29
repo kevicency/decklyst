@@ -16,7 +16,7 @@ import { difference, identity } from 'lodash'
 import { customAlphabet } from 'nanoid'
 import type { ModelContext } from './context'
 
-export type DeckSettings = Partial<Pick<Decklyst, 'archetype' | 'privacy' | 'views'>>
+export type DeckSettings = Partial<Pick<Decklyst, 'archetype' | 'privacy' | 'views' | 'tags'>>
 
 export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelContext) => {
   const user = ctx.session?.user

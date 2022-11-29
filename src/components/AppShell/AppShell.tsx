@@ -1,7 +1,9 @@
 import { AppShellContext } from '@/context/useAppShell'
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import type { FC, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
+import { PageLoader } from '../PageLoader'
 import { AppHeader } from './AppHeader'
 import { AppLogo } from './AppLogo'
 import { AppNav } from './AppNav'
@@ -10,6 +12,7 @@ export const AppShell: FC<{ children: ReactNode }> = ({ children }) => {
   const [isNavExpanded, setNavExpanded] = useState(true)
   const [showFilters, setShowFilters] = useState(false)
   const router = useRouter()
+  const { status } = useSession()
 
   useEffect(() => {
     const handleRouteChanged = (url: string, { shallow }: { shallow: boolean }) => {
@@ -40,7 +43,7 @@ export const AppShell: FC<{ children: ReactNode }> = ({ children }) => {
         <AppLogo />
         <AppHeader />
         <AppNav />
-        {children}
+        {status === 'loading' ? <PageLoader /> : children}
       </div>
     </AppShellContext.Provider>
   )

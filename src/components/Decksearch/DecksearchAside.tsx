@@ -62,6 +62,7 @@ export const DecksearchAside: FC<{
               <div className="relative">
                 <span className="relative inline-flex w-full flex-row overflow-hidden">
                   <Combobox.Input
+                    value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className="flex-1 border-none bg-alt-800 px-2 py-2 outline-none"
                   />

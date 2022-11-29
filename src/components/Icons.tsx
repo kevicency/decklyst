@@ -15,7 +15,7 @@ import { GoRepoForked } from 'react-icons/go'
 import { HiEye, HiOutlineLibrary } from 'react-icons/hi'
 import { IoIosBuild, IoIosShareAlt } from 'react-icons/io'
 import { IoCopyOutline, IoFilterSharp, IoTrashOutline } from 'react-icons/io5'
-import { MdDone, MdDownload, MdDownloadDone, MdLink, MdSearch } from 'react-icons/md'
+import { MdClose, MdDone, MdDownload, MdDownloadDone, MdLink, MdSearch } from 'react-icons/md'
 import { RiChatSmile3Fill } from 'react-icons/ri'
 
 export const ImportIcon = BiImport
@@ -49,3 +49,4 @@ export const ChangesIcon = CgArrowsExchangeAlt
 export const NewIcon = FaStarOfLife
 export const LogInIcon = BiLogInCircle
 export const ProfileIcon = BiUserCircle
+export const CloseIcon = MdClose
