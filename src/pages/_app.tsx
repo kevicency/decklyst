@@ -15,7 +15,11 @@ const App: AppType<{ session: Session | null }> = ({
   <>
     <Head>
       <title>Decklyst</title>
-      <meta name="description" content="Share or create Duelyst 2 deckcodes" />
+      <meta name="description" content="Share or create Duelyst 2 decks" />
+      <meta
+        name="keywords"
+        content="Decklyst, Duelyst, Duelyst 2, database, deck, decklist, deckcode, deckbuilder, meta, tournament, starter decks"
+      />
       <meta property="og:site_name" content="Decklyst" />
       <meta name="google-site-verification" content="todbfz-oykJnt7ZTWmfVp8J6TyL1pnYoPMo6tZtkz-o" />
       <link rel="icon" href="favicon.ico" />
