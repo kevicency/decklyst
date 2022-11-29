@@ -12,7 +12,7 @@ export const IconCardList: FC<{ cards: CardEntry[]; variant?: Variant }> = ({
     <div
       className={cx(
         'grid',
-        cards.length && 'mt-6 h-24',
+        cards.length && 'h-24',
         variant === 'infograph' ? 'bg-alt-800' : 'bg-transparent',
       )}
       style={{ gridTemplateColumns: `repeat(${cards.length}, minmax(0, 1fr))` }}

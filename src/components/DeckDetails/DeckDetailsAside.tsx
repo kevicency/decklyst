@@ -3,7 +3,6 @@ import { Aside } from '../Aside'
 import { DeckManaCurve } from '../DeckInfograph/DeckManaCurve'
 import { CardRarityChart } from './CardRarityChart'
 import { CardTypeChart } from './CardTypeChart'
-import { DeckCraftingCost } from './DeckCraftingCost'
 import { DeckStat } from './DeckStat'
 import { FactionChart } from './FactionChart'
 
@@ -30,9 +29,8 @@ export const DeckDetailsAside: FC = () => {
               <CardTypeChart />
             </div>
           </DeckStat>
-          <DeckStat title="Crafting">
-            <DeckCraftingCost />
-            <div className="mt-2 w-full">
+          <DeckStat title="Card Rarity">
+            <div className="w-full">
               <CardRarityChart />
             </div>
           </DeckStat>

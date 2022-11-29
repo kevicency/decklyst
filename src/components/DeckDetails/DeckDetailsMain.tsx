@@ -12,9 +12,9 @@ import { DeckArtifactList } from '../DeckInfograph/DeckArtifactList'
 import { DeckCardList } from '../DeckInfograph/DeckCardList'
 import { DeckMinionList } from '../DeckInfograph/DeckMinionList'
 import { DeckSpellList } from '../DeckInfograph/DeckSpellList'
+import { DeckTags } from '../DeckInfograph/DeckTags'
 import { CopyIcon, DoneIcon, EditIcon, EyeIcon, ShareIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
-import { Tag } from '../Tag'
 import { ShareDeckDialog } from './ShareDeckDialog'
 
 export const DeckDetailsMain: FC = () => {
@@ -126,18 +126,22 @@ export const DeckDetailsMain: FC = () => {
                 )}
               </OneTimeButton>
             </div>
-            <div className="flex flex-wrap items-end gap-2 ">
-              {deck.meta?.tags?.map((tag) => (
-                <Tag tag={tag} key={tag} size="sm" faction={deck.faction} />
-              ))}
-            </div>
-            <DeckMinionList variant="details" />
-            <div className="mb-8 flex justify-between">
-              <DeckSpellList variant="details" />
-              <DeckArtifactList variant="details" />
-            </div>
-            <div className="mt-2 px-2">
-              <DeckCardList />
+            <div className="flex flex-col gap-y-4">
+              <div className="flex flex-row-reverse justify-between">
+                <div className="mt-0.5 flex items-center gap-x-2 text-lg">
+                  <span className={`text-${deck.faction} font-semibold`}>{deck.spiritCost}</span>
+                  <span className="text-gray-300">Spirit</span>
+                </div>
+                <DeckTags />
+              </div>
+              <DeckMinionList variant="details" />
+              <div className="flex justify-between">
+                <DeckSpellList variant="details" />
+                <DeckArtifactList variant="details" />
+              </div>
+              <div className="mt-2 px-2">
+                <DeckCardList />
+              </div>
             </div>
           </div>
         </div>

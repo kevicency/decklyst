@@ -9,6 +9,7 @@ import { DeckManaCurve } from './DeckManaCurve'
 import { DeckMinionList } from './DeckMinionList'
 import { DeckQRCode } from './DeckQRCode'
 import { DeckSpellList } from './DeckSpellList'
+import { DeckTags } from './DeckTags'
 import { DeckTitle } from './DeckTitle'
 
 export const DeckInfograph: FC = () => {
@@ -38,7 +39,8 @@ export const DeckInfograph: FC = () => {
           </div>
           <DeckQRCode />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-y-4">
+          <DeckTags />
           <DeckMinionList />
           <div className="flex justify-between">
             <DeckSpellList />
