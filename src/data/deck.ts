@@ -32,7 +32,7 @@ export type DeckExpanded = Deck & {
   }
   manaCurve: ManaCurve
   spiritCost: number
-  meta?: Omit<Decklyst, 'id' | 'deckcode' | 'title' | 'cardcode' | 'statsId'> & {
+  meta?: Omit<Decklyst, 'title' | 'cardcode' | 'statsId'> & {
     author?: User | null
   }
 }
@@ -103,6 +103,7 @@ export const spiritCost$ = $((deck) =>
 
 export const expandDeck = (deck: Deck, meta?: DeckExpanded['meta']): DeckExpanded => ({
   ...deck,
+  deckcode: meta?.deckcode ?? deck.deckcode,
   faction: faction$(deck) ?? 'neutral',
   general: general$(deck)!,
   minions: minions$(deck),

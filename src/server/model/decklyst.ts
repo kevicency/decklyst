@@ -12,15 +12,12 @@ import { splitDeckcode, validateDeckcode } from '@/data/deckcode'
 import type { Decklyst, PrismaClient } from '@prisma/client'
 import { difference, identity } from 'lodash'
 import { customAlphabet } from 'nanoid'
-import type { Session } from 'next-auth'
+import type { ModelContext } from './context'
 
 export type DeckSettings = Partial<Pick<Decklyst, 'archetype' | 'privacy' | 'views'>>
 
-export const extendDecklyst = (
-  decklyst: PrismaClient['decklyst'],
-  session: Session | null = null,
-) => {
-  const user = session?.user
+export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelContext) => {
+  const user = ctx.session?.user
 
   const upsertDeck = async (
     sharecode: string | undefined | null,
@@ -53,7 +50,12 @@ export const extendDecklyst = (
       cardCounts: Object.fromEntries(deck.cards.map((card) => [card.id, card.count])),
     }
 
-    return await decklyst.upsert({
+    // if (existingDecklyst && hasCardChanges) {
+    //   await ctx.prisma
+    //     .$executeRaw`UPDATE "decklyst" SET "updatedAt" = CURRENT_TIMESTAMP WHERE "id" = '${result.id}'`
+    // }
+
+    const result = await decklyst.upsert({
       where: { sharecode },
       include: { author: true },
       create: {
@@ -70,6 +72,7 @@ export const extendDecklyst = (
         stats: {
           update: stats,
         },
+        updatedAt: new Date(),
         history: hasCardChanges
           ? {
               create: {
@@ -80,6 +83,8 @@ export const extendDecklyst = (
           : undefined,
       },
     })
+
+    return result
   }
 
   const findByDeckcode = async (deckcode: string, onlyUserDecklysts: boolean = false) => {

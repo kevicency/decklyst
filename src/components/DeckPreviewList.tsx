@@ -34,7 +34,7 @@ const DeckPreview: FC = () => {
         <DeckCounts />
         <DeckManaCurve />
       </div>
-      <Link href={deckUrl(deckcode, true)} className="cover-parent" />
+      <Link href={deckUrl(meta?.sharecode ?? deckcode, true)} className="cover-parent" />
       <div
         className={`relative flex items-center gap-x-3 border-t-2 border-gray-800 bg-alt-850 px-4 py-1 text-gray-400`}
       >

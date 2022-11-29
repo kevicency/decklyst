@@ -19,7 +19,7 @@ export const decklystRouter = router({
     .query(async ({ ctx, input }) => {
       const isSSG = input.ssrSecret === env.SSR_SECRET
 
-      let decklyst = await ctx.decklyst.findByCode(input.code)
+      let decklyst = await ctx.decklyst.findByCode(input.code, input.scope === 'user')
 
       if (decklyst === null && isSSG && validateDeckcode(input.code)) {
         decklyst = await ctx.decklyst.upsertDeck(null, createDeck(input.code), {
@@ -27,9 +27,9 @@ export const decklystRouter = router({
         })
       }
 
-      if (decklyst === null) {
-        throw new TRPCError({ message: 'Deck not found', code: 'NOT_FOUND' })
-      }
+      // if (decklyst === null) {
+      //   throw new TRPCError({ message: 'Deck not found', code: 'NOT_FOUND' })
+      // }
 
       if (decklyst?.privacy === 'private') {
         const authorized = decklyst.authorId === ctx.session?.user?.id || isSSG

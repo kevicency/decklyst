@@ -29,6 +29,8 @@ const DeckPage: FC<Props> = ({ decklyst, code }) => {
   )
   useRegisterView(deck?.meta.sharecode, { enabled: !!deck && isSuccess })
 
+  console.log(deck?.deckcode, deck?.meta.deckcode, deck?.deckcode === deck?.meta.deckcode)
+
   if (error)
     return (
       <div className="flex h-full w-full items-center justify-center grid-in-main">
