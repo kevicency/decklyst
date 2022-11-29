@@ -12,8 +12,8 @@ import { OneTimeButton } from '../OneTimeButton'
 
 export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
   const deck = useDeck()
-  const { imageDataUri, imageFilename } = useDeckImage()
-  const { copyDeckImageUrl, copyDeckcode, copyDeckUrl } = useDeckActions()
+  const { imageDataUri, imageFilename } = useDeckImage({ renderOnly: !open })
+  const { copyDeckImageUrl, copyDeckUrl } = useDeckActions()
 
   return (
     <OuterTransition show={open}>

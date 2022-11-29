@@ -5,7 +5,7 @@ import { env } from '@/env/server.mjs'
 import type { Decklyst, Prisma, User } from '@prisma/client'
 import { Archetype, Privacy } from '@prisma/client'
 import { TRPCError } from '@trpc/server'
-import { sortBy } from 'lodash'
+import { isEqual, sortBy } from 'lodash'
 import { z } from 'zod'
 import { proc, router, secureProc } from '../trpc'
 
@@ -157,6 +157,17 @@ export const decklystRouter = router({
         throw new TRPCError({ message: 'Unauthorized', code: 'UNAUTHORIZED' })
       }
 
-      return await ctx.decklyst.upsertDeck(sharecode, deck, settings)
+      const decklyst = await ctx.decklyst.upsertDeck(sharecode, deck, settings)
+
+      if (
+        existingDecklyst &&
+        (existingDecklyst.deckcode !== decklyst.deckcode ||
+          existingDecklyst.archetype !== decklyst.archetype ||
+          !isEqual(existingDecklyst?.tags, decklyst.tags))
+      ) {
+        await ctx.deckImage.deleteMany({ where: { sharecode: decklyst.sharecode } })
+      }
+
+      return decklyst
     }),
 })

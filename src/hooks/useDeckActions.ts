@@ -33,7 +33,7 @@ export const useDeckActions = () => {
   }, [deck])
 }
 
-export const useDeckImage = () => {
+export const useDeckImage = ({ renderOnly }: { renderOnly?: boolean } = {}) => {
   const deck = useDeck()
   const { deckcode } = deck
 
@@ -44,14 +44,13 @@ export const useDeckImage = () => {
 
   const { mutateAsync: ensureDeckImage } = trpc.deckImage.ensure.useMutation()
   const { data: imageDataUriFromQuery, refetch: refetchDeckImage } = useQuery(
-    ['deck-image', deckcode],
+    ['deck-image', deckcode, { renderOnly }],
     async () => {
-      const image = await ensureDeckImage({ code: deckcode })
+      const image = await ensureDeckImage({ code: deckcode, renderOnly })
 
       return getImageDataUri(image)
     },
     {
-      staleTime: Infinity,
       retry: true,
       retryDelay: (retryCount) => 1000 * Math.pow(2, Math.max(0, retryCount - 5)),
     },

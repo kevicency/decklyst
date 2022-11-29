@@ -11,7 +11,6 @@ export const Tag: FC<{
   faction?: Faction
 }> = ({ tag, onDelete, faction, size = 'default' }) => {
   const Container = onDelete ? 'button' : 'div'
-  console.log(size)
   return (
     <Container
       onClick={onDelete}

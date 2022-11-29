@@ -15,9 +15,10 @@ export const deckImageRouter = router({
         code: z.string(),
         forceRerender: z.boolean().optional(),
         timeout: z.number().optional(),
+        renderOnly: z.boolean().optional(),
       }),
     )
-    .mutation(async ({ ctx, input: { code, forceRerender, timeout } }) => {
+    .mutation(async ({ ctx, input: { code, forceRerender, timeout, renderOnly } }) => {
       const decklyst = await ctx.decklyst.ensureByCode(code)
 
       if (!decklyst) return null
@@ -28,17 +29,17 @@ export const deckImageRouter = router({
         ? null
         : await ctx.deckImage.findBySharecode(sharecode, timeout ?? 25000)
 
-      if (image) return image
-
-      await ctx.deckImage.startRendering(sharecode, deckcode)
-      try {
-        image = await snapshot(sharecode)
-      } catch (err) {
-        image = null
-        console.error('Failed to render deck image', sharecode, err)
+      if (!image) {
+        await ctx.deckImage.startRendering(sharecode, deckcode)
+        try {
+          image = await snapshot(sharecode)
+        } catch (err) {
+          image = null
+          console.error('Failed to render deck image', sharecode, err)
+        }
+        await ctx.deckImage.finishRendering(sharecode, image)
       }
-      await ctx.deckImage.finishRendering(sharecode, image)
 
-      return image
+      return renderOnly ? null : image
     }),
 })
