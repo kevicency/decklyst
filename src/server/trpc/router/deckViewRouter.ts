@@ -7,7 +7,7 @@ export const deckViewRouter = router({
     .input(z.object({ sharecode: z.string() }))
     .mutation(async ({ ctx, input: { sharecode } }) => {
       const ipAddress = (ctx.session?.user?.id ? undefined : ctx.ipAddress) ?? ''
-      const userId = ctx.session?.user?.id ?? ''
+      const userId = ctx.session?.user?.id ?? 'anonymous'
 
       const view = await ctx.prisma.deckView.upsert({
         where: {

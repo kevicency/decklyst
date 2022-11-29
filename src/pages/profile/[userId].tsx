@@ -65,6 +65,7 @@ const UserProfilePage: FC<Props> = (props) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const { prisma } = await createContextInner()
   const users = await prisma.user.findMany({
+    where: { id: { not: 'anonymous' } },
     select: { id: true },
   })
 
@@ -77,7 +78,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps = async (ctx: GetStaticPropsContext<{ userId?: string }>) => {
   const userId = ctx.params?.userId as string | undefined
 
-  if (!userId) {
+  if (!userId || userId === 'anonymous') {
     return { notFound: true }
   }
 
