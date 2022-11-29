@@ -2,6 +2,7 @@ import { factions } from '@/data/cards'
 import { createDeck, faction$ } from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
 import { env } from '@/env/server.mjs'
+import type { Prisma } from '@prisma/client'
 import { Archetype, Privacy } from '@prisma/client'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
@@ -65,26 +66,28 @@ export const decklystRouter = router({
         const skip = limit * page
         const cardIds = filters.cardIds ?? []
 
+        const where: Prisma.DecklystWhereInput = {
+          AND: [
+            { privacy: 'public' },
+            { draft: filters.includeDrafts ? undefined : false },
+            {
+              stats: {
+                AND: [
+                  {
+                    faction: filters.factions?.length ? { in: filters.factions } : undefined,
+                  },
+                  ...cardIds.map((cardId) => ({ cardCounts: { path: [`${cardId}`], gte: 1 } })),
+                ],
+              },
+            },
+          ],
+        }
+
         const decklysts = await ctx.decklyst.findMany({
           include: { author: true },
           skip,
           take: limit + 1,
-          where: {
-            AND: [
-              { privacy: 'public' },
-              { draft: filters.includeDrafts ? undefined : false },
-              {
-                stats: {
-                  AND: [
-                    {
-                      faction: filters.factions?.length ? { in: filters.factions } : undefined,
-                    },
-                    ...cardIds.map((cardId) => ({ cardCounts: { path: [`${cardId}`], gte: 1 } })),
-                  ],
-                },
-              },
-            ],
-          },
+          where: where,
           orderBy:
             sorting === 'date:created'
               ? { createdAt: 'desc' }

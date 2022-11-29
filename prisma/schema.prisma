@@ -11,15 +11,15 @@ datasource db {
 }
 
 model Decklyst {
-  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  sharecode String     @unique
-  deckcode  String
-  title     String
-  cardcode  String
-  privacy   Privacy    @default(unlisted)
-  version   Int        @default(1)
-  draft     Boolean    @default(false)
-  archetype Archetype?
+  id                 String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sharecode          String     @unique
+  deckcode           String
+  deckcodeNormalized String
+  title              String
+  privacy            Privacy    @default(unlisted)
+  version            Int        @default(1)
+  draft              Boolean    @default(false)
+  archetype          Archetype?
 
   views Int @default(0)
   likes Int @default(0)

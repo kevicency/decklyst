@@ -18,6 +18,10 @@ export const validateDeckcode = (deckcode?: string): deckcode is string =>
 export const splitDeckcode = (deckcode: string) =>
   (deckcode.match(deckcodeRegex)?.slice(2, 4) ?? ['', '']) as [string, string]
 
+export const getNormalizedCardcode = (deckcode: string) => {
+  return splitDeckcode(encodeDeckcode(parseDeckcode(deckcode)))[1]
+}
+
 export const addCard = (deckcode: Deckcode, cardId: number, count = 1, max = 3) => ({
   ...deckcode,
   cards: {
@@ -55,9 +59,6 @@ export const parseDeckcode = memoize((deckcode: string): Deckcode => {
       ),
   }
 })
-
-export const parseDeckcodeUnvalidated = (deckcode: string) =>
-  validateDeckcode(deckcode) ? parseDeckcode(deckcode) : null
 
 export const encodeDeckcode = (deckcode: Deckcode) => {
   const { title, cards } = deckcode

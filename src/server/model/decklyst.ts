@@ -2,13 +2,15 @@ import type { Deck } from '@/data/deck'
 import {
   artifactCount$,
   createDeck,
+  deckcodeNormalized$,
   faction$,
   minionCount$,
   spellCount$,
   spiritCost$,
+  title$,
   totalCount$,
 } from '@/data/deck'
-import { splitDeckcode, validateDeckcode } from '@/data/deckcode'
+import { validateDeckcode } from '@/data/deckcode'
 import type { Decklyst, PrismaClient } from '@prisma/client'
 import { difference, identity } from 'lodash'
 import { customAlphabet } from 'nanoid'
@@ -26,17 +28,18 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
   ) => {
     sharecode ??= await generateSharecode(decklyst)
     const deckcode = deck.deckcode
-    const [title = '', cardcode] = splitDeckcode(deck.deckcode)
 
     const existingDecklyst = await decklyst.findUnique({
       where: { sharecode },
     })
-    const hasCardChanges = existingDecklyst && existingDecklyst.cardcode !== cardcode
+    const deckcodeNormalized = deckcodeNormalized$(deck)
+    const hasCardChanges =
+      existingDecklyst && existingDecklyst.deckcodeNormalized === deckcodeNormalized
 
     const data = {
       deckcode,
-      title,
-      cardcode,
+      deckcodeNormalized,
+      title: title$(deck) ?? '',
       draft: totalCount$(deck) !== 40,
       ...settings,
     }

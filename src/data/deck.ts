@@ -64,6 +64,9 @@ export const title$ = $(({ title }) => title)
 export const cards$ = $(({ cards }) => cards)
 export const deckcode$ = $(({ deckcode }) => deckcode)
 export const deckcodeWithoutTitle$ = $(({ deckcode }) => splitDeckcode(deckcode)[1])
+export const deckcodeNormalized$ = $((deck) =>
+  encodeDeckcode(parseDeckcode(deckcodeWithoutTitle$(deck))),
+)
 export const general$ = $((deck) => deck.cards.find((card) => card.cardType === 'General'))
 export const faction$ = $((deck) => general$(deck)?.faction)
 

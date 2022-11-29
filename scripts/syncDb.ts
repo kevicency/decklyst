@@ -1,14 +1,15 @@
-import { splitDeckcode } from '@/data/deckcode'
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
 import {
   artifactCount$,
   createDeck,
+  deckcodeNormalized$,
   faction$,
   minionCount$,
   spellCount$,
   spiritCost$,
+  title$,
   totalCount$,
 } from '../src/data/deck'
 
@@ -68,7 +69,9 @@ const main = async () => {
     for (const deckinfo of deckinfos) {
       const deckcode = deckinfo.deckcode
       const deck = createDeck(deckcode)
-      const [title = '', cardcode] = splitDeckcode(deckcode)
+      // const [title = '', cardcode] = splitDeckcode(deckcode)
+      const title = title$(deck)
+      const deckcodeNormalized = deckcodeNormalized$(deck)
 
       if (!title || totalCount$(deck) !== 40) continue
 
@@ -76,8 +79,8 @@ const main = async () => {
         .create({
           data: {
             deckcode,
+            deckcodeNormalized,
             title,
-            cardcode,
             draft: totalCount$(deck) !== 40,
             views: deckviewTotals[deckcode] ?? 0,
             sharecode: deckinfo.sharecode,
@@ -121,18 +124,16 @@ const main = async () => {
     // })
     // console.log(`Imported ${deckImages.length} deckviews from ${deckImageFile}`)
   } else if (cmd === 'update') {
-    // const deckinfos = await prisma.deckinfo.findMany({
-    //   where: { OR: [{ spiritCost: 0 }, { deckcodeDecoded: '' }] },
-    // })
-    // for (const deckinfo of deckinfos) {
-    //   const spiritCost = spiritCost$(createDeck(deckinfo.deckcode))
-    //   const decoded = debase64(splitDeckcode(deckinfo.deckcode)[1]) + ','
-    //   await prisma.deckinfo.update({
-    //     where: { deckcode: deckinfo.deckcode },
-    //     data: { spiritCost, deckcodeDecoded: decoded },
-    //   })
-    // }
-    await prisma.decklyst.updateMany({ data: { privacy: 'public' } })
+    const decklysts = await prisma.decklyst.findMany({})
+    for (const decklyst of decklysts) {
+      const deck = createDeck(decklyst.deckcode)
+      const deckcodeNormalized = deckcodeNormalized$(deck)
+      await prisma.decklyst.update({
+        where: { id: decklyst.id },
+        data: { deckcodeNormalized },
+      })
+    }
+    // await prisma.decklyst.updateMany({ data: { privacy: 'public' } })
     // console.log(`Updated ${deckinfos.length} deckinfos`)
     // } else if (cmd === 'test') {
     //   const deckinfos = await prisma.deckinfo.findMany({
