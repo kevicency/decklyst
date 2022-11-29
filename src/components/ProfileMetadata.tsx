@@ -8,7 +8,9 @@ export const ProfileMetadata: FC<{ profile: UserProfile }> = ({ profile }) => (
     <meta property="og:title" content={`${profile.name}'s Profile`} />
     <meta
       property="og:description"
-      content={`Check out ${profile.name}'s ${profile.totalDecklysts} decks on Decklyst!`}
+      content={`Check out ${profile.name}'s ${profile.totalDecklysts} deck${
+        profile.totalDecklysts === 1 ? '' : 's'
+      } on Decklyst!`}
     />
     {profile.image && <meta property="og:image" content={profile.image} />}
   </Head>

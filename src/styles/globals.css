@@ -191,6 +191,11 @@ body {
     background-image: url('/assets/backgrounds/bg6.jpg');
   }
 
+  .bg-image-profile {
+    @apply bg-image bg-gray-1000;
+    background-image: url('/assets/backgrounds/bg10.jpg');
+  }
+
   .cover-parent::before {
     content: '';
     display: block;

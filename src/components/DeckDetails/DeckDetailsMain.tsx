@@ -127,7 +127,7 @@ export const DeckDetailsMain: FC = () => {
               </OneTimeButton>
             </div>
             <div className="flex flex-col gap-y-4">
-              <div className="flex flex-row-reverse justify-between">
+              <div className="flex flex-row-reverse justify-between gap-x-6">
                 <div className="mt-0.5 flex items-center gap-x-2 text-lg">
                   <span className={`text-${deck.faction} font-semibold`}>{deck.spiritCost}</span>
                   <span className="text-gray-300">Spirit</span>

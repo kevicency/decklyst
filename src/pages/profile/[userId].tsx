@@ -28,7 +28,7 @@ const UserProfilePage: FC<Props> = (props) => {
   )
 
   return (
-    <div className="grid-in-main">
+    <div className="bg-image-profile flex flex-1 flex-col overflow-hidden grid-in-main">
       <ProfileMetadata profile={userProfile} />
       <PageHeader>
         <div className="flex items-end text-3xl text-gray-100">
