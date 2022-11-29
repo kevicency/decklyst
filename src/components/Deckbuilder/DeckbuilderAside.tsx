@@ -18,7 +18,7 @@ import { DeckDiffDialog } from './DeckDiffDialog'
 import { DeckTitleInput } from './DeckTitleInput'
 import { SaveDeckDialog } from './SaveDeckDialog'
 
-export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) => {
+export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded | null }> = ({ baseDeck }) => {
   const deck = useDeck()
   const deckDiff = useMemo(
     () => (baseDeck ? createDeckDiff(baseDeck, deck) : null),
