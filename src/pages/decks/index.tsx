@@ -20,7 +20,7 @@ export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 const toSorting = (listing: Listing): RouterInputs['decklyst']['search']['sorting'] => {
   switch (listing) {
     case 'hot':
-      return 'views:all'
+      return 'views:recent'
     case 'popular':
       return 'views:all'
     case 'new':

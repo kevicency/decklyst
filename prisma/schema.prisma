@@ -72,8 +72,8 @@ model DeckView {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  deck Decklyst @relation(fields: [sharecode], references: [sharecode], onDelete: Cascade)
-  user User?    @relation(fields: [userId], references: [id])
+  decklyst Decklyst @relation(fields: [sharecode], references: [sharecode], onDelete: Cascade)
+  user     User?    @relation(fields: [userId], references: [id])
 
   @@unique([sharecode, ipAddress, userId])
   @@map("deckview")

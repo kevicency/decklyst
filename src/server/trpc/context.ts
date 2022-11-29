@@ -6,6 +6,7 @@ import { prisma } from '../db/client'
 import type { ModelContext } from '../model/context'
 import { extendDeckImage } from '../model/deckImage'
 import { extendDecklyst } from '../model/decklyst'
+import { extendDeckView } from '../model/deckView'
 import { getIpAddress } from '../utils'
 
 type CreateContextOptions = {
@@ -23,10 +24,10 @@ export const createContextInner = async (opts: CreateContextOptions = { session:
   return {
     ...opts,
     prisma,
-    deckView: prisma.deckView,
     user: prisma.user,
-    deckImage: extendDeckImage(prisma.deckImage),
     decklyst: extendDecklyst(prisma.decklyst, modelContext),
+    deckImage: extendDeckImage(prisma.deckImage),
+    deckView: extendDeckView(prisma.deckView, modelContext),
   }
 }
 

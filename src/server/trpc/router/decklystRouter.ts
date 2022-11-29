@@ -2,9 +2,10 @@ import { factions } from '@/data/cards'
 import { createDeck, faction$ } from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
 import { env } from '@/env/server.mjs'
-import type { Prisma } from '@prisma/client'
+import type { Decklyst, Prisma, User } from '@prisma/client'
 import { Archetype, Privacy } from '@prisma/client'
 import { TRPCError } from '@trpc/server'
+import { sortBy } from 'lodash'
 import { z } from 'zod'
 import { proc, router, secureProc } from '../trpc'
 
@@ -64,6 +65,7 @@ export const decklystRouter = router({
         input: { limit = 10, cursor: page = 0, filters = { factions: [] }, sorting },
       }) => {
         const skip = limit * page
+        const take = limit + 1
         const cardIds = filters.cardIds ?? []
 
         const where: Prisma.DecklystWhereInput = {
@@ -82,27 +84,51 @@ export const decklystRouter = router({
             },
           ],
         }
+        const include = { author: true }
 
-        const decklysts = await ctx.decklyst.findMany({
-          include: { author: true },
-          skip,
-          take: limit + 1,
-          where: where,
-          orderBy:
-            sorting === 'date:created'
-              ? { createdAt: 'desc' }
-              : sorting === 'likes:all'
-              ? { likes: 'desc' }
-              : sorting === 'views:all'
-              ? { views: 'desc' }
-              : undefined,
-        })
+        let decklysts: Array<Decklyst & { author: User | null }> = []
 
-        const hasMore = decklysts.length === limit + 1
+        switch (sorting) {
+          case 'date:created':
+            decklysts = await ctx.decklyst.findMany({
+              include,
+              skip,
+              take,
+              where,
+              orderBy: { createdAt: 'desc' },
+            })
+            break
+          case 'views:all':
+            decklysts = await ctx.decklyst.findMany({
+              include,
+              skip,
+              take,
+              where,
+              orderBy: { views: 'desc' },
+            })
+            break
+          case 'views:recent': {
+            const mostViewed = await ctx.deckView.mostViewed({
+              sinceDaysAgo: 7,
+              take,
+              decklystFilter: where,
+            })
+            decklysts = await ctx.decklyst.findMany({
+              include,
+              where: { sharecode: { in: mostViewed.map(({ sharecode }) => sharecode) } },
+            })
+            decklysts = sortBy(decklysts, (decklyst) =>
+              mostViewed.findIndex(({ sharecode }) => sharecode === decklyst.sharecode),
+            )
+            break
+          }
+          default:
+            break
+        }
 
         return {
-          hasMore,
-          decklysts: decklysts.slice(0, hasMore ? -1 : undefined),
+          hasMore: decklysts.length === take,
+          decklysts: decklysts.slice(0, limit),
         }
       },
     ),
