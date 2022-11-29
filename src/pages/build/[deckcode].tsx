@@ -32,7 +32,7 @@ const useRouteQuery = (initialDeckcode: string | null) => {
     { code: baseDeckcodeQuery!, scope: 'user' },
     {
       enabled: !!baseDeckcodeQuery,
-      select: createDeckFromDecklyst,
+      select: (data) => createDeckFromDecklyst(data),
     },
   )
 

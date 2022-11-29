@@ -2,5 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-  yarn build
+  NEXTAUTH_SECRET=foo yarn build
 fi
