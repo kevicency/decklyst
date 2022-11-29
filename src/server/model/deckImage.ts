@@ -4,7 +4,7 @@ import type { Buffer } from 'node:buffer'
 
 type DeckImage = PrismaClient['deckImage']
 
-export const DECK_IMAGE_VERSION = '2.0'
+export const DECK_IMAGE_VERSION = '2.1'
 
 export const extendDeckImage = (deckImage: DeckImage) =>
   Object.assign(deckImage, {
