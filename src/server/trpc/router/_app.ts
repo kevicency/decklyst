@@ -1,11 +1,11 @@
 import { router } from '../trpc'
-import { deckimageRouter } from './deckimageRouter'
+import { deckImageRouter } from './deckImageRouter'
 import { decklystRouter } from './decklystRouter'
 import { deckViewRouter } from './deckViewRouter'
 import { userProfileRouter } from './userProfileRouter'
 
 export const appRouter = router({
-  deckimage: deckimageRouter,
+  deckImage: deckImageRouter,
   deckView: deckViewRouter,
   decklyst: decklystRouter,
   userProfile: userProfileRouter,

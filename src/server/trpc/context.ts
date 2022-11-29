@@ -3,9 +3,8 @@ import type { CreateNextContextOptions } from '@trpc/server/adapters/next'
 import type { Session } from 'next-auth'
 import { getServerAuthSession } from '../auth'
 import { prisma } from '../db/client'
-import { extendDeckimage } from '../model/deckimage'
+import { extendDeckImage } from '../model/deckImage'
 import { extendDecklyst } from '../model/decklyst'
-import { extendDeckviews } from '../model/deckviews'
 import { getIpAddress } from '../utils'
 
 type CreateContextOptions = {
@@ -21,10 +20,10 @@ type CreateContextOptions = {
 export const createContextInner = async (opts: CreateContextOptions = { session: null }) => ({
   ...opts,
   prisma,
-  deckimage: extendDeckimage(prisma.deckimage),
-  deckviews: extendDeckviews(prisma.deckviews),
-  decklyst: extendDecklyst(prisma.decklyst, opts.session),
+  deckView: prisma.deckView,
   user: prisma.user,
+  deckImage: extendDeckImage(prisma.deckImage),
+  decklyst: extendDecklyst(prisma.decklyst, opts.session),
 })
 
 /**

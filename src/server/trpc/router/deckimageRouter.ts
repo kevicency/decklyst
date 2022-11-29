@@ -2,12 +2,12 @@ import { z } from 'zod'
 import { snapshot } from '../../model/snapshot'
 import { proc, router } from '../trpc'
 
-export const deckimageRouter = router({
+export const deckImageRouter = router({
   get: proc
     .input(z.object({ code: z.string(), timeout: z.number().optional() }))
     .query(async ({ ctx, input }) => {
-      const deckcode = await ctx.decklyst.unwrapCode(input.code)
-      return deckcode ? ctx.deckimage.findByDeckcode(deckcode, input.timeout) : null
+      const decklyst = await ctx.decklyst.findByCode(input.code)
+      return decklyst ? ctx.deckImage.findBySharecode(decklyst.sharecode, input.timeout) : null
     }),
   ensure: proc
     .input(
@@ -18,24 +18,26 @@ export const deckimageRouter = router({
       }),
     )
     .mutation(async ({ ctx, input: { code, forceRerender, timeout } }) => {
-      const { deckcode } = (await ctx.decklyst.ensureByCode(code)) ?? { deckcode: null }
+      const decklyst = await ctx.decklyst.ensureByCode(code)
 
-      if (!deckcode) return null
+      if (!decklyst) return null
+
+      const { sharecode, deckcode } = decklyst
 
       let image: Buffer | null = forceRerender
         ? null
-        : await ctx.deckimage.findByDeckcode(deckcode, timeout ?? 25000)
+        : await ctx.deckImage.findBySharecode(sharecode, timeout ?? 25000)
 
       if (image) return image
 
-      await ctx.deckimage.startRendering(deckcode)
+      await ctx.deckImage.startRendering(sharecode, deckcode)
       try {
-        image = await snapshot(deckcode)
+        image = await snapshot(sharecode)
       } catch (err) {
         image = null
-        console.error('Failed to render deck image', deckcode, err)
+        console.error('Failed to render deck image', sharecode, err)
       }
-      await ctx.deckimage.finishRendering(deckcode, image)
+      await ctx.deckImage.finishRendering(sharecode, image)
 
       return image
     }),

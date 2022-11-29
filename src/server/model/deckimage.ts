@@ -2,17 +2,17 @@ import type { PrismaClient } from '@prisma/client'
 import { differenceInMilliseconds } from 'date-fns'
 import type { Buffer } from 'node:buffer'
 
-type Deckimage = PrismaClient['deckimage']
+type DeckImage = PrismaClient['deckImage']
 
 export const DECK_IMAGE_VERSION = '2.0-beta'
 
-export const extendDeckimage = (deckimage: Deckimage) =>
-  Object.assign(deckimage, {
-    findByDeckcode: async (deckcode: string, renderTimeout: number = 0) => {
+export const extendDeckImage = (deckImage: DeckImage) =>
+  Object.assign(deckImage, {
+    findBySharecode: async (sharecode: string, renderTimeout: number = 0) => {
       let isRendering = true
 
       while (isRendering) {
-        const image = await deckimage.findUnique({ where: { deckcode } })
+        const image = await deckImage.findUnique({ where: { sharecode } })
 
         if (image == null) return null
         if (image.bytes && image.version === DECK_IMAGE_VERSION) return image.bytes
@@ -26,24 +26,24 @@ export const extendDeckimage = (deckimage: Deckimage) =>
 
       return null
     },
-    startRendering: async (deckcode: string) => {
+    startRendering: async (sharecode: string, deckcode: string) => {
       const update = {
         renderStartedAt: new Date(),
         renderedAt: null,
         bytes: null,
         version: DECK_IMAGE_VERSION,
       }
-      await deckimage.upsert({
-        select: { deckcode: true },
-        where: { deckcode },
+      await deckImage.upsert({
+        select: { sharecode: true },
+        where: { sharecode },
         update,
-        create: { deckcode, ...update },
+        create: { sharecode, deckcode, ...update },
       })
     },
-    finishRendering: async (deckcode: string, bytes: Buffer | null) => {
-      await deckimage.update({
-        select: { deckcode: true },
-        where: { deckcode },
+    finishRendering: async (sharecode: string, bytes: Buffer | null) => {
+      await deckImage.update({
+        select: { sharecode: true },
+        where: { sharecode },
         data: bytes
           ? { bytes, renderedAt: new Date() }
           : { bytes: null, renderStartedAt: null, version: null },

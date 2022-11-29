@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const client = await createApiClient()
-  const image = await client.deckimage.ensure({ code })
+  const image = await client.deckImage.ensure({ code })
 
   if (image === null) {
     return res.status(404).send('image not found')

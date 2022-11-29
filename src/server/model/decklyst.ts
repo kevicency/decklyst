@@ -101,7 +101,7 @@ export const extendDecklyst = (
     return candidates.find(identity) ?? null
   }
 
-  const findByCode = async (code: string, userOnly?: boolean) => {
+  const findByCode = async (code: string, userOnly: boolean = false) => {
     const candidates = await Promise.all([
       user
         ? decklyst.findFirst({
@@ -128,14 +128,14 @@ export const extendDecklyst = (
     ensureByCode: async (code: string) => {
       let decklyst = await findByCode(code)
 
-      if (!decklyst) {
-        decklyst = validateDeckcode(code) ? await upsertDeck(null, createDeck(code)) : null
+      if (decklyst === null && validateDeckcode(code)) {
+        decklyst = await upsertDeck(null, createDeck(code), {
+          privacy: 'public',
+        })
       }
 
       return decklyst
     },
-    unwrapCode: async (code: string) =>
-      validateDeckcode(code) ? code : (await findByCode(code))?.deckcode ?? null,
   })
 }
 

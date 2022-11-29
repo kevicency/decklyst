@@ -35,18 +35,18 @@ export const useDeckActions = () => {
 
 export const useDeckImage = () => {
   const deck = useDeck()
-  const deckcode = deck.deckcode
+  const { deckcode } = deck
 
   const imageFilename = useMemo(
     () => `${title$(deck)}_${faction$(deck)}_${deckcodeWithoutTitle$(deck)}.png`,
     [deck],
   )
 
-  const { mutateAsync: ensureDeckimage } = trpc.deckimage.ensure.useMutation()
-  const { data: imageDataUriFromQuery, refetch: refetchDeckimage } = useQuery(
+  const { mutateAsync: ensureDeckImage } = trpc.deckImage.ensure.useMutation()
+  const { data: imageDataUriFromQuery, refetch: refetchDeckImage } = useQuery(
     ['deck-image', deckcode],
     async () => {
-      const image = await ensureDeckimage({ code: deckcode })
+      const image = await ensureDeckImage({ code: deckcode })
 
       return getImageDataUri(image)
     },
@@ -61,12 +61,12 @@ export const useDeckImage = () => {
   const regenerateImage = useCallback(async () => {
     setImageDataUri(null)
     try {
-      const image = await ensureDeckimage({ code: deckcode, forceRerender: true })
+      const image = await ensureDeckImage({ code: deckcode, forceRerender: true })
       setImageDataUri(getImageDataUri(image))
     } catch (e) {
-      await refetchDeckimage()
+      await refetchDeckImage()
     }
-  }, [deckcode, ensureDeckimage, refetchDeckimage])
+  }, [deckcode, ensureDeckImage, refetchDeckImage])
 
   useEffect(() => {
     if (imageDataUriFromQuery && imageDataUri !== imageDataUriFromQuery) {

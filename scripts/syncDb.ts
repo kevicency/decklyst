@@ -18,7 +18,7 @@ const prisma = new PrismaClient()
 const deckinfoFile = path.join(__dirname, '.data', 'deckinfo.json')
 const deckviewsFile = path.join(__dirname, '.data', 'deckviews.json')
 const deckviewTotalsFile = path.join(__dirname, '.data', 'deckviewTotals.json')
-const deckimageFile = path.join(__dirname, '.data', 'deckimage.json')
+const deckImageFile = path.join(__dirname, '.data', 'deckImage.json')
 
 const main = async () => {
   const cmd = process.argv[2] ?? 'export'
@@ -47,14 +47,14 @@ const main = async () => {
       `Exported ${Object.keys(deckviewTotals).length} deckview totals to ${deckviewTotalsFile}`,
     )
 
-    // const deckimages = await prisma.deckimage.findMany()
-    const deckimages = [] as any[]
-    const serializableDeckimages = deckimages.map((deckimage) => {
-      deckimage.bytes = (deckimage.bytes ? deckimage.bytes.toString('base64') : null) as any
-      return deckimage
+    // const deckImages = await prisma.deckImage.findMany()
+    const deckImages = [] as any[]
+    const serializableDeckImages = deckImages.map((deckImage) => {
+      deckImage.bytes = (deckImage.bytes ? deckImage.bytes.toString('base64') : null) as any
+      return deckImage
     })
-    fs.writeFileSync(deckimageFile, JSON.stringify(serializableDeckimages, null, 2))
-    console.log(`Exported ${deckimages.length} deckimages to ${deckimageFile}`)
+    fs.writeFileSync(deckImageFile, JSON.stringify(serializableDeckImages, null, 2))
+    console.log(`Exported ${deckImages.length} deckImages to ${deckImageFile}`)
   } else if (cmd === 'import') {
     const deckinfos = JSON.parse(fs.readFileSync(deckinfoFile, 'utf8')) as Deckinfo[]
     const deckviewTotals = JSON.parse(fs.readFileSync(deckviewTotalsFile, 'utf8')) as Record<
@@ -104,17 +104,17 @@ const main = async () => {
     })
     console.log(`Imported ${deckviews.length} deckviews from ${deckviewsFile}`)
 
-    const deckimages = JSON.parse(fs.readFileSync(deckimageFile, 'utf8')).map(
+    const deckImages = JSON.parse(fs.readFileSync(deckImageFile, 'utf8')).map(
       ({ id, bytes, ...rest }: any) => ({
         ...rest,
         bytes: Buffer.from(bytes, 'base64'),
       }),
     )
-    await prisma.deckimage.createMany({
-      data: deckimages,
+    await prisma.deckImage.createMany({
+      data: deckImages,
       skipDuplicates: true,
     })
-    console.log(`Imported ${deckimages.length} deckviews from ${deckimageFile}`)
+    console.log(`Imported ${deckImages.length} deckviews from ${deckImageFile}`)
   } else if (cmd === 'update') {
     // const deckinfos = await prisma.deckinfo.findMany({
     //   where: { OR: [{ spiritCost: 0 }, { deckcodeDecoded: '' }] },
