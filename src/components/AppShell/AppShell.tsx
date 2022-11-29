@@ -3,7 +3,6 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import type { FC, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
-import { PageLoader } from '../PageLoader'
 import { AppHeader } from './AppHeader'
 import { AppLogo } from './AppLogo'
 import { AppNav } from './AppNav'
@@ -43,7 +42,8 @@ export const AppShell: FC<{ children: ReactNode }> = ({ children }) => {
         <AppLogo />
         <AppHeader />
         <AppNav />
-        {status === 'loading' ? <PageLoader /> : children}
+        {/* {status === 'loading' ? <PageLoader /> : children} */}
+        {children}
       </div>
     </AppShellContext.Provider>
   )
