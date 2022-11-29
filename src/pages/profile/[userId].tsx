@@ -1,5 +1,6 @@
 import { DeckPreviewList } from '@/components/DeckPreviewList'
 import { PageHeader } from '@/components/PageHeader'
+import { ProfileMetadata } from '@/components/ProfileMetadata'
 import { createDeckFromDecklyst } from '@/data/deck'
 import { createContextInner, createSSGClient } from '@/server'
 import { trpc } from '@/utils/trpc'
@@ -28,6 +29,7 @@ const UserProfilePage: FC<Props> = (props) => {
 
   return (
     <div className="grid-in-main">
+      <ProfileMetadata profile={userProfile} />
       <PageHeader>
         <div className="flex items-end text-3xl text-gray-100">
           {userProfile.image ? (
