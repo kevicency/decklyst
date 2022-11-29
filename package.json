@@ -10,12 +10,12 @@
     "test": "jest --passWithNoTests",
     "prepare": "husky install && cp -n .env.template .env.local | true",
     "prebuild": "prisma generate",
-    "migrate:dev": "dotenv -e .env.local -- prisma migrate dev",
-    "migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
-    "studio:dev": "dotenv -e .env.local -- prisma studio",
-    "studio:prod": "dotenv -e .env.production -- prisma studio",
+    "migrate:dev": "dotenv -e .env.local prisma migrate dev",
+    "migrate:prod": "dotenv -e .env.production prisma migrate deploy",
+    "studio:dev": "dotenv -e .env.local prisma studio",
+    "studio:prod": "dotenv -e .env.production prisma studio",
     "generate:cards.json": "ts-node scripts/generateCardsJson.ts",
-    "sync:db": "dotenv -e .env -e .env.local -- ts-node scripts/syncDb.ts"
+    "sync:db": "dotenv -e .env -e .env.local ts-node scripts/syncDb.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",

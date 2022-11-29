@@ -1,5 +1,4 @@
 import { splitDeckcode } from '@/data/deckcode'
-import type { Deckinfo } from '@prisma/client'
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
@@ -24,39 +23,43 @@ const main = async () => {
   const cmd = process.argv[2] ?? 'export'
 
   if (cmd === 'export') {
-    const deckinfos = await prisma.deckinfo.findMany()
+    const deckinfos = await prisma.decklyst.findMany()
     fs.writeFileSync(deckinfoFile, JSON.stringify(deckinfos, null, 2))
     console.log(`Exported ${deckinfos.length} deckinfos to ${deckinfoFile}`)
 
-    const deckviews = await prisma.deckviews.findMany()
-    fs.writeFileSync(deckviewsFile, JSON.stringify(deckviews, null, 2))
-    console.log(`Exported ${deckviews.length} deckviews to ${deckviewsFile}`)
+    // const deckviews = await prisma.deckView.findMany()
+    // fs.writeFileSync(deckviewsFile, JSON.stringify(deckviews, null, 2))
+    // console.log(`Exported ${deckviews.length} deckviews to ${deckviewsFile}`)
 
-    const deckviewTotals = Object.fromEntries(
-      (
-        await prisma.deckviews.groupBy({
-          by: ['deckcode'],
-          _count: {
-            deckcode: true,
-          },
-        })
-      ).map((group) => [group.deckcode, group._count.deckcode]),
-    )
-    fs.writeFileSync(deckviewTotalsFile, JSON.stringify(deckviewTotals, null, 2))
-    console.log(
-      `Exported ${Object.keys(deckviewTotals).length} deckview totals to ${deckviewTotalsFile}`,
-    )
+    // const deckviewTotals = Object.fromEntries(
+    //   (
+    //     await prisma.deckviews.groupBy({
+    //       by: ['deckcode'],
+    //       _count: {
+    //         deckcode: true,
+    //       },
+    //     })
+    //   ).map((group) => [group.deckcode, group._count.deckcode]),
+    // )
+    // fs.writeFileSync(deckviewTotalsFile, JSON.stringify(deckviewTotals, null, 2))
+    // console.log(
+    //   `Exported ${Object.keys(deckviewTotals).length} deckview totals to ${deckviewTotalsFile}`,
+    // )
 
-    // const deckImages = await prisma.deckImage.findMany()
-    const deckImages = [] as any[]
-    const serializableDeckImages = deckImages.map((deckImage) => {
-      deckImage.bytes = (deckImage.bytes ? deckImage.bytes.toString('base64') : null) as any
-      return deckImage
-    })
-    fs.writeFileSync(deckImageFile, JSON.stringify(serializableDeckImages, null, 2))
-    console.log(`Exported ${deckImages.length} deckImages to ${deckImageFile}`)
+    // // const deckImages = await prisma.deckImage.findMany()
+    // const deckImages = [] as any[]
+    // const serializableDeckImages = deckImages.map((deckImage) => {
+    //   deckImage.bytes = (deckImage.bytes ? deckImage.bytes.toString('base64') : null) as any
+    //   return deckImage
+    // })
+    // fs.writeFileSync(deckImageFile, JSON.stringify(serializableDeckImages, null, 2))
+    // console.log(`Exported ${deckImages.length} deckImages to ${deckImageFile}`)
   } else if (cmd === 'import') {
-    const deckinfos = JSON.parse(fs.readFileSync(deckinfoFile, 'utf8')) as Deckinfo[]
+    const deckinfos = JSON.parse(fs.readFileSync(deckinfoFile, 'utf8')) as {
+      deckcode: string
+      sharecode: string
+      createdAt: Date
+    }[]
     const deckviewTotals = JSON.parse(fs.readFileSync(deckviewTotalsFile, 'utf8')) as Record<
       string,
       number
@@ -66,6 +69,8 @@ const main = async () => {
       const deckcode = deckinfo.deckcode
       const deck = createDeck(deckcode)
       const [title = '', cardcode] = splitDeckcode(deckcode)
+
+      if (!title || totalCount$(deck) !== 40) continue
 
       await prisma.decklyst
         .create({
@@ -97,24 +102,24 @@ const main = async () => {
     }
     console.log(`Imported ${deckinfos.length} decklysts from ${deckinfoFile}`)
 
-    const deckviews = JSON.parse(fs.readFileSync(deckviewsFile, 'utf8'))
-    await prisma.deckviews.createMany({
-      data: deckviews,
-      skipDuplicates: true,
-    })
-    console.log(`Imported ${deckviews.length} deckviews from ${deckviewsFile}`)
+    // const deckviews = JSON.parse(fs.readFileSync(deckviewsFile, 'utf8'))
+    // await prisma.deckviews.createMany({
+    //   data: deckviews,
+    //   skipDuplicates: true,
+    // })
+    // console.log(`Imported ${deckviews.length} deckviews from ${deckviewsFile}`)
 
-    const deckImages = JSON.parse(fs.readFileSync(deckImageFile, 'utf8')).map(
-      ({ id, bytes, ...rest }: any) => ({
-        ...rest,
-        bytes: Buffer.from(bytes, 'base64'),
-      }),
-    )
-    await prisma.deckImage.createMany({
-      data: deckImages,
-      skipDuplicates: true,
-    })
-    console.log(`Imported ${deckImages.length} deckviews from ${deckImageFile}`)
+    // const deckImages = JSON.parse(fs.readFileSync(deckImageFile, 'utf8')).map(
+    //   ({ id, bytes, ...rest }: any) => ({
+    //     ...rest,
+    //     bytes: Buffer.from(bytes, 'base64'),
+    //   }),
+    // )
+    // await prisma.deckImage.createMany({
+    //   data: deckImages,
+    //   skipDuplicates: true,
+    // })
+    // console.log(`Imported ${deckImages.length} deckviews from ${deckImageFile}`)
   } else if (cmd === 'update') {
     // const deckinfos = await prisma.deckinfo.findMany({
     //   where: { OR: [{ spiritCost: 0 }, { deckcodeDecoded: '' }] },
