@@ -42,7 +42,9 @@ export const DeckDetailsMain: FC = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-1 truncate text-3xl font-light">{deck.title}</div>
+            <div className="flex flex-1 truncate text-3xl font-light">
+              {deck.title || 'Untitled'}
+            </div>
             <div className="grid shrink-0 grid-cols-2 items-center gap-x-2">
               <Link
                 href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}

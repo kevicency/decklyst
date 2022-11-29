@@ -54,17 +54,13 @@ const DeckPreview: FC = () => {
           </>
         )}
         <div className="flex-1" />
-        {meta?.views && (
-          <>
-            <div className="flex items-center gap-x-1">
-              <span className={`font-semibold text-gray-300`}>
-                <EyeIcon size={18} className="mx-1 inline-block pb-0.5" />
-                {meta.views}
-              </span>
-              <span>{meta.views === 1 ? 'view' : 'views'}</span>
-            </div>
-          </>
-        )}
+        <div className="flex items-center gap-x-1">
+          <span className={`font-semibold text-gray-300`}>
+            <EyeIcon size={18} className="mx-1 inline-block pb-0.5" />
+            {meta?.views ?? 1}
+          </span>
+          <span>{(meta?.views ?? 1) === 1 ? 'view' : 'views'}</span>
+        </div>
       </div>
     </div>
   )
