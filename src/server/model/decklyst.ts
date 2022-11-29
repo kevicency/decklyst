@@ -72,7 +72,7 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
         stats: {
           update: stats,
         },
-        updatedAt: new Date(),
+        updatedAt: hasCardChanges ? new Date() : undefined,
         history: hasCardChanges
           ? {
               create: {
@@ -117,7 +117,7 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
         : null,
       !userOnly
         ? decklyst.findFirst({
-            where: { OR: [{ deckcode: code, privacy: 'public' }, { sharecode: code }] },
+            where: { OR: [{ deckcode: code }, { sharecode: code }] },
             orderBy: { createdAt: 'asc' },
             include: { author: true },
           })
