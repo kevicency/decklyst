@@ -10,5 +10,5 @@ export const trpcUrl = `${typeof window === 'undefined' ? '' : siteUrl}/api/trpc
 
 export const deckUrl = (code: string, relative = false) =>
   `${relative ? '' : siteUrl}/decks/${encodeURIComponent(code)}`
-export const deckImageUrl = (deckcode: string, relative = false) =>
-  `${deckUrl(deckcode, relative)}.png`
+export const deckImageUrl = (code: string, relative = false) =>
+  `${relative ? '' : siteUrl}/i/${encodeURIComponent(code)}.png`
