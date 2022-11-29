@@ -76,7 +76,7 @@ export const SaveDeckDialog: FC<{
         <Backdrop />
         <InnerTransition>
           <div className="fixed inset-0 flex items-center justify-center p-4">
-            <Dialog.Panel className="mx-auto flex max-h-full w-1/4 min-w-fit flex-col overflow-hidden border-2 border-gray-700 bg-alt-900">
+            <Dialog.Panel className="mx-auto flex max-h-full w-1/4 min-w-[32rem] flex-col overflow-hidden border-2 border-gray-700 bg-alt-900">
               <Dialog.Title className="bg-alt-1000 py-3 px-6 text-3xl font-thin text-gray-100">
                 Save deck
               </Dialog.Title>
