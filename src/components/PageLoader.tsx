@@ -1,11 +1,11 @@
 import type { FC } from 'react'
-import { PacmanLoader } from 'react-spinners'
-import colors from 'tailwindcss/colors'
 
 export const PageLoader: FC = () => (
   <div className="flex h-full w-full items-center justify-center grid-in-main">
-    <div className="">
-      <PacmanLoader size={32} color={colors.teal['400']} />
-    </div>
+    <img
+      src="https://alpha.duelyst2.com/resources/card_gifs/f2PanddoRun.gif"
+      alt="loading"
+      className="sprite scale-200"
+    />
   </div>
 )

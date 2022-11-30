@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
-import { PacmanLoader } from 'react-spinners'
 import { useVisibilityObserver } from 'react-visibility-observer'
-import colors from 'tailwindcss/colors'
 
 export const EndlessScroll: React.FC<{ fetch: () => void; isFetching?: boolean }> = ({
   fetch,
@@ -15,5 +13,13 @@ export const EndlessScroll: React.FC<{ fetch: () => void; isFetching?: boolean }
     }
   }, [fetch, isFetching, isVisible])
 
-  return <PacmanLoader size={24} color={colors.teal['400']} />
+  return (
+    <div className="flex w-full items-center justify-center">
+      <img
+        src="https://alpha.duelyst2.com/resources/card_gifs/f2PanddoRun.gif"
+        alt="loading"
+        className="sprite scale-200"
+      />
+    </div>
+  )
 }
