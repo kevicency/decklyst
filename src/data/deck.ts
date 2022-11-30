@@ -167,6 +167,7 @@ export const allTags = [
   'ranged',
   'obelysk',
   'arcanyst',
+  'golem',
 ].sort()
 
 export const humanizeTag = (tag: string) => tag.split('-').map(startCase).join('-')
