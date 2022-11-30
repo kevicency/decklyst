@@ -137,6 +137,30 @@ body {
     width: var(--w-aside);
     @apply border-l border-gray-700;
   }
+
+  .combobox {
+    @apply relative;
+  }
+
+  .combobox-input {
+    @apply relative inline-flex w-full flex-row overflow-hidden;
+  }
+  .combobox-input > input {
+    @apply flex-1 border-none bg-alt-800 px-2 py-2 outline-none;
+  }
+  .combobox-input > button {
+    @apply cursor-pointer border-l border-gray-600 bg-alt-850 px-2.5 text-accent-600 focus:outline-none;
+  }
+
+  .combobox-options {
+    @apply absolute z-50 mt-1 w-full bg-alt-1000 shadow-lg;
+  }
+  .combobox-options > ul {
+    @apply max-h-60 overflow-auto rounded-md py-1 text-base leading-6 shadow-sm focus:outline-none sm:text-sm sm:leading-5;
+  }
+  .combobox-options > ul > li {
+    @apply relative flex cursor-default select-none items-center justify-between gap-x-2 py-2 px-2 text-gray-100 focus:outline-none ui-active:bg-accent-600;
+  }
 }
 
 @layer utilities {

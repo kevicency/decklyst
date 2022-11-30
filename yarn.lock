@@ -353,6 +353,13 @@
   dependencies:
     client-only "^0.0.1"
 
+"@headlessui/tailwindcss@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@headlessui/tailwindcss/-/tailwindcss-0.1.1.tgz#61df8112f3d063c297197bfea3bbb06010b4ab66"
+  integrity sha512-MJbc/MG1iVDow0IQYdsZNVY2xiTa2fDpXLF01xIAyNH6M+Ks0c6X0k3x6PqAvwvKWKEFhS0MlMzrDUVTU6cXDA==
+  dependencies:
+    tailwindcss "^0.0.0-insiders.83b4811"
+
 "@humanwhocodes/config-array@^0.11.6":
   version "0.11.7"
   resolved "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.7.tgz"
@@ -843,6 +850,66 @@
   integrity sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==
   dependencies:
     mini-svg-data-uri "^1.2.3"
+
+"@tailwindcss/oxide-darwin-arm64@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-darwin-arm64/-/oxide-darwin-arm64-0.0.0-insiders.6bf5e56.tgz#dba72ebbd0896874b2932e8bf1adde2166706877"
+  integrity sha512-rK5PvgpTsoJWbxCVp02nioV+YXCqTEdWkNWbky9VKgh853iLkbOQge3p63ke43iSVueYOJA0/hrofpMfWp0qyw==
+
+"@tailwindcss/oxide-darwin-x64@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-darwin-x64/-/oxide-darwin-x64-0.0.0-insiders.6bf5e56.tgz#3ee0c9014a9d7c48506e64748c26344831c55e6a"
+  integrity sha512-K0nTT2WmT8RHO+pKiQrbGAsr/NXo/GU9hMtRHkAwsdIuzWD0cKdU93phkPvt0VIjdvGbzwf73LHsX8MG0J9wyQ==
+
+"@tailwindcss/oxide-freebsd-x64@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-freebsd-x64/-/oxide-freebsd-x64-0.0.0-insiders.6bf5e56.tgz#e603232d909b2f512ae27b1fcc2d1e214a27e577"
+  integrity sha512-EiYXZerVA9BCDgptVpEBe+fAsx9QpG0X4cxaqHHE/NrIlXT8vA8OMRZKrQERnkxzxIHa/h/f4Iz1mXeIfu2q2g==
+
+"@tailwindcss/oxide-linux-arm-gnueabihf@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-linux-arm-gnueabihf/-/oxide-linux-arm-gnueabihf-0.0.0-insiders.6bf5e56.tgz#346fabddfc68504236863416c61ef0a42822ad7d"
+  integrity sha512-HHGaRCW/XW0XRGzejSpkhAxPiFofjYld5swddlBy7gkBNKzHWw7ld1LvTjUi5UiCtWDoKYtcbMmKs6QrxqQHOQ==
+
+"@tailwindcss/oxide-linux-arm64-gnu@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-linux-arm64-gnu/-/oxide-linux-arm64-gnu-0.0.0-insiders.6bf5e56.tgz#5c0778f8d60c9d7c33338e94894a63c2bf211d30"
+  integrity sha512-TpYhRxNk/s+kk0/VbnC5miUki9Cu9nzxpxyyB5eA5Lc0mZyaVEB3aW3tlYDc4yFAA+Oo7dlr/rSETiN54R3I/w==
+
+"@tailwindcss/oxide-linux-arm64-musl@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-linux-arm64-musl/-/oxide-linux-arm64-musl-0.0.0-insiders.6bf5e56.tgz#065b58818a554c96c8135bd77a1af962fdad0df5"
+  integrity sha512-kW5ZtTH0K5AlzMCxD14w66mMgMhEcJTaas29xyFCYmV1WR9Id6uZGEX7XO7jUYPwVFzFyiPv133ILtj3++staw==
+
+"@tailwindcss/oxide-linux-x64-gnu@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-linux-x64-gnu/-/oxide-linux-x64-gnu-0.0.0-insiders.6bf5e56.tgz#ec7a82800f9cad034f32588cc8605399d2f5b15f"
+  integrity sha512-DVAmG6aJ5u9VJ/jxbf/+kLunr75abK9EipyqpBDqBXEOK9BpuFsH70r9k7QxxUjLweU7Sxv9nUAL3Aex2zGe0w==
+
+"@tailwindcss/oxide-linux-x64-musl@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-linux-x64-musl/-/oxide-linux-x64-musl-0.0.0-insiders.6bf5e56.tgz#e26823495ad38548169cddd3d05cfbeb4279ccbb"
+  integrity sha512-Y3SONvaXD8ylHrjI6QQoOPJUilAs5TcdbWza9bAbCcJ/tWCoZvE6rrZ88j69s80GPjkck1n+gLodWRDvb0DfTQ==
+
+"@tailwindcss/oxide-win32-x64-msvc@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide-win32-x64-msvc/-/oxide-win32-x64-msvc-0.0.0-insiders.6bf5e56.tgz#793d9e92af4865346e58e8d551bd63a1b73aa3dd"
+  integrity sha512-WqeehWDWxJxm06aEcY81hYk98/5eg+dodREodPdNrM191YalzvUU60io8rrm+TUj0JIlY0wd2bqN0zHfXSXVEQ==
+
+"@tailwindcss/oxide@0.0.0-insiders.6bf5e56":
+  version "0.0.0-insiders.6bf5e56"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/oxide/-/oxide-0.0.0-insiders.6bf5e56.tgz#1db9750b27df42e7c01bdc15af5f1d91604a81be"
+  integrity sha512-zD8Bm6rG4iJtgOgbKjemR6M9g0kkxWSh+i7+bocj/C4oCxhrjbFviRuqnXfFpEuFirmfSix+ZQJIzdrIxj2eCg==
+  optionalDependencies:
+    "@tailwindcss/oxide-darwin-arm64" "0.0.0-insiders.6bf5e56"
+    "@tailwindcss/oxide-darwin-x64" "0.0.0-insiders.6bf5e56"
+    "@tailwindcss/oxide-freebsd-x64" "0.0.0-insiders.6bf5e56"
+    "@tailwindcss/oxide-linux-arm-gnueabihf" "0.0.0-insiders.6bf5e56"
+    "@tailwindcss/oxide-linux-arm64-gnu" "0.0.0-insiders.6bf5e56"
+    "@tailwindcss/oxide-linux-arm64-musl" "0.0.0-insiders.6bf5e56"
+    "@tailwindcss/oxide-linux-x64-gnu" "0.0.0-insiders.6bf5e56"
+    "@tailwindcss/oxide-linux-x64-musl" "0.0.0-insiders.6bf5e56"
+    "@tailwindcss/oxide-win32-x64-msvc" "0.0.0-insiders.6bf5e56"
 
 "@tanstack/query-core@4.18.0":
   version "4.18.0"
@@ -5086,6 +5153,14 @@ postcss-selector-parser@^6.0.10:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
 
+postcss-selector-parser@^6.0.11:
+  version "6.0.11"
+  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.11.tgz#2e41dc39b7ad74046e1615185185cd0b17d0c8dc"
+  integrity sha512-zbARubNdogI9j7WY4nQJBiNqQf3sLS3wCP4WfOidu+p28LofJqDH1tcXypGrcmMHhDk2t9wGhCsYe/+szLTy1g==
+  dependencies:
+    cssesc "^3.0.0"
+    util-deprecate "^1.0.2"
+
 postcss-value-parser@^3.3.0:
   version "3.3.1"
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-3.3.1.tgz"
@@ -5105,7 +5180,7 @@ postcss@8.4.14:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postcss@8.4.19, postcss@^8.4.18:
+postcss@8.4.19, postcss@^8.4.18, postcss@^8.4.19:
   version "8.4.19"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.19.tgz"
   integrity sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==
@@ -5973,6 +6048,36 @@ tailwindcss@3.2.4:
     postcss-load-config "^3.1.4"
     postcss-nested "6.0.0"
     postcss-selector-parser "^6.0.10"
+    postcss-value-parser "^4.2.0"
+    quick-lru "^5.1.1"
+    resolve "^1.22.1"
+
+tailwindcss@^0.0.0-insiders.83b4811:
+  version "0.0.0-oxide.6bf5e56"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-0.0.0-oxide.6bf5e56.tgz#46d60cd56e856a7d0341bff3fbf422adf3fc868b"
+  integrity sha512-wtFPmCNc6t5+NqXSkqhJNcrbHE63XZwWutZ9O8VAcE7hv6w2b0o+fOXDz8l0823mWAiROqXQmPAjuWKoPE9OIg==
+  dependencies:
+    "@tailwindcss/oxide" "0.0.0-insiders.6bf5e56"
+    arg "^5.0.2"
+    chokidar "^3.5.3"
+    color-name "^1.1.4"
+    detective "^5.2.1"
+    didyoumean "^1.2.2"
+    dlv "^1.1.3"
+    fast-glob "^3.2.12"
+    glob-parent "^6.0.2"
+    is-glob "^4.0.3"
+    lilconfig "^2.0.6"
+    micromatch "^4.0.5"
+    normalize-path "^3.0.0"
+    object-hash "^3.0.0"
+    picocolors "^1.0.0"
+    postcss "^8.4.19"
+    postcss-import "^14.1.0"
+    postcss-js "^4.0.0"
+    postcss-load-config "^3.1.4"
+    postcss-nested "6.0.0"
+    postcss-selector-parser "^6.0.11"
     postcss-value-parser "^4.2.0"
     quick-lru "^5.1.1"
     resolve "^1.22.1"

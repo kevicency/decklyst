@@ -85,6 +85,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('tailwindcss-animate'),
     require('@savvywombat/tailwindcss-grid-areas'),
+    require('@headlessui/tailwindcss')({ prefix: 'ui' }),
   ],
   safelist: [
     {

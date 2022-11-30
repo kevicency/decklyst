@@ -1,8 +1,7 @@
 import { useDeck } from '@/context/useDeck'
 import type { DeckExpanded } from '@/data/deck'
-import { allTags, humanizeTag } from '@/data/deck'
 import { trpc } from '@/utils/trpc'
-import { Combobox, Dialog, RadioGroup } from '@headlessui/react'
+import { Dialog, RadioGroup } from '@headlessui/react'
 import { Archetype, Privacy } from '@prisma/client'
 import cx from 'classnames'
 import { startCase } from 'lodash'
@@ -12,6 +11,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Backdrop, InnerTransition, OuterTransition } from '../Dialog'
 import { NewIcon, SaveIcon } from '../Icons'
 import { Tag } from '../Tag'
+import { TagsCombobox } from '../TagsCombobox'
 import { DeckTitleInput } from './DeckTitleInput'
 
 export const FormControl: FC<{ label: ReactNode; children: ReactNode }> = ({ children, label }) => {
@@ -128,92 +128,12 @@ export const SaveDeckDialog: FC<{
                   </select>
                 </FormControl>
                 <FormControl label="Tags">
-                  <Combobox
-                    multiple
+                  <TagsCombobox
                     value={tags}
                     onChange={(value) => {
                       setTags(value)
-                      setTagQuery('')
                     }}
-                    as="div"
-                  >
-                    <div className="relative">
-                      <span className="relative inline-flex w-full flex-row overflow-hidden">
-                        <Combobox.Input
-                          value={tagQuery}
-                          onChange={(e) => setTagQuery(e.target.value)}
-                          className="flex-1 border-none bg-alt-800 px-2 py-2 outline-none"
-                        />
-                        <Combobox.Button className="cursor-default border-l border-gray-600 bg-alt-850 px-1 text-accent-600 focus:outline-none">
-                          <span className="pointer-events-none flex items-center px-2">
-                            <svg
-                              className="h-5 w-5 text-gray-400"
-                              viewBox="0 0 20 20"
-                              fill="none"
-                              stroke="currentColor"
-                            >
-                              <path
-                                d="M7 7l3-3 3 3m0 6l-3 3-3-3"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </span>
-                        </Combobox.Button>
-                      </span>
-
-                      <div className="absolute top-0 -mt-1 w-full -translate-y-full rounded-md bg-alt-1000 shadow-lg">
-                        <Combobox.Options className="shadow-xs relative max-h-60 overflow-auto rounded-md py-1 text-base leading-6 focus:outline-none sm:text-sm sm:leading-5">
-                          {allTags.map((tag) => (
-                            <Combobox.Option
-                              key={tag}
-                              value={tag}
-                              className={({ active }) => {
-                                return cx(
-                                  'relative cursor-default select-none py-2 pl-3 pr-9 text-gray-100 focus:outline-none',
-                                  active ? 'bg-accent-600' : '',
-                                )
-                              }}
-                            >
-                              {({ active, selected }) => (
-                                <>
-                                  <span
-                                    className={cx(
-                                      'block truncate',
-                                      selected ? 'font-semibold' : 'font-normal',
-                                    )}
-                                  >
-                                    {humanizeTag(tag)}
-                                  </span>
-                                  {selected && (
-                                    <span
-                                      className={cx(
-                                        'absolute inset-y-0 right-0 flex items-center pr-4',
-                                        active ? 'text-white' : 'text-indigo-600',
-                                      )}
-                                    >
-                                      <svg
-                                        className="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                      >
-                                        <path
-                                          fillRule="evenodd"
-                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                          clipRule="evenodd"
-                                        />
-                                      </svg>
-                                    </span>
-                                  )}
-                                </>
-                              )}
-                            </Combobox.Option>
-                          ))}
-                        </Combobox.Options>
-                      </div>
-                    </div>
-                  </Combobox>
+                  />
                   <div className="mt-1 flex min-h-[4rem] flex-wrap items-start justify-start gap-1">
                     {tags.map((tag) => (
                       <Tag

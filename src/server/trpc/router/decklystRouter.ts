@@ -52,6 +52,7 @@ export const decklystRouter = router({
           .object({
             factions: z.array(z.enum(factions as [string, ...string[]])),
             cardIds: z.array(z.number().int().positive()),
+            tags: z.array(z.string()),
             includeDrafts: z.boolean().optional(),
             includeAnonymous: z.boolean().optional(),
             includeUntitled: z.boolean().optional(),
@@ -62,7 +63,7 @@ export const decklystRouter = router({
     .query(
       async ({
         ctx,
-        input: { limit = 10, cursor: page = 0, filters = { factions: [] }, sorting },
+        input: { limit = 10, cursor: page = 0, filters = { factions: [], tags: [] }, sorting },
       }) => {
         const skip = limit * page
         const take = limit + 1
@@ -82,6 +83,7 @@ export const decklystRouter = router({
                 ],
               },
             },
+            { tags: filters.tags.length ? { hasEvery: filters.tags } : undefined },
           ],
         }
         const include = { author: true }

@@ -53,7 +53,7 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
     { sorting: toSorting(routeParams.listing), filters: routeParams.filters },
     {
       getNextPageParam: (_, allPages) => allPages.length,
-      initialData: initialDecklysts ? { pages: [initialDecklysts], pageParams: [] } : undefined,
+      placeholderData: initialDecklysts ? { pages: [initialDecklysts], pageParams: [] } : undefined,
     },
   )
 

@@ -3,6 +3,8 @@ import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
 import { CgArrowsExchangeAlt } from 'react-icons/cg'
 import {
   FaBug,
+  FaCheck,
+  FaChevronDown,
   FaDiscord,
   FaImage,
   FaPencilAlt,
@@ -50,3 +52,5 @@ export const NewIcon = FaStarOfLife
 export const LogInIcon = BiLogInCircle
 export const ProfileIcon = BiUserCircle
 export const CloseIcon = MdClose
+export const ChevronDownIcon = FaChevronDown
+export const CheckIcon = FaCheck
