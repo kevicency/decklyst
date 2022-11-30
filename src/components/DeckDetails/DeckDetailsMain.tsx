@@ -2,7 +2,6 @@ import { DeckMetadata } from '@/components/DeckMetadata'
 import { PageHeader } from '@/components/PageHeader'
 import { useDeck } from '@/context/useDeck'
 import { useDeckActions } from '@/hooks/useDeckActions'
-import { formatDistance } from 'date-fns'
 import { noop, startCase } from 'lodash'
 import Link from 'next/link'
 import type { FC } from 'react'
@@ -15,6 +14,7 @@ import { DeckSpellList } from '../DeckInfograph/DeckSpellList'
 import { DeckTags } from '../DeckInfograph/DeckTags'
 import { CopyIcon, DoneIcon, EditIcon, EyeIcon, ShareIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
+import { TimeAgo } from '../TimeAgo'
 import { ShareDeckDialog } from './ShareDeckDialog'
 
 export const DeckDetailsMain: FC = () => {
@@ -88,7 +88,7 @@ export const DeckDetailsMain: FC = () => {
                   <span className={`mx-2 text-lg font-bold text-alt-400`}>•</span>
                   <span>last updated </span>
                   <span className="font-semibold text-gray-300">
-                    {formatDistance(meta.updatedAt!, new Date(), { addSuffix: true })}
+                    <TimeAgo date={meta.updatedAt} />
                   </span>
                 </div>
               </div>

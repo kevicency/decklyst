@@ -15,7 +15,7 @@
     "studio:dev": "dotenv -e .env.local prisma studio",
     "studio:prod": "dotenv -e .env.production prisma studio",
     "generate:cards.json": "ts-node scripts/generateCardsJson.ts",
-    "sync:db": "dotenv -e .env -e .env.local ts-node scripts/syncDb.ts"
+    "sync:db": "dotenv -e .env.local -e .env ts-node scripts/syncDb.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",

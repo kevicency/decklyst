@@ -28,26 +28,30 @@ const useRouteQuery = (initialDeckcode: string | null) => {
   const { query, replace, pathname } = useRouter()
   const deckcodeQuery = (query.deckcode as string | undefined) ?? initialDeckcode ?? ''
   const baseDeckcodeQuery = query.base as string | undefined
+
+  const deckcode = useMemo(() => parseDeckcode(deckcodeQuery), [deckcodeQuery])
+  const deck = useMemo(() => createDeckExpanded(deckcode), [deckcode])
+  const baseDeckcode = useMemo(
+    () => baseDeckcodeQuery ?? (deck.counts.total > 1 ? deck.deckcode : undefined),
+    [deck, baseDeckcodeQuery],
+  )
+
   const { data: baseDeck } = trpc.decklyst.get.useQuery(
-    { code: baseDeckcodeQuery!, scope: 'user' },
+    { code: baseDeckcode!, scope: 'user' },
     {
-      enabled: !!baseDeckcodeQuery,
+      enabled: !!baseDeckcode,
       select: (data) => createDeckFromDecklyst(data),
     },
   )
 
   useEffect(() => {
-    if (
-      !baseDeckcodeQuery &&
-      deckcodeQuery &&
-      Object.keys(parseDeckcode(deckcodeQuery).cards).length > 1
-    ) {
+    if (!baseDeckcodeQuery && baseDeckcode) {
       replace(
         {
           pathname,
           query: {
             ...query,
-            base: deckcodeQuery,
+            base: baseDeckcode,
           },
         },
         undefined,
@@ -55,9 +59,6 @@ const useRouteQuery = (initialDeckcode: string | null) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const deckcode = useMemo(() => parseDeckcode(deckcodeQuery), [deckcodeQuery])
-  const deck = useMemo(() => createDeckExpanded(deckcode), [deckcode])
 
   return { deckcode, deck, baseDeck }
 }

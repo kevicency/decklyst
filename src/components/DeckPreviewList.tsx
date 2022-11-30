@@ -5,11 +5,11 @@ import { DeckTitle } from '@/components/DeckInfograph/DeckTitle'
 import { DeckProvider, useDeck } from '@/context/useDeck'
 import type { DeckExpanded } from '@/data/deck'
 import cx from 'classnames'
-import { formatDistance } from 'date-fns'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { EyeIcon } from './Icons'
 import { ProfileLink } from './ProfileLink'
+import { TimeAgo } from './TimeAgo'
 
 const DeckPreview: FC = () => {
   const { faction, deckcode, meta } = useDeck()
@@ -48,7 +48,7 @@ const DeckPreview: FC = () => {
             <div>
               <span>submitted </span>
               <span className="font-semibold text-gray-300">
-                {formatDistance(meta?.createdAt!, new Date(), { addSuffix: true })}
+                <TimeAgo date={meta.createdAt} />
               </span>
             </div>
           </>
@@ -78,7 +78,7 @@ export const DeckPreviewList: FC<{
       {title && <h3 className="mb-6 text-3xl">{title}</h3>}
       <ul className="flex flex-col gap-y-4">
         {decks.map((deck) => (
-          <li key={deck.deckcode}>
+          <li key={deck.meta?.id ?? deck.deckcode}>
             <DeckProvider deck={deck}>
               <DeckPreview />
             </DeckProvider>

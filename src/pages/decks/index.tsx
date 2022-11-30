@@ -8,7 +8,7 @@ import { createDeckFromDecklyst } from '@/data/deck'
 import { createApiClient } from '@/server'
 import type { RouterInputs } from '@/utils/trpc'
 import { trpc } from '@/utils/trpc'
-import { last, startCase } from 'lodash'
+import { last, startCase, uniqBy } from 'lodash'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
 import type { GetServerSidePropsContext } from 'next/types'
 import { useMemo, useRef, useState } from 'react'
@@ -56,10 +56,11 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
   )
 
   const decks = useMemo(() => {
-    return (data?.pages ?? [])
+    const allDecks = (data?.pages ?? [])
       .flatMap((page) => page.decklysts ?? [])
       .map((decklyst) => createDeckFromDecklyst(decklyst))
       .filter((x) => x.general)
+    return uniqBy(allDecks, (x) => x.deckcode)
   }, [data?.pages])
   const hasMore = useMemo(() => last(data?.pages ?? [])?.hasMore ?? false, [data?.pages])
 

@@ -1,21 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
-import {
-  artifactCount$,
-  createDeck,
-  deckcodeNormalized$,
-  faction$,
-  minionCount$,
-  spellCount$,
-  spiritCost$,
-  title$,
-  totalCount$,
-} from '../src/data/deck'
+import { createDeck, deckcodeNormalized$ } from '../src/data/deck'
 
 const prisma = new PrismaClient()
 
-const deckinfoFile = path.join(__dirname, '.data', 'deckinfo.json')
+const usersFile = path.join(__dirname, '.data', 'users.json')
+const decklystFile = path.join(__dirname, '.data', 'decklysts.json')
 const deckviewsFile = path.join(__dirname, '.data', 'deckviews.json')
 const deckviewTotalsFile = path.join(__dirname, '.data', 'deckviewTotals.json')
 const deckImageFile = path.join(__dirname, '.data', 'deckImage.json')
@@ -24,9 +15,13 @@ const main = async () => {
   const cmd = process.argv[2] ?? 'export'
 
   if (cmd === 'export') {
-    const deckinfos = await prisma.decklyst.findMany()
-    fs.writeFileSync(deckinfoFile, JSON.stringify(deckinfos, null, 2))
-    console.log(`Exported ${deckinfos.length} deckinfos to ${deckinfoFile}`)
+    const users = await prisma.user.findMany({})
+    fs.writeFileSync(usersFile, JSON.stringify(users, null, 2))
+    console.log(`Exported ${users.length} users to ${usersFile}`)
+
+    const decklysts = await prisma.decklyst.findMany({ include: { stats: true } })
+    fs.writeFileSync(decklystFile, JSON.stringify(decklysts, null, 2))
+    console.log(`Exported ${decklysts.length} decklysts to ${decklystFile}`)
 
     // const deckviews = await prisma.deckView.findMany()
     // fs.writeFileSync(deckviewsFile, JSON.stringify(deckviews, null, 2))
@@ -56,54 +51,72 @@ const main = async () => {
     // fs.writeFileSync(deckImageFile, JSON.stringify(serializableDeckImages, null, 2))
     // console.log(`Exported ${deckImages.length} deckImages to ${deckImageFile}`)
   } else if (cmd === 'import') {
-    const deckinfos = JSON.parse(fs.readFileSync(deckinfoFile, 'utf8')) as {
-      deckcode: string
-      sharecode: string
-      createdAt: Date
-    }[]
-    const deckviewTotals = JSON.parse(fs.readFileSync(deckviewTotalsFile, 'utf8')) as Record<
-      string,
-      number
-    >
+    const users = JSON.parse(fs.readFileSync(usersFile, 'utf-8'))
+    await prisma.user.createMany({
+      data: users,
+      skipDuplicates: true,
+    })
+    console.log(`Imported ${users.length} users from ${usersFile}`)
 
-    for (const deckinfo of deckinfos) {
-      const deckcode = deckinfo.deckcode
-      const deck = createDeck(deckcode)
-      // const [title = '', cardcode] = splitDeckcode(deckcode)
-      const title = title$(deck)
-      const deckcodeNormalized = deckcodeNormalized$(deck)
+    const decklysts: any[] = JSON.parse(fs.readFileSync(decklystFile, 'utf8'))
+    await prisma.deckStats.createMany({
+      data: decklysts.map(({ stats, ...decklyst }) => stats),
+      skipDuplicates: true,
+    })
+    await prisma.decklyst.createMany({
+      data: decklysts.map(({ stats, ...decklyst }) => decklyst),
+      skipDuplicates: true,
+    })
+    console.log(`Imported ${decklysts.length} decklysts from ${decklystFile}`)
 
-      if (!title || totalCount$(deck) !== 40) continue
+    // const deckinfos = JSON.parse(fs.readFileSync(decklystFile, 'utf8')) as {
+    //   deckcode: string
+    //   sharecode: string
+    //   createdAt: Date
+    // }[]
+    // const deckviewTotals = JSON.parse(fs.readFileSync(deckviewTotalsFile, 'utf8')) as Record<
+    //   string,
+    //   number
+    // >
 
-      await prisma.decklyst
-        .create({
-          data: {
-            deckcode,
-            deckcodeNormalized,
-            title,
-            draft: totalCount$(deck) !== 40,
-            views: deckviewTotals[deckcode] ?? 0,
-            sharecode: deckinfo.sharecode,
-            privacy: 'public',
-            stats: {
-              create: {
-                faction: faction$(deck),
-                minionCount: minionCount$(deck),
-                spellCount: spellCount$(deck),
-                artifactCount: artifactCount$(deck),
-                totalCount: totalCount$(deck),
-                spiritCost: spiritCost$(deck),
-                cardCounts: Object.fromEntries(deck.cards.map((card) => [card.id, card.count])),
-              },
-            },
-            createdAt: deckinfo.createdAt,
-            updatedAt: deckinfo.createdAt,
-          },
-          select: { id: true },
-        })
-        .catch(console.error)
-    }
-    console.log(`Imported ${deckinfos.length} decklysts from ${deckinfoFile}`)
+    // for (const deckinfo of deckinfos) {
+    //   const deckcode = deckinfo.deckcode
+    //   const deck = createDeck(deckcode)
+    //   // const [title = '', cardcode] = splitDeckcode(deckcode)
+    //   const title = title$(deck)
+    //   const deckcodeNormalized = deckcodeNormalized$(deck)
+
+    //   if (!title || totalCount$(deck) !== 40) continue
+
+    //   await prisma.decklyst
+    //     .create({
+    //       data: {
+    //         deckcode,
+    //         deckcodeNormalized,
+    //         title,
+    //         draft: totalCount$(deck) !== 40,
+    //         views: deckviewTotals[deckcode] ?? 0,
+    //         sharecode: deckinfo.sharecode,
+    //         privacy: 'public',
+    //         stats: {
+    //           create: {
+    //             faction: faction$(deck),
+    //             minionCount: minionCount$(deck),
+    //             spellCount: spellCount$(deck),
+    //             artifactCount: artifactCount$(deck),
+    //             totalCount: totalCount$(deck),
+    //             spiritCost: spiritCost$(deck),
+    //             cardCounts: Object.fromEntries(deck.cards.map((card) => [card.id, card.count])),
+    //           },
+    //         },
+    //         createdAt: deckinfo.createdAt,
+    //         updatedAt: deckinfo.createdAt,
+    //       },
+    //       select: { id: true },
+    //     })
+    //     .catch(console.error)
+    // }
+    // console.log(`Imported ${deckinfos.length} decklysts from ${decklystFile}`)
 
     // const deckviews = JSON.parse(fs.readFileSync(deckviewsFile, 'utf8'))
     // await prisma.deckviews.createMany({
