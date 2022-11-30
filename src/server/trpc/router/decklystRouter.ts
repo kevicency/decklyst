@@ -110,6 +110,7 @@ export const decklystRouter = router({
           case 'views:recent': {
             const mostViewed = await ctx.deckView.mostViewed({
               sinceDaysAgo: 7,
+              skip,
               take,
               decklystFilter: where,
             })

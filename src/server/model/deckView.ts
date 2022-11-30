@@ -6,10 +6,12 @@ export const extendDeckView = (deckView: PrismaClient['deckView'], _ctx: ModelCo
   return Object.assign(deckView, {
     mostViewed: async ({
       take,
+      skip,
       sinceDaysAgo,
       decklystFilter,
     }: {
       take: number
+      skip: number
       sinceDaysAgo?: number
       decklystFilter?: Prisma.DecklystWhereInput
     }) => {
@@ -32,6 +34,7 @@ export const extendDeckView = (deckView: PrismaClient['deckView'], _ctx: ModelCo
           },
         },
         take,
+        skip,
       })
 
       return result.map(({ sharecode, _count }) => ({ sharecode, viewCount: _count.sharecode }))
