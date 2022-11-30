@@ -30,19 +30,21 @@ const toSorting = (listing: Listing): RouterInputs['decklyst']['search']['sortin
 
 const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) => {
   const [routeParams, updateRouteParams] = useRouteParams(initialRouteParams)
-  const [showEndlessScroll, setShowEndlessScroll] = useState(true)
+  const [endlessScrollTimeoutId, setEndlessScrollTimeoutId] = useState(0)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const utils = trpc.useContext()
 
   const updateFilters = async (partialFilters: Partial<Filters>) => {
     utils.decklyst.search.cancel()
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
-    setShowEndlessScroll(false)
     updateRouteParams({ ...routeParams, filters: { ...routeParams.filters, ...partialFilters } })
 
-    setTimeout(() => {
-      setShowEndlessScroll(true)
-    }, 500)
+    window.clearTimeout(endlessScrollTimeoutId)
+    setEndlessScrollTimeoutId(
+      window.setTimeout(() => {
+        setEndlessScrollTimeoutId(0)
+      }, 100),
+    )
   }
   const createListingChangedHandler = (listing: Listing) => () =>
     updateRouteParams({ ...routeParams, listing })
@@ -63,6 +65,8 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
     return uniqBy(allDecks, (x) => x.deckcode)
   }, [data?.pages])
   const hasMore = useMemo(() => last(data?.pages ?? [])?.hasMore ?? false, [data?.pages])
+
+  console.log(endlessScrollTimeoutId, decks.length)
 
   return (
     <>
@@ -87,19 +91,23 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
           <div className="content-container mt-8 flex flex-col">
             <DeckPreviewList decks={decks ?? []} />
             <div className="my-8 flex justify-center">
-              {showEndlessScroll &&
-                (hasMore ? (
-                  <VisibilityObserver root={scrollContainerRef.current} rootMargin="0px">
-                    <EndlessScroll
-                      fetch={() => fetchNextPage()}
-                      isFetching={isFetching || isLoading}
-                    />
-                  </VisibilityObserver>
-                ) : (
-                  <div className="flex justify-center font-semibold">
-                    No {decks.length ? 'more' : 'matching'} decks found
-                  </div>
-                ))}
+              {hasMore ? (
+                <VisibilityObserver
+                  root={scrollContainerRef.current}
+                  rootMargin="0px"
+                  threshold={0.75}
+                >
+                  <EndlessScroll
+                    hidden={endlessScrollTimeoutId !== 0}
+                    fetch={fetchNextPage}
+                    isFetching={isFetching || isLoading}
+                  />
+                </VisibilityObserver>
+              ) : (
+                <div className="flex justify-center font-semibold">
+                  No {decks.length ? 'more' : 'matching'} decks found
+                </div>
+              )}
             </div>
           </div>
         </div>

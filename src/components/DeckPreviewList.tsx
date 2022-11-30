@@ -7,6 +7,7 @@ import type { DeckExpanded } from '@/data/deck'
 import cx from 'classnames'
 import Link from 'next/link'
 import type { FC } from 'react'
+import { DeckTags } from './DeckInfograph/DeckTags'
 import { EyeIcon } from './Icons'
 import { ProfileLink } from './ProfileLink'
 import { TimeAgo } from './TimeAgo'
@@ -34,6 +35,7 @@ const DeckPreview: FC = () => {
         <DeckCounts />
         <DeckManaCurve />
       </div>
+      <DeckTags />
       <Link href={deckUrl(meta?.sharecode ?? deckcode, true)} className="cover-parent" />
       <div
         className={`relative flex items-center gap-x-3 border-t-2 border-gray-800 bg-alt-850 px-4 py-1 text-gray-400`}
