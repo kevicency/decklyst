@@ -73,6 +73,8 @@ export const decklystRouter = router({
           AND: [
             { privacy: 'public' },
             { draft: filters.includeDrafts ? undefined : false },
+            { title: filters.includeUntitled ? undefined : { not: '' } },
+            { authorId: filters.includeAnonymous ? undefined : { not: null } },
             {
               stats: {
                 AND: [

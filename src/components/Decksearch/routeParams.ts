@@ -17,10 +17,13 @@ export const parseRouteParams = (query: ParsedUrlQuery) => {
     .filter(isString)
     .map((cardId) => +cardId)
   const tags = (Array.isArray(query.tags) ? query.tags : [query.tags]).filter(isString)
+  const includeDrafts = query.includeDrafts === 'true'
+  const includeAnonymous = query.includeAnonymous === 'true' || query.includeAnonymous === undefined
+  const includeUntitled = query.includeUntitled === 'true' || query.includeUntitled === undefined
 
   return {
     listing,
-    filters: { factions, cardIds, tags },
+    filters: { factions, cardIds, tags, includeDrafts, includeAnonymous, includeUntitled },
   } as const
 }
 

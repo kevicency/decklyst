@@ -1,6 +1,6 @@
 import { BiImport, BiLogInCircle, BiUserCircle } from 'react-icons/bi'
 import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
-import { CgArrowsExchangeAlt } from 'react-icons/cg'
+import { CgArrowsExchangeAlt, CgClose } from 'react-icons/cg'
 import {
   FaBug,
   FaCheck,
@@ -52,5 +52,6 @@ export const NewIcon = FaStarOfLife
 export const LogInIcon = BiLogInCircle
 export const ProfileIcon = BiUserCircle
 export const CloseIcon = MdClose
+export const CloseAltIcon = CgClose
 export const ChevronDownIcon = FaChevronDown
 export const CheckIcon = FaCheck

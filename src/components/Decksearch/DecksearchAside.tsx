@@ -10,6 +10,7 @@ import { useMemo } from 'react'
 import { CardsCombobox } from '../CardsCombobox'
 import { Tag } from '../Tag'
 import { TagsCombobox } from '../TagsCombobox'
+import { Toggle } from '../Toggle'
 
 export const DecksearchAside: FC<{
   filters: Filters
@@ -46,7 +47,7 @@ export const DecksearchAside: FC<{
               ))}
             </div>
           </Filter>
-          <Filter title="Tag" onClear={() => updateFilters({ tags: [] })}>
+          <Filter title="Tags" onClear={() => updateFilters({ tags: [] })}>
             <TagsCombobox
               value={filters.tags}
               onChange={(value) => {
@@ -63,13 +64,36 @@ export const DecksearchAside: FC<{
               ))}
             </div>
           </Filter>
-          <Filter title="Card" onClear={() => updateFilters({ cardIds: [] })}>
+          <Filter title="Cards" onClear={() => updateFilters({ cardIds: [] })}>
             <CardsCombobox
+              cards={cards}
               value={filters.cardIds}
               onChange={(value) => updateFilters({ cardIds: value })}
             />
             <div className="mt-1 text-sm">
               {filters.cardIds.length} {filters.cardIds.length === 1 ? 'card' : 'cards'} selected
+            </div>
+          </Filter>
+          <Filter title="Deck">
+            <div className="flex flex-col gap-y-3">
+              <Toggle
+                checked={filters.includeAnonymous}
+                onChange={(checked) => updateFilters({ includeAnonymous: checked })}
+              >
+                Created by<span className="t font-semibold">Anonymous</span>
+              </Toggle>
+              <Toggle
+                checked={filters.includeUntitled}
+                onChange={(checked) => updateFilters({ includeUntitled: checked })}
+              >
+                Include Untitled
+              </Toggle>
+              <Toggle
+                checked={filters.includeDrafts}
+                onChange={(checked) => updateFilters({ includeDrafts: checked })}
+              >
+                Show drafts (&ne; 40 cards)
+              </Toggle>
             </div>
           </Filter>
         </>
