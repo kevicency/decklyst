@@ -66,8 +66,6 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
   }, [data?.pages])
   const hasMore = useMemo(() => last(data?.pages ?? [])?.hasMore ?? false, [data?.pages])
 
-  console.log(endlessScrollTimeoutId, decks.length)
-
   return (
     <>
       <div className="bg-image-decksearch flex flex-1 flex-col overflow-hidden grid-in-main">

@@ -18,27 +18,24 @@ const DeckPreview: FC = () => {
     <div
       className={cx(
         'group',
-        'relative flex flex-col',
+        'relative flex flex-col bg-alt-900',
         'border-[3px] border-alt-700',
         `hover:border-${faction}  hover:scale-101 hover:text-gray-100`,
       )}
     >
-      <div
-        className={cx(
-          'flex items-center justify-between gap-4 lg:gap-8',
-          'bg-alt-900 pt-2 pb-4 pr-4',
-        )}
-      >
+      <div className={cx('flex items-center justify-between gap-4 lg:gap-8', 'pt-2 pb-4 pr-4')}>
         <div className="flex-1 scale-90">
           <DeckTitle />
         </div>
         <DeckCounts />
         <DeckManaCurve />
       </div>
-      <DeckTags />
+      <div className="px-2 pb-2">
+        <DeckTags />
+      </div>
       <Link href={deckUrl(meta?.sharecode ?? deckcode, true)} className="cover-parent" />
       <div
-        className={`relative flex items-center gap-x-3 border-t-2 border-gray-800 bg-alt-850 px-4 py-1 text-gray-400`}
+        className={`relative flex items-center gap-x-3 border-t-2 border-gray-800 bg-alt-850 px-2.5 py-1 text-gray-400`}
       >
         <div>
           <span>created by </span>
