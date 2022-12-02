@@ -56,6 +56,7 @@ export const decklystRouter = router({
             includeDrafts: z.boolean().optional(),
             includeAnonymous: z.boolean().optional(),
             includeUntitled: z.boolean().optional(),
+            authorId: z.string().optional(),
           })
           .optional(),
       }),
@@ -74,7 +75,9 @@ export const decklystRouter = router({
             { privacy: 'public' },
             { draft: filters.includeDrafts ? undefined : false },
             { title: filters.includeUntitled ? undefined : { not: '' } },
-            { authorId: filters.includeAnonymous ? undefined : { not: null } },
+            {
+              authorId: filters.authorId ?? (filters.includeAnonymous ? undefined : { not: null }),
+            },
             {
               stats: {
                 AND: [

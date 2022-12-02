@@ -12,7 +12,7 @@ import { EyeIcon } from './Icons'
 import { ProfileLink } from './ProfileLink'
 import { TimeAgo } from './TimeAgo'
 
-const DeckPreview: FC = () => {
+const DeckPreview: FC<{ type: 'card' | 'list' }> = ({ type }) => {
   const { faction, deckcode, meta } = useDeck()
   return (
     <div
@@ -27,8 +27,12 @@ const DeckPreview: FC = () => {
         <div className="flex-1 scale-90">
           <DeckTitle />
         </div>
-        <DeckCounts />
-        <DeckManaCurve />
+        {type === 'list' && (
+          <>
+            <DeckCounts />
+            <DeckManaCurve />
+          </>
+        )}
       </div>
       <div className="px-2 pb-2">
         <DeckTags />
@@ -79,7 +83,7 @@ export const DeckPreviewList: FC<{
         {decks.map((deck) => (
           <li key={deck.meta?.id ?? deck.deckcode}>
             <DeckProvider deck={deck}>
-              <DeckPreview />
+              <DeckPreview type="list" />
             </DeckProvider>
           </li>
         ))}

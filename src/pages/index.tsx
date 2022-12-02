@@ -1,13 +1,48 @@
 import { transformer } from '@/common/transformer'
+import { DeckPreviewList } from '@/components/DeckPreviewList'
+import { factions } from '@/data/cards'
+import { createDeckFromDecklyst } from '@/data/deck'
 import { appRouter, createContextInner } from '@/server'
 import { createProxySSGHelpers } from '@trpc/react-query/ssg'
-import type { NextPage } from 'next'
-import type { Props } from './decks'
-import DecksPage from './decks'
+import type { InferGetStaticPropsType, NextPage } from 'next'
+import Link from 'next/link'
+import { useMemo } from 'react'
 
-const Home: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) => (
-  <DecksPage initialDecklysts={initialDecklysts} initialRouteParams={initialRouteParams} />
-)
+type Props = InferGetStaticPropsType<typeof getStaticProps>
+
+const Home: NextPage<Props> = ({ starterDecklysts }) => {
+  const starterDecks = useMemo(
+    () => starterDecklysts.map((x) => createDeckFromDecklyst(x)),
+    [starterDecklysts],
+  )
+  return (
+    <div className="bg-gray-900 grid-in-main">
+      <div className="content-container mt-32 flex flex-col px-24">
+        <h1 className="mb-3 text-center text-5xl text-gray-100">
+          Welcome to&nbsp;
+          <span className="font-thin text-accent-400">Decklyst</span>
+        </h1>
+        <p className="text-center text-xl text-gray-300">Your Duelyst 2 deck companion</p>
+        <div className="mt-8 flex items-center justify-center gap-x-12">
+          <Link className="btn btn--large bg-accent-700" href="/decks">
+            Browse decks
+          </Link>
+          <span className="uppercase text-gray-400">or</span>
+          <Link className="btn btn--large bg-accent-700" href="/build">
+            Create deck
+          </Link>
+        </div>
+      </div>
+      <div className="content-container mt-24 flex flex-col">
+        <h2 className="mb-2 text-3xl">Popular starter decks</h2>
+        <p className="mb-4 text-lg text-gray-400">
+          Kickstart your Duelyst 2 journey with these starter decks
+        </p>
+        <DeckPreviewList decks={starterDecks} />
+      </div>
+    </div>
+  )
+}
 
 export const getStaticProps = async () => {
   const ssg = createProxySSGHelpers({
@@ -16,17 +51,28 @@ export const getStaticProps = async () => {
     transformer,
   })
 
-  const decklysts = await ssg.decklyst.search.fetch({
-    sorting: 'views:recent',
-  })
+  const decklysts = await Promise.all(
+    factions
+      .filter((faction) => faction !== 'neutral')
+      .map((faction) =>
+        ssg.decklyst.search.fetch({
+          limit: 1,
+          sorting: 'views:all',
+          filters: {
+            tags: ['starter'],
+            factions: [faction],
+            cardIds: [],
+          },
+        }),
+      ),
+  )
 
   return {
     props: {
-      initialDeckcodes: decklysts,
-      initialRouteParams: {
-        listing: 'hot',
-        filters: { factions: [] },
-      },
+      starterDecklysts: decklysts
+        .map((x) => x.decklysts[0])
+        .filter(Boolean)
+        .sort((a, b) => a.views - b.views),
     },
     revalidate: 60,
   }

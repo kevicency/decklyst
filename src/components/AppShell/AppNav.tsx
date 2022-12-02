@@ -83,11 +83,7 @@ export const AppNav: FC = () => {
         <AppNavLink
           href="/decks"
           icon={DeckLibraryIcon}
-          active={
-            router.pathname.startsWith('/decks') ||
-            router.pathname === `/[code]` ||
-            router.pathname === '/'
-          }
+          active={router.pathname.startsWith('/decks') || router.pathname === `/[code]`}
         >
           Deck Library
         </AppNavLink>
