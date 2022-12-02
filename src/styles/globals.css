@@ -214,10 +214,13 @@ body {
     @apply bg-image bg-gray-900;
     background-image: url('/assets/backgrounds/bg6.jpg');
   }
-
   .bg-image-profile {
     @apply bg-image bg-gray-1000;
     background-image: url('/assets/backgrounds/bg10.jpg');
+  }
+  .bg-image-home {
+    @apply bg-image bg-gray-900;
+    background-image: url('/assets/backgrounds/bg1.jpg');
   }
 
   .cover-parent::before {

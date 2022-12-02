@@ -12,13 +12,13 @@ import { EyeIcon } from './Icons'
 import { ProfileLink } from './ProfileLink'
 import { TimeAgo } from './TimeAgo'
 
-const DeckPreview: FC<{ type: 'card' | 'list' }> = ({ type }) => {
+export const DeckPreview: FC<{ type: 'card' | 'list' }> = ({ type }) => {
   const { faction, deckcode, meta } = useDeck()
   return (
     <div
       className={cx(
         'group',
-        'relative flex flex-col bg-alt-900',
+        'relative flex min-w-max shrink-0 flex-col bg-alt-900',
         'border-[3px] border-alt-700',
         `hover:border-${faction}  hover:scale-101 hover:text-gray-100`,
       )}
@@ -34,7 +34,7 @@ const DeckPreview: FC<{ type: 'card' | 'list' }> = ({ type }) => {
           </>
         )}
       </div>
-      <div className="px-2 pb-2">
+      <div className="flex-1 justify-end px-2 pb-2">
         <DeckTags />
       </div>
       <Link href={deckUrl(meta?.sharecode ?? deckcode, true)} className="cover-parent" />

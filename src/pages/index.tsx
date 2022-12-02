@@ -1,5 +1,6 @@
 import { transformer } from '@/common/transformer'
-import { DeckPreviewList } from '@/components/DeckPreviewList'
+import { DeckPreview } from '@/components/DeckPreviewList'
+import { DeckProvider } from '@/context/useDeck'
 import { factions } from '@/data/cards'
 import { createDeckFromDecklyst } from '@/data/deck'
 import { appRouter, createContextInner } from '@/server'
@@ -11,12 +12,13 @@ import { useMemo } from 'react'
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 const Home: NextPage<Props> = ({ starterDecklysts }) => {
-  const starterDecks = useMemo(
-    () => starterDecklysts.map((x) => createDeckFromDecklyst(x)),
+  const starterDeckGroups = useMemo(
+    () =>
+      starterDecklysts.map((group) => group.map((decklyst) => createDeckFromDecklyst(decklyst))),
     [starterDecklysts],
   )
   return (
-    <div className="bg-gray-900 grid-in-main">
+    <div className="bg-image-home overflow-y-auto bg-gray-900 grid-in-main">
       <div className="content-container mt-32 flex flex-col px-24">
         <h1 className="mb-3 text-center text-5xl text-gray-100">
           Welcome to&nbsp;
@@ -33,12 +35,20 @@ const Home: NextPage<Props> = ({ starterDecklysts }) => {
           </Link>
         </div>
       </div>
-      <div className="content-container mt-24 flex flex-col">
+      <div className="content-container mt-32 flex flex-col">
         <h2 className="mb-2 text-3xl">Popular starter decks</h2>
         <p className="mb-4 text-lg text-gray-400">
           Kickstart your Duelyst 2 journey with these starter decks
         </p>
-        <DeckPreviewList decks={starterDecks} />
+        {starterDeckGroups.map((decks, i) => (
+          <div key={i} className="mb-6 grid grid-cols-2 gap-x-8">
+            {decks.map((deck) => (
+              <DeckProvider key={deck.meta.id} deck={deck}>
+                <DeckPreview type="card" />
+              </DeckProvider>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -56,7 +66,7 @@ export const getStaticProps = async () => {
       .filter((faction) => faction !== 'neutral')
       .map((faction) =>
         ssg.decklyst.search.fetch({
-          limit: 1,
+          limit: 2,
           sorting: 'views:all',
           filters: {
             tags: ['starter'],
@@ -69,10 +79,9 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      starterDecklysts: decklysts
-        .map((x) => x.decklysts[0])
-        .filter(Boolean)
-        .sort((a, b) => a.views - b.views),
+      starterDecklysts: decklysts.map((x) =>
+        x.decklysts.sort((a, b) => b.views - a.views).filter(Boolean),
+      ),
     },
     revalidate: 60,
   }
