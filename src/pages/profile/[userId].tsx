@@ -52,7 +52,7 @@ const UserProfilePage: FC<Props> = ({ decklysts, userProfile: initialUserProfile
     isLoading,
     refetch,
   } = trpc.decklyst.search.useInfiniteQuery(
-    { filters: { ...routeParams.filters, authorId: userId }, sorting: 'date:updated' },
+    { limit: 15, filters: { ...routeParams.filters, authorId: userId }, sorting: 'date:updated' },
     {
       getNextPageParam: (_, allPages) => allPages.length,
       placeholderData: decklysts ? { pages: [decklysts], pageParams: [] } : undefined,
@@ -232,6 +232,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ userId?: strin
           decklysts,
           trpcState: ssg.dehydrate(),
         },
+        revalidate: 60,
       }
     : { notFound: true, revalidate: true }
 }

@@ -15,12 +15,6 @@ export const userProfileRouter = router({
           id: true,
           name: true,
           image: true,
-          decklysts: {
-            where: { privacy: input.id === ctx.session?.user?.id ? undefined : 'public' },
-            take: 10,
-            orderBy: { updatedAt: 'desc' },
-            include: { author: true },
-          },
         },
       })
 

@@ -5,7 +5,7 @@ export const Custom404Page = () => {
         <img src="/assets/vaath_frustrated.webp" alt="404" />
         <div>
           <h2 className="mb-1 border-b-2 pb-2 text-4xl font-bold">404</h2>
-          <p className="text-lg text-alt-300">Deck not found</p>
+          <p className="text-lg text-alt-300">Page not found</p>
         </div>
       </div>
     </div>
