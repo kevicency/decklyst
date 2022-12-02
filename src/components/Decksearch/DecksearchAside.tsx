@@ -15,7 +15,8 @@ import { Toggle } from '../Toggle'
 export const DecksearchAside: FC<{
   filters: Filters
   updateFilters: (filters: Partial<Filters>) => void
-}> = ({ updateFilters, filters }) => {
+  hideIncludeAnonymous?: boolean
+}> = ({ updateFilters, filters, hideIncludeAnonymous }) => {
   const handleFactionChanged = (faction: string) => (enabled: boolean) => {
     updateFilters({
       factions: enabled
@@ -76,12 +77,14 @@ export const DecksearchAside: FC<{
           </Filter>
           <Filter title="Deck">
             <div className="flex flex-col gap-y-3">
-              <Toggle
-                checked={filters.includeAnonymous}
-                onChange={(checked) => updateFilters({ includeAnonymous: checked })}
-              >
-                Created by<span className="t font-semibold">Anonymous</span>
-              </Toggle>
+              {!hideIncludeAnonymous && (
+                <Toggle
+                  checked={filters.includeAnonymous}
+                  onChange={(checked) => updateFilters({ includeAnonymous: checked })}
+                >
+                  Created by<span className="t font-semibold">Anonymous</span>
+                </Toggle>
+              )}
               <Toggle
                 checked={filters.includeUntitled}
                 onChange={(checked) => updateFilters({ includeUntitled: checked })}

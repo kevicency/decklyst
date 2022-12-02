@@ -29,6 +29,7 @@ module.exports = {
       mana: '#2ba9d8',
       attack: colors.amber[400],
       health: colors.red[600],
+      danger: colors.red[600],
 
       // faction
       lyonar: '#e5c56d',

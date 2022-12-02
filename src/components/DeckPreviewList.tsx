@@ -4,15 +4,21 @@ import { DeckManaCurve } from '@/components/DeckInfograph/DeckManaCurve'
 import { DeckTitle } from '@/components/DeckInfograph/DeckTitle'
 import { DeckProvider, useDeck } from '@/context/useDeck'
 import type { DeckExpanded } from '@/data/deck'
+import { Privacy } from '@prisma/client'
 import cx from 'classnames'
+import { startCase } from 'lodash'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { DeckTags } from './DeckInfograph/DeckTags'
-import { EyeIcon } from './Icons'
+import { EyeIcon, TrashIcon } from './Icons'
 import { ProfileLink } from './ProfileLink'
 import { TimeAgo } from './TimeAgo'
 
-export const DeckPreview: FC<{ type: 'card' | 'list' }> = ({ type }) => {
+export const DeckPreview: FC<{
+  type: 'card' | 'list'
+  onChangePrivacy?: (privacy: Privacy) => Promise<void>
+  onDelete?: () => void | Promise<void>
+}> = ({ type, onChangePrivacy, onDelete }) => {
   const { faction, deckcode, meta } = useDeck()
   return (
     <div
@@ -56,13 +62,48 @@ export const DeckPreview: FC<{ type: 'card' | 'list' }> = ({ type }) => {
             </div>
           </>
         )}
+        {/* {meta?.views && (
+          <>
+            <div className={`text-lg font-bold text-gray-600`}>•</div>
+            <div>
+              <span>views</span>
+              <span className={`font-semibold text-gray-300`}>
+                <EyeIcon size={18} className="mx-1 inline-block pb-0.5" />
+                {meta?.views ?? 1}
+              </span>
+            </div>
+          </>
+        )} */}
         <div className="flex-1" />
-        <div className="flex items-center gap-x-1">
-          <span className={`font-semibold text-gray-300`}>
+
+        <div className="flex items-center gap-x-4">
+          <span className={`-mr-3 font-semibold text-gray-300`}>
             <EyeIcon size={18} className="mx-1 inline-block pb-0.5" />
             {meta?.views ?? 1}
           </span>
           <span>{(meta?.views ?? 1) === 1 ? 'view' : 'views'}</span>
+          {onChangePrivacy && (
+            <select
+              className="cursor-pointer bg-alt-1000 py-1.5 text-gray-300"
+              value={meta?.privacy}
+              onChange={(e) => onChangePrivacy(e.target.value as Privacy)}
+            >
+              {Object.values(Privacy).map((privacy) => (
+                <option key={privacy} value={privacy}>
+                  {startCase(privacy)}
+                </option>
+              ))}
+            </select>
+          )}
+          {onDelete && (
+            <button
+              onClick={onDelete}
+              className="btn-outline border-danger text-danger hover:bg-danger hover:text-gray-100"
+            >
+              <TrashIcon />
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </div>

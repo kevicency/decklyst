@@ -47,12 +47,14 @@ export const decklystRouter = router({
       z.object({
         limit: z.number().gt(0).lte(50).optional(),
         cursor: z.number().optional(),
-        sorting: z.enum(['date:created', 'views:all', 'views:recent', 'likes:all']).optional(),
+        sorting: z
+          .enum(['date:created', 'date:updated', 'views:all', 'views:recent', 'likes:all'])
+          .optional(),
         filters: z
           .object({
-            factions: z.array(z.enum(factions as [string, ...string[]])),
-            cardIds: z.array(z.number().int().positive()),
-            tags: z.array(z.string()),
+            factions: z.array(z.enum(factions as [string, ...string[]])).optional(),
+            cardIds: z.array(z.number().int().positive()).optional(),
+            tags: z.array(z.string()).optional(),
             includeDrafts: z.boolean().optional(),
             includeAnonymous: z.boolean().optional(),
             includeUntitled: z.boolean().optional(),
@@ -64,15 +66,20 @@ export const decklystRouter = router({
     .query(
       async ({
         ctx,
-        input: { limit = 10, cursor: page = 0, filters = { factions: [], tags: [] }, sorting },
+        input: {
+          limit = 10,
+          cursor: page = 0,
+          filters: { factions = [], tags = [], cardIds = [], ...filters } = {},
+          sorting,
+        },
       }) => {
+        const isMyProfileSearch = filters.authorId && filters.authorId === ctx.session?.user?.id
         const skip = limit * page
         const take = limit + 1
-        const cardIds = filters.cardIds ?? []
 
         const where: Prisma.DecklystWhereInput = {
           AND: [
-            { privacy: 'public' },
+            { privacy: isMyProfileSearch ? undefined : 'public' },
             { draft: filters.includeDrafts ? undefined : false },
             { title: filters.includeUntitled ? undefined : { not: '' } },
             {
@@ -82,13 +89,13 @@ export const decklystRouter = router({
               stats: {
                 AND: [
                   {
-                    faction: filters.factions?.length ? { in: filters.factions } : undefined,
+                    faction: factions?.length ? { in: factions } : undefined,
                   },
                   ...cardIds.map((cardId) => ({ cardCounts: { path: [`${cardId}`], gte: 1 } })),
                 ],
               },
             },
-            { tags: filters.tags.length ? { hasEvery: filters.tags } : undefined },
+            { tags: tags.length ? { hasEvery: tags } : undefined },
           ],
         }
         const include = { author: true }
@@ -103,6 +110,15 @@ export const decklystRouter = router({
               take,
               where,
               orderBy: { createdAt: 'desc' },
+            })
+            break
+          case 'date:updated':
+            decklysts = await ctx.decklyst.findMany({
+              include,
+              skip,
+              take,
+              where,
+              orderBy: { updatedAt: 'desc' },
             })
             break
           case 'views:all':
@@ -177,5 +193,18 @@ export const decklystRouter = router({
       }
 
       return decklyst
+    }),
+  delete: secureProc
+    .input(z.object({ sharecode: z.string() }))
+    .mutation(async ({ ctx, input: { sharecode } }) => {
+      const decklyst = await ctx.decklyst.findUnique({ where: { sharecode } })
+      if (!decklyst) {
+        throw new TRPCError({ message: 'Not found', code: 'NOT_FOUND' })
+      }
+      if (decklyst.authorId !== ctx.session.user.id) {
+        throw new TRPCError({ message: 'Unauthorized', code: 'UNAUTHORIZED' })
+      }
+      await ctx.decklyst.delete({ where: { sharecode } })
+      return true
     }),
 })

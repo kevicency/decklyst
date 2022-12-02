@@ -1,4 +1,4 @@
-import { isString, isUndefined, omitBy } from 'lodash'
+import { isString, isUndefined, omit, omitBy } from 'lodash'
 import { useRouter } from 'next/router'
 import type { ParsedUrlQuery } from 'querystring'
 
@@ -32,10 +32,12 @@ export const useRouteParams = (initialRouteParams: RouteParams) => {
   const routeParams = router.query ? parseRouteParams(router.query) : initialRouteParams
 
   const updateRouteParams = async ({ filters, listing }: RouteParams) => {
+    const newQuery = { listing, ...omitBy(filters, isUndefined) }
+
     await router.push(
       {
-        pathname: '/decks',
-        query: { listing, ...omitBy(filters, isUndefined) },
+        pathname: router.pathname,
+        query: { ...omit(router.query, Object.keys(newQuery)), ...newQuery },
       },
       undefined,
       { shallow: true },

@@ -3,6 +3,7 @@ import { PageHeader } from '@/components/PageHeader'
 import { useDeck } from '@/context/useDeck'
 import { useDeckActions } from '@/hooks/useDeckActions'
 import { noop, startCase } from 'lodash'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { useState } from 'react'
@@ -12,18 +13,22 @@ import { DeckCardList } from '../DeckInfograph/DeckCardList'
 import { DeckMinionList } from '../DeckInfograph/DeckMinionList'
 import { DeckSpellList } from '../DeckInfograph/DeckSpellList'
 import { DeckTags } from '../DeckInfograph/DeckTags'
-import { CopyIcon, DoneIcon, EditIcon, EyeIcon, ShareIcon } from '../Icons'
+import { CopyIcon, DoneIcon, EditIcon, EyeIcon, ShareIcon, TrashIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
 import { TimeAgo } from '../TimeAgo'
 import { ShareDeckDialog } from './ShareDeckDialog'
 
 export const DeckDetailsMain: FC = () => {
   const deck = useDeck()
+  const session = useSession()
   const [isShareDialogOpen, setShareDialogOpen] = useState(false)
   const { copyDeckcode } = useDeckActions()
 
   const meta = deck.meta!
   const general = deck.general
+  const isMyDeck = meta.authorId && meta.authorId === session?.data?.user?.id
+
+  const handleDeleteDeck = () => {}
 
   return (
     <div className="bg-image-deckdetails relative flex flex-1 flex-col overflow-hidden grid-in-main">
@@ -46,7 +51,16 @@ export const DeckDetailsMain: FC = () => {
             <div className="flex flex-1 truncate text-3xl font-light">
               {deck.title || 'Untitled'}
             </div>
-            <div className="grid shrink-0 grid-cols-2 items-center gap-x-2">
+            <div className="flex shrink-0 items-center gap-x-2">
+              {isMyDeck && (
+                <button
+                  onClick={handleDeleteDeck}
+                  className="btn-outline border-danger text-danger hover:bg-danger hover:text-gray-100"
+                >
+                  <TrashIcon />
+                  Delete
+                </button>
+              )}
               <Link
                 href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}
                 className="btn-outline"
@@ -81,7 +95,15 @@ export const DeckDetailsMain: FC = () => {
                 <div className=" text-gray-400">
                   <span>created by </span>
                   {meta.author ? (
-                    <span className="font-semibold text-accent-400">{meta.author.name}</span>
+                    <Link
+                      href={{
+                        pathname: '/profile/[userId]',
+                        query: { userId: deck.meta?.authorId },
+                      }}
+                      className="font-semibold text-accent-400 hover:underline"
+                    >
+                      {meta.author.name}
+                    </Link>
                   ) : (
                     <span className="font-semibold text-gray-300">Anonymous</span>
                   )}
