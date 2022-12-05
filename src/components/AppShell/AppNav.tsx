@@ -25,7 +25,7 @@ const AppNavLink: FC<{
   active?: boolean
   className?: string
 }> = ({ icon: Icon, iconClassName, active, className, href, onClick, children }) => {
-  const [{ isNavExpanded }] = useAppShell()
+  const [{ isNavExpanded, isMobileNavOpen }] = useAppShell()
 
   const router = useRouter()
   const Component = href ? Link : 'div'
@@ -52,7 +52,14 @@ const AppNavLink: FC<{
           'text-accent-400': isActive,
         })}
       />
-      {isNavExpanded && <span className="animate-in fade-in">{children}</span>}
+      <span
+        className={cx(
+          `animate-in fade-in`,
+          isNavExpanded || isMobileNavOpen ? '!inline-block min-w-fit' : 'hidden w-0',
+        )}
+      >
+        {children}
+      </span>
     </Component>
   )
 }
@@ -71,13 +78,18 @@ const AvatarIcon: FC<{ className?: string }> = () => {
 export const AppNav: FC = () => {
   const router = useRouter()
   const session = useSession()
-  const [{ isNavExpanded: isExpanded }, { toggleNav }] = useAppShell()
+  const [{ isNavExpanded: isExpanded, isMobile, isMobileNavOpen }, { toggleNav }] = useAppShell()
 
   return (
-    <>
+    <div className="grid-in-nav flex flex-col justify-between border-gray-700 ">
       <div
         className={cx(
-          'z-30 flex flex-col gap-y-0.5 border-r border-gray-700 pt-6 shadow-nav grid-in-nav-t',
+          'z-30 flex flex-col gap-y-0.5 border-gray-700 grid-in-nav-t',
+          isMobile
+            ? isMobileNavOpen
+              ? 'fixed top-[58px] left-0 bottom-0 z-[100] w-full bg-gray-900'
+              : 'hidden'
+            : 'border-r pt-6 shadow-nav',
         )}
       >
         <AppNavLink
@@ -94,50 +106,52 @@ export const AppNav: FC = () => {
           Deck Diff
         </AppNavLink>
       </div>
-      <div className={cx('z-30 flex flex-col border-r border-gray-700 shadow-nav grid-in-nav-b')}>
-        {session?.data?.user ? (
-          <AppNavLink href={`/profile/${session.data.user?.id}`} icon={AvatarIcon}>
-            Profile
-          </AppNavLink>
-        ) : (
-          <AppNavLink
-            onClick={() =>
-              signIn('discord', {
-                callbackUrl: window.location.href,
-              })
-            }
-            icon={LogInIcon}
-          >
-            Sign In
-          </AppNavLink>
-        )}
-        <div className="border-t border-gray-800">
-          <AppNavLink
-            href="discord://discord.com/channels/1041363184872857602/1041363185707528208"
-            icon={FeedbackIcon}
-          >
-            Feedback
-          </AppNavLink>
+      {!isMobile && (
+        <div className={cx('z-30 flex flex-col border-r border-gray-700 shadow-nav grid-in-nav-b')}>
+          {session?.data?.user ? (
+            <AppNavLink href={`/profile/${session.data.user?.id}`} icon={AvatarIcon}>
+              Profile
+            </AppNavLink>
+          ) : (
+            <AppNavLink
+              onClick={() =>
+                signIn('discord', {
+                  callbackUrl: window.location.href,
+                })
+              }
+              icon={LogInIcon}
+            >
+              Sign In
+            </AppNavLink>
+          )}
+          <div className="border-t border-gray-800">
+            <AppNavLink
+              href="discord://discord.com/channels/1041363184872857602/1041363185707528208"
+              icon={FeedbackIcon}
+            >
+              Feedback
+            </AppNavLink>
+          </div>
+          <div className="border-t border-gray-800">
+            <AppNavLink
+              href="discord://discord.com/channels/1041363184872857602/1041363436711465050"
+              icon={BugReportIcon}
+              iconClassName="py-0.5"
+            >
+              Report a bug
+            </AppNavLink>
+          </div>
+          <div className="border-t border-gray-800">
+            <AppNavLink
+              onClick={toggleNav}
+              icon={ExpandSidebarIcon}
+              iconClassName={isExpanded ? '-rotate-180' : 'rotate-0'}
+            >
+              {isExpanded ? 'Collapse' : 'Expand'}
+            </AppNavLink>
+          </div>
         </div>
-        <div className="border-t border-gray-800">
-          <AppNavLink
-            href="discord://discord.com/channels/1041363184872857602/1041363436711465050"
-            icon={BugReportIcon}
-            iconClassName="py-0.5"
-          >
-            Report a bug
-          </AppNavLink>
-        </div>
-        <div className="border-t border-gray-800">
-          <AppNavLink
-            onClick={toggleNav}
-            icon={ExpandSidebarIcon}
-            iconClassName={isExpanded ? '-rotate-180' : 'rotate-0'}
-          >
-            {isExpanded ? 'Collapse' : 'Expand'}
-          </AppNavLink>
-        </div>
-      </div>
-    </>
+      )}
+    </div>
   )
 }

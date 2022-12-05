@@ -65,14 +65,23 @@ module.exports = {
           'nav-t main   aside',
           'nav-b main   aside'
         ],
+        mobile: [
+          'logo header header',
+          'nav-t nav-t nav-t',
+          'main main   aside',
+        ]
       },
       gridTemplateColumns: {
         desktop: 'auto minmax(0, 1fr) auto',
+        mobile: 'auto minmax(0, 1fr) auto',
       },
       gridTemplateRows: {
         desktop: `min-content
                   minmax(0, 1fr)
                   auto`,
+        mobile: `min-content
+                 0
+                 minmax(0, 1fr)`
       },
       scale: {
         '101': '1.01',
