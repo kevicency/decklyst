@@ -14,8 +14,8 @@ export const PageHeader: FC<{
       className={cx(
         className,
         'relative flex shrink-0 items-end justify-between gap-x-8',
-        'h-20 px-8 pb-4',
-        'z-50 bg-gradient-to-r from-gray-850 to-alt-900 shadow-header',
+        'h-20 px-4 pb-4 lg:px-8',
+        'z-20 bg-gradient-to-r from-gray-850 to-alt-900 shadow-header',
         { 'pr-20': showFilterToggle },
       )}
     >

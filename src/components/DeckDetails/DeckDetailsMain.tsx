@@ -1,5 +1,6 @@
 import { DeckMetadata } from '@/components/DeckMetadata'
 import { PageHeader } from '@/components/PageHeader'
+import { useAppShell } from '@/context/useAppShell'
 import { useDeck } from '@/context/useDeck'
 import { useDeckActions } from '@/hooks/useDeckActions'
 import { noop, startCase } from 'lodash'
@@ -16,6 +17,7 @@ import { DeckTags } from '../DeckInfograph/DeckTags'
 import { CopyIcon, DoneIcon, EditIcon, EyeIcon, ShareIcon, TrashIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
 import { TimeAgo } from '../TimeAgo'
+import { DeckStats } from './DeckDetailsAside'
 import { ShareDeckDialog } from './ShareDeckDialog'
 
 export const DeckDetailsMain: FC = () => {
@@ -23,6 +25,7 @@ export const DeckDetailsMain: FC = () => {
   const session = useSession()
   const [isShareDialogOpen, setShareDialogOpen] = useState(false)
   const { copyDeckcode } = useDeckActions()
+  const [{ isMobile }] = useAppShell()
 
   const meta = deck.meta!
   const general = deck.general
@@ -34,7 +37,7 @@ export const DeckDetailsMain: FC = () => {
     <div className="bg-image-deckdetails relative flex flex-1 flex-col overflow-hidden grid-in-main">
       <PageHeader>
         <div className="content-container">
-          <div className="-mt-1 grid grid-cols-[6rem_minmax(0,1fr)_max-content]">
+          <div className="-mt-1 grid grid-cols-[6rem_minmax(0,1fr)_auto]">
             <div className="relative">
               <div className="absolute -bottom-11 -left-4 z-50 w-24">
                 <img
@@ -51,14 +54,14 @@ export const DeckDetailsMain: FC = () => {
             <div className="flex flex-1 truncate text-3xl font-light">
               {deck.title || 'Untitled'}
             </div>
-            <div className="flex shrink-0 items-center gap-x-2">
+            <div className="flex items-center gap-x-2">
               {isMyDeck && (
                 <button
                   onClick={handleDeleteDeck}
                   className="btn-outline border-danger text-danger hover:bg-danger hover:text-gray-100"
                 >
                   <TrashIcon />
-                  Delete
+                  <span className="hidden md:inline">Delete</span>
                 </button>
               )}
               <Link
@@ -66,14 +69,14 @@ export const DeckDetailsMain: FC = () => {
                 className="btn-outline"
               >
                 <EditIcon />
-                Edit
+                <span className="hidden md:inline">Edit</span>
               </Link>
               <button
                 className={`btn-outline border-${deck.faction} text-${deck.faction} hover:bg-${deck.faction} hover:text-gray-100`}
                 onClick={() => setShareDialogOpen(true)}
               >
                 <ShareIcon />
-                Share
+                <span className="hidden md:inline">Share</span>
               </button>
             </div>
           </div>
@@ -167,6 +170,14 @@ export const DeckDetailsMain: FC = () => {
             </div>
           </div>
         </div>
+        {isMobile && (
+          <div className="mt-12 flex flex-col px-2">
+            <h3 className="mb-6 px-4 text-3xl font-thin text-gray-100">Stats</h3>
+            <div className="flex w-full flex-col gap-y-4">
+              <DeckStats />
+            </div>
+          </div>
+        )}
       </div>
       <CardTooltip />
       <ShareDeckDialog open={isShareDialogOpen} onClose={() => setShareDialogOpen(false)} />

@@ -5,6 +5,7 @@ import cx from 'classnames'
 import type { FC } from 'react'
 import { BounceLoader } from 'react-spinners'
 import colors from 'tailwindcss/colors'
+import { useWindowSize } from 'usehooks-ts'
 import { DeckInfograph } from '../DeckInfograph'
 import { Backdrop, InnerTransition, OuterTransition } from '../Dialog'
 import { DoneIcon, DownloadDoneIcon, ImageIcon, LinkIcon } from '../Icons'
@@ -14,6 +15,7 @@ export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ op
   const deck = useDeck()
   const { imageDataUri, imageFilename } = useDeckImage({ renderOnly: !open })
   const { copyDeckImageUrl, copyDeckUrl } = useDeckActions()
+  const { width } = useWindowSize()
 
   return (
     <OuterTransition show={open}>
@@ -35,7 +37,7 @@ export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ op
                 )}
               >
                 <Dialog.Title className="text-2xl">Share this deck</Dialog.Title>
-                <div className="flex gap-x-2">
+                <div className="flex flex-wrap justify-end gap-2">
                   <OneTimeButton onClick={copyDeckUrl} timeout={2500}>
                     {(copied) => (
                       <>
@@ -52,7 +54,6 @@ export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ op
                       </>
                     )}
                   </OneTimeButton>
-                  <div className="w-2" />
                   <OneTimeButton
                     href={imageDataUri ?? undefined}
                     download={imageFilename}
@@ -80,7 +81,11 @@ export const ShareDeckDialog: FC<{ open: boolean; onClose: () => void }> = ({ op
                 </div>
               </div>
               <div className="flex-1 overflow-y-auto">
-                <DeckInfograph />
+                {width < 960 ? (
+                  <img src={imageDataUri ?? ''} alt="Deck image" />
+                ) : (
+                  <DeckInfograph />
+                )}
               </div>
             </Dialog.Panel>
           </div>

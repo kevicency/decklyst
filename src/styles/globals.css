@@ -99,7 +99,7 @@ body {
 
   .btn-outline {
     @apply flex items-center justify-center gap-x-1.5;
-    @apply py-1 px-3;
+    @apply py-1 px-1 md:py-1 md:px-3;
     @apply bg-transparent hover:bg-alt-600;
     @apply border-2 border-alt-400 hover:border-transparent;
     @apply font-semibold text-alt-400 hover:text-gray-100;
@@ -133,7 +133,8 @@ body {
     @apply cursor-help hover:text-inherit;
   }
 
-  .grid-in-aside > * {
+  .grid-in-aside > *,
+  .grid-in-filters > * {
     width: var(--w-aside);
     @apply border-l border-gray-700;
   }

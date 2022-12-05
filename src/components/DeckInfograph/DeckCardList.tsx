@@ -1,28 +1,39 @@
 import { useDeck } from '@/context/useDeck'
 import cx from 'classnames'
 import { chunk, flatMap } from 'lodash'
+import { useWindowSize } from 'usehooks-ts'
 import { ManaIcon } from './ManaIcon'
 
 export const DeckCardList = () => {
   const { faction, minions, spells, artifacts, counts } = useDeck()
+  const { width } = useWindowSize()
 
+  const chunkSize = width >= 1280 ? 7 : undefined
   const cols = flatMap([minions, spells, artifacts], (cards, i) =>
-    chunk(cards, 6).map((chunked, j) => ({
+    chunk(cards, chunkSize ?? cards.length).map((chunked, j) => ({
       title: j === 0 ? (i === 0 ? 'Minions' : i === 1 ? 'Spells' : 'Artifacts') : '',
       count: i === 0 ? counts.minions : i === 1 ? counts.spells : counts.artifacts,
       cards: chunked,
     })),
   )
+  console.log({ cols })
 
   return (
     <div
-      className={cx(`grid gap-4`, {
-        'grid-cols-3': cols.length === 3,
-        'grid-cols-4': cols.length === 4,
-        'grid-cols-5': cols.length === 5,
-        'grid-cols-6': cols.length === 6,
-        'grid-cols-7': cols.length === 7,
-      })}
+      className={cx(
+        `grid gap-4`,
+        width <= 480
+          ? 'grid-cols-1'
+          : width < 720
+          ? 'grid-cols-2'
+          : {
+              'grid-cols-3': cols.length <= 3,
+              'grid-cols-4': cols.length === 4,
+              'grid-cols-5': cols.length === 5,
+              'grid-cols-6': cols.length === 6,
+              'grid-cols-7': cols.length === 7,
+            },
+      )}
     >
       {cols.map((col, i) => (
         <div key={i}>

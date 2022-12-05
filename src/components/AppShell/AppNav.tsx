@@ -81,17 +81,17 @@ export const AppNav: FC = () => {
   const [{ isNavExpanded: isExpanded, isMobile, isMobileNavOpen }, { toggleNav }] = useAppShell()
 
   return (
-    <div className="grid-in-nav flex flex-col justify-between border-gray-700 ">
-      <div
-        className={cx(
-          'z-30 flex flex-col gap-y-0.5 border-gray-700 grid-in-nav-t',
-          isMobile
-            ? isMobileNavOpen
-              ? 'fixed top-[58px] left-0 bottom-0 z-[100] w-full bg-gray-900'
-              : 'hidden'
-            : 'border-r pt-6 shadow-nav',
-        )}
-      >
+    <div
+      className={cx(
+        'z-30 flex flex-col border-gray-700 grid-in-nav',
+        isMobile
+          ? isMobileNavOpen
+            ? 'fixed top-[58px] left-0 bottom-0 z-[100] w-full overflow-y-auto bg-gray-900'
+            : 'hidden'
+          : 'border-r pt-6 shadow-nav',
+      )}
+    >
+      <div className="flex flex-1 flex-col items-stretch gap-y-0.5">
         <AppNavLink
           href="/decks"
           icon={DeckLibraryIcon}
@@ -106,41 +106,41 @@ export const AppNav: FC = () => {
           Deck Diff
         </AppNavLink>
       </div>
-      {!isMobile && (
-        <div className={cx('z-30 flex flex-col border-r border-gray-700 shadow-nav grid-in-nav-b')}>
-          {session?.data?.user ? (
-            <AppNavLink href={`/profile/${session.data.user?.id}`} icon={AvatarIcon}>
-              Profile
-            </AppNavLink>
-          ) : (
-            <AppNavLink
-              onClick={() =>
-                signIn('discord', {
-                  callbackUrl: window.location.href,
-                })
-              }
-              icon={LogInIcon}
-            >
-              Sign In
-            </AppNavLink>
-          )}
-          <div className="border-t border-gray-800">
-            <AppNavLink
-              href="discord://discord.com/channels/1041363184872857602/1041363185707528208"
-              icon={FeedbackIcon}
-            >
-              Feedback
-            </AppNavLink>
-          </div>
-          <div className="border-t border-gray-800">
-            <AppNavLink
-              href="discord://discord.com/channels/1041363184872857602/1041363436711465050"
-              icon={BugReportIcon}
-              iconClassName="py-0.5"
-            >
-              Report a bug
-            </AppNavLink>
-          </div>
+      <div className={cx('flex shrink-0', isMobile ? 'flex-col' : 'flex-col')}>
+        {session?.data?.user ? (
+          <AppNavLink href={`/profile/${session.data.user?.id}`} icon={AvatarIcon}>
+            Profile
+          </AppNavLink>
+        ) : (
+          <AppNavLink
+            onClick={() =>
+              signIn('discord', {
+                callbackUrl: window.location.href,
+              })
+            }
+            icon={LogInIcon}
+          >
+            Sign In
+          </AppNavLink>
+        )}
+        <div className="border-t border-gray-800">
+          <AppNavLink
+            href="discord://discord.com/channels/1041363184872857602/1041363185707528208"
+            icon={FeedbackIcon}
+          >
+            Feedback
+          </AppNavLink>
+        </div>
+        <div className="border-t border-gray-800">
+          <AppNavLink
+            href="discord://discord.com/channels/1041363184872857602/1041363436711465050"
+            icon={BugReportIcon}
+            iconClassName="py-0.5"
+          >
+            Report a bug
+          </AppNavLink>
+        </div>
+        {!isMobile && (
           <div className="border-t border-gray-800">
             <AppNavLink
               onClick={toggleNav}
@@ -150,8 +150,8 @@ export const AppNav: FC = () => {
               {isExpanded ? 'Collapse' : 'Expand'}
             </AppNavLink>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

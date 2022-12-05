@@ -61,13 +61,12 @@ module.exports = {
       },
       gridTemplateAreas: {
         desktop: [
-          'logo  header header',
-          'nav-t main   aside',
-          'nav-b main   aside'
+          'logo header header',
+          'nav  main   aside',
         ],
         mobile: [
           'logo header header',
-          'nav-t nav-t nav-t',
+          'nav  nav    nav',
           'main main   aside',
         ]
       },

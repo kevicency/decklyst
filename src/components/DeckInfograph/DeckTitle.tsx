@@ -35,7 +35,7 @@ export const DeckTitle = () => {
         />
       </div>
       <div className="ml-24 flex flex-1 flex-col justify-center">
-        <div className="mb-2 overflow-hidden text-3xl font-bold">
+        <div className="mb-2 overflow-hidden truncate text-3xl font-bold">
           {title?.slice(0, 40) || 'Untitled'}
         </div>
         <div className={`mb-1 flex content-center items-center gap-x-2 truncate text-xl`}>

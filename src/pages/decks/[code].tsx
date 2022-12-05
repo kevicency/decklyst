@@ -1,6 +1,7 @@
 import { DeckDetailsAside } from '@/components/DeckDetails/DeckDetailsAside'
 import { DeckDetailsMain } from '@/components/DeckDetails/DeckDetailsMain'
 import { PageLoader } from '@/components/PageLoader'
+import { useAppShell } from '@/context/useAppShell'
 import { DeckProvider } from '@/context/useDeck'
 import { useRegisterView } from '@/context/useRegisterView'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
@@ -15,6 +16,7 @@ import type { FC } from 'react'
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 const DeckPage: FC<Props> = ({ decklyst, code }) => {
+  const [{ isMobile }] = useAppShell()
   const {
     data: deck,
     error,
@@ -41,7 +43,7 @@ const DeckPage: FC<Props> = ({ decklyst, code }) => {
     <DeckProvider deck={deck}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
         <DeckDetailsMain />
-        <DeckDetailsAside />
+        {!isMobile && <DeckDetailsAside />}
       </SpriteLoaderProvider>
     </DeckProvider>
   )

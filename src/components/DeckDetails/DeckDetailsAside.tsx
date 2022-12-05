@@ -6,6 +6,31 @@ import { CardTypeChart } from './CardTypeChart'
 import { DeckStat } from './DeckStat'
 import { FactionChart } from './FactionChart'
 
+export const DeckStats: FC = () => (
+  <>
+    <DeckStat title="Mana Curve">
+      <div className="flex justify-center">
+        <DeckManaCurve />
+      </div>
+    </DeckStat>
+    <DeckStat title="Factions">
+      <div className="w-full">
+        <FactionChart />
+      </div>
+    </DeckStat>
+    <DeckStat title="Card Types">
+      <div className=" w-full">
+        <CardTypeChart />
+      </div>
+    </DeckStat>
+    <DeckStat title="Card Rarity">
+      <div className="w-full">
+        <CardRarityChart />
+      </div>
+    </DeckStat>
+  </>
+)
+
 export const DeckDetailsAside: FC = () => {
   return (
     <Aside>
@@ -14,26 +39,7 @@ export const DeckDetailsAside: FC = () => {
           <h3 className="text-2xl">Stats</h3>
         </div>
         <div className="flex flex-col gap-y-4 overflow-y-auto py-4">
-          <DeckStat title="Mana Curve">
-            <div className="flex justify-center">
-              <DeckManaCurve />
-            </div>
-          </DeckStat>
-          <DeckStat title="Factions">
-            <div className="w-full">
-              <FactionChart />
-            </div>
-          </DeckStat>
-          <DeckStat title="Card Types">
-            <div className=" w-full">
-              <CardTypeChart />
-            </div>
-          </DeckStat>
-          <DeckStat title="Card Rarity">
-            <div className="w-full">
-              <CardRarityChart />
-            </div>
-          </DeckStat>
+          <DeckStats />
         </div>
       </div>
     </Aside>

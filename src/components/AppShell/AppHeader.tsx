@@ -41,7 +41,7 @@ export const AppHeader = () => {
     <div className="z-20 flex w-full items-center border-b border-gray-700 bg-gradient-to-r from-gray-900 to-alt-900 shadow-header grid-in-header">
       {isMobile ? (
         <>
-          <div className="flex flex-1 items-stretch justify-end">
+          <div className="flex flex-1 items-stretch justify-end" onClick={handleSearch}>
             <button
               aria-label="Search"
               className={cx(

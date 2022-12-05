@@ -3,15 +3,18 @@ import { useDeck } from '@/context/useDeck'
 import type { CardEntry } from '@/data/deck'
 import { range } from 'lodash'
 import type { FC } from 'react'
+import { useElementSize } from 'usehooks-ts'
 import type { Variant } from './variant'
 
 export const DeckMinionList: FC<{ variant?: Variant }> = ({ variant = 'infograph' }) => {
   const { minions } = useDeck()
-  const columnCount = 10
+  const [containerRef, { width }] = useElementSize()
+  const columnCount = Math.min(10, Math.ceil(width / 120))
   const rowCount = Math.ceil(minions.length / columnCount)
 
   return (
     <div
+      ref={containerRef}
       className={`grid ${variant === 'infograph' ? 'bg-alt-800' : 'bg-transparent'}`}
       style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}
     >

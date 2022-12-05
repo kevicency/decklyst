@@ -9,6 +9,7 @@ import cx from 'classnames'
 import { startCase } from 'lodash'
 import Link from 'next/link'
 import type { FC } from 'react'
+import { useWindowSize } from 'usehooks-ts'
 import { DeckTags } from './DeckInfograph/DeckTags'
 import { EyeIcon, TrashIcon } from './Icons'
 import { ProfileLink } from './ProfileLink'
@@ -24,7 +25,7 @@ export const DeckPreview: FC<{
     <div
       className={cx(
         'group',
-        'relative flex min-w-max shrink-0 flex-col bg-alt-900',
+        'relative flex min-w-fit flex-col bg-alt-900',
         'border-[3px] border-alt-700',
         `hover:border-${faction}  hover:scale-101 hover:text-gray-100`,
       )}
@@ -45,7 +46,7 @@ export const DeckPreview: FC<{
       </div>
       <Link href={deckUrl(meta?.sharecode ?? deckcode, true)} className="cover-parent" />
       <div
-        className={`relative flex items-center gap-x-3 border-t-2 border-gray-800 bg-alt-850 px-2.5 py-1 text-gray-400`}
+        className={`relative flex flex-wrap items-center gap-3 border-t-2 border-gray-800 bg-alt-850 px-2.5 py-1 text-gray-400`}
       >
         <div>
           <span>created by </span>
@@ -76,7 +77,7 @@ export const DeckPreview: FC<{
         )} */}
         <div className="flex-1" />
 
-        <div className="flex items-center gap-x-4">
+        <div className="flex flex-wrap items-center gap-4">
           <span className={`-mr-3 font-semibold text-gray-300`}>
             <EyeIcon size={18} className="mx-1 inline-block pb-0.5" />
             {meta?.views ?? 1}
@@ -115,6 +116,7 @@ export const DeckPreviewList: FC<{
   decks: DeckExpanded[]
   className?: string
 }> = ({ title, decks, className }) => {
+  const { width } = useWindowSize()
   if (!decks.length) return null
 
   return (
@@ -124,7 +126,7 @@ export const DeckPreviewList: FC<{
         {decks.map((deck) => (
           <li key={deck.meta?.id ?? deck.deckcode}>
             <DeckProvider deck={deck}>
-              <DeckPreview type="list" />
+              <DeckPreview type={width <= 768 ? 'card' : 'list'} />
             </DeckProvider>
           </li>
         ))}
