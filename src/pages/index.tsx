@@ -19,7 +19,7 @@ const Home: NextPage<Props> = ({ starterDecklysts }) => {
   )
   return (
     <div className="bg-image-home overflow-y-auto bg-gray-900 grid-in-main">
-      <div className="content-container mt-32 flex flex-col px-24">
+      <div className="content-container mt-16 flex flex-col px-24 lg:mt-32">
         <h1 className="mb-3 text-center text-5xl text-gray-100">
           Welcome to&nbsp;
           <span className="font-thin text-accent-400">Decklyst</span>
@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({ starterDecklysts }) => {
           Kickstart your Duelyst 2 journey with these starter decks
         </p>
         {starterDeckGroups.map((decks, i) => (
-          <div key={i} className="mb-6 grid grid-cols-2 gap-x-8">
+          <div key={i} className="mb-6 grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
             {decks.map((deck) => (
               <DeckProvider key={deck.meta.id} deck={deck}>
                 <DeckPreview type="card" />
