@@ -35,7 +35,7 @@ export const DeckDetailsMain: FC = () => {
 
   return (
     <div className="bg-image-deckdetails relative flex flex-1 flex-col overflow-hidden grid-in-main">
-      <PageHeader>
+      <PageHeader className="!px-0">
         <div className="content-container">
           <div className="-mt-1 grid grid-cols-[6rem_minmax(0,1fr)_auto]">
             <div className="relative">
@@ -47,14 +47,11 @@ export const DeckDetailsMain: FC = () => {
                     `/assets/generals/${general.id}_hex@2x.png 2x`,
                   ].join(',')}
                   alt={general.name}
-                  className="h-full"
                 />
               </div>
             </div>
-            <div className="flex flex-1 truncate text-3xl font-light">
-              {deck.title || 'Untitled'}
-            </div>
-            <div className="flex items-center gap-x-2">
+            <div className="truncate text-3xl font-light">{deck.title || 'Untitled'}</div>
+            <div className="ml-2 flex items-center gap-x-2">
               {isMyDeck && (
                 <button
                   onClick={handleDeleteDeck}
@@ -87,34 +84,38 @@ export const DeckDetailsMain: FC = () => {
         <div className="content-container">
           <div className="flex flex-col gap-y-3">
             <div className="mt-2 grid grid-cols-[6rem_minmax(0,1fr)_auto] gap-x-1">
-              <div className="flex items-end gap-x-2 pl-2 pb-1 text-xl font-semibold text-gray-100">
-                <EyeIcon className="mb-[1px] text-gray-400" size={24} /> {meta.views}
+              <div className="mt-6 flex gap-x-2 pl-2 pb-1 text-xl font-semibold text-gray-100">
+                <EyeIcon className="mb-[1px] mt-0.5 text-gray-400" size={24} /> {meta.views}
               </div>
               <div className="flex flex-col gap-y-0">
                 <div className="flex gap-x-2 text-xl text-gray-300">
                   <span className={`text-${deck.faction}`}>{startCase(deck.faction)}</span>
                   {startCase(deck.meta?.archetype ?? '')}
                 </div>
-                <div className=" text-gray-400">
-                  <span>created by </span>
-                  {meta.author ? (
-                    <Link
-                      href={{
-                        pathname: '/profile/[userId]',
-                        query: { userId: deck.meta?.authorId },
-                      }}
-                      className="font-semibold text-accent-400 hover:underline"
-                    >
-                      {meta.author.name}
-                    </Link>
-                  ) : (
-                    <span className="font-semibold text-gray-300">Anonymous</span>
-                  )}
-                  <span className={`mx-2 text-lg font-bold text-alt-400`}>•</span>
-                  <span>last updated </span>
-                  <span className="font-semibold text-gray-300">
-                    <TimeAgo date={meta.updatedAt} />
-                  </span>
+                <div className="flex flex-wrap items-center gap-x-2 text-gray-400">
+                  <div>
+                    <span>created by&nbsp;</span>
+                    {meta.author ? (
+                      <Link
+                        href={{
+                          pathname: '/profile/[userId]',
+                          query: { userId: deck.meta?.authorId },
+                        }}
+                        className="font-semibold text-accent-400 hover:underline"
+                      >
+                        {meta.author.name}
+                      </Link>
+                    ) : (
+                      <span className="font-semibold text-gray-300">Anonymous</span>
+                    )}
+                  </div>
+                  <div className={`hidden text-lg font-bold text-alt-400 sm:inline-block`}>•</div>
+                  <div>
+                    <span>last updated&nbsp;</span>
+                    <span className="font-semibold text-gray-300">
+                      <TimeAgo date={meta.updatedAt} />
+                    </span>
+                  </div>
                 </div>
               </div>
               {/* <div className="flex flex-wrap items-end justify-center gap-2 px-4">

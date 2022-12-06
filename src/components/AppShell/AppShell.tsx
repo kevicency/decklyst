@@ -27,7 +27,7 @@ export const AppShell: FC<{ children: ReactNode }> = ({ children }) => {
     handleResize()
 
     const handleRouteChanged = (url: string, { shallow }: { shallow: boolean }) => {
-      if (!shallow) {
+      if (!shallow && !isMobile) {
         setShowFilters(url.startsWith('/decks') || url.startsWith('/profile'))
       }
       setMobileNavOpen(false)

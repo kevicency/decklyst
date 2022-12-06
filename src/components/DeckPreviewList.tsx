@@ -25,7 +25,7 @@ export const DeckPreview: FC<{
     <div
       className={cx(
         'group',
-        'relative flex min-w-fit flex-col bg-alt-900',
+        'relative flex flex-col bg-alt-900',
         'border-[3px] border-alt-700',
         `hover:border-${faction}  hover:scale-101 hover:text-gray-100`,
       )}

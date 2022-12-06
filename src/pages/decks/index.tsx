@@ -31,6 +31,7 @@ const toSorting = (listing: Listing): RouterInputs['decklyst']['search']['sortin
 const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) => {
   const [routeParams, updateRouteParams] = useRouteParams(initialRouteParams)
   const [endlessScrollTimeoutId, setEndlessScrollTimeoutId] = useState(0)
+  const [filtersChanged, setFiltersChanged] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const utils = trpc.useContext()
 
@@ -38,6 +39,7 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
     utils.decklyst.search.cancel()
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
     updateRouteParams({ ...routeParams, filters: { ...routeParams.filters, ...partialFilters } })
+    setFiltersChanged(true)
 
     window.clearTimeout(endlessScrollTimeoutId)
     setEndlessScrollTimeoutId(
@@ -53,7 +55,10 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
     { sorting: toSorting(routeParams.listing), filters: routeParams.filters },
     {
       getNextPageParam: (_, allPages) => allPages.length,
-      placeholderData: initialDecklysts ? { pages: [initialDecklysts], pageParams: [] } : undefined,
+      placeholderData:
+        initialDecklysts && !filtersChanged
+          ? { pages: [initialDecklysts], pageParams: [] }
+          : undefined,
     },
   )
 

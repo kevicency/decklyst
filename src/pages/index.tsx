@@ -19,13 +19,13 @@ const Home: NextPage<Props> = ({ starterDecklysts }) => {
   )
   return (
     <div className="bg-image-home overflow-y-auto bg-gray-900 grid-in-main">
-      <div className="content-container mt-16 flex flex-col px-24 lg:mt-32">
-        <h1 className="mb-3 text-center text-5xl text-gray-100">
-          Welcome to&nbsp;
+      <div className="content-container mt-16 flex flex-col px-6 lg:mt-32 lg:px-24">
+        <h1 className="mb-3 text-center text-5xl leading-tight text-gray-100">
+          <span className="inline-block whitespace-nowrap">Welcome to&nbsp;</span>
           <span className="font-thin text-accent-400">Decklyst</span>
         </h1>
         <p className="text-center text-xl text-gray-300">Your Duelyst 2 deck companion</p>
-        <div className="mt-8 flex items-center justify-center gap-x-12">
+        <div className="mt-8 flex flex-col items-center justify-center gap-x-12 gap-y-4 sm:flex-row">
           <Link className="btn btn--large bg-accent-700" href="/decks">
             Browse decks
           </Link>
