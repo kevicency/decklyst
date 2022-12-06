@@ -1,5 +1,4 @@
-import { createApiClient } from '@/server'
-import { createContext } from '@/server/trpc/context'
+import { createSSRClient } from '@/server'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
 
@@ -11,7 +10,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext<{ code?:
 
   if (!code) return { notFound: true }
 
-  const client = await createApiClient(await createContext(ctx as any))
+  const client = await createSSRClient(ctx)
   const decklyst = await client.decklyst.get({ code, ssrSecret: env.SSR_SECRET })
 
   return decklyst

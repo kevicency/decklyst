@@ -1,5 +1,5 @@
 import type * as trpc from '@trpc/server'
-import type { CreateNextContextOptions } from '@trpc/server/adapters/next'
+import type { GetServerSidePropsContext } from 'next'
 import type { Session } from 'next-auth'
 import { getServerAuthSession } from '../auth'
 import { prisma } from '../db/client'
@@ -35,7 +35,7 @@ export const createContextInner = async (opts: CreateContextOptions = { session:
  * This is the actual context you'll use in your router
  * @link https://trpc.io/docs/context
  **/
-export async function createContext(opts: CreateNextContextOptions) {
+export async function createContext(opts: Pick<GetServerSidePropsContext, 'req' | 'res'>) {
   const ipAddress = getIpAddress(opts.req)
   const session = await getServerAuthSession(opts)
 

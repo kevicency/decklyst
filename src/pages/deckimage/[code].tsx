@@ -2,7 +2,7 @@ import { DeckInfograph } from '@/components/DeckInfograph'
 import { DeckProvider } from '@/context/useDeck'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import { createDeckFromDecklyst } from '@/data/deck'
-import { createApiClient } from '@/server'
+import { createSSRClient } from '@/server'
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next/types'
 import type { FC } from 'react'
 import { useMemo } from 'react'
@@ -24,10 +24,10 @@ const DeckPage: FC<Props> = ({ decklyst }) => {
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query, req, res }: GetServerSidePropsContext) => {
   const code = (query.code as string | undefined) ?? ''
   const ssrSecret = (query.ssrSecret as string | undefined) ?? ''
-  const client = await createApiClient()
+  const client = await createSSRClient({ req, res })
 
   const decklyst = await client.decklyst.get({ code, ssrSecret: ssrSecret })
 

@@ -5,7 +5,7 @@ import { EndlessScroll } from '@/components/Decksearch/EndlessScroll'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
 import { createDeckFromDecklyst } from '@/data/deck'
-import { createApiClient } from '@/server'
+import { createSSRClient } from '@/server'
 import type { RouterInputs } from '@/utils/trpc'
 import { trpc } from '@/utils/trpc'
 import { last, startCase, uniqBy } from 'lodash'
@@ -115,8 +115,8 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const client = await createApiClient()
+export const getServerSideProps = async ({ query, ...ctx }: GetServerSidePropsContext) => {
+  const client = await createSSRClient(ctx)
   const routeParams = parseRouteParams(query)
   const decklysts = await client.decklyst.search({
     filters: routeParams.filters,

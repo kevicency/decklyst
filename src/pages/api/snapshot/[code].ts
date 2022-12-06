@@ -1,5 +1,5 @@
 import { isShareOrDeckcode } from '@/common/utils'
-import { createApiClient } from '@/server'
+import { createSSRClient } from '@/server'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).send('invalid deckcode or share code')
   }
 
-  const client = await createApiClient()
+  const client = await createSSRClient({ req, res })
   const image = await client.deckImage.ensure({ code })
 
   if (image === null) {
