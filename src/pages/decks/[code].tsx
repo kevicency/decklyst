@@ -60,6 +60,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: uniqBy(
       decklysts
         .flatMap(({ deckcode, sharecode }) => [deckcode, sharecode])
+        .map((code) => code?.trim())
+        .filter((code): code is string => code?.length > 0)
         .map((code) => `/decks/${encodeURIComponent(code)}`)
         .filter((code) => code?.length > 0 && code.length <= 205),
       (code) => code.toLowerCase(),
