@@ -14,7 +14,7 @@
     "migrate:prod": "dotenv -e .env.production prisma migrate deploy",
     "studio:dev": "dotenv -e .env.local prisma studio",
     "studio:prod": "dotenv -e .env.production prisma studio",
-    "generate:cards.json": "ts-node scripts/generateCardsJson.ts",
+    "generate:cards.json": "ts-node scripts/generateCardsJson.ts && yarn prettier --write src/data/carddata.json",
     "sync:db": "dotenv -e .env.local -e .env ts-node scripts/syncDb.ts"
   },
   "dependencies": {
