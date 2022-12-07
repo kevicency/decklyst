@@ -39,13 +39,15 @@ const DeckPage: FC<Props> = ({ decklyst, code }) => {
     )
   if (!deck) return <PageLoader />
 
-  return (
+  return deck.valid ? (
     <DeckProvider deck={deck}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
         <DeckDetailsMain />
         {!isMobile && <DeckDetailsAside />}
       </SpriteLoaderProvider>
     </DeckProvider>
+  ) : (
+    <div className="flex items-center justify-center grid-in-main">invalid deckcode</div>
   )
 }
 

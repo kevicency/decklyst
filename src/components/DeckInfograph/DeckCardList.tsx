@@ -16,7 +16,6 @@ export const DeckCardList = () => {
       cards: chunked,
     })),
   )
-  console.log({ cols })
 
   return (
     <div
