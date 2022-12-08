@@ -8,7 +8,9 @@ import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import { createDeckFromDecklyst } from '@/data/deck'
 import { createSSGClient } from '@/server'
 import { createContextInner } from '@/server/trpc/context'
+import type { Decklyst } from '@/types'
 import { trpc } from '@/utils/trpc'
+import { TRPCError } from '@trpc/server'
 import { uniqBy } from 'lodash'
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from 'next/types'
 import type { FC } from 'react'
@@ -81,7 +83,18 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
   }
 
   const ssg = await createSSGClient()
-  const decklyst = await ssg.decklyst.get.fetch({ code, ssrSecret: env.SSR_SECRET })
+
+  let decklyst: Decklyst | null = null
+  let invalid = true
+
+  try {
+    decklyst = await ssg.decklyst.get.fetch({ code, ssrSecret: env.SSR_SECRET })
+  } catch (err) {
+    if (err instanceof TRPCError) {
+      console.log(err.message, err.cause, err.name)
+      invalid = /invalid/i.test(err.message)
+    }
+  }
 
   const isPrivate = decklyst?.privacy === 'private'
 
@@ -93,6 +106,8 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
           decklyst: isPrivate ? null : decklyst,
         },
       }
+    : invalid
+    ? { redirect: { destination: '/decks/invalid', permanent: false } }
     : { notFound: true, revalidate: true }
 }
 

@@ -1,5 +1,5 @@
 import { factions } from '@/data/cards'
-import { createDeck, faction$ } from '@/data/deck'
+import { createDeck, createDeckExpanded } from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
 import { env } from '@/env/server.mjs'
 import type { Decklyst, Prisma, User } from '@prisma/client'
@@ -23,10 +23,15 @@ export const decklystRouter = router({
 
       let decklyst = await ctx.decklyst.findByCode(input.code, input.scope === 'user')
 
-      if (decklyst === null && isSSG && validateDeckcode(input.code)) {
-        decklyst = await ctx.decklyst.upsertDeck(null, createDeck(input.code), {
-          privacy: 'public',
-        })
+      if (decklyst === null && isSSG) {
+        const deck = validateDeckcode(input.code) ? createDeckExpanded(input.code) : null
+        if (deck?.valid) {
+          decklyst = await ctx.decklyst.upsertDeck(null, createDeck(input.code), {
+            privacy: 'public',
+          })
+        } else {
+          throw new TRPCError({ message: 'Invalid deckcode', code: 'BAD_REQUEST' })
+        }
       }
 
       // if (decklyst === null) {
@@ -167,10 +172,9 @@ export const decklystRouter = router({
       }),
     )
     .mutation(async ({ ctx, input: { sharecode, deckcode, ...settings } }) => {
-      const deck = createDeck(deckcode)
-      const faction = faction$(deck)
+      const deck = createDeckExpanded(deckcode)
 
-      if (!faction || faction === 'neutral') {
+      if (!deck.valid || !deck.deckcode) {
         throw new TRPCError({ message: 'Invalid deckcode', code: 'BAD_REQUEST' })
       }
 

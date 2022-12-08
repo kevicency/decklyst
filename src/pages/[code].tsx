@@ -1,4 +1,3 @@
-import { createSSRClient } from '@/server'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { FC } from 'react'
 
@@ -10,17 +9,31 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext<{ code?:
 
   if (!code) return { notFound: true }
 
-  const client = await createSSRClient(ctx)
-  const decklyst = await client.decklyst.get({ code, ssrSecret: env.SSR_SECRET })
+  return {
+    redirect: {
+      destination: `/decks/${encodeURIComponent(code)}`,
+      permanent: true,
+    },
+  }
 
-  return decklyst
-    ? {
-        redirect: {
-          destination: `/decks/${encodeURIComponent(code)}`,
-          permanent: true,
-        },
-      }
-    : { notFound: true }
+  // const client = await createSSRClient(ctx)
+  // try {
+  //   const decklyst = await client.decklyst.get({ code, ssrSecret: env.SSR_SECRET })
+
+  //   return decklyst
+  //     ? {
+  //         redirect: {
+  //           destination: `/decks/${encodeURIComponent(code)}`,
+  //           permanent: true,
+  //         },
+  //       }
+  //     : { notFound: true }
+  // } catch (err) {
+  //   if (err instanceof TRPCError) {
+  //     console.log('is trpc error')
+  //   }
+  //   return { redirect: { destination: '/decks/invalid', permanent: false } }
+  // }
 }
 
 export default DeckRedirectPage
