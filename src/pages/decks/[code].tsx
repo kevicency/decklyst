@@ -8,9 +8,9 @@ import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import { createDeckFromDecklyst } from '@/data/deck'
 import { createSSGClient } from '@/server'
 import { createContextInner } from '@/server/trpc/context'
+import { isInvalidDeckcodeError } from '@/server/utils'
 import type { Decklyst } from '@/types'
 import { trpc } from '@/utils/trpc'
-import { TRPCError } from '@trpc/server'
 import { uniqBy } from 'lodash'
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from 'next/types'
 import type { FC } from 'react'
@@ -90,9 +90,10 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
   try {
     decklyst = await ssg.decklyst.get.fetch({ code, ssrSecret: env.SSR_SECRET })
   } catch (err) {
-    if (err instanceof TRPCError) {
-      console.log(err.message, err.cause, err.name)
-      invalid = /invalid/i.test(err.message)
+    if (isInvalidDeckcodeError(err)) {
+      invalid = true
+    } else {
+      throw err
     }
   }
 
