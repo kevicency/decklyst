@@ -18,20 +18,12 @@ export const TagsCombobox: FC<{
         .sort((a, b) => a.localeCompare(b)),
     [tags, query],
   )
+  console.log(' query', query)
 
   return (
-    <Combobox
-      multiple
-      value={value}
-      onChange={(value) => {
-        onChange(value)
-        setQuery('')
-      }}
-      as="div"
-      className="combobox"
-    >
+    <Combobox multiple value={value} onChange={onChange} as="div" className="combobox">
       <div className="combobox-input">
-        <Combobox.Input value={query} onChange={(e) => setQuery(e.target.value)} />
+        <Combobox.Input onChange={(e) => setQuery(e.target.value)} />
         <Combobox.Button>
           <ChevronDownIcon />
         </Combobox.Button>

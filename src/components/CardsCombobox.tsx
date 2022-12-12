@@ -22,16 +22,7 @@ export const CardsCombobox: FC<{
   )
 
   return (
-    <Combobox
-      multiple
-      value={value}
-      onChange={(value) => {
-        onChange(value)
-        setQuery('')
-      }}
-      as="div"
-      className="combobox"
-    >
+    <Combobox multiple value={value} onChange={onChange} as="div" className="combobox">
       <div className="combobox-input">
         <Combobox.Input value={query} onChange={(e) => setQuery(e.target.value)} />
         <Combobox.Button>

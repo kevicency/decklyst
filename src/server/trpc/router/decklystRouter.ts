@@ -30,7 +30,11 @@ export const decklystRouter = router({
             privacy: 'public',
           })
         } else {
-          throw new TRPCError({ message: 'Invalid deckcode', code: 'BAD_REQUEST' })
+          throw new TRPCError({
+            message: 'Invalid deckcode',
+            code: 'BAD_REQUEST',
+            cause: input.code,
+          })
         }
       }
 
