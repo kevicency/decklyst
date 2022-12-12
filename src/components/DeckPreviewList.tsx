@@ -24,14 +24,19 @@ export const DeckPreview: FC<{
   return (
     <div
       className={cx(
-        'group',
+        'group overflow-hidden',
         'relative flex flex-col bg-alt-900',
         'border-[3px] border-alt-700',
         `hover:border-${faction}  hover:scale-101 hover:text-gray-100`,
       )}
     >
-      <div className={cx('flex items-center justify-between gap-4 lg:gap-8', 'pt-2 pb-4 pr-4')}>
-        <div className="flex-1 scale-90">
+      <div
+        className={cx(
+          'flex w-full items-center justify-between gap-4 overflow-hidden lg:gap-8',
+          'pt-2 pb-4 pr-4',
+        )}
+      >
+        <div className="flex-1 scale-90 truncate text-ellipsis">
           <DeckTitle />
         </div>
         {type === 'list' && (
