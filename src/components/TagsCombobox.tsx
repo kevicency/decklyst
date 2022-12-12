@@ -18,7 +18,6 @@ export const TagsCombobox: FC<{
         .sort((a, b) => a.localeCompare(b)),
     [tags, query],
   )
-  console.log(' query', query)
 
   return (
     <Combobox multiple value={value} onChange={onChange} as="div" className="combobox">
