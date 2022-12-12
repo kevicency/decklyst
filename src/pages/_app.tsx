@@ -22,7 +22,7 @@ const App: AppType<{ session: Session | null }> = ({
       />
       <meta property="og:site_name" content="Decklyst" />
       <meta name="google-site-verification" content="todbfz-oykJnt7ZTWmfVp8J6TyL1pnYoPMo6tZtkz-o" />
-      <link rel="icon" href="favicon.ico" />
+      <link rel="icon" href="/favicon.ico" />
     </Head>
     <SessionProvider session={session}>
       <AppShell>
