@@ -60,7 +60,7 @@ export const DeckbuilderMain: FC = () => {
             onChange={(ev) => updateCardFilters({ query: ev.target.value })}
           />
         </div>
-        <div className="z-10 mr-8 mt-4 -mb-8 flex justify-around">
+        <div className="z-10 mr-2 mt-4 -mb-8 flex justify-around">
           {generals.map((general) => (
             <GeneralCard
               size="sm"

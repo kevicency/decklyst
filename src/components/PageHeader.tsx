@@ -16,7 +16,7 @@ export const PageHeader: FC<{
         'relative flex shrink-0 items-end justify-between gap-x-8',
         'h-16 px-4 pb-3 lg:h-20 lg:px-8 lg:pb-4',
         'z-20 bg-gradient-to-r from-gray-850 to-alt-900 shadow-header',
-        { 'pr-20': showFilterToggle },
+        { '!pr-20': showFilterToggle },
       )}
     >
       {children}
