@@ -1,5 +1,3 @@
-import { execSync } from 'child_process'
-
 require('dotenv').config({ path: '.env.test', override: true })
 
 beforeAll(() => {
@@ -7,5 +5,5 @@ beforeAll(() => {
     console.error('DATABASE_URL must include decklyst-test')
     process.exit(1)
   }
-  execSync(`./node_modules/.bin/prisma db push --force-reset`, { stdio: 'inherit' })
+  // execSync(`./node_modules/.bin/prisma db push --force-reset`, { stdio: 'inherit' })
 })
