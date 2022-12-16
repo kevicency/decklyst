@@ -18,7 +18,10 @@ export const CardsInDeck: FC<{ cardType: CardType }> = ({ cardType }) => {
     <div className="mb-3">
       <div className="mb-1 font-mono text-lg">
         <span className={`text-${deck.faction} inline-block w-8`}>{count}</span>
-        <span>{startCase(cardType)}s</span>
+        <span>
+          {startCase(cardType)}
+          {count !== 1 ? 's' : ''}
+        </span>
       </div>
       <ul>
         {cards.map((card) => (
