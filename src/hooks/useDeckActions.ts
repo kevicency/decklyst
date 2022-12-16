@@ -37,7 +37,6 @@ export const useDeckImage = ({ renderOnly }: { renderOnly?: boolean } = {}) => {
   const deck = useDeck()
   const { deckcode } = deck
 
-  console.log('useDeckImage', deck.meta?.sharecode, deckcode)
   const imageFilename = useMemo(
     () => `${title$(deck)}_${faction$(deck)}_${deckcodeWithoutTitle$(deck)}.png`,
     [deck],

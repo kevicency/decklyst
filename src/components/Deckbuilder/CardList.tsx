@@ -35,7 +35,7 @@ export const CardList: FC<{
             : true,
         )
         .sort(cardCompareFn),
-    [faction, mana, query, rarity, cardType, keyword],
+    [faction, mana, rarity, cardType, keywordRegex, query],
   )
 
   return (
