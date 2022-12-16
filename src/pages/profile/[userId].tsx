@@ -25,6 +25,7 @@ const UserProfilePage: FC<Props> = ({ decklysts, userProfile: initialUserProfile
   const session = useSession()
   const [routeParams, updateRouteParams] = useRouteParams({} as any)
   const [endlessScrollTimeoutId, setEndlessScrollTimeoutId] = useState(0)
+  const [filtersChanged, setFiltersChanged] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [deleteDialogState, setDeleteDialogState] = useState<{
     deck: WithRequired<DeckExpanded, 'meta'> | null
@@ -36,6 +37,7 @@ const UserProfilePage: FC<Props> = ({ decklysts, userProfile: initialUserProfile
     utils.decklyst.search.cancel()
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
     updateRouteParams({ ...routeParams, filters: { ...routeParams.filters, ...partialFilters } })
+    setFiltersChanged(true)
 
     window.clearTimeout(endlessScrollTimeoutId)
     setEndlessScrollTimeoutId(
@@ -55,7 +57,8 @@ const UserProfilePage: FC<Props> = ({ decklysts, userProfile: initialUserProfile
     { limit: 15, filters: { ...routeParams.filters, authorId: userId }, sorting: 'date:updated' },
     {
       getNextPageParam: (_, allPages) => allPages.length,
-      placeholderData: decklysts ? { pages: [decklysts], pageParams: [] } : undefined,
+      placeholderData:
+        decklysts && !filtersChanged ? { pages: [decklysts], pageParams: [] } : undefined,
     },
   )
   const { data } = trpc.userProfile.get.useQuery(
