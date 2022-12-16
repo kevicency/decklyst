@@ -35,7 +35,7 @@ const Home: NextPage<Props> = ({ starterDecklysts }) => {
           </Link>
         </div>
       </div>
-      <div className="content-container mt-32 flex flex-col">
+      <div className="content-container mt-32 mb-16 flex flex-col">
         <h2 className="mb-2 text-3xl">Popular starter decks</h2>
         <p className="mb-4 text-lg text-gray-400">
           Kickstart your Duelyst 2 journey with these starter decks
