@@ -357,7 +357,7 @@
     },
     "mana": 4,
     "attack": 3,
-    "health": 4,
+    "health": 5,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f1_sunriser",
@@ -703,7 +703,7 @@
       "death": "resources/card_gifs/f2StormKageDeath.gif"
     },
     "mana": 7,
-    "attack": 5,
+    "attack": 6,
     "health": 10,
     "cardType": "Minion",
     "tribes": [],
@@ -956,7 +956,7 @@
     },
     "mana": 4,
     "attack": 3,
-    "health": 3,
+    "health": 4,
     "cardType": "Minion",
     "tribes": ["Dervish"],
     "spriteName": "f3_sandhowler",
@@ -1242,7 +1242,7 @@
       "death": "resources/card_gifs/f3OserixDeath.gif"
     },
     "mana": 7,
-    "attack": 7,
+    "attack": 8,
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
@@ -1685,7 +1685,7 @@
       "death": "resources/card_gifs/f4ReaperNineMoonsDeath.gif"
     },
     "mana": 5,
-    "attack": 6,
+    "attack": 7,
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
@@ -2545,7 +2545,7 @@
       "death": "resources/card_gifs/f6VoiceoftheWindDeath.gif"
     },
     "mana": 4,
-    "attack": 4,
+    "attack": 5,
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
@@ -3014,7 +3014,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "rare",
-    "description": "Ranged\nThis cannot attack minions.",
+    "description": "Ranged\nThis can only attack Generals.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralMercGrenadierBreathing.gif",
@@ -3756,7 +3756,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "common",
-    "description": "When this takes damage, it gains +1/+0.",
+    "description": "When this takes damage, this gains +2/+0 until the start of your turn.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralNeedlerBreathing.gif",
@@ -6172,7 +6172,7 @@
     "cardSet": "Core Set",
     "faction": "songhai",
     "rarity": "basic",
-    "description": "Deal 5 damage to a minion.",
+    "description": "Deal 6 damage to a minion.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2KageLightningIdle.gif",
@@ -6513,7 +6513,7 @@
     "cardSet": "Core Set",
     "faction": "vetruvian",
     "rarity": "common",
-    "description": "Give a minion +0/+5 and Flying.",
+    "description": "Give a minion +0/+6 and Flying.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2AstralPhasingIdle.gif",
@@ -6621,7 +6621,7 @@
     "cardSet": "Core Set",
     "faction": "vetruvian",
     "rarity": "rare",
-    "description": "Draw two cards.",
+    "description": "Heal your General for 2. Draw two cards.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2ScionsSecondWishIdle.gif",
@@ -6639,7 +6639,7 @@
     "cardSet": "Core Set",
     "faction": "vetruvian",
     "rarity": "epic",
-    "description": "This turn, give your general +3/+0 and \"This can move up to 3 spaces. Reduce damage taken by this by 3\".",
+    "description": "This turn, give your general +3/+0 and \"This can move up to 3 spaces. Reduce damage this takes by 3\".",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2ScionsThirdWishIdle.gif",
@@ -7269,7 +7269,7 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "legendary",
-    "description": "Summon an Egg of each allied minion behind that minion.",
+    "description": "Summon an Egg of each allied minion on the space behind that minion.",
     "relatedCards": [469],
     "resource": {
       "idle": "resources/card_gifs/iconD2ChrysalisBurstIdle.gif",
