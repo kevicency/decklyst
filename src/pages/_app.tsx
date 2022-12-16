@@ -1,6 +1,7 @@
 import { AppShell } from '@/components/AppShell/AppShell'
 import { SpriteLoaderProvider } from '@/context/useSpriteLoader'
 import { trpc } from '@/utils/trpc'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Analytics } from '@vercel/analytics/react'
 import type { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
@@ -32,6 +33,7 @@ const App: AppType<{ session: Session | null }> = ({
       </AppShell>
     </SessionProvider>
     <Analytics />
+    <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
   </>
 )
 

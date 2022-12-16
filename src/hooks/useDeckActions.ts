@@ -37,6 +37,7 @@ export const useDeckImage = ({ renderOnly }: { renderOnly?: boolean } = {}) => {
   const deck = useDeck()
   const { deckcode } = deck
 
+  console.log('useDeckImage', deck.meta?.sharecode, deckcode)
   const imageFilename = useMemo(
     () => `${title$(deck)}_${faction$(deck)}_${deckcodeWithoutTitle$(deck)}.png`,
     [deck],
@@ -46,7 +47,11 @@ export const useDeckImage = ({ renderOnly }: { renderOnly?: boolean } = {}) => {
   const { data: imageDataUriFromQuery, refetch: refetchDeckImage } = useQuery(
     ['deck-image', deckcode, { renderOnly }],
     async () => {
-      const image = await ensureDeckImage({ code: deckcode, renderOnly })
+      const image = await ensureDeckImage({
+        code: deckcode,
+        renderOnly,
+        sharecode: deck.meta?.sharecode,
+      })
 
       return getImageDataUri(image)
     },
@@ -60,12 +65,16 @@ export const useDeckImage = ({ renderOnly }: { renderOnly?: boolean } = {}) => {
   const regenerateImage = useCallback(async () => {
     setImageDataUri(null)
     try {
-      const image = await ensureDeckImage({ code: deckcode, forceRerender: true })
+      const image = await ensureDeckImage({
+        code: deckcode,
+        forceRerender: true,
+        sharecode: deck.meta?.sharecode,
+      })
       setImageDataUri(getImageDataUri(image))
     } catch (e) {
       await refetchDeckImage()
     }
-  }, [deckcode, ensureDeckImage, refetchDeckImage])
+  }, [deck.meta?.sharecode, deckcode, ensureDeckImage, refetchDeckImage])
 
   useEffect(() => {
     if (imageDataUriFromQuery && imageDataUri !== imageDataUriFromQuery) {

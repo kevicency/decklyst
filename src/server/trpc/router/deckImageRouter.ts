@@ -13,24 +13,27 @@ export const deckImageRouter = router({
     .input(
       z.object({
         code: z.string(),
+        sharecode: z.string().optional(),
         forceRerender: z.boolean().optional(),
         timeout: z.number().optional(),
         renderOnly: z.boolean().optional(),
       }),
     )
-    .mutation(async ({ ctx, input: { code, forceRerender, timeout, renderOnly } }) => {
-      const decklyst = await ctx.decklyst.ensureByCode(code)
+    .mutation(async ({ ctx, input: { code, sharecode, forceRerender, timeout, renderOnly } }) => {
+      const decklyst =
+        (sharecode ? await ctx.decklyst.findByCode(sharecode) : null) ??
+        (await ctx.decklyst.ensureByCode(code))
 
       if (!decklyst) return null
 
-      const { sharecode, deckcode } = decklyst
+      sharecode = decklyst.sharecode
 
       let image: Buffer | null = forceRerender
         ? null
         : await ctx.deckImage.findBySharecode(sharecode, timeout ?? 25000)
 
       if (!image) {
-        await ctx.deckImage.startRendering(sharecode, deckcode)
+        await ctx.deckImage.startRendering(sharecode, decklyst.deckcode)
         try {
           image = await snapshot(sharecode)
         } catch (err) {
