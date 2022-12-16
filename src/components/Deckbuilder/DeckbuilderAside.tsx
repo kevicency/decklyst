@@ -53,7 +53,7 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
           <div className="-mb-4 flex flex-1 overflow-y-hidden">
             <div className="flex-1 overflow-y-scroll pl-4 pr-2">
               <div className="mb-2 font-mono text-lg">
-                <span className={`text-${deck.faction} inline-block w-8`}>{deck.spiritCost}</span>
+                <span className={`text-${deck.faction} inline-block`}>{deck.spiritCost}</span>
                 &nbsp;
                 <span>Spirit</span>
               </div>
