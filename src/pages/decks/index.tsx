@@ -5,7 +5,7 @@ import { EndlessScroll } from '@/components/Decksearch/EndlessScroll'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
 import { createDeckFromDecklyst } from '@/data/deck'
-import { createSSRClient } from '@/server'
+import { createSSGClient } from '@/server'
 import type { RouterInputs } from '@/utils/trpc'
 import { trpc } from '@/utils/trpc'
 import { last, startCase, uniqBy } from 'lodash'
@@ -28,10 +28,9 @@ const toSorting = (listing: Listing): RouterInputs['decklyst']['search']['sortin
   }
 }
 
-const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) => {
+const DecksPage: NextPage<Props> = ({ initialRouteParams }) => {
   const [routeParams, updateRouteParams] = useRouteParams(initialRouteParams)
   const [endlessScrollTimeoutId, setEndlessScrollTimeoutId] = useState(0)
-  const [filtersChanged, setFiltersChanged] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const utils = trpc.useContext()
 
@@ -39,7 +38,6 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
     utils.decklyst.search.cancel()
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
     updateRouteParams({ ...routeParams, filters: { ...routeParams.filters, ...partialFilters } })
-    setFiltersChanged(true)
 
     window.clearTimeout(endlessScrollTimeoutId)
     setEndlessScrollTimeoutId(
@@ -55,10 +53,6 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
     { sorting: toSorting(routeParams.listing), filters: routeParams.filters },
     {
       getNextPageParam: (_, allPages) => allPages.length,
-      placeholderData:
-        initialDecklysts && !filtersChanged
-          ? { pages: [initialDecklysts], pageParams: [] }
-          : undefined,
     },
   )
 
@@ -121,9 +115,9 @@ const DecksPage: NextPage<Props> = ({ initialDecklysts, initialRouteParams }) =>
 }
 
 export const getServerSideProps = async ({ query, ...ctx }: GetServerSidePropsContext) => {
-  const client = await createSSRClient(ctx)
+  const client = await createSSGClient(ctx)
   const routeParams = parseRouteParams(query)
-  const decklysts = await client.decklyst.search({
+  await client.decklyst.search.prefetchInfinite({
     filters: routeParams.filters,
     sorting: toSorting(routeParams.listing),
   })
@@ -131,7 +125,7 @@ export const getServerSideProps = async ({ query, ...ctx }: GetServerSidePropsCo
   return {
     props: {
       initialRouteParams: routeParams,
-      initialDecklysts: decklysts,
+      trpcState: client.dehydrate(),
     },
   }
 }

@@ -17,9 +17,15 @@ export const createSSRClient = async ({
   return appRouter.createCaller(await createContext({ req, res }))
 }
 
-export const createSSGClient = async () =>
+export const createSSGClient = async ({
+  req,
+  res,
+}: {
+  req?: GetServerSidePropsContext['req'] | NextApiRequest
+  res?: GetServerSidePropsContext['res'] | NextApiResponse
+} = {}) =>
   createProxySSGHelpers({
     router: appRouter,
-    ctx: await createContextInner(),
+    ctx: req && res ? await createContext({ req, res }) : await createContextInner(),
     transformer,
   })
