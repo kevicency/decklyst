@@ -19,6 +19,7 @@ import { IoIosBuild, IoIosShareAlt } from 'react-icons/io'
 import { IoCopyOutline, IoFilterSharp, IoTrashOutline } from 'react-icons/io5'
 import { MdClose, MdDone, MdDownload, MdDownloadDone, MdLink, MdSearch } from 'react-icons/md'
 import { RiChatSmile3Fill } from 'react-icons/ri'
+import { SiBuymeacoffee } from 'react-icons/si'
 
 export const ImportIcon = BiImport
 export const BuildIcon = IoIosBuild
@@ -55,3 +56,4 @@ export const CloseIcon = MdClose
 export const CloseAltIcon = CgClose
 export const ChevronDownIcon = FaChevronDown
 export const CheckIcon = FaCheck
+export const BuyMeACoffeeIcon = SiBuymeacoffee

@@ -1,5 +1,5 @@
 import { isShareOrDeckcode } from '@/common/utils'
-import { DiscordIcon, SearchIcon } from '@/components/Icons'
+import { BuyMeACoffeeIcon, DiscordIcon, SearchIcon } from '@/components/Icons'
 import { useAppShell } from '@/context/useAppShell'
 import cx from 'classnames'
 import Link from 'next/link'
@@ -114,6 +114,9 @@ export const AppHeader = () => {
           </div>
           <div className="flex justify-center gap-x-4 px-4 font-semibold"></div>
           <div className="flex shrink-0 items-center justify-end gap-x-4 px-4">
+            <Link href="https://www.buymeacoffee.com/kmees" className="text-xl" target="_blank">
+              <BuyMeACoffeeIcon />
+            </Link>
             <Link href="https://discord.gg/zYx5bqZszj" className="text-xl" target="_blank">
               <DiscordIcon />
             </Link>
