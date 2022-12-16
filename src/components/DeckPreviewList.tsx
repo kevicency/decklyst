@@ -31,12 +31,9 @@ export const DeckPreview: FC<{
       )}
     >
       <div
-        className={cx(
-          'flex w-full items-center justify-between gap-4 overflow-hidden lg:gap-8',
-          'pt-2 pb-4 pr-4',
-        )}
+        className={cx('flex w-full items-center justify-between gap-4 lg:gap-8', 'pt-2 pb-4 pr-4')}
       >
-        <div className="flex-1 scale-90 truncate text-ellipsis">
+        <div className="flex-1 scale-90 ">
           <DeckTitle />
         </div>
         {type === 'list' && (
