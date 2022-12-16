@@ -7,3 +7,4 @@ beforeAll(() => {
   }
   // execSync(`./node_modules/.bin/prisma db push --force-reset`, { stdio: 'inherit' })
 })
+export {}
