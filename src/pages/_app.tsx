@@ -15,7 +15,7 @@ const App: AppType<{ session: Session | null }> = ({
 }) => (
   <>
     <Head>
-      <title>Decklyst</title>
+      <title>Decklyst | Duelyst 2 deck companion</title>
       <meta name="description" content="Share or create Duelyst 2 decks" />
       <meta
         name="keywords"
@@ -24,6 +24,28 @@ const App: AppType<{ session: Session | null }> = ({
       <meta property="og:site_name" content="Decklyst" />
       <meta name="google-site-verification" content="todbfz-oykJnt7ZTWmfVp8J6TyL1pnYoPMo6tZtkz-o" />
       <link rel="icon" href="/favicon.ico" />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          '@id': 'https://decklyst.vercel.app/#website',
+          url: 'https://decklyst.vercel.app/',
+          name: 'Decklyst',
+          description: 'Duelyst 2 deck companion',
+          image: 'https://decklyst.vercel.app/favicon.png',
+          potentialAction: [
+            {
+              '@type': 'SearchAction',
+              target: {
+                '@type': 'EntryPoint',
+                urlTemplate: 'https://decklyst.vercel.app/decks/{deckcode_string}',
+              },
+              'query-input': 'required name=deckcode_string',
+            },
+          ],
+          inLanguage: 'en-US',
+        })}
+      </script>
     </Head>
     <SessionProvider session={session}>
       <AppShell>
