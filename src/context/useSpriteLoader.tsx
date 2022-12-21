@@ -15,13 +15,17 @@ const SpriteLoaderContext = createContext<SpriteLoaderContextValue>({
 export const SpriteLoaderProvider = ({ deck, children }: { deck?: Deck; children: any }) => {
   const [requestedImageIds] = useState(new Set(deck?.cards.map(({ id }) => id) ?? []))
   const [loadedImageIds, setLoadedImageIds] = useState(new Set<number>())
-  const isLoaded = requestedImageIds.size === loadedImageIds.size
+  const [isLoaded, setIsLoaded] = useState(false)
 
   return (
     <SpriteLoaderContext.Provider
       value={{
         allSpritesLoaded: isLoaded,
-        setSpriteLoaded: (id) => setLoadedImageIds((state) => state.add(id)),
+        setSpriteLoaded: (id) => {
+          const next = loadedImageIds.add(id)
+          setLoadedImageIds(next)
+          setIsLoaded(next.size === requestedImageIds.size)
+        },
       }}
     >
       {children}

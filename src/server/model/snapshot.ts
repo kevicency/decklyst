@@ -51,12 +51,10 @@ export const snapshotBrowserless = async (code: string) => {
           },
           body: JSON.stringify({
             url: snapshotUrl(code),
+            waitFor: '#snap.snap--loaded',
             options: {
               fullPage: false,
               type: 'png',
-            },
-            gotoOptions: {
-              waitUntil: 'networkidle0',
             },
             selector: '#snap',
             viewport: { width: 1280, height: 1024 },

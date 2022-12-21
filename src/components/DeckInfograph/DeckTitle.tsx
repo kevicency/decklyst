@@ -20,6 +20,7 @@ export const DeckTitle = () => {
       }
     }
   }, [imageRef, setSpriteLoaded, general.id])
+
   return (
     <div className="relative grid w-full grid-cols-[6rem_minmax(0,1fr)]">
       <div className="absolute -bottom-1 -left-6 w-32 flex-shrink-0">
