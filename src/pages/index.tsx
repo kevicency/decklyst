@@ -38,7 +38,9 @@ const Home: NextPage<Props> = ({ starterDecklysts }) => {
       <div className="content-container mt-32 mb-16 flex flex-col">
         <h2 className="mb-2 text-3xl">Popular starter decks</h2>
         <p className="mb-4 text-lg text-gray-400">
-          Kickstart your Duelyst 2 journey with these starter decks
+          Kickstart your Duelyst 2 journey with these starter decks. Use referral code{' '}
+          <span className="text-accent-400">decklyst</span> for free{' '}
+          <span className="text-amber-300">100g</span>.
         </p>
         {starterDeckGroups.map((decks, i) => (
           <div key={i} className="mb-6 grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
