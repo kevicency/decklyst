@@ -26,12 +26,28 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
     deck: Deck,
     settings: DeckSettings = {},
   ) => {
-    sharecode ??= await generateSharecode(decklyst)
     const deckcode = deck.deckcode
+    let existingDecklyst: Decklyst | null = null
+    if (sharecode) {
+      existingDecklyst ??= await decklyst.findUnique({
+        where: { sharecode },
+      })
+    } else {
+      existingDecklyst ??= await decklyst.findFirst({
+        where: { deckcode, authorId: user?.id ?? null },
+        orderBy: { createdAt: 'asc' },
+      })
+      existingDecklyst ??= user
+        ? existingDecklyst
+        : await decklyst.findFirst({
+            where: { deckcode, privacy: { not: 'private' } },
+            orderBy: { createdAt: 'asc' },
+          })
+    }
 
-    const existingDecklyst = await decklyst.findUnique({
-      where: { sharecode },
-    })
+    sharecode = existingDecklyst?.sharecode ?? (await generateSharecode(decklyst))
+    console.log('existingDecklyst', existingDecklyst)
+
     const deckcodeNormalized = deckcodeNormalized$(deck)
     const hasCardChanges =
       existingDecklyst && existingDecklyst.deckcodeNormalized === deckcodeNormalized
