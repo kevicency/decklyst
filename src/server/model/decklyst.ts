@@ -46,7 +46,6 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
     }
 
     sharecode = existingDecklyst?.sharecode ?? (await generateSharecode(decklyst))
-    console.log('existingDecklyst', existingDecklyst)
 
     const deckcodeNormalized = deckcodeNormalized$(deck)
     const hasCardChanges =
@@ -95,8 +94,8 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
         history: hasCardChanges
           ? {
               create: {
-                version: existingDecklyst.version,
-                deckcode: existingDecklyst.deckcode,
+                version: existingDecklyst?.version ?? 1,
+                deckcode,
               },
             }
           : undefined,
