@@ -35,7 +35,6 @@ export const SaveDeckDialog: FC<{
   const router = useRouter()
   const deck = useDeck()
   const { mutateAsync: upsertDecklyst, isLoading: isSaving } = trpc.decklyst.upsert.useMutation()
-  const { decklyst: utils } = trpc.useContext()
 
   const [archetype, setArchetype] = useState<Archetype | null>(
     (baseDeck?.meta?.archetype as Archetype) ?? null,

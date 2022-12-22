@@ -15,7 +15,8 @@
     "studio:dev": "dotenv -o -e .env.local prisma studio",
     "studio:prod": "dotenv -o -e .env.production prisma studio",
     "generate:cards.json": "ts-node scripts/generateCardsJson.ts && yarn prettier --write src/data/carddata.json",
-    "sync:db": "dotenv -e .env.local -e .env ts-node scripts/syncDb.ts"
+    "sync:db": "dotenv -o -e .env.local -e .env ts-node scripts/syncDb.ts",
+    "sync:db:prod": "dotenv -o -e .env.production -e .env ts-node scripts/syncDb.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",

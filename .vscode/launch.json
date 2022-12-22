@@ -40,6 +40,12 @@
       "request": "attach",
       "skipFiles": ["<node_internals>/**"],
       "port": 9229
+    },
+    {
+      "name": "syncDb: clean",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn sync:db clean"
     }
   ]
 }

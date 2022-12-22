@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
-import { createDeck, deckcodeNormalized$ } from '../src/data/deck'
 
 const prisma = new PrismaClient()
 
@@ -136,25 +135,38 @@ const main = async () => {
     //   skipDuplicates: true,
     // })
     // console.log(`Imported ${deckImages.length} deckviews from ${deckImageFile}`)
-  } else if (cmd === 'update') {
-    const decklysts = await prisma.decklyst.findMany({})
-    for (const decklyst of decklysts) {
-      const deck = createDeck(decklyst.deckcode)
-      const deckcodeNormalized = deckcodeNormalized$(deck)
-      await prisma.decklyst.update({
-        where: { id: decklyst.id },
-        data: { deckcodeNormalized },
-      })
+  } else if (cmd === 'clean') {
+    // let c = 0
+    // while (true) {
+    //   if (c++ > 10) throw new Error('Too many iterations')
+
+    const deckcodesWithCount = await prisma.decklyst.groupBy({
+      where: { authorId: null },
+      by: ['deckcode'],
+      orderBy: { _count: { deckcode: 'desc' } },
+      _count: { deckcode: true },
+      having: { deckcode: { _count: { gt: 1 } } },
+    })
+
+    console.log('decks with dupes', deckcodesWithCount.length)
+
+    for (const deckcodeWithCount of deckcodesWithCount) {
+      console.log(
+        `${deckcodeWithCount.deckcode} has ${deckcodeWithCount._count.deckcode - 1} dupes`,
+      )
+
+      // const firstDecklyst = await prisma.decklyst.findFirst({
+      //   where: { deckcode: deckcodeWithCount.deckcode },
+      //   orderBy: { createdAt: 'asc' },
+      // })
+      // if (!firstDecklyst) return
+
+      // const { count: deleted } = await prisma.decklyst.deleteMany({
+      //   where: { deckcode: firstDecklyst.deckcode, id: { not: firstDecklyst.id }, authorId: null },
+      // })
+
+      // console.log(`Deleted ${deleted} dupes`)
     }
-    // await prisma.decklyst.updateMany({ data: { privacy: 'public' } })
-    // console.log(`Updated ${deckinfos.length} deckinfos`)
-    // } else if (cmd === 'test') {
-    //   const deckinfos = await prisma.deckinfo.findMany({
-    //     where: {
-    //       AND: [{ AND: [{ deckcodeDecoded: { contains: ':162,' } }] }],
-    //     },
-    //   })
-    //   console.log('Found', deckinfos.length, 'decks')
   }
 }
 
