@@ -5,6 +5,8 @@ import type { DeckExpanded } from '@/data/deck'
 import { createDeckExpanded } from '@/data/deck'
 import type { CardDiff, DeckDiff } from '@/hooks/useDeckDiff'
 import { useDeckDiff } from '@/hooks/useDeckDiff'
+import { createSSGClient } from '@/server'
+import { trpc } from '@/utils/trpc'
 import { debounce, get, startCase } from 'lodash'
 import type { InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
@@ -21,16 +23,25 @@ import { Row } from '../../components/DeckDiff/Row'
 type Show = 'all' | 'diff'
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
+export const ComparePage: FC<Props> = ({ snapshot, left, right, ...props }) => {
   const router = useRouter()
-  const left = (router.query.left as string) ?? props.left ?? ''
-  const right = (router.query.right as string) ?? props.right ?? ''
+  // const left = (router.query.left as string) ?? props.left ?? ''
+  // const right = (router.query.right as string) ?? props.right ?? ''
   const show = (router.query.show as Show) ?? props.show ?? 'all'
   const [leftValue, setLeftValue] = useState(left)
   const [rightValue, setRightValue] = useState(right)
 
-  const leftDeck = useMemo(() => createDeckExpanded(left ?? ''), [left])
-  const rightDeck = useMemo(() => createDeckExpanded(right ?? ''), [right])
+  const { data: leftDecklyst } = trpc.decklyst.get.useQuery({ code: leftValue })
+  const { data: rightDecklyst } = trpc.decklyst.get.useQuery({ code: rightValue })
+
+  const leftDeck = useMemo(
+    () => createDeckExpanded(leftDecklyst?.deckcode ?? leftValue ?? ''),
+    [leftValue, leftDecklyst],
+  )
+  const rightDeck = useMemo(
+    () => createDeckExpanded(rightDecklyst?.deckcode ?? rightValue ?? ''),
+    [rightValue, rightDecklyst],
+  )
 
   const deckDiff = useDeckDiff(leftDeck, rightDeck)
 
@@ -60,7 +71,7 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
         <div className="flex-1">
           <input
             name="left"
-            placeholder="Enter a deckcode"
+            placeholder="Enter a deckcode or sharecode"
             className="page-header-input"
             value={leftValue}
             onChange={(ev) => {
@@ -76,7 +87,7 @@ export const ComparePage: FC<Props> = ({ snapshot, ...props }) => {
         <div className="flex-1">
           <input
             name="right"
-            placeholder="Enter a deckcode"
+            placeholder="Enter a deckcode or sharecode"
             className="page-header-input"
             value={rightValue}
             onChange={(ev) => {
@@ -204,7 +215,7 @@ const DeckHeader: FC<{ deck: DeckExpanded }> = ({ deck }) => {
         </div>
       ) : (
         <div className="flex items-center justify-center text-lg text-gray-500">
-          Please enter a deckcode above
+          Please enter a deckcode or sharecode above
         </div>
       )}
     </DeckProvider>
@@ -219,10 +230,29 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     show?: 'all' | 'diff'
     snapshot?: number | boolean
   }
+  const fetchDecklyst = async (code?: string) => {
+    try {
+      return code ? await ssg.decklyst.get.fetch({ code }) : null
+    } catch (err) {
+      return null
+    }
+  }
+
+  const ssg = await createSSGClient(context)
+  const [leftDecklyst, rightDecklyst] = await Promise.all(
+    [left, right].map((code) => fetchDecklyst(code)),
+  )
+
   return {
     props: {
+      trpcState: ssg.dehydrate({
+        shouldDehydrateQuery: () =>
+          leftDecklyst?.privacy !== 'private' && rightDecklyst?.privacy !== 'private',
+      }),
       left: left ?? '',
+      leftDecklyst,
       right: right ?? '',
+      rightDecklyst,
       show: show ?? 'diff',
       snapshot: Boolean(snapshot ?? 0),
     },
