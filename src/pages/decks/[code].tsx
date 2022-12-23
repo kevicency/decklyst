@@ -24,14 +24,16 @@ const DeckPage: FC<Props> = ({ decklyst, code }) => {
     error,
     isSuccess,
   } = trpc.decklyst.get.useQuery(
-    { code },
+    { code: decklyst?.sharecode ?? code },
     {
-      initialData: decklyst,
+      placeholderData: decklyst,
       retry: (count, error) => (error.data?.code === 'UNAUTHORIZED' ? false : count < 3),
       select: (data) => createDeckFromDecklyst(data),
     },
   )
   useRegisterView(deck?.meta.sharecode, { enabled: !!deck && isSuccess })
+
+  console.log({ decklyst, deck, error })
 
   if (error)
     return (

@@ -69,7 +69,7 @@ export const getStaticProps = async () => {
       .map((faction) =>
         ssg.decklyst.search.fetch({
           limit: 2,
-          sorting: 'views:all',
+          sorting: 'views:recent',
           filters: {
             tags: ['starter'],
             factions: [faction],

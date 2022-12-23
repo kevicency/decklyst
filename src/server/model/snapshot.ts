@@ -57,7 +57,7 @@ export const snapshotBrowserless = async (code: string) => {
               type: 'png',
             },
             selector: '#snap',
-            viewport: { width: 1280, height: 1024 },
+            viewport: { width: 1920, height: 1440 },
           }),
         })
       : await fetch(remoteSnapshotUrl(code), { method: 'POST' })
