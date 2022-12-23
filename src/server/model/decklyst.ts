@@ -126,23 +126,46 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
   }
 
   const findByCode = async (code: string, userOnly: boolean = false) => {
-    const candidates = await Promise.all([
-      user
-        ? decklyst.findFirst({
-            where: { OR: [{ deckcode: code }, { sharecode: code }], authorId: user?.id },
-            orderBy: { createdAt: 'asc' },
-            include: { author: true },
-          })
-        : null,
-      !userOnly
-        ? decklyst.findFirst({
-            where: { OR: [{ deckcode: code }, { sharecode: code }] },
-            orderBy: { createdAt: 'asc' },
-            include: { author: true },
-          })
-        : null,
-    ])
-    return candidates.find(identity) ?? null
+    var queries = [
+      // prioritize decklysts of current user
+      async () =>
+        user
+          ? await decklyst.findFirst({
+              where: { OR: [{ deckcode: code }, { sharecode: code }], authorId: user?.id },
+              orderBy: { createdAt: 'asc' },
+              include: { author: true },
+            })
+          : null,
+      // then search for public decklysts if not user only query
+      async () =>
+        !userOnly
+          ? await decklyst.findFirst({
+              where: { OR: [{ deckcode: code }, { sharecode: code }] },
+              orderBy: { createdAt: 'asc' },
+              include: { author: true },
+            })
+          : null,
+      // then search for decklysts with same normalized deckcode
+      async () => {
+        const deck = validateDeckcode(code) ? createDeck(code) : null
+        return deck && !deck.title
+          ? await decklyst.findFirst({
+              where: { deckcodeNormalized: deckcodeNormalized$(deck) },
+              orderBy: { createdAt: 'asc' },
+              include: { author: true },
+            })
+          : null
+      },
+    ]
+
+    for (const query of queries) {
+      const result = await query()
+      if (result) {
+        return result
+      }
+    }
+
+    return null
   }
 
   return Object.assign(decklyst, {
