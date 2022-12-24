@@ -68,6 +68,7 @@ export const decklystRouter = router({
             includeAnonymous: z.boolean().optional(),
             includeUntitled: z.boolean().optional(),
             authorId: z.string().optional(),
+            maxSpirit: z.number().int().positive().optional(),
           })
           .optional(),
       }),
@@ -99,6 +100,7 @@ export const decklystRouter = router({
                 AND: [
                   {
                     faction: factions?.length ? { in: factions } : undefined,
+                    spiritCost: filters.maxSpirit ? { lte: filters.maxSpirit } : undefined,
                   },
                   ...cardIds.map((cardId) => ({ cardCounts: { path: [`${cardId}`], gte: 1 } })),
                 ],
