@@ -3,68 +3,17 @@ import type { Filters } from '@/components/Decksearch'
 import { Filter } from '@/components/Filter'
 import type { Faction } from '@/data/cards'
 import { allCards, factions as allFactions } from '@/data/cards'
+import { maxSpiritCost } from '@/data/deck'
 import { Switch } from '@headlessui/react'
-import { startCase, throttle } from 'lodash'
-import type { FC, PropsWithChildren } from 'react'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { startCase } from 'lodash'
+import type { FC } from 'react'
+import { useMemo } from 'react'
 import { CardsCombobox } from '../CardsCombobox'
 import { Tag } from '../Tag'
 import { TagsCombobox } from '../TagsCombobox'
 import { Toggle } from '../Toggle'
+import { SpiritSlider } from './SpiritSlider'
 
-const RangeSliderInput: FC<
-  PropsWithChildren<{
-    min?: number
-    max?: number
-    value: number
-    onChange: (value: number) => void
-    debounce?: number
-  }>
-> = ({ min = 0, max = 100, value, onChange, children }) => {
-  return (
-    <label className="text-gray font-medium">
-      {children} [<span className="font-semibold text-accent-200">{value}</span>]
-      <input
-        type="range"
-        min={String(min)}
-        max={String(max)}
-        value={value}
-        onChange={(e) => onChange(parseInt(e.target.value))}
-        className="mt-2 inline-block h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-600 accent-accent-500"
-      ></input>
-    </label>
-  )
-}
-
-// function useDebouncedFn(cb: any, delay: number) {
-//   // ...
-//   const inputsRef = useRef({cb, delay}); // mutable ref like with useThrottle
-//   useEffect(() => { inputsRef.current = { cb, delay }; }); //also track cur. delay
-//   return useCallback(
-//     _.debounce((...args) => {
-//         // Debounce is an async callback. Cancel it, if in the meanwhile
-//         // (1) component has been unmounted (see isMounted in snippet)
-//         // (2) delay has changed
-//         if (inputsRef.current.delay === delay && isMounted())
-//           inputsRef.current.cb(...args);
-//       }, delay, options
-//     ),
-//     [delay, _.debounce]
-//   );
-// }
-function useThrottle(cb: Function, delay: number) {
-  const options = { leading: false, trailing: true } // add custom lodash options
-  const cbRef = useRef(cb)
-  // use mutable ref to make useCallback/throttle not depend on `cb` dep
-  useEffect(() => {
-    cbRef.current = cb
-  })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useCallback(
-    throttle((...args) => cbRef.current(...args), delay, options),
-    [delay],
-  )
-}
 export const DecksearchAside: FC<{
   filters: Filters
   updateFilters: (filters: Partial<Filters>) => void
@@ -76,14 +25,6 @@ export const DecksearchAside: FC<{
         ? [...filters.factions, faction]
         : filters.factions.filter((x) => x !== faction),
     })
-  }
-  const updateMaxSpiritFilterDebounced = useThrottle((value: number) => {
-    updateFilters({ maxSpirit: value })
-  }, 1000)
-  const [spirit, setSpirit] = useState(filters.maxSpirit)
-  const handleMaxSpiritChanged = (value: number) => {
-    setSpirit(value)
-    updateMaxSpiritFilterDebounced(value)
   }
   const cards = useMemo(
     () =>
@@ -136,16 +77,13 @@ export const DecksearchAside: FC<{
               {filters.cardIds.length} {filters.cardIds.length === 1 ? 'card' : 'cards'} selected
             </div>
           </Filter>
-          <Filter title="Deck" onClear={() => handleMaxSpiritChanged(25000)}>
+          <Filter title="Deck" onClear={() => updateFilters({ maxSpirit: maxSpiritCost })}>
             <div className="flex flex-col gap-y-3">
-              <RangeSliderInput
-                min={1560}
-                max={25000}
-                value={spirit ?? 25000}
-                onChange={(value) => handleMaxSpiritChanged(value)}
-              >
-                Max Spirit
-              </RangeSliderInput>
+              <SpiritSlider
+                key={filters.maxSpirit}
+                value={filters.maxSpirit}
+                onChange={(value) => updateFilters({ maxSpirit: value })}
+              />
               {!hideIncludeAnonymous && (
                 <Toggle
                   checked={filters.includeAnonymous}

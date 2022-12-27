@@ -1,4 +1,5 @@
-import { isString, isUndefined, omit, omitBy } from 'lodash'
+import { maxSpiritCost } from '@/data/deck'
+import { isNil, isString, omit, omitBy } from 'lodash'
 import { useRouter } from 'next/router'
 import type { ParsedUrlQuery } from 'querystring'
 
@@ -17,7 +18,7 @@ export const parseRouteParams = (query: ParsedUrlQuery) => {
     .filter(isString)
     .map((cardId) => +cardId)
   const tags = (Array.isArray(query.tags) ? query.tags : [query.tags]).filter(isString)
-  const maxSpirit = query.maxSpirit ? +query.maxSpirit : 25000
+  const maxSpirit = query.maxSpirit ? +query.maxSpirit : maxSpiritCost
   const includeDrafts = query.includeDrafts === 'true'
   const includeAnonymous = query.includeAnonymous === 'true' || query.includeAnonymous === undefined
   const includeUntitled = query.includeUntitled === 'true' || query.includeUntitled === undefined
@@ -41,7 +42,7 @@ export const useRouteParams = (initialRouteParams: RouteParams) => {
   const routeParams = router.query ? parseRouteParams(router.query) : initialRouteParams
 
   const updateRouteParams = async ({ filters, listing }: RouteParams) => {
-    const newQuery = { listing, ...omitBy(filters, isUndefined) }
+    const newQuery = { listing, ...omitBy(filters, isNil) }
 
     await router.push(
       {

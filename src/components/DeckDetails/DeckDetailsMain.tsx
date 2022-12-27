@@ -14,7 +14,7 @@ import { DeckCardList } from '../DeckInfograph/DeckCardList'
 import { DeckMinionList } from '../DeckInfograph/DeckMinionList'
 import { DeckSpellList } from '../DeckInfograph/DeckSpellList'
 import { DeckTags } from '../DeckInfograph/DeckTags'
-import { CopyIcon, DoneIcon, EditIcon, EyeIcon, ShareIcon, TrashIcon } from '../Icons'
+import { CopyIcon, DoneIcon, EditIcon, EyeIcon, ShareIcon } from '../Icons'
 import { OneTimeButton } from '../OneTimeButton'
 import { TimeAgo } from '../TimeAgo'
 import { DeckStats } from './DeckDetailsAside'
@@ -52,7 +52,7 @@ export const DeckDetailsMain: FC = () => {
             </div>
             <div className="truncate text-3xl font-light">{deck.title || 'Untitled'}</div>
             <div className="ml-2 flex items-center gap-x-2">
-              {isMyDeck && (
+              {/* {isMyDeck && (
                 <button
                   onClick={handleDeleteDeck}
                   className="btn-outline border-danger text-danger hover:bg-danger hover:text-gray-100"
@@ -60,7 +60,7 @@ export const DeckDetailsMain: FC = () => {
                   <TrashIcon />
                   <span className="hidden md:inline">Delete</span>
                 </button>
-              )}
+              )} */}
               <Link
                 href={{ pathname: '/build/[deckcode]', query: { deckcode: deck.deckcode } }}
                 className="btn-outline"

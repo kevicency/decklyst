@@ -43,9 +43,11 @@ export const DeckPreview: FC<{
           </>
         )}
       </div>
-      <div className="flex-1 justify-end px-2 pb-2">
-        <DeckTags />
-      </div>
+      {meta?.tags && (
+        <div className="flex-1 justify-end px-2 pb-2">
+          <DeckTags />
+        </div>
+      )}
       <Link href={deckUrl(meta?.sharecode ?? deckcode, true)} className="cover-parent" />
       <div
         className={`relative flex flex-wrap items-center gap-3 border-t-2 border-gray-800 bg-alt-850 px-2.5 py-1 text-gray-400`}

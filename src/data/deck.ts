@@ -171,3 +171,6 @@ export const allTags = [
 ].sort()
 
 export const humanizeTag = (tag: string) => tag.split('-').map(startCase).join('-')
+
+export const minSpiritCost = 1560
+export const maxSpiritCost = 25000

@@ -17,6 +17,8 @@ module.exports = {
       red: colors.red,
       green: colors.green,
       amber: colors.amber,
+      // form plugin colors
+      blue: colors.teal,
 
       // semantic colors
       gray: {
