@@ -3756,7 +3756,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "common",
-    "description": "When this takes damage, this gains +2/+0 until the start of your turn.",
+    "description": "When this takes damage, it gains +2/+0 until your next turn.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralNeedlerBreathing.gif",
