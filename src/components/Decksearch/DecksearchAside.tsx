@@ -28,8 +28,10 @@ export const DecksearchAside: FC<{
   }
   const cards = useMemo(
     () =>
-      allCards.filter((card) =>
-        filters.factions?.length ? filters.factions.includes(card.faction) : true,
+      allCards.filter(
+        (card) =>
+          card.faction === 'neutral' ||
+          (filters.factions?.length ? filters.factions.includes(card.faction) : true),
       ),
     [filters.factions],
   )
