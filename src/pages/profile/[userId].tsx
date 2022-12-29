@@ -181,7 +181,7 @@ const UserProfilePage: FC<Props> = ({ userId, searchParams }) => {
       <DecksearchAside
         updateFilters={updateFilters}
         filters={routeParams.filters}
-        hideIncludeAnonymous
+        hideAuthorFilters
       />
       <ConfirmDeleteDialog
         open={deleteDialogState.open}

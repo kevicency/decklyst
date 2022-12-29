@@ -8,6 +8,7 @@ import { Switch } from '@headlessui/react'
 import { startCase } from 'lodash'
 import type { FC } from 'react'
 import { useMemo } from 'react'
+import { AuthorCombobox } from '../AuthorCombobox'
 import { CardsCombobox } from '../CardsCombobox'
 import { Tag } from '../Tag'
 import { TagsCombobox } from '../TagsCombobox'
@@ -17,8 +18,8 @@ import { SpiritSlider } from './SpiritSlider'
 export const DecksearchAside: FC<{
   filters: Filters
   updateFilters: (filters: Partial<Filters>) => void
-  hideIncludeAnonymous?: boolean
-}> = ({ updateFilters, filters, hideIncludeAnonymous }) => {
+  hideAuthorFilters?: boolean
+}> = ({ updateFilters, filters, hideAuthorFilters }) => {
   const handleFactionChanged = (faction: string) => (enabled: boolean) => {
     updateFilters({
       factions: enabled
@@ -79,6 +80,14 @@ export const DecksearchAside: FC<{
               {filters.cardIds.length} {filters.cardIds.length === 1 ? 'card' : 'cards'} selected
             </div>
           </Filter>
+          {!hideAuthorFilters && (
+            <Filter title="Author" onClear={() => updateFilters({ authorId: undefined })}>
+              <AuthorCombobox
+                value={filters.authorId ?? ''}
+                onChange={(value) => updateFilters({ authorId: value })}
+              />
+            </Filter>
+          )}
           <Filter title="Deck" onClear={() => updateFilters({ maxSpirit: maxSpiritCost })}>
             <div className="flex flex-col gap-y-3">
               <SpiritSlider
@@ -86,7 +95,7 @@ export const DecksearchAside: FC<{
                 value={filters.maxSpirit}
                 onChange={(value) => updateFilters({ maxSpirit: value })}
               />
-              {!hideIncludeAnonymous && (
+              {!hideAuthorFilters && (
                 <Toggle
                   checked={filters.includeAnonymous}
                   onChange={(checked) => updateFilters({ includeAnonymous: checked })}

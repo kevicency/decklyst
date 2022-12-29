@@ -11,7 +11,7 @@ export const CardsCombobox: FC<{
   onChange: (value: number[]) => void
   cards?: CardData[]
 }> = ({ value, onChange, cards }) => {
-  let [query, setQuery] = useState('')
+  const [query, setQuery] = useState('')
   const options = useMemo(
     () =>
       (cards ?? allCards)

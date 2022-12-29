@@ -1,5 +1,5 @@
 import { maxSpiritCost } from '@/data/deck'
-import { isNil, isString, omit, omitBy } from 'lodash'
+import { get, isNil, isString, omitBy } from 'lodash'
 import { useRouter } from 'next/router'
 import type { ParsedUrlQuery } from 'querystring'
 
@@ -19,6 +19,7 @@ export const parseRouteParams = (query: ParsedUrlQuery) => {
     .map((cardId) => +cardId)
   const tags = (Array.isArray(query.tags) ? query.tags : [query.tags]).filter(isString)
   const maxSpirit = query.maxSpirit ? +query.maxSpirit : maxSpiritCost
+  const authorId = query.authorId as string | undefined
   const includeDrafts = query.includeDrafts === 'true'
   const includeAnonymous = query.includeAnonymous === 'true' || query.includeAnonymous === undefined
   const includeUntitled = query.includeUntitled === 'true' || query.includeUntitled === undefined
@@ -30,6 +31,7 @@ export const parseRouteParams = (query: ParsedUrlQuery) => {
       cardIds,
       tags,
       maxSpirit,
+      authorId,
       includeDrafts,
       includeAnonymous,
       includeUntitled,
@@ -37,17 +39,25 @@ export const parseRouteParams = (query: ParsedUrlQuery) => {
   } as const
 }
 
+const defaultRouteParams = parseRouteParams({})
+
 export const useRouteParams = (initialRouteParams: RouteParams) => {
   const router = useRouter()
   const routeParams = router.query ? parseRouteParams(router.query) : initialRouteParams
 
   const updateRouteParams = async ({ filters, listing }: RouteParams) => {
-    const newQuery = { listing, ...omitBy(filters, isNil) }
+    console.log('updateRouteParams', { filters })
 
     await router.push(
       {
         pathname: router.pathname,
-        query: { ...omit(router.query, Object.keys(newQuery)), ...newQuery },
+        query: omitBy(
+          { ...router.query, listing, ...filters },
+          (value, key) =>
+            isNil(value) ||
+            get(defaultRouteParams.filters, key) === value ||
+            (key === 'listing' && value === defaultRouteParams.listing),
+        ),
       },
       undefined,
       { shallow: true },

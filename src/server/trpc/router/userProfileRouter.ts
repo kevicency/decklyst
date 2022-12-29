@@ -26,4 +26,17 @@ export const userProfileRouter = router({
 
       return { ...user, totalDecklysts }
     }),
+  all: proc
+    .input(
+      z.object({
+        onlyAuthors: z.boolean().optional(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const authors = await ctx.user.findMany({
+        where: { decklysts: input.onlyAuthors ? { some: { privacy: 'public' } } : undefined },
+        select: { id: true, name: true },
+      })
+      return authors
+    }),
 })
