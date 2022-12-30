@@ -10,8 +10,8 @@ import type { FC, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 import { Backdrop, InnerTransition, OuterTransition } from '../Dialog'
 import { NewIcon, SaveIcon } from '../Icons'
+import { TagsCombobox } from '../Inputs/TagsCombobox'
 import { Tag } from '../Tag'
-import { TagsCombobox } from '../TagsCombobox'
 import { DeckTitleInput } from './DeckTitleInput'
 
 export const FormControl: FC<{ label: ReactNode; children: ReactNode }> = ({ children, label }) => {

@@ -1,6 +1,6 @@
 import { Switch } from '@headlessui/react'
 import type { FC, PropsWithChildren } from 'react'
-import { CheckIcon, CloseAltIcon } from './Icons'
+import { CheckIcon, CloseAltIcon } from '../Icons'
 
 export const Toggle: FC<
   PropsWithChildren<{ checked: boolean; onChange: (checked: boolean) => void }>

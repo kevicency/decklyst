@@ -1,7 +1,7 @@
 import { maxSpiritCost, minSpiritCost } from '@/data/deck'
 import { useState } from 'react'
 import { useThrottle } from '../../hooks/useThrottle'
-import { NumberSliderInput } from '../NumberSliderInput'
+import { NumberSliderInput } from '../Inputs/NumberSliderInput'
 
 export const SpiritSlider = ({
   value,

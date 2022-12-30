@@ -2,8 +2,8 @@ import { trpc } from '@/utils/trpc'
 import { Combobox } from '@headlessui/react'
 import type { FC } from 'react'
 import { useMemo, useState } from 'react'
-import { ChevronDownIcon } from './Icons'
-import { OptionContent } from './OptionContent'
+import { ChevronDownIcon } from '../Icons'
+import { OptionContent } from '../OptionContent'
 
 export const AuthorCombobox: FC<{
   value: string
