@@ -4,7 +4,7 @@ import { DeckManaCurve } from '../DeckInfograph/DeckManaCurve'
 import { CardRarityChart } from './CardRarityChart'
 import { CardTypeChart } from './CardTypeChart'
 import { DeckStat } from './DeckStat'
-import { FactionChart } from './FactionChart'
+import { FactionChart, OpeningHandChart } from './FactionChart'
 
 export const DeckStats: FC = () => (
   <>
@@ -16,6 +16,11 @@ export const DeckStats: FC = () => (
     <DeckStat title="Factions">
       <div className="w-full">
         <FactionChart />
+      </div>
+    </DeckStat>
+    <DeckStat title="Opening Hand">
+      <div className=" w-full">
+        <OpeningHandChart />
       </div>
     </DeckStat>
     <DeckStat title="Card Types">

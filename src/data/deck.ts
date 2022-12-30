@@ -1,3 +1,4 @@
+import { atLeastOneProbability } from '@/common/combinatorics'
 import type { CardData, CardType, Faction, Rarity } from '@/data/cards'
 import { cardsById, rarityCraftingCost, sortCards } from '@/data/cards'
 import type { Deckcode } from '@/data/deckcode'
@@ -174,3 +175,29 @@ export const humanizeTag = (tag: string) => tag.split('-').map(startCase).join('
 
 export const minSpiritCost = 1560
 export const maxSpiritCost = 25000
+
+const drawSize = 3
+const playableMinionChance = (deck: Deck, mana: number) => {
+  const playableCards = deck.cards.filter((card) => card.cardType === 'Minion' && card.mana <= mana)
+  const playableCardCount = sumBy(playableCards, (card) => card.count)
+  const totalCount = totalCount$(deck) - 1
+
+  const opening = atLeastOneProbability(totalCount, playableCardCount, drawSize)
+  const mulligan = atLeastOneProbability(totalCount - drawSize, playableCardCount, drawSize)
+
+  return opening + (1 - opening) * mulligan
+}
+export const playableMinionOnThePlayChance = (deck: Deck) => playableMinionChance(deck, 2)
+export const playableMinionOnTheDrawChance = (deck: Deck) => playableMinionChance(deck, 3)
+// export const twoPlayableMinionsOnTheDrawChance = (deck: Deck) => {
+//   const [oneDrops, twoDrops, threeDrops] = [1, 2, 3].map((mana) =>
+//     deck.cards
+//       .filter((card) => card.cardType === 'Minion' && card.mana === mana)
+//       .reduce((acc, card) => acc + card.count, 0),
+//   )
+
+//   const opening = atLeastOneProbability(totalCount, playableCardCount, drawSize)
+//   const mulligan = atLeastOneProbability(totalCount - drawSize, playableCardCount, drawSize)
+
+//   return opening + (1 - opening) * mulligan
+// }

@@ -50,15 +50,15 @@ export const DeckPreview: FC<{
       )}
       <Link href={deckUrl(meta?.sharecode ?? deckcode, true)} className="cover-parent" />
       <div
-        className={`relative flex flex-wrap items-center gap-3 border-t-2 border-gray-800 bg-alt-850 px-2.5 py-1 text-gray-400`}
+        className={`relative flex flex-wrap items-center gap-0.5 border-t-2 border-gray-800 bg-alt-850 px-2.5 py-1 text-gray-400`}
       >
         <div>
-          <span>created by </span>
+          <span>by </span>
           <ProfileLink user={meta?.author} />
         </div>
         {meta?.createdAt && (
           <>
-            <div className={`text-lg font-bold text-gray-600`}>•</div>
+            <div className={`flex-1 px-0.5 text-center text-lg font-bold text-gray-600`}>•</div>
             <div>
               <span>submitted </span>
               <span className="font-semibold text-gray-300">
@@ -67,23 +67,10 @@ export const DeckPreview: FC<{
             </div>
           </>
         )}
-        {/* {meta?.views && (
-          <>
-            <div className={`text-lg font-bold text-gray-600`}>•</div>
-            <div>
-              <span>views</span>
-              <span className={`font-semibold text-gray-300`}>
-                <EyeIcon size={18} className="mx-1 inline-block pb-0.5" />
-                {meta?.views ?? 1}
-              </span>
-            </div>
-          </>
-        )} */}
-        <div className="flex-1" />
-
+        <div className={`flex-1 px-0.5 text-center text-lg font-bold text-gray-600`}>•</div>
         <div className="flex flex-wrap items-center gap-4">
           <span className={`-mr-3 font-semibold text-gray-300`}>
-            <EyeIcon size={18} className="mx-1 inline-block pb-0.5" />
+            <EyeIcon size={18} className="mr-1 inline-block pb-0.5" />
             {meta?.views ?? 1}
           </span>
           <span>{(meta?.views ?? 1) === 1 ? 'view' : 'views'}</span>
