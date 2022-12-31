@@ -124,16 +124,13 @@ export const AppNav: FC = () => {
           </AppNavLink>
         )}
         <div className="border-t border-gray-800">
-          <AppNavLink
-            href="discord://discord.com/channels/1041363184872857602/1041363185707528208"
-            icon={FeedbackIcon}
-          >
+          <AppNavLink href="https://discord.gg/YrwcrWymev" icon={FeedbackIcon}>
             Feedback
           </AppNavLink>
         </div>
         <div className="border-t border-gray-800">
           <AppNavLink
-            href="discord://discord.com/channels/1041363184872857602/1041363436711465050"
+            href="https://discord.gg/qBe4AStVR8"
             icon={BugReportIcon}
             iconClassName="py-0.5"
           >
