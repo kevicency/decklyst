@@ -23,7 +23,7 @@ export const Aside: FC<{
         <div
           className={cx(
             'animate-in slide-in-from-right',
-            'flex h-full flex-col bg-alt-900',
+            'z-10 flex h-full flex-col bg-alt-900',
             children ? 'absolute left-0 top-0 2xl:relative 2xl:animate-none' : '',
             isMobile ? 'w-aside fixed right-0 z-50' : '',
           )}
