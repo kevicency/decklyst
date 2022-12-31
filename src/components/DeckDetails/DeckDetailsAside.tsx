@@ -6,13 +6,15 @@ import { CardTypeChart } from './CardTypeChart'
 import { DeckStat } from './DeckStat'
 import { FactionChart, OpeningHandChart } from './FactionChart'
 
-export const DeckStats: FC = () => (
+export const DeckStats: FC<{ hideManaCurve?: boolean }> = ({ hideManaCurve }) => (
   <>
-    <DeckStat title="Mana Curve">
-      <div className="flex justify-center">
-        <DeckManaCurve />
-      </div>
-    </DeckStat>
+    {!hideManaCurve && (
+      <DeckStat title="Mana Curve">
+        <div className="flex justify-center">
+          <DeckManaCurve />
+        </div>
+      </DeckStat>
+    )}
     <DeckStat title="Factions">
       <div className="w-full">
         <FactionChart />

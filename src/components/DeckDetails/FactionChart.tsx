@@ -2,6 +2,7 @@ import { useDeck } from '@/context/useDeck'
 import { playableMinionOnTheDrawChance, playableMinionOnThePlayChance } from '@/data/deck'
 import { chain, sumBy } from 'lodash'
 import { Fragment, useMemo } from 'react'
+import { FaChevronDown } from 'react-icons/fa'
 
 export const OpeningHandChart = () => {
   const deck = useDeck()
@@ -13,13 +14,28 @@ export const OpeningHandChart = () => {
   return (
     <div className="text-center">
       <div className="mb-4 text-gray-400">Chance to have a playable minion</div>
-      <div className="grid grid-cols-2 items-center gap-x-2">
-        {probabilities.map((probability, i) => (
-          <div className="flex flex-col rounded bg-alt-1000 px-2 py-4 text-sm" key={i}>
-            On the {i === 0 ? 'play' : 'draw'}
-            <div className={`text-2xl font-bold text-${deck.faction}`}>
-              {Math.round(probability * 1000) / 10}%
-            </div>
+      <div className="grid grid-cols-2 items-center gap-1.5">
+        <span>On the play</span>
+        <span>On the draw</span>
+        {probabilities.map(([p1], i) => (
+          <div
+            className={`flex flex-col bg-alt-1000/50 py-2 font-mono text-xl text-${deck.faction}`}
+            key={i}
+          >
+            {Math.round(p1 * 1000) / 10}%
+          </div>
+        ))}
+        <div className="col-span-2 flex w-full items-center justify-around px-3 text-gray-200">
+          <FaChevronDown />
+          with full mulligan
+          <FaChevronDown />
+        </div>
+        {probabilities.map(([, p2], i) => (
+          <div
+            className={`flex flex-col bg-alt-1000/50 py-2 font-mono text-xl text-${deck.faction}`}
+            key={i}
+          >
+            {Math.round(p2 * 1000) / 10}%
           </div>
         ))}
       </div>

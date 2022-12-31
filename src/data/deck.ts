@@ -180,12 +180,12 @@ const drawSize = 3
 const playableMinionChance = (deck: Deck, mana: number) => {
   const playableCards = deck.cards.filter((card) => card.cardType === 'Minion' && card.mana <= mana)
   const playableCardCount = sumBy(playableCards, (card) => card.count)
-  const totalCount = totalCount$(deck) - 1
+  const totalCount = 39
 
   const opening = atLeastOneProbability(totalCount, playableCardCount, drawSize)
   const mulligan = atLeastOneProbability(totalCount - drawSize, playableCardCount, drawSize)
 
-  return opening + (1 - opening) * mulligan
+  return [opening, opening + (1 - opening) * mulligan]
 }
 export const playableMinionOnThePlayChance = (deck: Deck) => playableMinionChance(deck, 2)
 export const playableMinionOnTheDrawChance = (deck: Deck) => playableMinionChance(deck, 3)
