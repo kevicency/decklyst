@@ -56,7 +56,7 @@ export const DeckbuilderAside: FC<{ baseDeck?: DeckExpanded }> = ({ baseDeck }) 
               ))}
             </Tab.List>
             <Tab.Panels as={Fragment}>
-              <Tab.Panel className="flex flex-1 flex-col gap-y-4">
+              <Tab.Panel className="flex flex-1 flex-col gap-y-4 overflow-hidden">
                 <div className="flex gap-2 p-2">
                   <DeckTitleInput />
 
