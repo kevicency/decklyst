@@ -10,6 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Tournament {
+  id     String   @id @default(cuid())
+  name   String
+  slug   String   @unique
+  format String
+  date   DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  results TournamentResult[]
+}
+
+model TournamentResult {
+  id         String @id @default(cuid())
+  place      Int
+  playerName String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  deckId       String     @db.Uuid
+  deck         Decklyst   @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  playerId     String?
+  player       User?      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+}
+
 model Decklyst {
   id                 String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   sharecode          String     @unique
@@ -28,13 +57,14 @@ model Decklyst {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  authorId String?
-  author   User?         @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  statsId  Int           @unique
-  stats    DeckStats     @relation(fields: [statsId], references: [id], onDelete: Cascade)
-  history  DeckHistory[]
-  viewers  DeckView[]
-  image    DeckImage?
+  authorId          String?
+  author            User?              @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  statsId           Int                @unique
+  stats             DeckStats          @relation(fields: [statsId], references: [id], onDelete: Cascade)
+  history           DeckHistory[]
+  viewers           DeckView[]
+  image             DeckImage?
+  tournamentResults TournamentResult[]
 
   @@index([deckcode], name: "deck_deckcode")
   @@map("deck")
@@ -137,15 +167,17 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
-  name          String?
-  email         String?    @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  decklysts     Decklyst[]
-  deckviews     DeckView[]
+  id                String             @id @default(cuid())
+  name              String?
+  email             String?            @unique
+  emailVerified     DateTime?
+  image             String?
+  duelystUsername   String?
+  accounts          Account[]
+  sessions          Session[]
+  decklysts         Decklyst[]
+  deckviews         DeckView[]
+  tournamentResults TournamentResult[]
 }
 
 model VerificationToken {
