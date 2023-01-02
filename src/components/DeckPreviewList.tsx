@@ -58,7 +58,7 @@ export const DeckPreview: FC<{
         </div>
         {meta?.createdAt && (
           <>
-            <div className={`flex-1 px-0.5 text-center text-lg font-bold text-gray-600`}>•</div>
+            <div className={`px-1 text-center text-lg font-bold text-gray-600`}>•</div>
             <div>
               <span>submitted </span>
               <span className="font-semibold text-gray-300">
@@ -67,7 +67,7 @@ export const DeckPreview: FC<{
             </div>
           </>
         )}
-        <div className={`flex-1 px-0.5 text-center text-lg font-bold text-gray-600`}>•</div>
+        <div className={`flex-1 px-0.5 text-center text-lg font-bold text-gray-600`}></div>
         <div className="flex flex-wrap items-center gap-4">
           <span className={`-mr-3 font-semibold text-gray-300`}>
             <EyeIcon size={18} className="mr-1 inline-block pb-0.5" />
