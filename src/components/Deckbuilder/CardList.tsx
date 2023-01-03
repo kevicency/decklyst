@@ -28,10 +28,9 @@ export const CardList: FC<{
         .filter((card) => keywordRegex?.test(card.description) ?? true)
         .filter((card) =>
           query
-            ? [card.name, card.description, card.cardType, ...card.tribes]
-                .join(';')
-                .toLowerCase()
-                .includes(query)
+            ? new RegExp(query, 'i').test(
+                [card.name, card.description, card.cardType, ...card.tribes].join(';'),
+              )
             : true,
         )
         .sort(cardCompareFn),
