@@ -17,7 +17,9 @@
     "studio:prod": "dotenv -o -e .env.production prisma studio",
     "generate:cards.json": "ts-node scripts/generateCardsJson.ts && yarn prettier --write src/data/carddata.json",
     "sync:db": "dotenv -o -e .env.local -e .env ts-node scripts/syncDb.ts",
-    "sync:db:prod": "dotenv -o -e .env.production -e .env ts-node scripts/syncDb.ts"
+    "sync:db:prod": "dotenv -o -e .env.production -e .env ts-node scripts/syncDb.ts",
+    "tournament:import": "ts-node scripts/importTournament.ts",
+    "tournament:export": "ts-node scripts/exportTournament.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",
@@ -31,12 +33,14 @@
     "@trpc/react-query": "^10.4.1",
     "@trpc/server": "10.4.1",
     "@types/csv-parse": "^1.2.2",
+    "@types/csv-stringify": "^3.1.0",
     "@types/minimist": "^1.2.2",
     "@types/recharts": "^1.8.24",
     "@vercel/analytics": "^0.1.5",
     "classnames": "2.3.2",
     "color-fns": "^0.1.1",
     "csv-parse": "^5.3.3",
+    "csv-stringify": "^6.2.3",
     "date-fns": "2.29.3",
     "dotenv": "16.0.3",
     "lodash": "4.17.21",

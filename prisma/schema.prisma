@@ -37,6 +37,8 @@ model TournamentResult {
   deck         Decklyst   @relation(fields: [deckId], references: [id], onDelete: Cascade)
   playerId     String?
   player       User?      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@unique([tournamentId, deckId, playerName])
 }
 
 model Decklyst {
