@@ -25,22 +25,21 @@ export const decklystRouter = router({
 
       if (decklyst === null && isSSG) {
         const deck = validateDeckcode(input.code) ? createDeckExpanded(input.code) : null
-        if (deck?.valid) {
-          decklyst = await ctx.decklyst.upsertDeck(null, createDeck(input.code), {
-            privacy: 'public',
-          })
-        } else {
-          throw new TRPCError({
-            message: 'Invalid deckcode',
-            code: 'BAD_REQUEST',
-            cause: input.code,
-          })
+
+        if (deck) {
+          if (deck.valid) {
+            decklyst = await ctx.decklyst.upsertDeck(null, createDeck(input.code), {
+              privacy: 'public',
+            })
+          } else {
+            throw new TRPCError({
+              message: 'Invalid deckcode',
+              code: 'BAD_REQUEST',
+              cause: input.code,
+            })
+          }
         }
       }
-
-      // if (decklyst === null) {
-      //   throw new TRPCError({ message: 'Deck not found', code: 'NOT_FOUND' })
-      // }
 
       if (decklyst?.privacy === 'private') {
         const authorized = decklyst.authorId === ctx.session?.user?.id || isSSG
