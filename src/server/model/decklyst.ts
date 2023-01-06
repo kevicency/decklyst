@@ -140,7 +140,10 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
       async () =>
         !userOnly
           ? await decklyst.findFirst({
-              where: { OR: [{ deckcode: code }, { sharecode: code }] },
+              where: {
+                OR: [{ deckcode: code }, { sharecode: code }],
+                privacy: { not: 'private' },
+              },
               orderBy: { createdAt: 'asc' },
               include: { author: true },
             })
