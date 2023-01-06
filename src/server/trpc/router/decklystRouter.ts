@@ -106,6 +106,7 @@ export const decklystRouter = router({
               },
             },
             { tags: tags.length ? { hasEvery: tags } : undefined },
+            { version: sorting === 'date:updated' ? { gt: 1 } : undefined },
           ],
         }
         const include = { author: true }
@@ -156,6 +157,15 @@ export const decklystRouter = router({
             )
             break
           }
+          case 'likes:all':
+            decklysts = await ctx.decklyst.findMany({
+              include,
+              skip,
+              take,
+              where,
+              orderBy: { likes: 'desc' },
+            })
+            break
           default:
             break
         }

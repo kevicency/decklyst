@@ -6,11 +6,11 @@ import type { ParsedUrlQuery } from 'querystring'
 export type RouteParams = ReturnType<typeof parseRouteParams>
 export type Filters = NonNullable<RouteParams['filters']>
 
-export const listings = ['hot', 'popular', 'new'] as const
+export const listings = ['views', 'likes', 'new'] as const
 export type Listing = typeof listings[number]
 
 export const parseRouteParams = (query: ParsedUrlQuery) => {
-  const listing = (query.listing as Listing | undefined) ?? 'hot'
+  const listing = (query.listing as Listing | undefined) ?? 'views'
   const factions = (Array.isArray(query.factions) ? query.factions : [query.factions])
     .filter(isString)
     .map((faction) => faction.toLowerCase())
