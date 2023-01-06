@@ -7,6 +7,7 @@ import type { ModelContext } from '../model/context'
 import { extendDeckImage } from '../model/deckImage'
 import { extendDecklyst } from '../model/decklyst'
 import { extendDeckView } from '../model/deckView'
+import { extendDeckVote } from '../model/deckVote'
 import { getIpAddress } from '../utils'
 
 type CreateContextOptions = {
@@ -28,6 +29,7 @@ export const createContextInner = async (opts: CreateContextOptions = { session:
     decklyst: extendDecklyst(prisma.decklyst, modelContext),
     deckImage: extendDeckImage(prisma.deckImage),
     deckView: extendDeckView(prisma.deckView, modelContext),
+    deckVote: extendDeckVote(prisma.deckVote, modelContext),
   }
 }
 

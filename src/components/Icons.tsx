@@ -11,6 +11,7 @@ import {
   FaRegClock,
   FaSave,
   FaStarOfLife,
+  FaThumbsUp,
 } from 'react-icons/fa'
 import { GiArtificialHive, GiEvilMinion, GiGearHammer, GiSpellBook } from 'react-icons/gi'
 import { GoRepoForked } from 'react-icons/go'
@@ -57,3 +58,4 @@ export const CloseAltIcon = CgClose
 export const ChevronDownIcon = FaChevronDown
 export const CheckIcon = FaCheck
 export const BuyMeACoffeeIcon = SiBuymeacoffee
+export const LikeIcon = FaThumbsUp

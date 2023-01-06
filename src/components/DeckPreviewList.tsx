@@ -11,7 +11,7 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { DeckTags } from './DeckInfograph/DeckTags'
-import { EyeIcon, TrashIcon } from './Icons'
+import { EyeIcon, LikeIcon, TrashIcon } from './Icons'
 import { ProfileLink } from './ProfileLink'
 import { TimeAgo } from './TimeAgo'
 
@@ -43,11 +43,11 @@ export const DeckPreview: FC<{
           </>
         )}
       </div>
-      {meta?.tags && (
+      {meta?.tags?.length ? (
         <div className="flex-1 justify-end px-2 pb-2">
           <DeckTags />
         </div>
-      )}
+      ) : null}
       <Link href={deckUrl(meta?.sharecode ?? deckcode, true)} className="cover-parent" />
       <div
         className={`relative flex flex-wrap items-center gap-0.5 border-t-2 border-gray-800 bg-alt-850 px-2.5 py-1 text-gray-400`}
@@ -69,11 +69,12 @@ export const DeckPreview: FC<{
         )}
         <div className={`flex-1 px-0.5 text-center text-lg font-bold text-gray-600`}></div>
         <div className="flex flex-wrap items-center gap-4">
-          <span className={`-mr-3 font-semibold text-gray-300`}>
-            <EyeIcon size={18} className="mr-1 inline-block pb-0.5" />
+          <div className="flex items-center gap-x-3 text-gray-100">
+            <LikeIcon size={16} className="-mr-1.5 pb-0.5 text-gray-400" />
+            {meta?.likes ?? 0}
+            <EyeIcon size={18} className="-mr-1.5 text-gray-400" />
             {meta?.views ?? 1}
-          </span>
-          <span>{(meta?.views ?? 1) === 1 ? 'view' : 'views'}</span>
+          </div>
           {onChangePrivacy && (
             <select
               className="cursor-pointer bg-alt-1000 py-1.5 text-gray-300"

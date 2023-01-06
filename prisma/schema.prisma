@@ -65,6 +65,7 @@ model Decklyst {
   stats             DeckStats          @relation(fields: [statsId], references: [id], onDelete: Cascade)
   history           DeckHistory[]
   viewers           DeckView[]
+  voters            DeckVote[]
   image             DeckImage?
   tournamentResults TournamentResult[]
 
@@ -93,6 +94,22 @@ model DeckHistory {
 
   @@id([deckId, version])
   @@map("deckhistory")
+}
+
+model DeckVote {
+  id        Int    @id @default(autoincrement())
+  sharecode String
+  userId    String @default("")
+  vote      Int    @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  decklyst Decklyst @relation(fields: [sharecode], references: [sharecode], onDelete: Cascade)
+  user     User?    @relation(fields: [userId], references: [id])
+
+  @@unique([sharecode, userId])
+  @@map("deckvote")
 }
 
 model DeckView {
@@ -180,6 +197,7 @@ model User {
   decklysts         Decklyst[]
   deckviews         DeckView[]
   tournamentResults TournamentResult[]
+  deckvotes         DeckVote[]
 }
 
 model VerificationToken {

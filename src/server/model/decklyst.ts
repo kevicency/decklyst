@@ -126,14 +126,16 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
   }
 
   const findByCode = async (code: string, userOnly: boolean = false) => {
-    var queries = [
+    const orderBy = { createdAt: 'asc' } as const
+    const include = { author: true } as const
+    const queries = [
       // prioritize decklysts of current user
       async () =>
         user
           ? await decklyst.findFirst({
               where: { OR: [{ deckcode: code }, { sharecode: code }], authorId: user?.id },
-              orderBy: { createdAt: 'asc' },
-              include: { author: true },
+              orderBy,
+              include,
             })
           : null,
       // then search for public decklysts if not user only query
@@ -143,8 +145,8 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
               where: {
                 OR: [{ deckcode: code, privacy: { not: 'private' } }, { sharecode: code }],
               },
-              orderBy: { createdAt: 'asc' },
-              include: { author: true },
+              orderBy,
+              include,
             })
           : null,
       // then search for decklysts with same normalized deckcode
@@ -153,8 +155,8 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
         return deck && !deck.title
           ? await decklyst.findFirst({
               where: { deckcodeNormalized: deckcodeNormalized$(deck) },
-              orderBy: { createdAt: 'asc' },
-              include: { author: true },
+              orderBy,
+              include,
             })
           : null
       },
