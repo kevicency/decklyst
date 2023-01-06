@@ -7,6 +7,7 @@ import {
   spiritCost$,
   totalCount$,
 } from '@/data/deck'
+import { normalizeDeckcode } from '@/data/deckcode'
 import { PrismaClient } from '@prisma/client'
 import { parse } from 'csv-parse'
 import * as dotenv from 'dotenv'
@@ -109,6 +110,8 @@ const main = async () => {
 
     if (!decklyst) {
       const deck = createDeck(result.deckcode)
+      deck.title = title
+
       const stats = {
         faction: faction$(deck),
         minionCount: minionCount$(deck),
@@ -123,8 +126,8 @@ const main = async () => {
         data: {
           sharecode,
           title,
-          deckcode: result.deckcode,
-          deckcodeNormalized: result.deckcode,
+          deckcode: deck.deckcode,
+          deckcodeNormalized: normalizeDeckcode(deck.deckcode)!,
           author: { connect: { id: tournamentBot.id } },
           draft: false,
           stats: { create: stats },
