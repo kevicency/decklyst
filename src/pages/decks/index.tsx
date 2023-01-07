@@ -1,12 +1,12 @@
 import { DeckPreviewList } from '@/components/DeckPreviewList'
-import type { Filters, Listing } from '@/components/Decksearch'
-import { listings, parseRouteParams, useRouteParams } from '@/components/Decksearch'
+import type { Filters, Sorting, Timespan } from '@/components/Decksearch'
+import { parseRouteParams, useRouteParams } from '@/components/Decksearch'
 import { EndlessScroll } from '@/components/Decksearch/EndlessScroll'
+import { TimespanCombobox } from '@/components/Inputs/TimespanCombobox'
 import { PageHeader } from '@/components/PageHeader'
 import { PivotButton } from '@/components/PivotButton'
 import { createDeckFromDecklyst } from '@/data/deck'
 import { createSSGClient } from '@/server'
-import type { RouterInputs } from '@/utils/trpc'
 import { trpc } from '@/utils/trpc'
 import { last, startCase, uniqBy } from 'lodash'
 import type { InferGetServerSidePropsType, NextPage } from 'next'
@@ -17,16 +17,15 @@ import { DecksearchAside } from '../../components/Decksearch/DecksearchAside'
 
 export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const toSorting = (listing: Listing): RouterInputs['decklyst']['search']['sorting'] => {
-  switch (listing) {
-    case 'views':
-      return 'views:all'
-    case 'likes':
-      return 'likes:all'
-    case 'new':
-      return 'date:created'
-    case 'updated':
-      return 'date:updated'
+const sortings: Sorting[] = ['views', 'likes', 'date:created']
+const sortingLabel = (sorting: Sorting): string => {
+  switch (sorting) {
+    case 'date:created':
+      return 'New'
+    case 'date:updated':
+      return 'Updated'
+    default:
+      return startCase(sorting)
   }
 }
 
@@ -48,11 +47,13 @@ const DecksPage: NextPage<Props> = ({ initialRouteParams }) => {
       }, 100),
     )
   }
-  const createListingChangedHandler = (listing: Listing) => () =>
-    updateRouteParams({ ...routeParams, listing })
+  const createSortingChangeHandler = (sorting: Sorting) => () =>
+    updateRouteParams({ ...routeParams, sorting })
+  const createTimespanChangeHandler = (timespan: Timespan) => () =>
+    updateRouteParams({ ...routeParams, timespan })
 
   const { data, fetchNextPage, isFetching, isLoading } = trpc.decklyst.search.useInfiniteQuery(
-    { sorting: toSorting(routeParams.listing), filters: routeParams.filters },
+    routeParams,
     {
       getNextPageParam: (_, allPages) => allPages.length,
     },
@@ -72,16 +73,24 @@ const DecksPage: NextPage<Props> = ({ initialRouteParams }) => {
       <div className="bg-image-decksearch flex flex-1 flex-col overflow-hidden grid-in-main">
         <PageHeader showFilterToggle>
           <div className="flex flex-1 justify-between">
-            <div className="flex gap-x-4 text-3xl">
-              {listings.map((listing) => (
+            <div className="flex items-end gap-x-4">
+              {sortings.map((sorting) => (
                 <PivotButton
-                  key={listing}
-                  active={listing === routeParams.listing}
-                  onClick={createListingChangedHandler(listing)}
+                  key={sorting}
+                  active={sorting === routeParams.sorting}
+                  onClick={createSortingChangeHandler(sorting)}
+                  className="text-3xl"
                 >
-                  {startCase(listing)}
+                  {sortingLabel(sorting)}
                 </PivotButton>
               ))}
+              <div className="ml-2">
+                <TimespanCombobox
+                  disabled={/^date/.test(routeParams.sorting)}
+                  value={routeParams.timespan}
+                  onChange={(timespan: Timespan) => updateRouteParams({ ...routeParams, timespan })}
+                />
+              </div>
             </div>
             <div className="flex gap-x-4"></div>
           </div>
@@ -121,7 +130,7 @@ export const getServerSideProps = async ({ query, ...ctx }: GetServerSidePropsCo
   const routeParams = parseRouteParams(query)
   await client.decklyst.search.prefetchInfinite({
     filters: routeParams.filters,
-    sorting: toSorting(routeParams.listing),
+    sorting: sortingLabel(routeParams.listing),
   })
 
   return {

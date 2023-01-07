@@ -1,4 +1,5 @@
 import { maxSpiritCost } from '@/data/deck'
+import type { RouterInputs } from '@/utils/trpc'
 import { get, isNil, isString, omitBy } from 'lodash'
 import { useRouter } from 'next/router'
 import type { ParsedUrlQuery } from 'querystring'
@@ -6,11 +7,12 @@ import type { ParsedUrlQuery } from 'querystring'
 export type RouteParams = ReturnType<typeof parseRouteParams>
 export type Filters = NonNullable<RouteParams['filters']>
 
-export const listings = ['views', 'likes', 'new'] as const
-export type Listing = typeof listings[number]
+export type Sorting = NonNullable<RouterInputs['decklyst']['search']['sorting']>
+export type Timespan = NonNullable<RouterInputs['decklyst']['search']['timespan']>
 
 export const parseRouteParams = (query: ParsedUrlQuery) => {
-  const listing = (query.listing as Listing | undefined) ?? 'views'
+  const sorting = (query.sorting as Sorting | undefined) ?? 'views'
+  const timespan = (query.timespan as Timespan | undefined) ?? 'all'
   const factions = (Array.isArray(query.factions) ? query.factions : [query.factions])
     .filter(isString)
     .map((faction) => faction.toLowerCase())
@@ -25,7 +27,8 @@ export const parseRouteParams = (query: ParsedUrlQuery) => {
   const includeUntitled = query.includeUntitled === 'true' || query.includeUntitled === undefined
 
   return {
-    listing,
+    sorting,
+    timespan,
     filters: {
       factions,
       cardIds,
@@ -45,18 +48,19 @@ export const useRouteParams = (initialRouteParams: RouteParams) => {
   const router = useRouter()
   const routeParams = router.query ? parseRouteParams(router.query) : initialRouteParams
 
-  const updateRouteParams = async ({ filters, listing }: RouteParams) => {
+  const updateRouteParams = async ({ filters, sorting, timespan }: RouteParams) => {
     console.log('updateRouteParams', { filters })
 
     await router.push(
       {
         pathname: router.pathname,
         query: omitBy(
-          { ...router.query, listing, ...filters },
+          { ...router.query, sorting, timespan, ...filters },
           (value, key) =>
             isNil(value) ||
             get(defaultRouteParams.filters, key) === value ||
-            (key === 'listing' && value === defaultRouteParams.listing),
+            (key === 'sorting' && value === defaultRouteParams.sorting) ||
+            (key === 'timespan' && value === defaultRouteParams.timespan),
         ),
       },
       undefined,

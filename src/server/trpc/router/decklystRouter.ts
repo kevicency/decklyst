@@ -55,9 +55,8 @@ export const decklystRouter = router({
       z.object({
         limit: z.number().gt(0).lte(50).optional(),
         cursor: z.number().optional(),
-        sorting: z
-          .enum(['date:created', 'date:updated', 'views:all', 'views:recent', 'likes:all'])
-          .optional(),
+        sorting: z.enum(['date:created', 'date:updated', 'views', 'likes']).optional(),
+        timespan: z.enum(['all', 'day', 'week', 'month']).optional(),
         filters: z
           .object({
             factions: z.array(z.enum(factions as [string, ...string[]])).optional(),
@@ -79,7 +78,8 @@ export const decklystRouter = router({
           limit = 10,
           cursor: page = 0,
           filters: { factions = [], tags = [], cardIds = [], ...filters } = {},
-          sorting,
+          sorting = 'views',
+          timespan = 'all',
         },
       }) => {
         const isMyProfileSearch = filters.authorId && filters.authorId === ctx.session?.user?.id
@@ -110,40 +110,32 @@ export const decklystRouter = router({
           ],
         }
         const include = { author: true }
+        const orderBy: any = {
+          'date:created': { createdAt: 'desc' },
+          'date:updated': { updatedAt: 'desc' },
+          likes: { likes: 'desc' },
+          views: { views: 'desc' },
+        }[sorting]
 
         let decklysts: Array<Decklyst & { author: User | null }> = []
 
-        switch (sorting) {
-          case 'date:created':
-            decklysts = await ctx.decklyst.findMany({
-              include,
-              skip,
-              take,
-              where,
-              orderBy: { createdAt: 'desc' },
-            })
-            break
-          case 'date:updated':
-            decklysts = await ctx.decklyst.findMany({
-              include,
-              skip,
-              take,
-              where,
-              orderBy: { updatedAt: 'desc' },
-            })
-            break
-          case 'views:all':
-            decklysts = await ctx.decklyst.findMany({
-              include,
-              skip,
-              take,
-              where,
-              orderBy: { views: 'desc' },
-            })
-            break
-          case 'views:recent': {
+        if (timespan === 'all' || /^date/.test(sorting)) {
+          decklysts = await ctx.decklyst.findMany({
+            include,
+            skip,
+            take,
+            where,
+            orderBy,
+          })
+        } else {
+          const sinceDaysAgo = {
+            day: 1,
+            week: 7,
+            month: 30,
+          }[timespan]
+          if (sorting === 'views') {
             const mostViewed = await ctx.deckView.mostViewed({
-              sinceDaysAgo: 7,
+              sinceDaysAgo,
               skip,
               take,
               decklystFilter: where,
@@ -155,19 +147,22 @@ export const decklystRouter = router({
             decklysts = sortBy(decklysts, (decklyst) =>
               mostViewed.findIndex(({ sharecode }) => sharecode === decklyst.sharecode),
             )
-            break
           }
-          case 'likes:all':
-            decklysts = await ctx.decklyst.findMany({
-              include,
+          if (sorting === 'likes') {
+            const mostLiked = await ctx.deckVote.mostLiked({
+              sinceDaysAgo,
               skip,
               take,
-              where,
-              orderBy: { likes: 'desc' },
+              decklystFilter: where,
             })
-            break
-          default:
-            break
+            decklysts = await ctx.decklyst.findMany({
+              include,
+              where: { sharecode: { in: mostLiked.map(({ sharecode }) => sharecode) } },
+            })
+            decklysts = sortBy(decklysts, (decklyst) =>
+              mostLiked.findIndex(({ sharecode }) => sharecode === decklyst.sharecode),
+            )
+          }
         }
 
         return {
