@@ -69,7 +69,7 @@ export const DeckPreview: FC<{
         )}
         <div className={`flex-1 px-0.5 text-center text-lg font-bold text-gray-600`}></div>
         <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-x-3 text-gray-100">
+          <div className="flex items-center gap-x-3 font-semibold text-gray-100">
             <LikeIcon size={16} className="-mr-1.5 pb-0.5 text-gray-400" />
             {meta?.likes ?? 0}
             <EyeIcon size={18} className="-mr-1.5 text-gray-400" />

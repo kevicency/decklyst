@@ -17,46 +17,57 @@ import { DeckMinionList } from '../DeckInfograph/DeckMinionList'
 import { DeckSpellList } from '../DeckInfograph/DeckSpellList'
 import { DeckTags } from '../DeckInfograph/DeckTags'
 import { CopyIcon, DoneIcon, EditIcon, EyeIcon, LikeIcon, ShareIcon } from '../Icons'
+import { LikeDeckDialog } from '../LikeDeckDialog'
 import { OneTimeButton } from '../OneTimeButton'
 import { TimeAgo } from '../TimeAgo'
 import { DeckStats } from './DeckDetailsAside'
 import { ShareDeckDialog } from './ShareDeckDialog'
 
 export const DeckUpvote: FC<{ className?: string }> = ({ className }) => {
+  const [showDialog, setShowDialog] = useState(false)
   const deck = useDeck()
   const session = useSession()
   const sharecode = deck.meta?.sharecode ?? ''
   const isMyDeck = deck.meta?.authorId && deck.meta?.authorId === session?.data?.user?.id
   const utils = trpc.useContext()
+  const signedIn = session.status === 'authenticated'
   const { data: myVote, refetch } = trpc.deckVote.getMyVote.useQuery(
     { sharecode },
     {
-      enabled: !!sharecode && !isMyDeck && session.status === 'authenticated',
+      enabled: !!sharecode && !isMyDeck && signedIn,
     },
   )
   const { mutateAsync: toggleUpvote, isLoading: isVoting } =
     trpc.deckVote.toggleUpvote.useMutation()
-  const canVote = !isMyDeck && session?.status === 'authenticated'
+  const canVote = !isMyDeck
 
   const handleVote = async () => {
     if (isVoting) return
+    if (!signedIn) {
+      setShowDialog(true)
+      return
+    }
     await toggleUpvote({ sharecode })
     await utils.decklyst.get.invalidate({ code: sharecode })
     await refetch()
   }
 
   return canVote ? (
-    <button
-      onClick={handleVote}
-      className={cx(
-        className,
-        myVote?.vote === 1
-          ? `text-${deck.faction} scale-110 hover:scale-100 hover:text-gray-300`
-          : `text-gray-300 hover:text-${deck.faction} scale-100 hover:scale-110`,
-      )}
-    >
-      <LikeIcon size={22} />
-    </button>
+    <>
+      <button
+        onClick={handleVote}
+        className={cx(
+          className,
+          myVote?.vote === 1
+            ? `text-${deck.faction} scale-110 hover:scale-100 hover:text-gray-300`
+            : `text-gray-300 hover:text-${deck.faction} scale-100 hover:scale-110`,
+          !signedIn && '!text-gray-500',
+        )}
+      >
+        <LikeIcon size={24} />
+      </button>
+      <LikeDeckDialog open={showDialog} onClose={() => setShowDialog(false)} />
+    </>
   ) : null
 }
 
@@ -92,7 +103,7 @@ export const DeckDetailsMain: FC = () => {
             </div>
             <div className="flex items-baseline gap-x-3 pr-4">
               <div className="truncate text-3xl font-light">{deck.title || 'Untitled'}</div>
-              <DeckUpvote className="" />
+              <DeckUpvote className="ml-4" />
             </div>
             <div className="ml-2 flex items-center gap-x-2">
               {/* {isMyDeck && (
@@ -127,7 +138,7 @@ export const DeckDetailsMain: FC = () => {
         <div className="content-container">
           <div className="flex flex-col gap-y-3">
             <div className="mt-2 grid grid-cols-[6rem_minmax(0,1fr)_auto] gap-x-1">
-              <div className={`font-mono text-3xl text-${deck.faction} mt-3 w-20 text-center`}>
+              <div className={`font-mono text-3xl text-${deck.faction} mt-4 w-20 text-center`}>
                 {meta.sharecode}
               </div>
               <div className="flex flex-col gap-y-0">
@@ -172,6 +183,9 @@ export const DeckDetailsMain: FC = () => {
                 </div>
                 <div className="flex items-center gap-x-1.5">
                   <EyeIcon className="text-gray-400" size={22} /> {meta.views}
+                </div>
+                <div className={`font-mono text-3xl text-${deck.faction} w-20 text-center`}>
+                  {meta.sharecode}
                 </div>
               </div>
             </div>
