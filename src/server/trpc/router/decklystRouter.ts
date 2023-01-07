@@ -115,7 +115,6 @@ export const decklystRouter = router({
               },
             },
             { tags: tags.length ? { hasEvery: tags } : undefined },
-            { version: sorting === 'date:updated' ? { gt: 1 } : undefined },
           ],
         }
         const include = { author: true }
