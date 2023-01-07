@@ -152,7 +152,7 @@ export const extendDecklyst = (decklyst: PrismaClient['decklyst'], ctx: ModelCon
       // then search for decklysts with same normalized deckcode
       async () => {
         const deck = validateDeckcode(code) ? createDeck(code) : null
-        return deck && !deck.title
+        return !userOnly && deck && !deck.title
           ? await decklyst.findFirst({
               where: { deckcodeNormalized: deckcodeNormalized$(deck) },
               orderBy,

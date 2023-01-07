@@ -37,7 +37,7 @@ export const extendDeckVote = (deckVote: PrismaClient['deckVote'], _ctx: ModelCo
         skip,
       })
 
-      return result.map(({ sharecode, _count }) => ({ sharecode, viewCount: _count.sharecode }))
+      return result.map(({ sharecode, _count }) => ({ sharecode, likeCount: _count.sharecode }))
     },
   })
 }

@@ -155,6 +155,14 @@ export const decklystRouter = router({
             decklysts = sortBy(decklysts, (decklyst) =>
               mostViewed.findIndex(({ sharecode }) => sharecode === decklyst.sharecode),
             )
+            decklysts = decklysts
+              .map((decklyst) => ({
+                ...decklyst,
+                views:
+                  mostViewed.find(({ sharecode }) => sharecode === decklyst.sharecode)?.viewCount ??
+                  0,
+              }))
+              .sort((a, b) => b.views - a.views)
           }
           if (sorting === 'likes') {
             const mostLiked = await ctx.deckVote.mostLiked({
@@ -167,9 +175,14 @@ export const decklystRouter = router({
               include,
               where: { sharecode: { in: mostLiked.map(({ sharecode }) => sharecode) } },
             })
-            decklysts = sortBy(decklysts, (decklyst) =>
-              mostLiked.findIndex(({ sharecode }) => sharecode === decklyst.sharecode),
-            )
+            decklysts = decklysts
+              .map((decklyst) => ({
+                ...decklyst,
+                likes:
+                  mostLiked.find(({ sharecode }) => sharecode === decklyst.sharecode)?.likeCount ??
+                  0,
+              }))
+              .sort((a, b) => b.likes - a.likes)
           }
         }
 
