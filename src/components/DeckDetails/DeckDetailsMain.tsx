@@ -60,7 +60,7 @@ export const DeckUpvote: FC<{ className?: string }> = ({ className }) => {
           className,
           myVote?.vote === 1
             ? `text-${deck.faction} scale-110 hover:scale-100 hover:text-gray-300`
-            : `text-gray-300 hover:text-${deck.faction} scale-100 hover:scale-110`,
+            : `text-accent-500 hover:text-${deck.faction} scale-100 hover:scale-110`,
           !signedIn && '!text-gray-500',
         )}
       >
@@ -103,7 +103,7 @@ export const DeckDetailsMain: FC = () => {
             </div>
             <div className="flex items-baseline gap-x-3 pr-4">
               <div className="truncate text-3xl font-light">{deck.title || 'Untitled'}</div>
-              <DeckUpvote className="ml-4" />
+              <DeckUpvote className="ml-2" />
             </div>
             <div className="ml-2 flex items-center gap-x-2">
               {/* {isMyDeck && (
