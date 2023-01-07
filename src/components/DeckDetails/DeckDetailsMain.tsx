@@ -138,7 +138,9 @@ export const DeckDetailsMain: FC = () => {
         <div className="content-container">
           <div className="flex flex-col gap-y-3">
             <div className="mt-2 grid grid-cols-[6rem_minmax(0,1fr)_auto] gap-x-1">
-              <div className={`font-mono text-3xl text-${deck.faction} mt-4 w-20 text-center`}>
+              <div
+                className={`font-mono text-3xl text-${deck.faction} mt-4 -ml-1 w-20 text-center`}
+              >
                 {meta.sharecode}
               </div>
               <div className="flex flex-col gap-y-0">
