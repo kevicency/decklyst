@@ -1,3 +1,4 @@
+import { isSharecode } from '@/common/utils'
 import { factions } from '@/data/cards'
 import { createDeck, createDeckExpanded } from '@/data/deck'
 import { validateDeckcode } from '@/data/deckcode'
@@ -39,6 +40,14 @@ export const decklystRouter = router({
             })
           }
         }
+      }
+
+      if (!decklyst && !isSharecode(input.code)) {
+        throw new TRPCError({
+          message: 'Invalid deckcode',
+          code: 'BAD_REQUEST',
+          cause: input.code,
+        })
       }
 
       if (decklyst?.privacy === 'private') {

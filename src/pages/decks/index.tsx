@@ -128,10 +128,7 @@ const DecksPage: NextPage<Props> = ({ initialRouteParams }) => {
 export const getServerSideProps = async ({ query, ...ctx }: GetServerSidePropsContext) => {
   const client = await createSSGClient(ctx)
   const routeParams = parseRouteParams(query)
-  await client.decklyst.search.prefetchInfinite({
-    filters: routeParams.filters,
-    sorting: sortingLabel(routeParams.listing),
-  })
+  await client.decklyst.search.prefetchInfinite(routeParams)
 
   return {
     props: {

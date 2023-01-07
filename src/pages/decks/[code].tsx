@@ -14,10 +14,11 @@ import { trpc } from '@/utils/trpc'
 import { uniqBy } from 'lodash'
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from 'next/types'
 import type { FC } from 'react'
+import InvalidDeckPage from './invalid'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
-const DeckPage: FC<Props> = ({ decklyst, code }) => {
+const DeckPage: FC<Props> = ({ decklyst, code, invalid }) => {
   const [{ isMobile }] = useAppShell()
   const {
     data: deck,
@@ -29,9 +30,10 @@ const DeckPage: FC<Props> = ({ decklyst, code }) => {
       placeholderData: decklyst,
       retry: (count, error) => (error.data?.code === 'UNAUTHORIZED' ? false : count < 3),
       select: (data) => createDeckFromDecklyst(data),
+      enabled: !invalid,
     },
   )
-  useRegisterView(deck?.meta.sharecode, { enabled: !!deck && isSuccess })
+  useRegisterView(deck?.meta.sharecode, { enabled: !!deck && isSuccess && !invalid })
 
   if (error)
     return (
@@ -39,17 +41,17 @@ const DeckPage: FC<Props> = ({ decklyst, code }) => {
         <div className="text-xl">Deck is private</div>
       </div>
     )
+
+  if (invalid || (deck && !deck.valid)) return <InvalidDeckPage />
   if (!deck) return <PageLoader />
 
-  return deck.valid ? (
+  return (
     <DeckProvider deck={deck}>
       <SpriteLoaderProvider deck={deck} key={deck.deckcode}>
         <DeckDetailsMain />
         {!isMobile && <DeckDetailsAside />}
       </SpriteLoaderProvider>
     </DeckProvider>
-  ) : (
-    <div className="flex items-center justify-center grid-in-main">invalid deckcode</div>
   )
 }
 
@@ -85,7 +87,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
   const ssg = await createSSGClient()
 
   let decklyst: Decklyst | null = null
-  let invalid = true
+  let invalid = false
 
   try {
     decklyst = await ssg.decklyst.get.fetch({ code, ssrSecret: env.SSR_SECRET })
@@ -99,16 +101,15 @@ export const getStaticProps = async (ctx: GetStaticPropsContext<{ code?: string 
 
   const isPrivate = decklyst?.privacy === 'private'
 
-  return decklyst
+  return decklyst || invalid
     ? {
         props: {
           code,
           trpcState: ssg.dehydrate({ shouldDehydrateQuery: () => !isPrivate }),
           decklyst: isPrivate ? null : decklyst,
+          invalid,
         },
       }
-    : invalid
-    ? { redirect: { destination: '/decks/invalid', permanent: false } }
     : { notFound: true, revalidate: true }
 }
 
