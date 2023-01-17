@@ -59,13 +59,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { prisma } = await createContextInner()
   const decklysts = await prisma.decklyst.findMany({
     select: { deckcode: true, sharecode: true },
-    where: { privacy: { not: 'private' } },
+    where: { privacy: { not: 'private' }, views: { gt: 1 } },
   })
 
   return {
     paths: uniqBy(
       decklysts
-        .flatMap(({ deckcode, sharecode }) => [deckcode, sharecode])
+        .flatMap(({ deckcode, sharecode }) => [sharecode])
         .map((code) => code?.trim())
         .filter((code): code is string => code?.length > 0)
         .map((code) => `/decks/${encodeURIComponent(code)}`)
