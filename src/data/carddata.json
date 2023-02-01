@@ -764,7 +764,7 @@
     "cardSet": "Core Set",
     "faction": "songhai",
     "rarity": "legendary",
-    "description": "Rush\nAt the start of your turn, this returns to your action bar.",
+    "description": "Rush\nAt the start of your turn, deal 1 damage to your General and return this to your action bar.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f2SpecialBreathing.gif",
@@ -2140,7 +2140,7 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "legendary",
-    "description": "Rush\nGive the first allied minion summoned nearby this each turn Rush.",
+    "description": "Rush\nThe next time an allied minion is summoned nearby this, give it Rush.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f5VindicatorBreathing.gif",
@@ -2151,7 +2151,7 @@
       "death": "resources/card_gifs/f5VindicatorDeath.gif"
     },
     "mana": 3,
-    "attack": 1,
+    "attack": 2,
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
@@ -2260,7 +2260,7 @@
     },
     "mana": 3,
     "attack": 3,
-    "health": 3,
+    "health": 4,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f6_fenrirwarmaster",
@@ -2284,7 +2284,7 @@
     },
     "mana": 2,
     "attack": 3,
-    "health": 3,
+    "health": 2,
     "cardType": "Minion",
     "tribes": [],
     "factionId": 6
@@ -4020,7 +4020,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "epic",
-    "description": "Your opponent's spells cost 1 more to play.",
+    "description": "All spells cost 1 more to play.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralArchonSpellbinderBreathing.gif",
@@ -4030,9 +4030,9 @@
       "damage": "resources/card_gifs/neutralArchonSpellbinderHit.gif",
       "death": "resources/card_gifs/neutralArchonSpellbinderDeath.gif"
     },
-    "mana": 6,
-    "attack": 7,
-    "health": 9,
+    "mana": 5,
+    "attack": 5,
+    "health": 6,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
     "spriteName": "neutral_mercarchonspellbinder",
@@ -5045,7 +5045,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "epic",
-    "description": "Provoke\nOpening Gambit: Give other minions you summon this turn +1/+1 and Provoke.",
+    "description": "Provoke\nOpening Gambit: Give other non-token minions you summon this turn +1/+1 and Provoke.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralLadyLockeBreathing.gif",
@@ -5535,7 +5535,7 @@
       "death": "resources/card_gifs/neutralSunElementalDeath.gif"
     },
     "mana": 4,
-    "attack": 1,
+    "attack": 2,
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
@@ -6189,7 +6189,7 @@
     "cardSet": "Core Set",
     "faction": "songhai",
     "rarity": "common",
-    "description": "Deal 2 damage to exactly two random enemy minions. Draw a card at the end of your turn.",
+    "description": "Deal 2 damage to exactly two enemy minions. Draw a card at the end of your turn.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2TwinStrikeIdle.gif",
@@ -7719,13 +7719,13 @@
     "cardSet": "Core Set",
     "faction": "songhai",
     "rarity": "epic",
-    "description": "Your General has Backstab: 5.",
+    "description": "Your General has Backstab: 3.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2MaskofShadowsIdle.gif",
       "active": "resources/card_gifs/iconD2MaskofShadowsActive.gif"
     },
-    "mana": 2,
+    "mana": 1,
     "cardType": "Artifact",
     "tribes": [],
     "spriteName": "artifact_f2_d2_maskofshadows",
@@ -7761,7 +7761,7 @@
       "idle": "resources/card_gifs/iconD2BloodLeechMaskIdle.gif",
       "active": "resources/card_gifs/iconD2BloodLeechMaskActive.gif"
     },
-    "mana": 1,
+    "mana": 2,
     "cardType": "Artifact",
     "tribes": [],
     "spriteName": "artifact_f2_d2_bloodleechmask",
