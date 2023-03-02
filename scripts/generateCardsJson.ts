@@ -52,7 +52,7 @@ const getSpriteName = (cardJson: CardJSON) => {
 }
 
 async function main() {
-  const json = await fetch('https://api-phppdmqb3q-uc.a.run.app/cards.json').then(
+  const json = await fetch('https://api.duelyst2.com/cards.json').then(
     (response) => response.json() as Promise<CardJSON[]>,
   )
   const cards: CardData[] = json

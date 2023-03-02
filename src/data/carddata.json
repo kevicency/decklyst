@@ -81,7 +81,7 @@
     "cardSet": "Core Set",
     "faction": "lyonar",
     "rarity": "epic",
-    "description": "Airdrop\nOpening Gambit: This turn, allied minions have Airdrop when played.",
+    "description": "Airdrop\nAllied minions have Airdrop when played.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f1SunstoneTemplarBreathing.gif",
@@ -92,8 +92,8 @@
       "death": "resources/card_gifs/f1SunstoneTemplarDeath.gif"
     },
     "mana": 2,
-    "attack": 3,
-    "health": 2,
+    "attack": 1,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f1_sunstonetemplar",
@@ -345,7 +345,7 @@
     "cardSet": "Core Set",
     "faction": "lyonar",
     "rarity": "epic",
-    "description": "When a unit is healed, deal 2 damage to nearby enemies.",
+    "description": "After a unit is healed, deal 2 damage to nearby enemies.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f1SunriserBreathing.gif",
@@ -501,7 +501,7 @@
     "cardSet": "Core Set",
     "faction": "songhai",
     "rarity": "common",
-    "description": "Backstab: 1.",
+    "description": "Backstab: 2.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f2MeleeBreathing.gif",
@@ -606,9 +606,9 @@
       "damage": "resources/card_gifs/f2JadeOgreDamage.gif",
       "death": "resources/card_gifs/f2JadeOgreDeath.gif"
     },
-    "mana": 4,
+    "mana": 3,
     "attack": 4,
-    "health": 4,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f2_ogremonk02",
@@ -1902,7 +1902,7 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "rare",
-    "description": "Rush\nOpening Gambit: Deal 4 damage to your General.",
+    "description": "Rush\nWhen this takes damage, deal 2 damage to your General.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f5SupportBreathing.gif",
@@ -1974,7 +1974,7 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "common",
-    "description": "Opening Gambit: Give a nearby minion +2/+2.",
+    "description": "Opening Gambit: Give a nearby minion +2/+1.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f5PrimordialGazerBreathing.gif",
@@ -2151,7 +2151,7 @@
       "death": "resources/card_gifs/f5VindicatorDeath.gif"
     },
     "mana": 3,
-    "attack": 2,
+    "attack": 1,
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
@@ -3024,9 +3024,9 @@
       "damage": "resources/card_gifs/neutralMercGrenadierHit.gif",
       "death": "resources/card_gifs/neutralMercGrenadierDeath.gif"
     },
-    "mana": 3,
-    "attack": 3,
-    "health": 2,
+    "mana": 1,
+    "attack": 2,
+    "health": 1,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "neutral_mercgrenadier",
@@ -3599,7 +3599,7 @@
       "death": "resources/card_gifs/neutralShieldOracleDeath.gif"
     },
     "mana": 3,
-    "attack": 0,
+    "attack": 1,
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
@@ -6549,7 +6549,7 @@
     "cardSet": "Core Set",
     "faction": "vetruvian",
     "rarity": "common",
-    "description": "Destroy a minion nearby your General.",
+    "description": "Destroy a minion nearby an ally.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2EntropicDecayIdle.gif",
@@ -7161,7 +7161,7 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "common",
-    "description": "Give a minion +2/+2.",
+    "description": "Give a minion +2/+1.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2GreaterFortitudeIdle.gif",
