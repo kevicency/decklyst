@@ -1130,12 +1130,12 @@
     "factionId": 3
   },
   {
-    "name": "Imperial Mechanyst",
+    "name": "Imperial Saboteur",
     "id": 275,
     "cardSet": "Core Set",
     "faction": "vetruvian",
     "rarity": "rare",
-    "description": "Opening Gambit: Restore your artifacts to full durability.",
+    "description": "Opening Gambit: Give a nearby minion -2/-0 until your next turn.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f3NighfallMechanistBreathing.gif",
@@ -1146,8 +1146,8 @@
       "death": "resources/card_gifs/f3NighfallMechanistDeath.gif"
     },
     "mana": 2,
-    "attack": 1,
-    "health": 4,
+    "attack": 2,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f3_palacetrinketeer",
@@ -1602,7 +1602,7 @@
     "cardSet": "Core Set",
     "faction": "abyssian",
     "rarity": "rare",
-    "description": "Opening Gambit: Destroy a nearby minion with 3 or less Attack.",
+    "description": "Opening Gambit: Destroy a nearby damaged minion.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f4NightsorrowBreathing.gif",
@@ -1614,7 +1614,7 @@
     },
     "mana": 3,
     "attack": 3,
-    "health": 1,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f4_nightsorrow",
@@ -1878,7 +1878,7 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "common",
-    "description": "",
+    "description": "This moves 1 less space.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f5TankBreathing.gif",
@@ -1888,9 +1888,9 @@
       "damage": "resources/card_gifs/f5TankDamage.gif",
       "death": "resources/card_gifs/f5TankDeath.gif"
     },
-    "mana": 3,
-    "attack": 7,
-    "health": 2,
+    "mana": 2,
+    "attack": 4,
+    "health": 4,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f5_tank",
@@ -2438,7 +2438,7 @@
     "cardSet": "Core Set",
     "faction": "vanar",
     "rarity": "rare",
-    "description": "Flying\nInfiltrate: This takes no damage from units with 3 or more Attack.",
+    "description": "Flying\nThis takes no damage from units with 3 or more Attack.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f6WolfravenBreathing.gif",
@@ -2450,7 +2450,7 @@
     },
     "mana": 3,
     "attack": 2,
-    "health": 4,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f6_wolfraven",
@@ -2510,7 +2510,7 @@
     "cardSet": "Core Set",
     "faction": "vanar",
     "rarity": "legendary",
-    "description": "Provoke\nOpening Gambit: Give allied minions \"Dying Wish: Summon a Treant on this space\".",
+    "description": "Provoke\nOpening Gambit: Give other allied minions \"Dying Wish: Summon a Treant on this space\".",
     "relatedCards": [582],
     "resource": {
       "breathing": "resources/card_gifs/f6TreantBreathing.gif",
@@ -2628,7 +2628,7 @@
     "cardSet": "Core Set",
     "faction": "vanar",
     "rarity": "rare",
-    "description": "When you summon a Vespyr, deal 2 damage to a random enemy minion.",
+    "description": "Infiltrate: When you summon a Vespyr, deal 2 damage to a random enemy minion.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f6SnowElementalBreathing.gif",
@@ -3038,7 +3038,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "common",
-    "description": "This gains Health equal to the cost of the next artifact you equip.",
+    "description": "This gains Attack equal to the cost of the next artifact you equip.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralD2KomodoScavengerBreathing.gif",
@@ -3049,8 +3049,8 @@
       "death": "resources/card_gifs/neutralD2KomodoScavengerDeath.gif"
     },
     "mana": 1,
-    "attack": 2,
-    "health": 2,
+    "attack": 1,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "neutral_beastcavern",
@@ -4031,7 +4031,7 @@
       "death": "resources/card_gifs/neutralArchonSpellbinderDeath.gif"
     },
     "mana": 5,
-    "attack": 5,
+    "attack": 6,
     "health": 6,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
@@ -4044,7 +4044,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "rare",
-    "description": "Opening Gambit: Teleport your General up to 4 spaces.",
+    "description": "Opening Gambit: Teleport your General up to 3 spaces.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralSilhouetteTracerBreathing.gif",
@@ -5127,7 +5127,7 @@
       "damage": "resources/card_gifs/neutralRookHit.gif",
       "death": "resources/card_gifs/neutralRookDeath.gif"
     },
-    "mana": 7,
+    "mana": 6,
     "attack": 7,
     "health": 7,
     "cardType": "Minion",
@@ -5381,7 +5381,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "common",
-    "description": "Opening Gambit: Teleport a nearby minion to a random space.",
+    "description": "Opening Gambit: Draw a card at the end of your turn.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralGhostLynxBreathing.gif",
@@ -5392,8 +5392,8 @@
       "death": "resources/card_gifs/neutralGhostLynxDeath.gif"
     },
     "mana": 2,
-    "attack": 2,
-    "health": 2,
+    "attack": 1,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "neutral_ghostlynx",
@@ -5548,7 +5548,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "rare",
-    "description": "Opening Gambit: Prevent damage dealt by spells until your next turn.",
+    "description": "Opening Gambit: Give all units \"This takes no damage from spells.\" until your next turn.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralProphetWhitePalmBreathing.gif",
@@ -5559,8 +5559,8 @@
       "death": "resources/card_gifs/neutralProphetWhitePalmDeath.gif"
     },
     "mana": 1,
-    "attack": 1,
-    "health": 3,
+    "attack": 2,
+    "health": 2,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "neutral_prophetwhitepalm",
@@ -5788,7 +5788,7 @@
     "cardSet": "Core Set",
     "faction": "neutral",
     "rarity": "epic",
-    "description": "When this attacks an enemy minion, deal excess damage dealt to the enemy General.",
+    "description": "When this attacks or counterattacks an enemy minion, deal excess damage dealt to the enemy General.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralWarTalonBreathing.gif",
@@ -6472,18 +6472,18 @@
     "factionId": 3
   },
   {
-    "name": "Cosmic Flesh",
+    "name": "Syzygy",
     "id": 20441,
     "cardSet": "Core Set",
     "faction": "vetruvian",
-    "rarity": "common",
-    "description": "Give a minion +1/+3 and Provoke.",
+    "rarity": "epic",
+    "description": "Give an allied minion +3/+0, another +0/+3, and another Blast this turn.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2CosmicFleshIdle.gif",
       "active": "resources/card_gifs/iconD2CosmicFleshActive.gif"
     },
-    "mana": 2,
+    "mana": 4,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f3_d2_cosmicflesh",
@@ -6494,7 +6494,7 @@
     "id": 20442,
     "cardSet": "Core Set",
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "common",
     "description": "Set a minion's Attack to 0 until your next turn.",
     "relatedCards": [],
     "resource": {
@@ -6530,7 +6530,7 @@
     "id": 20444,
     "cardSet": "Core Set",
     "faction": "vetruvian",
-    "rarity": "epic",
+    "rarity": "rare",
     "description": "For each artifact equipped to your General, give your General +2/+0 this turn.",
     "relatedCards": [],
     "resource": {
@@ -6927,13 +6927,13 @@
     "cardSet": "Core Set",
     "faction": "abyssian",
     "rarity": "common",
-    "description": "Destroy a minion and summon a Wraithling on that space.",
+    "description": "Destroy a minion and summon a Wraithling for its owner on that space.",
     "relatedCards": [372],
     "resource": {
       "idle": "resources/card_gifs/iconD2DarkTransformationIdle.gif",
       "active": "resources/card_gifs/iconD2DarkTransformationActive.gif"
     },
-    "mana": 5,
+    "mana": 4,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f4_d2_darktransformation",
@@ -7503,13 +7503,13 @@
     "cardSet": "Core Set",
     "faction": "vanar",
     "rarity": "common",
-    "description": "Both players lose a mana crystal.",
+    "description": "Deal 2 damage to enemy minions on a row and Stun them.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2MesmerizeIdle.gif",
       "active": "resources/card_gifs/iconD2MesmerizeActive.gif"
     },
-    "mana": 1,
+    "mana": 2,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f6_d2_mesmerize",
@@ -7719,7 +7719,7 @@
     "cardSet": "Core Set",
     "faction": "songhai",
     "rarity": "epic",
-    "description": "Your General has Backstab: 3.",
+    "description": "Your General has +1/+0 and Backstab: 2.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2MaskofShadowsIdle.gif",
@@ -7743,7 +7743,7 @@
       "idle": "resources/card_gifs/iconD2CycloneMaskIdle.gif",
       "active": "resources/card_gifs/iconD2CycloneMaskActive.gif"
     },
-    "mana": 3,
+    "mana": 4,
     "cardType": "Artifact",
     "tribes": [],
     "spriteName": "artifact_f2_d2_cyclonemask",
@@ -7863,7 +7863,7 @@
     "cardSet": "Core Set",
     "faction": "abyssian",
     "rarity": "rare",
-    "description": "Your General has +2/+0.\nWhen your General destroys a minion, heal your General for 2.",
+    "description": "Your General has +2/+0.\nWhen your General destroys a minion, heal your General for 1.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2SpectralBladeIdle.gif",
@@ -7899,13 +7899,13 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "epic",
-    "description": "Your General has an additional +2/+0 for each time an ally takes damage.",
+    "description": "Your General has an additional +1/+0 for each time an ally takes damage.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2TwinFangIdle.gif",
       "active": "resources/card_gifs/iconD2TwinFangActive.gif"
     },
-    "mana": 3,
+    "mana": 2,
     "cardType": "Artifact",
     "tribes": [],
     "spriteName": "artifact_f5_d2_twinfang",
