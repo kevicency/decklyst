@@ -585,7 +585,7 @@
     },
     "mana": 0,
     "attack": 0,
-    "health": 2,
+    "health": 1,
     "cardType": "Minion",
     "tribes": [],
     "factionId": 2
@@ -716,7 +716,7 @@
     "cardSet": "Core Set",
     "faction": "songhai",
     "rarity": "epic",
-    "description": "At the start of your turn, deal 2 damage to your General.",
+    "description": "At the start of your turn, deal 1 damage to your General.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f2HammonBladeseekerBreathing.gif",
@@ -955,7 +955,7 @@
       "death": "resources/card_gifs/f3SandhowlerDeath.gif"
     },
     "mana": 4,
-    "attack": 3,
+    "attack": 4,
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Dervish"],
@@ -1363,7 +1363,7 @@
     "cardSet": "Core Set",
     "faction": "abyssian",
     "rarity": "rare",
-    "description": "When this damages an enemy minion, create a Shadow Creep tile on that space.",
+    "description": "When this damages an enemy, create a Shadow Creep tile on that space.",
     "relatedCards": [40011],
     "resource": {
       "breathing": "resources/card_gifs/f4JuggernautBreathing.gif",
@@ -1374,8 +1374,8 @@
       "death": "resources/card_gifs/f4JuggernautDeath.gif"
     },
     "mana": 4,
-    "attack": 3,
-    "health": 5,
+    "attack": 4,
+    "health": 4,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f4_juggernaut",
@@ -2069,7 +2069,7 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "legendary",
-    "description": "Rebirth\nAt the end of your turn, summon an Egg of this on a random nearby space.",
+    "description": "Rebirth\nAt the end of your turn, summon an Egg of this behind it.",
     "relatedCards": [469],
     "resource": {
       "breathing": "resources/card_gifs/f5ElderSilitharBreathing.gif",
@@ -3983,8 +3983,8 @@
       "death": "resources/card_gifs/neutralPiercingMantisDeath.gif"
     },
     "mana": 2,
-    "attack": 2,
-    "health": 2,
+    "attack": 1,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "neutral_monstershreddingmantis",
@@ -6028,13 +6028,13 @@
     "cardSet": "Core Set",
     "faction": "lyonar",
     "rarity": "rare",
-    "description": "Give a minion Attack equal to its Health.",
+    "description": "Set a minion's Attack equal to its Health.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2DivineBondIdle.gif",
       "active": "resources/card_gifs/iconD2DivineBondActive.gif"
     },
-    "mana": 3,
+    "mana": 2,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f1_d2_divinebond",
@@ -6477,13 +6477,13 @@
     "cardSet": "Core Set",
     "faction": "vetruvian",
     "rarity": "epic",
-    "description": "Give an allied minion +3/+0, another +0/+3, and another Blast this turn.",
+    "description": "Give an allied minion +2/+0, another +0/+2, and another Blast this turn.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2CosmicFleshIdle.gif",
       "active": "resources/card_gifs/iconD2CosmicFleshActive.gif"
     },
-    "mana": 4,
+    "mana": 3,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f3_d2_cosmicflesh",
@@ -7251,13 +7251,13 @@
     "cardSet": "Core Set",
     "faction": "magmar",
     "rarity": "rare",
-    "description": "Destroy minions with 3 or less Attack.",
+    "description": "Destroy minions with 2 or less Attack.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2PlasmaStormIdle.gif",
       "active": "resources/card_gifs/iconD2PlasmaStormActive.gif"
     },
-    "mana": 5,
+    "mana": 4,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f5_d2_plasmastorm",
@@ -7503,7 +7503,7 @@
     "cardSet": "Core Set",
     "faction": "vanar",
     "rarity": "common",
-    "description": "Deal 2 damage to enemy minions on a row and Stun them.",
+    "description": "Deal 2 damage to enemies on a row and Stun them if they are minions.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2MesmerizeIdle.gif",
@@ -7629,7 +7629,7 @@
     "cardSet": "Core Set",
     "faction": "vanar",
     "rarity": "legendary",
-    "description": "Activate allied minions on your opponent's starting side of the battlefield.",
+    "description": "Activate allied units on your opponent's starting side of the battlefield.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2SpiritOfTheWildIdle.gif",
@@ -7743,7 +7743,7 @@
       "idle": "resources/card_gifs/iconD2CycloneMaskIdle.gif",
       "active": "resources/card_gifs/iconD2CycloneMaskActive.gif"
     },
-    "mana": 4,
+    "mana": 3,
     "cardType": "Artifact",
     "tribes": [],
     "spriteName": "artifact_f2_d2_cyclonemask",

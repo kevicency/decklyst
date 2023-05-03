@@ -49,8 +49,6 @@ export const useRouteParams = (initialRouteParams: RouteParams) => {
   const routeParams = router.query ? parseRouteParams(router.query) : initialRouteParams
 
   const updateRouteParams = async ({ filters, sorting, timespan }: RouteParams) => {
-    console.log('updateRouteParams', { filters })
-
     await router.push(
       {
         pathname: router.pathname,
