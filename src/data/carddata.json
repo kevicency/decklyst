@@ -341,8 +341,8 @@
       "death": "resources/card_gifs/f1SunriserDeath.gif"
     },
     "mana": 4,
-    "attack": 3,
-    "health": 5,
+    "attack": 4,
+    "health": 4,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f1_sunriser",
@@ -605,7 +605,7 @@
       "death": "resources/card_gifs/f2ChakriAvatarDeath.gif"
     },
     "mana": 2,
-    "attack": 1,
+    "attack": 0,
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
@@ -1490,7 +1490,7 @@
     "id": 374,
     "faction": "abyssian",
     "rarity": "common",
-    "description": "Opening Gambit: Summon a Wraithling behind this.",
+    "description": "Opening Gambit: Summon a Wraithling directly behind this.",
     "relatedCards": [372],
     "resource": {
       "breathing": "resources/card_gifs/f4GloomchaserBreathing.gif",
@@ -1984,7 +1984,7 @@
     "id": 472,
     "faction": "magmar",
     "rarity": "legendary",
-    "description": "Rebirth\nAt the end of your turn, summon an Egg of this behind it.",
+    "description": "Rebirth\nAt the end of your turn, summon an Egg of this directly behind it.",
     "relatedCards": [469],
     "resource": {
       "breathing": "resources/card_gifs/f5ElderSilitharBreathing.gif",
@@ -2531,7 +2531,7 @@
       "death": "resources/card_gifs/f6SnowElementalDeath.gif"
     },
     "mana": 3,
-    "attack": 2,
+    "attack": 3,
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
@@ -2855,7 +2855,7 @@
       "death": "resources/card_gifs/neutralBlackSandBurrowerDeath.gif"
     },
     "mana": 3,
-    "attack": 2,
+    "attack": 3,
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
@@ -3521,7 +3521,7 @@
     },
     "mana": 4,
     "attack": 2,
-    "health": 5,
+    "health": 6,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "neutral_primusshieldmaster",
@@ -3796,7 +3796,7 @@
       "death": "resources/card_gifs/neutralGolemStoneDeath.gif"
     },
     "mana": 3,
-    "attack": 2,
+    "attack": 3,
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Golem"],
@@ -4222,7 +4222,7 @@
     "id": 11224,
     "faction": "neutral",
     "rarity": "common",
-    "description": "Opening Gambit: Deal 3 damage to the minion in front of this.",
+    "description": "Opening Gambit: Deal 3 damage to the minion directly in front of this.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralDancingBladesBreathing.gif",
@@ -4744,7 +4744,7 @@
     "id": 11247,
     "faction": "neutral",
     "rarity": "rare",
-    "description": "Opening Gambit: Summon two exact copies of this nearby.",
+    "description": "Airdrop\nOpening Gambit: Summon two exact copies of this on any two spaces.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralAshMephytBreathing.gif",
@@ -5456,7 +5456,7 @@
     "id": 11278,
     "faction": "neutral",
     "rarity": "epic",
-    "description": "When you replace this card, summon it on the space behind your General and deal 2 damage to your General.",
+    "description": "When you replace this card, summon it on the space directly behind your General and deal 2 damage to your General.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralDreamgazerBreathing.gif",
@@ -5564,6 +5564,160 @@
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "neutral_wartalon",
+    "factionId": 100
+  },
+  {
+    "name": "Owlbeast Adept",
+    "id": 11283,
+    "faction": "neutral",
+    "rarity": "epic",
+    "description": "When you play a spell, this gains +0/+1. When your opponent plays a spell, this gains +1/+0.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralAerBreathing.gif",
+      "idle": "resources/card_gifs/neutralAerIdle.gif",
+      "walk": "resources/card_gifs/neutralAerRun.gif",
+      "attack": "resources/card_gifs/neutralAerAttack.gif",
+      "damage": "resources/card_gifs/neutralAerHit.gif",
+      "death": "resources/card_gifs/neutralAerDeath.gif"
+    },
+    "mana": 3,
+    "attack": 2,
+    "health": 4,
+    "cardType": "Minion",
+    "tribes": ["Arcanyst"],
+    "factionId": 100
+  },
+  {
+    "name": "Riftwalker",
+    "id": 11285,
+    "faction": "neutral",
+    "rarity": "rare",
+    "description": "Airdrop\nOpening Gambit: Deal 2 damage to the nearest unit in front, behind, above, and below this.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralVoidExploderBreathing.gif",
+      "idle": "resources/card_gifs/neutralVoidExploderIdle.gif",
+      "walk": "resources/card_gifs/neutralVoidExploderRun.gif",
+      "attack": "resources/card_gifs/neutralVoidExploderAttack.gif",
+      "damage": "resources/card_gifs/neutralVoidExploderHit.gif",
+      "death": "resources/card_gifs/neutralVoidExploderDeath.gif"
+    },
+    "mana": 3,
+    "attack": 3,
+    "health": 2,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100
+  },
+  {
+    "name": "Mana Artificer",
+    "id": 11287,
+    "faction": "neutral",
+    "rarity": "epic",
+    "description": "Dying Wish: Create a Mana Spring tile on this space.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralD2ArtifactShaperBreathing.gif",
+      "idle": "resources/card_gifs/neutralD2ArtifactShaperIdle.gif",
+      "walk": "resources/card_gifs/neutralD2ArtifactShaperRun.gif",
+      "attack": "resources/card_gifs/neutralD2ArtifactShaperAttack.gif",
+      "damage": "resources/card_gifs/neutralD2ArtifactShaperHit.gif",
+      "death": "resources/card_gifs/neutralD2ArtifactShaperDeath.gif"
+    },
+    "mana": 2,
+    "attack": 2,
+    "health": 4,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100
+  },
+  {
+    "name": "Dezark",
+    "id": 11290,
+    "faction": "neutral",
+    "rarity": "rare",
+    "description": "At the end of your turn, draw an additional card.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralShufflerBreathing.gif",
+      "idle": "resources/card_gifs/neutralShufflerIdle.gif",
+      "walk": "resources/card_gifs/neutralShufflerRun.gif",
+      "attack": "resources/card_gifs/neutralShufflerAttack.gif",
+      "damage": "resources/card_gifs/neutralShufflerHit.gif",
+      "death": "resources/card_gifs/neutralShufflerDeath.gif"
+    },
+    "mana": 6,
+    "attack": 6,
+    "health": 9,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100
+  },
+  {
+    "name": "Metaltooth",
+    "id": 11293,
+    "faction": "neutral",
+    "rarity": "rare",
+    "description": "Frenzy\nThis has Rush if you control another Mech.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralMetaltoothBreathing.gif",
+      "idle": "resources/card_gifs/neutralMetaltoothIdle.gif",
+      "walk": "resources/card_gifs/neutralMetaltoothRun.gif",
+      "attack": "resources/card_gifs/neutralMetaltoothAttack.gif",
+      "damage": "resources/card_gifs/neutralMetaltoothHit.gif",
+      "death": "resources/card_gifs/neutralMetaltoothDeath.gif"
+    },
+    "mana": 3,
+    "attack": 2,
+    "health": 2,
+    "cardType": "Minion",
+    "tribes": ["Mech"],
+    "factionId": 100
+  },
+  {
+    "name": "Double Agent",
+    "id": 11298,
+    "faction": "neutral",
+    "rarity": "rare",
+    "description": "Opening Gambit: Draw a card from your opponent's deck.\nDying Wish: Shuffle this into your opponent's deck.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/doubleAgentBreathing.gif",
+      "idle": "resources/card_gifs/doubleAgentIdle.gif",
+      "walk": "resources/card_gifs/doubleAgentRun.gif",
+      "attack": "resources/card_gifs/doubleAgentAttack.gif",
+      "damage": "resources/card_gifs/doubleAgentHit.gif",
+      "death": "resources/card_gifs/doubleAgentDeath.gif"
+    },
+    "mana": 2,
+    "attack": 2,
+    "health": 2,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100
+  },
+  {
+    "name": "Slothguard Letharus",
+    "id": 11303,
+    "faction": "neutral",
+    "rarity": "legendary",
+    "description": "Provoke\nOpening Gambit: Create a Ruby Aura, Emerald Aura, and Sapphire Aura nearby.",
+    "relatedCards": [40016, 40018, 40017],
+    "resource": {
+      "breathing": "resources/card_gifs/letharusBreathing.gif",
+      "idle": "resources/card_gifs/letharusIdle.gif",
+      "walk": "resources/card_gifs/letharusRun.gif",
+      "attack": "resources/card_gifs/letharusAttack.gif",
+      "damage": "resources/card_gifs/letharusHit.gif",
+      "death": "resources/card_gifs/letharusDeath.gif"
+    },
+    "mana": 4,
+    "attack": 1,
+    "health": 6,
+    "cardType": "Minion",
+    "tribes": [],
     "factionId": 100
   },
   {
@@ -5826,7 +5980,7 @@
     "id": 20419,
     "faction": "lyonar",
     "rarity": "rare",
-    "description": "Teleport a minion to the space in front of your General.",
+    "description": "Teleport a minion to the space directly in front of your General.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2MagnetizeIdle.gif",
@@ -6063,7 +6217,7 @@
     "id": 20433,
     "faction": "songhai",
     "rarity": "epic",
-    "description": "When you play a minion this turn, draw a card.",
+    "description": "Draw a card. When you play a minion this turn, draw a card.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2AncestralPactIdle.gif",
@@ -6743,7 +6897,7 @@
     "id": 20474,
     "faction": "magmar",
     "rarity": "epic",
-    "description": "Summon two exact copies of an allied minion nearby that minion.",
+    "description": "Summon two exact copies of an allied minion nearby it.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2FractalReplicationIdle.gif",
@@ -6947,7 +7101,7 @@
     "id": 20486,
     "faction": "magmar",
     "rarity": "legendary",
-    "description": "Summon an Egg of each allied minion on the space behind that minion.",
+    "description": "Summon an Egg of each allied minion on the space directly behind that minion.",
     "relatedCards": [469],
     "resource": {
       "idle": "resources/card_gifs/iconD2ChrysalisBurstIdle.gif",
@@ -7185,7 +7339,7 @@
     "id": 20500,
     "faction": "vanar",
     "rarity": "rare",
-    "description": "Give a minion \"This cannot attack Generals\". It becomes 5/5.",
+    "description": "Give a minion \"This cannot attack Generals\". It becomes 6/6.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2MarkOfSolitudeIdle.gif",
