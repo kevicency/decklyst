@@ -1582,7 +1582,7 @@
     "id": 378,
     "faction": "abyssian",
     "rarity": "rare",
-    "description": "Dying Wish: Fill your action bar with Wraithlings.",
+    "description": "Opening Gambit: Put two Wraithlings into your action bar.",
     "relatedCards": [372],
     "resource": {
       "breathing": "resources/card_gifs/f4BlackSolusBreathing.gif",
@@ -1593,8 +1593,8 @@
       "death": "resources/card_gifs/f4BlackSolusDeath.gif"
     },
     "mana": 4,
-    "attack": 6,
-    "health": 4,
+    "attack": 4,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "spriteName": "f4_blacksolus",
@@ -2007,7 +2007,7 @@
     "id": 473,
     "faction": "magmar",
     "rarity": "rare",
-    "description": "At the end of your turn, deal 2 damage to other minions.",
+    "description": "At the end of your turn, deal 1 damage to other minions.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f5SpiritHarvestorBreathing.gif",
@@ -2311,7 +2311,7 @@
     "factionId": 6
   },
   {
-    "name": "Snow Chaser",
+    "name": "Snowchaser",
     "id": 576,
     "faction": "vanar",
     "rarity": "rare",
@@ -2520,7 +2520,7 @@
     "id": 585,
     "faction": "vanar",
     "rarity": "rare",
-    "description": "Infiltrate: When you summon a Vespyr, deal 2 damage to a random enemy minion.",
+    "description": "When you summon a Vespyr, deal 2 damage to a random enemy minion.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f6SnowElementalBreathing.gif",
@@ -2532,7 +2532,7 @@
     },
     "mana": 3,
     "attack": 3,
-    "health": 3,
+    "health": 2,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
     "spriteName": "f6_snowman",
@@ -2565,7 +2565,7 @@
     "id": 587,
     "faction": "vanar",
     "rarity": "token",
-    "description": "Flying",
+    "description": "",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f6WhiteWyvernBreathing.gif",
@@ -3854,7 +3854,7 @@
     "id": 11208,
     "faction": "neutral",
     "rarity": "epic",
-    "description": "All spells cost 1 more to play.",
+    "description": "Your opponent's spells cost 1 more to play.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralArchonSpellbinderBreathing.gif",
@@ -3864,9 +3864,9 @@
       "damage": "resources/card_gifs/neutralArchonSpellbinderHit.gif",
       "death": "resources/card_gifs/neutralArchonSpellbinderDeath.gif"
     },
-    "mana": 5,
-    "attack": 6,
-    "health": 6,
+    "mana": 6,
+    "attack": 8,
+    "health": 8,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
     "spriteName": "neutral_mercarchonspellbinder",
@@ -5525,7 +5525,7 @@
     "id": 11281,
     "faction": "neutral",
     "rarity": "rare",
-    "description": "Opening Gambit: Refresh all Mana tiles.",
+    "description": "Opening Gambit: Refresh all Mana Spring tiles.",
     "relatedCards": [40001],
     "resource": {
       "breathing": "resources/card_gifs/neutralD2TethermancerBreathing.gif",
@@ -5611,6 +5611,28 @@
     "factionId": 100
   },
   {
+    "name": "Worldcore Golem",
+    "id": 11286,
+    "faction": "neutral",
+    "rarity": "rare",
+    "description": "This card costs 1 less for each enemy minion and 1 more for each allied minion.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/d2NeutralMoltenGolemBreathing.gif",
+      "idle": "resources/card_gifs/d2NeutralMoltenGolemIdle.gif",
+      "walk": "resources/card_gifs/d2NeutralMoltenGolemRun.gif",
+      "attack": "resources/card_gifs/d2NeutralMoltenGolemAttack.gif",
+      "damage": "resources/card_gifs/d2NeutralMoltenGolemHit.gif",
+      "death": "resources/card_gifs/d2NeutralMoltenGolemDeath.gif"
+    },
+    "mana": 9,
+    "attack": 12,
+    "health": 12,
+    "cardType": "Minion",
+    "tribes": ["Golem"],
+    "factionId": 100
+  },
+  {
     "name": "Mana Artificer",
     "id": 11287,
     "faction": "neutral",
@@ -5628,6 +5650,28 @@
     "mana": 2,
     "attack": 2,
     "health": 4,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100
+  },
+  {
+    "name": "Capricious Marauder",
+    "id": 11288,
+    "faction": "neutral",
+    "rarity": "epic",
+    "description": "After this attacks an enemy, destroy enemy minions diagonal from that enemy.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralCapriciousWarriorBreathing.gif",
+      "idle": "resources/card_gifs/neutralCapriciousWarriorIdle.gif",
+      "walk": "resources/card_gifs/neutralCapriciousWarriorRun.gif",
+      "attack": "resources/card_gifs/neutralCapriciousWarriorAttack.gif",
+      "damage": "resources/card_gifs/neutralCapriciousWarriorHit.gif",
+      "death": "resources/card_gifs/neutralCapriciousWarriorDeath.gif"
+    },
+    "mana": 3,
+    "attack": 4,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
     "factionId": 100
@@ -5655,6 +5699,28 @@
     "factionId": 100
   },
   {
+    "name": "Boulder Breacher",
+    "id": 11291,
+    "faction": "neutral",
+    "rarity": "legendary",
+    "description": "Opening Gambit: Deal 3 damage to other allied Golems and all units nearby them.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralBoulderBreacherBreathing.gif",
+      "idle": "resources/card_gifs/neutralBoulderBreacherIdle.gif",
+      "walk": "resources/card_gifs/neutralBoulderBreacherRun.gif",
+      "attack": "resources/card_gifs/neutralBoulderBreacherAttack.gif",
+      "damage": "resources/card_gifs/neutralBoulderBreacherHit.gif",
+      "death": "resources/card_gifs/neutralBoulderBreacherDeath.gif"
+    },
+    "mana": 6,
+    "attack": 7,
+    "health": 7,
+    "cardType": "Minion",
+    "tribes": ["Golem"],
+    "factionId": 100
+  },
+  {
     "name": "Metaltooth",
     "id": 11293,
     "faction": "neutral",
@@ -5677,11 +5743,55 @@
     "factionId": 100
   },
   {
+    "name": "Decapotheosis",
+    "id": 11294,
+    "faction": "neutral",
+    "rarity": "epic",
+    "description": "Veil\nAfter this takes damage, summon an exact copy of it nearby.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralGiantCrabBreathing.gif",
+      "idle": "resources/card_gifs/neutralGiantCrabIdle.gif",
+      "walk": "resources/card_gifs/neutralGiantCrabRun.gif",
+      "attack": "resources/card_gifs/neutralGiantCrabAttack.gif",
+      "damage": "resources/card_gifs/neutralGiantCrabHit.gif",
+      "death": "resources/card_gifs/neutralGiantCrabDeath.gif"
+    },
+    "mana": 4,
+    "attack": 0,
+    "health": 6,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100
+  },
+  {
+    "name": "Nebula",
+    "id": 11297,
+    "faction": "neutral",
+    "rarity": "rare",
+    "description": "Airdrop\nThis has Rush if you control another Golem.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralDiamondGolemBreathing.gif",
+      "idle": "resources/card_gifs/neutralDiamondGolemIdle.gif",
+      "walk": "resources/card_gifs/neutralDiamondGolemRun.gif",
+      "attack": "resources/card_gifs/neutralDiamondGolemAttack.gif",
+      "damage": "resources/card_gifs/neutralDiamondGolemHit.gif",
+      "death": "resources/card_gifs/neutralDiamondGolemDeath.gif"
+    },
+    "mana": 7,
+    "attack": 4,
+    "health": 7,
+    "cardType": "Minion",
+    "tribes": ["Golem"],
+    "factionId": 100
+  },
+  {
     "name": "Double Agent",
     "id": 11298,
     "faction": "neutral",
     "rarity": "rare",
-    "description": "Opening Gambit: Draw a card from your opponent's deck.\nDying Wish: Shuffle this into your opponent's deck.",
+    "description": "Opening Gambit: Draw a card from your opponent's deck and reveal it.\nDying Wish: Shuffle this into your opponent's deck.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/doubleAgentBreathing.gif",
@@ -5694,6 +5804,52 @@
     "mana": 2,
     "attack": 2,
     "health": 2,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100
+  },
+  {
+    "name": "Isbee's Monument",
+    "id": 11299,
+    "faction": "neutral",
+    "rarity": "rare",
+    "description": "At the end of each turn, this gains -0/-2 and heals both Generals for 2.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/isbeesMonumentBreathing.gif",
+      "idle": "resources/card_gifs/isbeesMonumentIdle.gif",
+      "walk": "resources/card_gifs/isbeesMonumentRun.gif",
+      "attack": "resources/card_gifs/isbeesMonumentAttack.gif",
+      "damage": "resources/card_gifs/isbeesMonumentHit.gif",
+      "death": "resources/card_gifs/isbeesMonumentDeath.gif"
+    },
+    "mana": 3,
+    "attack": 0,
+    "health": 12,
+    "cardType": "Minion",
+    "tribes": ["Structure"],
+    "factionId": 100
+  },
+  {
+    "name": "Krazed",
+    "id": 11302,
+    "faction": "neutral",
+    "rarity": "epic",
+    "description": "This has Veil and Frenzy if you have 9 mana crystals.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/krazedBreathing.gif",
+      "idle": "resources/card_gifs/krazedIdle.gif",
+      "walk": "resources/card_gifs/krazedRun.gif",
+      "attack": "resources/card_gifs/krazedAttack.gif",
+      "damage": "resources/card_gifs/krazedHit.gif",
+      "death": "resources/card_gifs/krazedDeath.gif",
+      "roping": "resources/card_gifs/krazedJumpscare.gif",
+      "ropingThresholds": "resources/card_gifs/20,10,5.gif"
+    },
+    "mana": 4,
+    "attack": 5,
+    "health": 5,
     "cardType": "Minion",
     "tribes": [],
     "factionId": 100
@@ -5715,7 +5871,7 @@
     },
     "mana": 4,
     "attack": 1,
-    "health": 6,
+    "health": 4,
     "cardType": "Minion",
     "tribes": [],
     "factionId": 100
@@ -6217,7 +6373,7 @@
     "id": 20433,
     "faction": "songhai",
     "rarity": "epic",
-    "description": "Draw a card. When you play a minion this turn, draw a card.",
+    "description": "When you play a minion this turn, draw a card.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2AncestralPactIdle.gif",
@@ -6353,7 +6509,7 @@
     "id": 20441,
     "faction": "vetruvian",
     "rarity": "epic",
-    "description": "Give an allied minion +2/+0, another +0/+2, and another Blast this turn.",
+    "description": "Give an allied minion +3/+0, another +0/+3, and another Blast this turn.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2CosmicFleshIdle.gif",
@@ -6506,7 +6662,7 @@
     "id": 20450,
     "faction": "vetruvian",
     "rarity": "epic",
-    "description": "This turn, give your general +3/+0 and \"This can move up to 3 spaces. Reduce damage this takes by 3\".",
+    "description": "This turn, give your General +3/+0 and \"This can move up to 3 spaces. Reduce damage this takes by 3\".",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2ScionsThirdWishIdle.gif",
@@ -6648,7 +6804,7 @@
       "idle": "resources/card_gifs/iconD2NetherSummoningIdle.gif",
       "active": "resources/card_gifs/iconD2NetherSummoningActive.gif"
     },
-    "mana": 4,
+    "mana": 5,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f4_d2_nethersummoning",
@@ -6880,13 +7036,13 @@
     "id": 20473,
     "faction": "abyssian",
     "rarity": "epic",
-    "description": "Destroy an allied minion. At the end of your turn, summon a copy of it on that space and give it +1/+1.",
+    "description": "This turn, when a unit is destroyed, gain +1 mana.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2ConsumingRebirthIdle.gif",
       "active": "resources/card_gifs/iconD2ConsumingRebirthActive.gif"
     },
-    "mana": 2,
+    "mana": 1,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f4_d2_consumingrebirth",
@@ -7050,13 +7206,13 @@
     "id": 20483,
     "faction": "magmar",
     "rarity": "common",
-    "description": "Give a damaged minion +3/+0.",
+    "description": "Give a minion \"Grow: +2/+2\".\nGrow allies with Grow.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2AmplificationIdle.gif",
       "active": "resources/card_gifs/iconD2AmplificationActive.gif"
     },
-    "mana": 0,
+    "mana": 2,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f5_d2_amplification",
@@ -7373,13 +7529,13 @@
     "id": 20502,
     "faction": "vanar",
     "rarity": "epic",
-    "description": "Transform a minion into a Whyte Wyrm and give allied minions nearby it Flying.",
+    "description": "Put a copy of a minion into its owner's action bar and transform that minion into a Whyte Wyrm.",
     "relatedCards": [587],
     "resource": {
       "idle": "resources/card_gifs/iconD2AspectDrakeIdle.gif",
       "active": "resources/card_gifs/iconD2AspectDrakeActive.gif"
     },
-    "mana": 4,
+    "mana": 2,
     "cardType": "Spell",
     "tribes": [],
     "spriteName": "icon_f6_d2_aspectofthedrake",
