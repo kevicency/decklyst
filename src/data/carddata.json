@@ -3,7 +3,7 @@
     "name": "Argeon Highmayne",
     "id": 60,
     "faction": "lyonar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -23,15 +23,15 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f1_general",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1General"
   },
   {
     "name": "Silverguard Squire",
     "id": 61,
     "faction": "lyonar",
-    "rarity": "common",
-    "description": "",
+    "rarity": "Common",
+    "description": "Opening Gambit: Give allies directly in front and behind your general +1/+1.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f1SilverguardSquireBreathing.gif",
@@ -43,17 +43,17 @@
     },
     "mana": 1,
     "attack": 1,
-    "health": 4,
+    "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_silverguardsquire",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1SilverguardSquire"
   },
   {
     "name": "Windblade Adept",
     "id": 62,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Zeal: +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -69,14 +69,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_melee",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1Melee"
   },
   {
     "name": "Sunstone Templar",
     "id": 63,
     "faction": "lyonar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Airdrop\nAllied minions have Airdrop when played.",
     "relatedCards": [],
     "resource": {
@@ -92,14 +92,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_sunstonetemplar",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1SunstoneTemplar"
   },
   {
     "name": "Silverguard Knight",
     "id": 64,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Provoke\nZeal: +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -115,14 +115,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_tank",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1Tank"
   },
   {
     "name": "Arclyte Sentinel",
     "id": 65,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Give a nearby minion +2/-2.",
     "relatedCards": [],
     "resource": {
@@ -138,14 +138,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_special",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1Special"
   },
   {
     "name": "Second Sun",
     "id": 66,
     "faction": "lyonar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Zeal: +8/+0.",
     "relatedCards": [],
     "resource": {
@@ -161,14 +161,14 @@
     "health": 8,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_windbladecommander",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1WindbladeCommander"
   },
   {
     "name": "Lysian Brawler",
     "id": 67,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Airdrop, Celerity",
     "relatedCards": [],
     "resource": {
@@ -184,14 +184,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_silvermanevanguard",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1SilvermaneVanguard"
   },
   {
     "name": "Lightchaser",
     "id": 68,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "When a unit is healed, this gains +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -207,14 +207,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_caster",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1Caster"
   },
   {
     "name": "Suntide Maiden",
     "id": 69,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Zeal: At the end of your turn, this fully heals.",
     "relatedCards": [],
     "resource": {
@@ -230,14 +230,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_support",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1Support"
   },
   {
     "name": "Ironcliffe Guardian",
     "id": 70,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Airdrop, Provoke",
     "relatedCards": [],
     "resource": {
@@ -253,15 +253,15 @@
     "health": 10,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_ironcliffeguardian",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1IroncliffeGuardian"
   },
   {
     "name": "Elyx Stormblade",
     "id": 71,
     "faction": "lyonar",
-    "rarity": "legendary",
-    "description": "Provoke\nAllies can move an additional space.",
+    "rarity": "Legendary",
+    "description": "Provoke\nOpening Gambit: Give a unit Celerity this turn.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f1ElyxStormbladeBreathing.gif",
@@ -271,19 +271,19 @@
       "damage": "resources/card_gifs/f1ElyxStormbladeDamage.gif",
       "death": "resources/card_gifs/f1ElyxStormbladeDeath.gif"
     },
-    "mana": 6,
-    "attack": 7,
-    "health": 7,
+    "mana": 8,
+    "attack": 8,
+    "health": 9,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_elyxstormblade",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1ElyxStormblade"
   },
   {
     "name": "Grandmaster Z'ir",
     "id": 72,
     "faction": "lyonar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "When your General is destroyed, this becomes your General.",
     "relatedCards": [],
     "resource": {
@@ -299,14 +299,14 @@
     "health": 12,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_grandmasterzir",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1GrandmasterZir"
   },
   {
     "name": "Azurite Lion",
     "id": 73,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Celerity",
     "relatedCards": [],
     "resource": {
@@ -322,14 +322,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_azuritelion",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1AzuriteLion"
   },
   {
     "name": "Sunriser",
     "id": 74,
     "faction": "lyonar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "After a unit is healed, deal 2 damage to nearby enemies.",
     "relatedCards": [],
     "resource": {
@@ -345,14 +345,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_sunriser",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1Sunriser"
   },
   {
     "name": "Zir'An Sunforge",
     "id": 75,
     "faction": "lyonar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -372,14 +372,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f1_altgeneral",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1AltGeneral"
   },
   {
     "name": "Brome Warcrest",
     "id": 76,
     "faction": "lyonar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -399,14 +399,37 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f1_3rdgeneral",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "f1ThirdGeneral"
+  },
+  {
+    "name": "Echo Mage",
+    "id": 78,
+    "faction": "lyonar",
+    "rarity": "Legendary",
+    "description": "Zeal: The first time you cast a spell with this in Zeal each turn, put a 1 cost copy of that spell into your action bar until the end of your turn.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f1LeovoyantBreathing.gif",
+      "idle": "resources/card_gifs/f1LeovoyantIdle.gif",
+      "walk": "resources/card_gifs/f1LeovoyantRun.gif",
+      "attack": "resources/card_gifs/f1LeovoyantAttack.gif",
+      "damage": "resources/card_gifs/f1LeovoyantHit.gif",
+      "death": "resources/card_gifs/f1LeovoyantDeath.gif"
+    },
+    "mana": 5,
+    "attack": 4,
+    "health": 6,
+    "cardType": "Minion",
+    "tribes": ["Arcanyst"],
+    "factionId": 1,
+    "spriteName": "f1Leovoyant"
   },
   {
     "name": "Kaleos Xaan",
     "id": 161,
     "faction": "songhai",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -426,14 +449,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f2_general",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2General"
   },
   {
     "name": "Heartseeker",
     "id": 162,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Ranged",
     "relatedCards": [],
     "resource": {
@@ -449,14 +472,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_caster",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2Caster"
   },
   {
     "name": "Widowmaker",
     "id": 163,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Ranged\nWhen this attacks, draw a card at the end of your turn.",
     "relatedCards": [],
     "resource": {
@@ -472,14 +495,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_ranged",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2Ranged"
   },
   {
     "name": "Kaido Assassin",
     "id": 164,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Backstab: 2.",
     "relatedCards": [],
     "resource": {
@@ -495,14 +518,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_melee",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2Melee"
   },
   {
     "name": "Scarlet Viper",
     "id": 165,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Flying\nBackstab: 3.",
     "relatedCards": [],
     "resource": {
@@ -518,14 +541,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_support",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2Support"
   },
   {
     "name": "Gore Horn",
     "id": 166,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Backstab: 2.\nAfter this attacks, it gains +1/+1.",
     "relatedCards": [],
     "resource": {
@@ -541,14 +564,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_tank",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2Tank"
   },
   {
     "name": "Panddo",
     "id": 167,
     "faction": "songhai",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "This cannot be attacked.",
     "relatedCards": [],
     "resource": {
@@ -564,13 +587,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2Panddo"
   },
   {
     "name": "Jade Monk",
     "id": 168,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "This card costs 1 less for each spell you played this turn.",
     "relatedCards": [],
     "resource": {
@@ -586,14 +610,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_ogremonk02",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2JadeOgre"
   },
   {
     "name": "Chakri Avatar",
     "id": 169,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "When you play a spell, this gains +1/+1.",
     "relatedCards": [],
     "resource": {
@@ -609,14 +633,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "f2_chakriavatar",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2ChakriAvatar"
   },
   {
     "name": "Four Winds Magus",
     "id": 170,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When you play a spell, deal 1 damage to enemy General and heal your General for 1.",
     "relatedCards": [],
     "resource": {
@@ -632,15 +656,15 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "f2_mage4winds",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2Mage4Winds"
   },
   {
     "name": "Celestial Phantom",
     "id": 171,
     "faction": "songhai",
-    "rarity": "epic",
-    "description": "Opening Gambit: This gains +1/+0 for each card in your action bar.",
+    "rarity": "Epic",
+    "description": "Whenever this damages an enemy minion, destroy that minion.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/f2DeathPhantomBreathing.gif",
@@ -650,19 +674,19 @@
       "damage": "resources/card_gifs/f2DeathPhantomDamage.gif",
       "death": "resources/card_gifs/f2DeathPhantomDeath.gif"
     },
-    "mana": 2,
-    "attack": 0,
-    "health": 3,
+    "mana": 3,
+    "attack": 1,
+    "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_deathphantom",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2DeathPhantom"
   },
   {
     "name": "Storm Kage",
     "id": 172,
     "faction": "songhai",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "When you play a spell that deals damage, put a Kage Lightning into your action bar.",
     "relatedCards": [20424],
     "resource": {
@@ -678,14 +702,14 @@
     "health": 10,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_stormkage",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2StormKage"
   },
   {
     "name": "Hamon Bladeseeker",
     "id": 173,
     "faction": "songhai",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "At the start of your turn, deal 1 damage to your General.",
     "relatedCards": [],
     "resource": {
@@ -701,14 +725,14 @@
     "health": 8,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_hammonnladeseeker",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2HammonBladeseeker"
   },
   {
     "name": "Keshrai Fanblade",
     "id": 174,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Your opponent's spells cost 2 more until your next turn.",
     "relatedCards": [],
     "resource": {
@@ -724,14 +748,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_keshraifanblade",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2KeshraiFanblade"
   },
   {
     "name": "Tusk Boar",
     "id": 175,
     "faction": "songhai",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Rush\nAt the start of your turn, deal 1 damage to your General and return this to your action bar.",
     "relatedCards": [],
     "resource": {
@@ -747,14 +771,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_special",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2Special"
   },
   {
     "name": "Lantern Fox",
     "id": 176,
     "faction": "songhai",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When this takes damage, put a Phoenix Fire into your action bar.",
     "relatedCards": [20423],
     "resource": {
@@ -770,14 +794,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f2_lanternfox",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2LanternFox"
   },
   {
     "name": "Reva Eventide",
     "id": 177,
     "faction": "songhai",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -797,14 +821,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f2_altgeneral",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2AltGeneral"
   },
   {
     "name": "Shidai Stormblossom",
     "id": 178,
     "faction": "songhai",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -824,14 +848,60 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f2_3rdgeneral",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "f2ThirdGeneral"
+  },
+  {
+    "name": "Flamewreath",
+    "id": 180,
+    "faction": "songhai",
+    "rarity": "Common",
+    "description": "Rush\nAfter this moves or teleports, deal 1 damage to nearby enemies.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f2FireWyrmBreathing.gif",
+      "idle": "resources/card_gifs/f2FireWyrmIdle.gif",
+      "walk": "resources/card_gifs/f2FireWyrmRun.gif",
+      "attack": "resources/card_gifs/f2FireWyrmAttack.gif",
+      "damage": "resources/card_gifs/f2FireWyrmHit.gif",
+      "death": "resources/card_gifs/f2FireWyrmDeath.gif"
+    },
+    "mana": 4,
+    "attack": 2,
+    "health": 3,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 2,
+    "spriteName": "f2FireWyrm"
+  },
+  {
+    "name": "Rhythmweaver",
+    "id": 184,
+    "faction": "songhai",
+    "rarity": "Common",
+    "description": "After this takes damage, draw a spell.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f2SpellThiefBreathing.gif",
+      "idle": "resources/card_gifs/f2SpellThiefIdle.gif",
+      "walk": "resources/card_gifs/f2SpellThiefRun.gif",
+      "attack": "resources/card_gifs/f2SpellThiefAttack.gif",
+      "damage": "resources/card_gifs/f2SpellThiefHit.gif",
+      "death": "resources/card_gifs/f2SpellThiefDeath.gif"
+    },
+    "mana": 1,
+    "attack": 2,
+    "health": 1,
+    "cardType": "Minion",
+    "tribes": ["Arcanyst"],
+    "factionId": 2,
+    "spriteName": "f2SpellThief"
   },
   {
     "name": "Zirix Starstrider",
     "id": 264,
     "faction": "vetruvian",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -851,14 +921,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f3_general",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3General"
   },
   {
     "name": "Wind Shrike",
     "id": 265,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Flying\nDying Wish: Equip a Staff Of Y'Kir to your General.",
     "relatedCards": [30107],
     "resource": {
@@ -874,14 +944,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f3_windshriek",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3Windshrike"
   },
   {
     "name": "Starfire Scarab",
     "id": 266,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Blast",
     "relatedCards": [],
     "resource": {
@@ -897,14 +967,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f3_starfirescarab",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3StafireScarab"
   },
   {
     "name": "Sand Howler",
     "id": 267,
     "faction": "vetruvian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Nearby enemies have -1/-0.",
     "relatedCards": [],
     "resource": {
@@ -920,14 +990,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Dervish"],
-    "spriteName": "f3_sandhowler",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3Sandhowler"
   },
   {
     "name": "Dunecaster",
     "id": 268,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Give another Dervish +2/+2 and \"This does not disappear at the end of your turn\".",
     "relatedCards": [],
     "resource": {
@@ -943,14 +1013,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": ["Dervish"],
-    "spriteName": "f3_orbweaver",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3Orbweaver"
   },
   {
     "name": "Orb Weaver",
     "id": 269,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Summon an exact copy of this nearby.",
     "relatedCards": [],
     "resource": {
@@ -966,14 +1036,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Dervish"],
-    "spriteName": "f3_dunecaster",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3DuneCaster"
   },
   {
     "name": "Pyromancer",
     "id": 270,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Blast",
     "relatedCards": [],
     "resource": {
@@ -989,14 +1059,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f3_pyromancer",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3Pyromancer"
   },
   {
     "name": "Ethereal Obelysk",
     "id": 271,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Gateway",
     "relatedCards": [274],
     "resource": {
@@ -1012,14 +1082,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": ["Structure"],
-    "spriteName": "f3_obelyskredsand",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3ObeliskRedSand"
   },
   {
     "name": "Fireblaze Obelysk",
     "id": 272,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Gateway\nAllied Dervishes have +1/+0.",
     "relatedCards": [274],
     "resource": {
@@ -1035,14 +1105,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": ["Structure"],
-    "spriteName": "f3_obelyskgoldenflame",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3ObeliskGoldenFlame"
   },
   {
     "name": "Windstorm Obelysk",
     "id": 273,
     "faction": "vetruvian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Gateway\nAllied Dervishes can move an additional space.",
     "relatedCards": [274],
     "resource": {
@@ -1058,14 +1128,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": ["Structure"],
-    "spriteName": "f3_obelyskduskwind",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3ObeliskDuskWind"
   },
   {
     "name": "Wind Dervish",
     "id": 274,
     "faction": "vetruvian",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Rush\nAt the end of your turn, this disappears.",
     "relatedCards": [],
     "resource": {
@@ -1081,13 +1151,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Dervish"],
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3Dervish"
   },
   {
     "name": "Imperial Saboteur",
     "id": 275,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Give a nearby minion -2/-0 until your next turn.",
     "relatedCards": [],
     "resource": {
@@ -1103,14 +1174,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f3_palacetrinketeer",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3NighfallMechanist"
   },
   {
     "name": "Mirage Master",
     "id": 276,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: This transforms into an exact copy of another minion.",
     "relatedCards": [],
     "resource": {
@@ -1126,14 +1197,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f3_glassmirage",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3MirrorMaster"
   },
   {
     "name": "Aymara Healer",
     "id": 277,
     "faction": "vetruvian",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Provoke\nDying Wish: Deal 5 damage to the enemy General and heal your General for 5.",
     "relatedCards": [],
     "resource": {
@@ -1149,14 +1220,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f3_aymarahealer",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3AymaraHealer"
   },
   {
     "name": "Portal Guardian",
     "id": 278,
     "faction": "vetruvian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Frenzy\nWhen you summon a minion, this gains +1/+0.",
     "relatedCards": [],
     "resource": {
@@ -1172,14 +1243,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f3_zodiac02",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3PortalGuardian"
   },
   {
     "name": "Oserix",
     "id": 279,
     "faction": "vetruvian",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Blast\nYour General deals double damage.",
     "relatedCards": [],
     "resource": {
@@ -1195,14 +1266,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f3_anubis",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3Oserix"
   },
   {
     "name": "Scioness Sajj",
     "id": 280,
     "faction": "vetruvian",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -1222,14 +1293,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f3_altgeneral",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3AltGeneral"
   },
   {
     "name": "Ciphyron Ascendant",
     "id": 281,
     "faction": "vetruvian",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -1249,14 +1320,37 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f3_3rdgeneral",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "f3ThirdGeneral"
+  },
+  {
+    "name": "Ancestral Vessel",
+    "id": 283,
+    "faction": "vetruvian",
+    "rarity": "Common",
+    "description": "Dying Wish: Summon a Wind Dervish on this space.",
+    "relatedCards": [274],
+    "resource": {
+      "breathing": "resources/card_gifs/f3CursedDervishBreathing.gif",
+      "idle": "resources/card_gifs/f3CursedDervishIdle.gif",
+      "walk": "resources/card_gifs/f3CursedDervishRun.gif",
+      "attack": "resources/card_gifs/f3CursedDervishAttack.gif",
+      "damage": "resources/card_gifs/f3CursedDervishHit.gif",
+      "death": "resources/card_gifs/f3CursedDervishDeath.gif"
+    },
+    "mana": 2,
+    "attack": 2,
+    "health": 2,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 3,
+    "spriteName": "f3CursedDervish"
   },
   {
     "name": "Lilithe Blightchaser",
     "id": 364,
     "faction": "abyssian",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -1276,14 +1370,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f4_general",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4General"
   },
   {
     "name": "Abyssal Crawler",
     "id": 365,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Dying Wish: Create a Shadow Creep tile on this space.",
     "relatedCards": [40011],
     "resource": {
@@ -1299,14 +1393,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_crawler",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4Crawler"
   },
   {
     "name": "Abyssal Juggernaut",
     "id": 366,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When this damages an enemy, create a Shadow Creep tile on that space.",
     "relatedCards": [40011],
     "resource": {
@@ -1322,14 +1416,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_juggernaut",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4Juggernaut"
   },
   {
     "name": "Bloodmoon Priestess",
     "id": 367,
     "faction": "abyssian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Deathwatch: Summon a Wraithling on a random nearby space.",
     "relatedCards": [372],
     "resource": {
@@ -1345,14 +1439,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_bloodmoon",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4Bloodmoon"
   },
   {
     "name": "Shadow Watcher",
     "id": 368,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deathwatch: This gains +1/+1.",
     "relatedCards": [],
     "resource": {
@@ -1368,14 +1462,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_engulfingshadow",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4EngulfingShadow"
   },
   {
     "name": "Aphotic Devourer",
     "id": 369,
     "faction": "abyssian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Opening Gambit: Destroy nearby allied minions and summon Wraithlings on those spaces. This gains +2/+2 for each destroyed.",
     "relatedCards": [372],
     "resource": {
@@ -1391,14 +1485,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_daemondeep",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4DaemonDeep"
   },
   {
     "name": "Blood Siren",
     "id": 370,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Set the enemy General's Attack to 0 this turn.",
     "relatedCards": [],
     "resource": {
@@ -1414,14 +1508,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_siren",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4Siren"
   },
   {
     "name": "Vorpal Reaver",
     "id": 371,
     "faction": "abyssian",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Celerity\nDying Wish: Summon six Wraithlings on random spaces.",
     "relatedCards": [372],
     "resource": {
@@ -1437,14 +1531,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_daemongate",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4DaemonGate"
   },
   {
     "name": "Wraithling",
     "id": 372,
     "faction": "abyssian",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -1460,13 +1554,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "neutralShadow01"
   },
   {
     "name": "Darkspine Elemental",
     "id": 373,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "This has +2/+2 for each of your Shadow Creep tiles.",
     "relatedCards": [40011],
     "resource": {
@@ -1482,14 +1577,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_darkspine",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4Darkspine"
   },
   {
     "name": "Gloomchaser",
     "id": 374,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Summon a Wraithling directly behind this.",
     "relatedCards": [372],
     "resource": {
@@ -1505,14 +1600,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_gloomchaser",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4Gloomchaser"
   },
   {
     "name": "Shadowdancer",
     "id": 375,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Deathwatch: Deal 1 damage to the enemy General and heal your General for 1.",
     "relatedCards": [],
     "resource": {
@@ -1528,14 +1623,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_shadowdancer",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4Shadowdancer"
   },
   {
     "name": "Nightsorrow Assassin",
     "id": 376,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Destroy a nearby damaged minion.",
     "relatedCards": [],
     "resource": {
@@ -1551,14 +1646,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_nightsorrow",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4Nightsorrow"
   },
   {
     "name": "Spectral Revenant",
     "id": 377,
     "faction": "abyssian",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Rush\nWhen this damages an enemy minion, deal 4 damage to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -1574,14 +1669,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_daemonvoid",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4SpectralRevenant"
   },
   {
     "name": "Black Solus",
     "id": 378,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Put two Wraithlings into your action bar.",
     "relatedCards": [372],
     "resource": {
@@ -1594,17 +1689,17 @@
     },
     "mana": 4,
     "attack": 4,
-    "health": 3,
+    "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_blacksolus",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4BlackSolus"
   },
   {
     "name": "Reaper of the Nine Moons",
     "id": 379,
     "faction": "abyssian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Flying\nDying Wish: Teleport the enemy General to this space.",
     "relatedCards": [],
     "resource": {
@@ -1615,19 +1710,19 @@
       "damage": "resources/card_gifs/f4ReaperNineMoonsDamage.gif",
       "death": "resources/card_gifs/f4ReaperNineMoonsDeath.gif"
     },
-    "mana": 5,
-    "attack": 7,
+    "mana": 4,
+    "attack": 4,
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f4_reaperninemoons",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4ReaperNineMoons"
   },
   {
     "name": "Cassyva Soulreaper",
     "id": 380,
     "faction": "abyssian",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -1647,14 +1742,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f4_altgeneral",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4AltGeneral"
   },
   {
     "name": "Maehv Skinsolder",
     "id": 381,
     "faction": "abyssian",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -1674,14 +1769,83 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f4_3rdgeneral",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "f4ThirdGeneral"
+  },
+  {
+    "name": "Soul-Scythe",
+    "id": 383,
+    "faction": "abyssian",
+    "rarity": "Common",
+    "description": "Opening Gambit: Destroy a nearby allied minion to draw two cards.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f4VoidTalonBreathing.gif",
+      "idle": "resources/card_gifs/f4VoidTalonIdle.gif",
+      "walk": "resources/card_gifs/f4VoidTalonRun.gif",
+      "attack": "resources/card_gifs/f4VoidTalonAttack.gif",
+      "damage": "resources/card_gifs/f4VoidTalonHit.gif",
+      "death": "resources/card_gifs/f4VoidTalonDeath.gif"
+    },
+    "mana": 2,
+    "attack": 3,
+    "health": 2,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 4,
+    "spriteName": "f4VoidTalon"
+  },
+  {
+    "name": "Elderchain Cultist",
+    "id": 384,
+    "faction": "abyssian",
+    "rarity": "Rare",
+    "description": "Dying Wish: The next minion you play with base cost 4 or more costs 4 less.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f4LimboDwellerBreathing.gif",
+      "idle": "resources/card_gifs/f4LimboDwellerIdle.gif",
+      "walk": "resources/card_gifs/f4LimboDwellerRun.gif",
+      "attack": "resources/card_gifs/f4LimboDwellerAttack.gif",
+      "damage": "resources/card_gifs/f4LimboDwellerHit.gif",
+      "death": "resources/card_gifs/f4LimboDwellerDeath.gif"
+    },
+    "mana": 4,
+    "attack": 4,
+    "health": 4,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 4,
+    "spriteName": "f4LimboDweller"
+  },
+  {
+    "name": "Bad Omen",
+    "id": 390,
+    "faction": "abyssian",
+    "rarity": "Common",
+    "description": "Deathwatch: This gains +1/+0.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f4MiniMinionBreathing.gif",
+      "idle": "resources/card_gifs/f4MiniMinionIdle.gif",
+      "walk": "resources/card_gifs/f4MiniMinionRun.gif",
+      "attack": "resources/card_gifs/f4MiniMinionAttack.gif",
+      "damage": "resources/card_gifs/f4MiniMinionHit.gif",
+      "death": "resources/card_gifs/f4MiniMinionDeath.gif"
+    },
+    "mana": 0,
+    "attack": 0,
+    "health": 1,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 4,
+    "spriteName": "f4MiniMinion"
   },
   {
     "name": "Vaath the Immortal",
     "id": 459,
     "faction": "magmar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -1701,14 +1865,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f5_general",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5General"
   },
   {
     "name": "Earth Walker",
     "id": 460,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Grow: +1/+1.",
     "relatedCards": [],
     "resource": {
@@ -1724,14 +1888,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_earthwalker",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5Earthwalker"
   },
   {
     "name": "Grimrock",
     "id": 461,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Grow: +2/+2.",
     "relatedCards": [],
     "resource": {
@@ -1747,14 +1911,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_grimrock",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5Grimrock"
   },
   {
     "name": "Kolossus",
     "id": 462,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Grow: +4/+4.",
     "relatedCards": [],
     "resource": {
@@ -1770,14 +1934,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_kolossus",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5Kolossus"
   },
   {
     "name": "Makantor Warbeast",
     "id": 463,
     "faction": "magmar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Frenzy, Rush",
     "relatedCards": [],
     "resource": {
@@ -1793,14 +1957,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_mankatorwarbeast",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5MakantorWarbeast"
   },
   {
     "name": "Phalanxar",
     "id": 464,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "This moves 1 less space.",
     "relatedCards": [],
     "resource": {
@@ -1816,14 +1980,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_tank",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5Tank"
   },
   {
     "name": "Elucidator",
     "id": 465,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Rush\nWhen this takes damage, deal 2 damage to your General.",
     "relatedCards": [],
     "resource": {
@@ -1839,14 +2003,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_support",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5Support"
   },
   {
     "name": "Unstable Leviathan",
     "id": 466,
     "faction": "magmar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "At the end of your turn, deal 4 damage to a random unit. If the unit is allied, give it +4/+0.",
     "relatedCards": [],
     "resource": {
@@ -1862,14 +2026,14 @@
     "health": 11,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_unstableleviathan",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5UnstableLeviathan"
   },
   {
     "name": "Kujata",
     "id": 467,
     "faction": "magmar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Your minions cost 1 less to play. When you play a minion, deal 1 damage to it.",
     "relatedCards": [],
     "resource": {
@@ -1885,14 +2049,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_kujata",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5Kujata"
   },
   {
     "name": "Primordial Gazer",
     "id": 468,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Give a nearby minion +2/+1.",
     "relatedCards": [],
     "resource": {
@@ -1908,14 +2072,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_primordialgazer",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5PrimordialGazer"
   },
   {
     "name": "Egg",
     "id": 469,
     "faction": "magmar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -1931,13 +2095,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": ["Chrysalis"],
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5MagmarEgg"
   },
   {
     "name": "Young Silithar",
     "id": 470,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Rebirth",
     "relatedCards": [469],
     "resource": {
@@ -1953,14 +2118,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_silitharyoung",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5YoungSilithar"
   },
   {
     "name": "Veteran Silithar",
     "id": 471,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Rebirth",
     "relatedCards": [469],
     "resource": {
@@ -1976,14 +2141,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_silitharveteran",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5VeteranSilithar"
   },
   {
     "name": "Silithar Elder",
     "id": 472,
     "faction": "magmar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Rebirth\nAt the end of your turn, summon an Egg of this directly behind it.",
     "relatedCards": [469],
     "resource": {
@@ -1999,14 +2164,14 @@
     "health": 8,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_silitharelder",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5ElderSilithar"
   },
   {
     "name": "Spirit Harvester",
     "id": 473,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "At the end of your turn, deal 1 damage to other minions.",
     "relatedCards": [],
     "resource": {
@@ -2022,14 +2187,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_spiritharvester",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5SpiritHarvestor"
   },
   {
     "name": "Magma",
     "id": 474,
     "faction": "magmar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2045,13 +2210,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5Magma"
   },
   {
     "name": "Vindicator",
     "id": 475,
     "faction": "magmar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Rush\nThe next time an allied minion is summoned nearby this, give it Rush.",
     "relatedCards": [],
     "resource": {
@@ -2067,14 +2233,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f5_vindicator",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5Vindicator"
   },
   {
     "name": "Starhorn the Seeker",
     "id": 476,
     "faction": "magmar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2094,14 +2260,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f5_altgeneral",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5AltGeneral"
   },
   {
     "name": "Ragnora the Relentless",
     "id": 477,
     "faction": "magmar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2121,14 +2287,83 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f5_3rdgeneral",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "f5ThirdGeneral"
+  },
+  {
+    "name": "Timecloak Coiler",
+    "id": 480,
+    "faction": "magmar",
+    "rarity": "Rare",
+    "description": "At the end of your turn, give your general +2/+0 until they move or teleport.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f5OmniseerBreathing.gif",
+      "idle": "resources/card_gifs/f5OmniseerIdle.gif",
+      "walk": "resources/card_gifs/f5OmniseerRun.gif",
+      "attack": "resources/card_gifs/f5OmniseerAttack.gif",
+      "damage": "resources/card_gifs/f5OmniseerHit.gif",
+      "death": "resources/card_gifs/f5OmniseerDeath.gif"
+    },
+    "mana": 3,
+    "attack": 2,
+    "health": 5,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 5,
+    "spriteName": "f5Omniseer"
+  },
+  {
+    "name": "Progenitor",
+    "id": 482,
+    "faction": "magmar",
+    "rarity": "Common",
+    "description": "Opening Gambit: Summon two Hatchling Eggs nearby your general.",
+    "relatedCards": [483],
+    "resource": {
+      "breathing": "resources/card_gifs/f5ProgenitorBreathing.gif",
+      "idle": "resources/card_gifs/f5ProgenitorIdle.gif",
+      "walk": "resources/card_gifs/f5ProgenitorRun.gif",
+      "attack": "resources/card_gifs/f5ProgenitorAttack.gif",
+      "damage": "resources/card_gifs/f5ProgenitorHit.gif",
+      "death": "resources/card_gifs/f5ProgenitorDeath.gif"
+    },
+    "mana": 4,
+    "attack": 3,
+    "health": 5,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 5,
+    "spriteName": "f5Progenitor"
+  },
+  {
+    "name": "Hatchling",
+    "id": 483,
+    "faction": "magmar",
+    "rarity": "Token",
+    "description": "",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f5RexBreathing.gif",
+      "idle": "resources/card_gifs/f5RexIdle.gif",
+      "walk": "resources/card_gifs/f5RexRun.gif",
+      "attack": "resources/card_gifs/f5RexAttack.gif",
+      "damage": "resources/card_gifs/f5RexHit.gif",
+      "death": "resources/card_gifs/f5RexDeath.gif"
+    },
+    "mana": 1,
+    "attack": 2,
+    "health": 1,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 5,
+    "spriteName": "f5Rex"
   },
   {
     "name": "Faie Bloodwing",
     "id": 568,
     "faction": "vanar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2148,14 +2383,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f6_general",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6General"
   },
   {
     "name": "Fenrir Warmaster",
     "id": 569,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Dying Wish: Summon a Ghost Wolf on this space.",
     "relatedCards": [570],
     "resource": {
@@ -2171,14 +2406,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f6_fenrirwarmaster",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6FenrirWarmaster"
   },
   {
     "name": "Ghost Wolf",
     "id": 570,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2194,13 +2429,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6Ghostwolf"
   },
   {
     "name": "Crystal Cloaker",
     "id": 571,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Infiltrate: +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -2216,14 +2452,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "spriteName": "f6_crystalbeetle",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6CrystalBeetle"
   },
   {
     "name": "Crystal Wisp",
     "id": 572,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Dying Wish: Gain a mana crystal.",
     "relatedCards": [],
     "resource": {
@@ -2239,14 +2475,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monstercrystalwisp",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "neutralCrystalWisp"
   },
   {
     "name": "Frosthorn Rhyno",
     "id": 573,
     "faction": "vanar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Infiltrate: +1/+0 and Celerity.",
     "relatedCards": [],
     "resource": {
@@ -2262,14 +2498,14 @@
     "health": 8,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f6_arcticrhyno",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6ArcticRhyno"
   },
   {
     "name": "Draugar Lord",
     "id": 574,
     "faction": "vanar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Opening Gambit: Transform allied Vespyrs into Ice Drakes until your next turn.",
     "relatedCards": [575],
     "resource": {
@@ -2285,14 +2521,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "spriteName": "f6_draugarlord",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6DraugarLord"
   },
   {
     "name": "Ice Drake",
     "id": 575,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2308,13 +2544,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6Frostdrake"
   },
   {
     "name": "Snowchaser",
     "id": 576,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Infiltrate: Dying Wish: Put a copy of this into your action bar.",
     "relatedCards": [],
     "resource": {
@@ -2330,14 +2567,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "spriteName": "f6_snowchaser",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6Snowchaser"
   },
   {
     "name": "Wolfraven",
     "id": 577,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Flying\nThis takes no damage from units with 3 or more Attack.",
     "relatedCards": [],
     "resource": {
@@ -2353,14 +2590,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f6_wolfraven",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6Wolfraven"
   },
   {
     "name": "Borean Bear",
     "id": 578,
     "faction": "vanar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "This has +1/+0 for each allied Wall.",
     "relatedCards": [],
     "resource": {
@@ -2376,14 +2613,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "spriteName": "f6_waterbear",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6WaterBear"
   },
   {
     "name": "Razorback",
     "id": 579,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Give other allied minions +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -2399,15 +2636,15 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f6_sentinel",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6Sentinel"
   },
   {
     "name": "Ancient Grove",
     "id": 580,
     "faction": "vanar",
-    "rarity": "legendary",
-    "description": "Provoke\nOpening Gambit: Give other allied minions \"Dying Wish: Summon a Treant on this space\".",
+    "rarity": "Legendary",
+    "description": "Provoke\nOpening Gambit: Give allied minions \"Dying Wish: Summon a Treant on this space\".",
     "relatedCards": [582],
     "resource": {
       "breathing": "resources/card_gifs/f6TreantBreathing.gif",
@@ -2422,14 +2659,14 @@
     "health": 9,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f6_treant",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6Treant"
   },
   {
     "name": "Voice of the Wind",
     "id": 581,
     "faction": "vanar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "When you play a minion, summon a Winter Maerid on a random nearby space.",
     "relatedCards": [584],
     "resource": {
@@ -2445,14 +2682,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f6_voiceofthewind",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6VoiceoftheWind"
   },
   {
     "name": "Treant",
     "id": 582,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Provoke",
     "relatedCards": [],
     "resource": {
@@ -2468,13 +2705,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6MiniTreant"
   },
   {
     "name": "Hearth-Sister",
     "id": 583,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: This switches positions with another minion.",
     "relatedCards": [],
     "resource": {
@@ -2490,14 +2728,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f6_justice",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6Justice"
   },
   {
     "name": "Winter Maerid",
     "id": 584,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2513,13 +2751,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6WaterElemental"
   },
   {
     "name": "Glacial Elemental",
     "id": 585,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When you summon a Vespyr, deal 2 damage to a random enemy minion.",
     "relatedCards": [],
     "resource": {
@@ -2531,18 +2770,18 @@
       "death": "resources/card_gifs/f6SnowElementalDeath.gif"
     },
     "mana": 3,
-    "attack": 3,
-    "health": 2,
+    "attack": 1,
+    "health": 3,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "spriteName": "f6_snowman",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6SnowElemental"
   },
   {
     "name": "Fox Ravager",
     "id": 586,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2558,13 +2797,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6Ravager"
   },
   {
     "name": "Whyte Wyrm",
     "id": 587,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2580,13 +2820,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6WhiteWyvern"
   },
   {
     "name": "Seismic Elemental",
     "id": 588,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2597,18 +2838,19 @@
       "damage": "resources/card_gifs/f6SeismicElementalDamage.gif",
       "death": "resources/card_gifs/f6SeismicElementalDeath.gif"
     },
-    "mana": 3,
+    "mana": 4,
     "attack": 5,
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6SeismicElemental"
   },
   {
     "name": "Frost Well",
     "id": 589,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Provoke\nWall",
     "relatedCards": [],
     "resource": {
@@ -2624,13 +2866,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6GravityWell"
   },
   {
     "name": "Frigid Spines",
     "id": 590,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Wall",
     "relatedCards": [],
     "resource": {
@@ -2646,13 +2889,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6BlazingSpines"
   },
   {
     "name": "Ice Barrier",
     "id": 591,
     "faction": "vanar",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Wall\nWhen a nearby minion damages this, Stun that minion.",
     "relatedCards": [],
     "resource": {
@@ -2668,13 +2912,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6BonechillBarrier"
   },
   {
     "name": "Arctic Displacer",
     "id": 592,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Airdrop",
     "relatedCards": [],
     "resource": {
@@ -2690,14 +2935,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Vespyr"],
-    "spriteName": "f6_snowwyvern",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6SnowWyvern"
   },
   {
     "name": "Kara Winterblade",
     "id": 593,
     "faction": "vanar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2717,14 +2962,14 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f6_altgeneral",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6AltGeneral"
   },
   {
     "name": "Ilena Cryobyte",
     "id": 594,
     "faction": "vanar",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -2744,14 +2989,83 @@
     "health": 25,
     "cardType": "General",
     "tribes": [],
-    "spriteName": "f6_3rdgeneral",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "f6ThirdGeneral"
+  },
+  {
+    "name": "Bubblesmith",
+    "id": 596,
+    "faction": "vanar",
+    "rarity": "Common",
+    "description": "Opening Gambit: Give your General \"The next time this would take damage, reduce that damage to 1\".",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f6YnuytTrackerBreathing.gif",
+      "idle": "resources/card_gifs/f6YnuytTrackerIdle.gif",
+      "walk": "resources/card_gifs/f6YnuytTrackerRun.gif",
+      "attack": "resources/card_gifs/f6YnuytTrackerAttack.gif",
+      "damage": "resources/card_gifs/f6YnuytTrackerHit.gif",
+      "death": "resources/card_gifs/f6YnuytTrackerDeath.gif"
+    },
+    "mana": 2,
+    "attack": 2,
+    "health": 3,
+    "cardType": "Minion",
+    "tribes": ["Vespyr"],
+    "factionId": 6,
+    "spriteName": "f6YnuytTracker"
+  },
+  {
+    "name": "Fylgja",
+    "id": 597,
+    "faction": "vanar",
+    "rarity": "Rare",
+    "description": "Opening Gambit: Both players lose a mana crystal.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f6MyriadBreathing.gif",
+      "idle": "resources/card_gifs/f6MyriadIdle.gif",
+      "walk": "resources/card_gifs/f6MyriadRun.gif",
+      "attack": "resources/card_gifs/f6MyriadAttack.gif",
+      "damage": "resources/card_gifs/f6MyriadHit.gif",
+      "death": "resources/card_gifs/f6MyriadDeath.gif"
+    },
+    "mana": 5,
+    "attack": 5,
+    "health": 5,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 6,
+    "spriteName": "f6Myriad"
+  },
+  {
+    "name": "Memento",
+    "id": 600,
+    "faction": "vanar",
+    "rarity": "Token",
+    "description": "Wall\nDying Wish: Draw a card.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/f6ExplodingWallBreathing.gif",
+      "idle": "resources/card_gifs/f6ExplodingWallIdle.gif",
+      "walk": "resources/card_gifs/f6ExplodingWallIdle.gif",
+      "attack": "resources/card_gifs/f6ExplodingWallAttack.gif",
+      "damage": "resources/card_gifs/f6ExplodingWallHit.gif",
+      "death": "resources/card_gifs/f6ExplodingWallDeath.gif"
+    },
+    "mana": 0,
+    "attack": 1,
+    "health": 1,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 6,
+    "spriteName": "f6ExplodingWall"
   },
   {
     "name": "Dragonlark",
     "id": 11160,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Flying",
     "relatedCards": [],
     "resource": {
@@ -2767,14 +3081,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterdragonhawk",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDragonhawk"
   },
   {
     "name": "Silvertongue Corsair",
     "id": 11161,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When this damages the enemy General, shuffle a card from your opponent's deck into yours for each damage it dealt.",
     "relatedCards": [],
     "resource": {
@@ -2790,14 +3104,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercpirate",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMercPirate"
   },
   {
     "name": "Saberspine Tiger",
     "id": 11162,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Rush",
     "relatedCards": [],
     "resource": {
@@ -2813,15 +3127,15 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_beastsaberspinetiger",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBeastSaberspineTiger"
   },
   {
     "name": "Blaze Hound",
     "id": 11163,
     "faction": "neutral",
-    "rarity": "rare",
-    "description": "This card costs 1 less to play if the enemy General took damage this turn.",
+    "rarity": "Rare",
+    "description": "This card costs 2 less to play if the enemy General took damage this turn.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralBeastDarkHarbingerBreathing.gif",
@@ -2836,14 +3150,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_beastdarkharbinger",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBeastDarkHarbinger"
   },
   {
     "name": "Sand Burrower",
     "id": 11164,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "This cannot be attacked while at full Health.",
     "relatedCards": [],
     "resource": {
@@ -2859,14 +3173,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterblacksandburrower",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBlackSandBurrower"
   },
   {
     "name": "Repulsor Beast",
     "id": 11165,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Teleport a nearby enemy minion to any space.",
     "relatedCards": [],
     "resource": {
@@ -2882,14 +3196,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_beastrepulsion",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBeastRepulsion"
   },
   {
     "name": "Fire Spitter",
     "id": 11166,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Ranged\nThis can only attack Generals.",
     "relatedCards": [],
     "resource": {
@@ -2905,14 +3219,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercgrenadier",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMercGrenadier"
   },
   {
     "name": "Komodo Scavenger",
     "id": 11167,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "This gains Attack equal to the cost of the next artifact you equip.",
     "relatedCards": [],
     "resource": {
@@ -2928,14 +3242,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_beastcavern",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralD2KomodoScavenger"
   },
   {
     "name": "Planar Scout",
     "id": 11168,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Airdrop",
     "relatedCards": [],
     "resource": {
@@ -2951,14 +3265,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_beastphasehound",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPhaseHound"
   },
   {
     "name": "Ephemeral Shroud",
     "id": 11169,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Dispel a nearby space.",
     "relatedCards": [],
     "resource": {
@@ -2974,14 +3288,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterdreamoracle",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDreamOracle"
   },
   {
     "name": "Vale Hunter",
     "id": 11170,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Ranged",
     "relatedCards": [],
     "resource": {
@@ -2997,14 +3311,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_tribalranged1",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralTribalRanged1"
   },
   {
     "name": "Twilight Sorcerer",
     "id": 11171,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Put a copy of a random spell you have played into your action bar.",
     "relatedCards": [],
     "resource": {
@@ -3020,14 +3334,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_merctwilightmage",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralTwilightMage"
   },
   {
     "name": "Brightmoss Golem",
     "id": 11172,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -3043,14 +3357,14 @@
     "health": 9,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "spriteName": "neutral_golemnature",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGolemNature"
   },
   {
     "name": "Bloodshard Golem",
     "id": 11173,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -3066,14 +3380,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "spriteName": "neutral_golembloodshard",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGolemBloodshard"
   },
   {
     "name": "Dragonbone Golem",
     "id": 11174,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -3089,14 +3403,14 @@
     "health": 10,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "spriteName": "neutral_golemdragonbone",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGolemDragonbone"
   },
   {
     "name": "Stormmetal Golem",
     "id": 11175,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -3112,14 +3426,14 @@
     "health": 8,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "spriteName": "neutral_golemstormmetal",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGolemStormmetal"
   },
   {
     "name": "Sun Seer",
     "id": 11176,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When this deals damage, heal your General for the amount dealt.",
     "relatedCards": [],
     "resource": {
@@ -3135,14 +3449,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_mercsunseer",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSunseer"
   },
   {
     "name": "Manaforger",
     "id": 11177,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Your spells cost 1 less to play.",
     "relatedCards": [],
     "resource": {
@@ -3158,14 +3472,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_monsterartifacthunter",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralArtifactHunter"
   },
   {
     "name": "Prismatic Illusionist",
     "id": 11178,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When you play a spell, summon an Illusion on a random nearby space.",
     "relatedCards": [11183],
     "resource": {
@@ -3181,14 +3495,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_prismaticillusionist",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPrismaticiIlusionist"
   },
   {
     "name": "Alcuin Loremaster",
     "id": 11179,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Opening Gambit: Put a copy of the most recently played spell into your action bar.",
     "relatedCards": [],
     "resource": {
@@ -3204,14 +3518,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_mercsightlessfarseer",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSightlessFarseer"
   },
   {
     "name": "Owlbeast Sage",
     "id": 11180,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When you play a spell, allied Arcanysts gain +0/+2.",
     "relatedCards": [],
     "resource": {
@@ -3227,14 +3541,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_mercowlbearmage",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralOwlbeastMage"
   },
   {
     "name": "Lightbender",
     "id": 11181,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Dispel nearby spaces.",
     "relatedCards": [],
     "resource": {
@@ -3250,14 +3564,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercarcanelimiter",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralArcaneLimiter"
   },
   {
     "name": "Serpenti",
     "id": 11182,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Frenzy",
     "relatedCards": [],
     "resource": {
@@ -3273,14 +3587,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_serpenti",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSerpenti"
   },
   {
     "name": "Illusion",
     "id": 11183,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -3296,13 +3610,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralIllusion"
   },
   {
     "name": "MECHAZ0R!!",
     "id": 11184,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Airdrop, Frenzy, Ranged, Veil",
     "relatedCards": [],
     "resource": {
@@ -3318,13 +3633,14 @@
     "health": 8,
     "cardType": "Minion",
     "tribes": ["Mech"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMechaz0rSuper"
   },
   {
     "name": "Helm of MECHAZ0R",
     "id": 11185,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Dying Wish: Progress your Mechaz0r build by 20%.",
     "relatedCards": [11184],
     "resource": {
@@ -3340,14 +3656,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": ["Mech"],
-    "spriteName": "neutral_mechaz0rhelm",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMechaz0rHelm"
   },
   {
     "name": "Wings of MECHAZ0R",
     "id": 11186,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Airdrop\nDying Wish: Progress your Mechaz0r build by 20%.",
     "relatedCards": [11184],
     "resource": {
@@ -3363,14 +3679,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Mech"],
-    "spriteName": "neutral_mechaz0rwing",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMechaz0rWings"
   },
   {
     "name": "Cannon of MECHAZ0R",
     "id": 11187,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Ranged\nDying Wish: Progress your Mechaz0r build by 20%.",
     "relatedCards": [11184],
     "resource": {
@@ -3386,14 +3702,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Mech"],
-    "spriteName": "neutral_mechaz0rcannon",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMechaz0rCannon"
   },
   {
     "name": "Sword of MECHAZ0R",
     "id": 11188,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Frenzy\nDying Wish: Progress your Mechaz0r build by 20%.",
     "relatedCards": [11184],
     "resource": {
@@ -3409,14 +3725,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Mech"],
-    "spriteName": "neutral_mechaz0rsword",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMechaz0rSword"
   },
   {
     "name": "Chassis of MECHAZ0R",
     "id": 11189,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Veil\nDying Wish: Progress your Mechaz0r build by 20%.",
     "relatedCards": [11184],
     "resource": {
@@ -3432,14 +3748,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Mech"],
-    "spriteName": "neutral_mechaz0rchassis",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMechaz0rChassis"
   },
   {
     "name": "Shield Oracle",
     "id": 11190,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When the ally in front of this would take damage, this takes that damage instead.",
     "relatedCards": [],
     "resource": {
@@ -3455,14 +3771,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercshieldoracle",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralShieldOracle"
   },
   {
     "name": "Swamp Entangler",
     "id": 11191,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Provoke",
     "relatedCards": [],
     "resource": {
@@ -3478,14 +3794,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_beastswamp",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBeastSwamp"
   },
   {
     "name": "Rock Pulverizer",
     "id": 11192,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Provoke",
     "relatedCards": [],
     "resource": {
@@ -3501,14 +3817,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterexplodingdemon",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralExplodingDemon"
   },
   {
     "name": "Primus Shieldmaster",
     "id": 11193,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Provoke\nAt the end of your turn, give nearby allied minions +0/+1.",
     "relatedCards": [],
     "resource": {
@@ -3524,14 +3840,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_primusshieldmaster",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPrimusShieldmaster"
   },
   {
     "name": "Cinderbeast",
     "id": 11194,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "At the start of each turn, deal 1 damage to both Generals.",
     "relatedCards": [],
     "resource": {
@@ -3547,14 +3863,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterdarkharbinger",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDarkHarbinger"
   },
   {
     "name": "Bluetip Scorpion",
     "id": 11195,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "This deals double damage to minions.",
     "relatedCards": [],
     "resource": {
@@ -3570,14 +3886,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsteronyxscorpion",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBluetipScorpion"
   },
   {
     "name": "Crimson Oculus",
     "id": 11196,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "When your opponent summons a minion, this gains +1/+1.",
     "relatedCards": [],
     "resource": {
@@ -3593,14 +3909,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsteroculus",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralOculus"
   },
   {
     "name": "Thorn Needler",
     "id": 11197,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "When this takes damage, it gains +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -3616,14 +3932,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercneedler",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralNeedler"
   },
   {
     "name": "Rogue Warden",
     "id": 11198,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Ranged\nThis has +1/+0 for each nearby ally.",
     "relatedCards": [],
     "resource": {
@@ -3639,15 +3955,15 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_ranged",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "f1Ranged"
   },
   {
     "name": "Putrid Dreadflayer",
     "id": 11199,
     "faction": "neutral",
-    "rarity": "common",
-    "description": "Flying\nDying Wish: Deal 1 damage to nearby enemies.",
+    "rarity": "Common",
+    "description": "Dying Wish: Deal 4 damage to nearby enemies.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralPutridDreadflayerBreathing.gif",
@@ -3657,19 +3973,19 @@
       "damage": "resources/card_gifs/neutralPutridDreadflayerHit.gif",
       "death": "resources/card_gifs/neutralPutridDreadflayerDeath.gif"
     },
-    "mana": 3,
-    "attack": 1,
-    "health": 5,
+    "mana": 4,
+    "attack": 4,
+    "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterputridmindflayer",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPutridDreadflayer"
   },
   {
     "name": "Young Flamewing",
     "id": 11200,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Flying",
     "relatedCards": [],
     "resource": {
@@ -3685,14 +4001,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterflamewing",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralFlamewing"
   },
   {
     "name": "Storm Aratha",
     "id": 11201,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Flying\nWhen this attacks an enemy, deal 3 damage to enemies nearby that enemy.",
     "relatedCards": [],
     "resource": {
@@ -3708,14 +4024,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterlightningbeetle",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralLightningBeetle"
   },
   {
     "name": "Whistling Blade",
     "id": 11202,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Veil",
     "relatedCards": [],
     "resource": {
@@ -3731,14 +4047,14 @@
     "health": 13,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterwhistlingblade",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralWhistlingBlade"
   },
   {
     "name": "Primus Fist",
     "id": 11203,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Give nearby allied minions +1/+0.",
     "relatedCards": [],
     "resource": {
@@ -3754,14 +4070,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_gauntletmaster",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGauntletMaster"
   },
   {
     "name": "Golem Metallurgist",
     "id": 11204,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Your Golems cost 1 less to play.",
     "relatedCards": [],
     "resource": {
@@ -3777,14 +4093,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "spriteName": "neutral_golemsteel",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGolemSteel"
   },
   {
     "name": "Golem Vanguard",
     "id": 11205,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Provoke\nOther allied Golems have Provoke.",
     "relatedCards": [],
     "resource": {
@@ -3800,14 +4116,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "spriteName": "neutral_golemstone",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGolemStone"
   },
   {
     "name": "Piercing Mantis",
     "id": 11206,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Frenzy",
     "relatedCards": [],
     "resource": {
@@ -3823,14 +4139,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monstershreddingmantis",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPiercingMantis"
   },
   {
     "name": "Frostbone Naga",
     "id": 11207,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Deal 2 damage to nearby units.",
     "relatedCards": [],
     "resource": {
@@ -3846,14 +4162,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercfrostbonenaga",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralFrostboneNaga"
   },
   {
     "name": "Archon Spellbinder",
     "id": 11208,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Your opponent's spells cost 1 more to play.",
     "relatedCards": [],
     "resource": {
@@ -3866,17 +4182,17 @@
     },
     "mana": 6,
     "attack": 8,
-    "health": 8,
+    "health": 7,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_mercarchonspellbinder",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralArchonSpellbinder"
   },
   {
     "name": "Silhouette Tracer",
     "id": 11209,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Teleport your General up to 3 spaces.",
     "relatedCards": [],
     "resource": {
@@ -3892,14 +4208,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_silhouettetracer",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSilhouetteTracer"
   },
   {
     "name": "Sarlac the Eternal",
     "id": 11210,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Dying Wish: Summon a copy of this on a random space.",
     "relatedCards": [],
     "resource": {
@@ -3915,14 +4231,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "f1_sunstonemaiden",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "f1SunstoneMaiden"
   },
   {
     "name": "Dark Nemesis",
     "id": 11211,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "At the start of your turn, this gains +4/+0. Deal 4 damage to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -3938,14 +4254,14 @@
     "health": 10,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_darknemesis",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDarkNemesis"
   },
   {
     "name": "Mirkblood Devourer",
     "id": 11212,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Give allied minions summoned nearby this +1/+1.",
     "relatedCards": [],
     "resource": {
@@ -3961,14 +4277,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_beastmirkwooddevourer",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMirkbloodDevourer"
   },
   {
     "name": "Skyrock Golem",
     "id": 11213,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -3984,14 +4300,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "spriteName": "neutral_golemrunesand",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGolemRunesand"
   },
   {
     "name": "Sojourner",
     "id": 11214,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Put a random card into your action bar.",
     "relatedCards": [],
     "resource": {
@@ -4007,14 +4323,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercgambitgirl",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGambitGirl"
   },
   {
     "name": "Azure Horn Shaman",
     "id": 11215,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Dying Wish: Give nearby allied minions +0/+4.",
     "relatedCards": [],
     "resource": {
@@ -4030,14 +4346,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercazurehorn",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralAzurehornShaman"
   },
   {
     "name": "Flameblood Warlock",
     "id": 11216,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Deal 3 damage to both Generals.",
     "relatedCards": [],
     "resource": {
@@ -4053,14 +4369,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercflamebloodwarlock",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralFlamebloodWarlock"
   },
   {
     "name": "Bloodtear Alchemist",
     "id": 11217,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Deal 1 damage to another unit.",
     "relatedCards": [],
     "resource": {
@@ -4076,14 +4392,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_bloodstonealchemist",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBloodstoneAlchemist"
   },
   {
     "name": "Crossbones",
     "id": 11218,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Dying Wish: The next card your opponent plays costs 1 more.",
     "relatedCards": [],
     "resource": {
@@ -4099,14 +4415,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_golem_crossbones",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralCrossbones"
   },
   {
     "name": "Sworn Avenger",
     "id": 11219,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Ranged\nWhen your General takes damage, this gains +1/+0.",
     "relatedCards": [],
     "resource": {
@@ -4122,14 +4438,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercswornavanger",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSwornAvenger"
   },
   {
     "name": "Sworn Defender",
     "id": 11220,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Provoke\nOpening Gambit: This gains +0/+1 for each nearby enemy.",
     "relatedCards": [],
     "resource": {
@@ -4145,14 +4461,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercsworndefender",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSwornDefender"
   },
   {
     "name": "Red Synja",
     "id": 11221,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When your General takes damage, this deals 7 damage to a random nearby enemy minion.",
     "relatedCards": [],
     "resource": {
@@ -4168,14 +4484,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterredsynja",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralRedSynja"
   },
   {
     "name": "Rust Crawler",
     "id": 11222,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Destroy a random artifact equipped to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -4187,18 +4503,18 @@
       "death": "resources/card_gifs/neutralCoiledCrawlerDeath.gif"
     },
     "mana": 2,
-    "attack": 1,
-    "health": 4,
+    "attack": 2,
+    "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monstercoiledcrawler",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralCoiledCrawler"
   },
   {
     "name": "Dagger Kiri",
     "id": 11223,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Celerity",
     "relatedCards": [],
     "resource": {
@@ -4214,14 +4530,14 @@
     "health": 8,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercdaggerkiri",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDaggerKiri"
   },
   {
     "name": "Dancing Blades",
     "id": 11224,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Deal 3 damage to the minion directly in front of this.",
     "relatedCards": [],
     "resource": {
@@ -4237,14 +4553,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_monsterdancingblades",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDancingBlades"
   },
   {
     "name": "Venom Toth",
     "id": 11225,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When your opponent summons a minion, deal 1 damage to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -4260,14 +4576,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_merctwinbladewarmonger",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralTwinbladeWarmonger"
   },
   {
     "name": "Artifact Hunter",
     "id": 11226,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Opening Gambit: Draw an artifact.",
     "relatedCards": [],
     "resource": {
@@ -4283,14 +4599,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_windstopper",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralWindstopper"
   },
   {
     "name": "Chaos Elemental",
     "id": 11227,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When this survives damage, it teleports to a random space.",
     "relatedCards": [],
     "resource": {
@@ -4306,14 +4622,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_chaoselemental",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralChaosElemental"
   },
   {
     "name": "Jax Truesight",
     "id": 11228,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Ranged\nOpening Gambit: Summon a Mini-Jax on each corner space of the battlefield.",
     "relatedCards": [11236],
     "resource": {
@@ -4329,14 +4645,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_jaxtruesight",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralJaxTruesight"
   },
   {
     "name": "Mindwarper",
     "id": 11229,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Players replace cards from their opponent's deck.",
     "relatedCards": [],
     "resource": {
@@ -4352,14 +4668,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_mercmindwarper",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMindwarper"
   },
   {
     "name": "Pandora",
     "id": 11230,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "At the end of your turn, summon a random Spirit on a random nearby space.",
     "relatedCards": [11231, 11232, 11233, 11234, 11235],
     "resource": {
@@ -4375,14 +4691,14 @@
     "health": 10,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_pandora",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPandora"
   },
   {
     "name": "Serenity",
     "id": 11231,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Flying",
     "relatedCards": [],
     "resource": {
@@ -4398,13 +4714,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Spirit"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPandoraMinionFly"
   },
   {
     "name": "Rage",
     "id": 11232,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Frenzy",
     "relatedCards": [],
     "resource": {
@@ -4420,13 +4737,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Spirit"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPandoraMinionRush"
   },
   {
     "name": "Wrath",
     "id": 11233,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Celerity",
     "relatedCards": [],
     "resource": {
@@ -4442,13 +4760,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Spirit"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPandoraMinionFrenzy"
   },
   {
     "name": "Envy",
     "id": 11234,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Ranged",
     "relatedCards": [],
     "resource": {
@@ -4464,13 +4783,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Spirit"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPandoraMinionCelerity"
   },
   {
     "name": "Fear",
     "id": 11235,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Provoke",
     "relatedCards": [],
     "resource": {
@@ -4486,13 +4806,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Spirit"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPandoraMinionProvoke"
   },
   {
     "name": "Mini-Jax",
     "id": 11236,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Ranged",
     "relatedCards": [],
     "resource": {
@@ -4508,13 +4829,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMiniJax"
   },
   {
     "name": "Lux Ignis",
     "id": 11237,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Ranged\nAt the end of your turn, heal nearby allies for 2.",
     "relatedCards": [],
     "resource": {
@@ -4530,14 +4852,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_luxignis",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralLuxIgnis"
   },
   {
     "name": "Syvrel the Exile",
     "id": 11238,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Ranged\nWhen this damages an enemy minion, teleport that minion to the space in front of this.",
     "relatedCards": [],
     "resource": {
@@ -4553,14 +4875,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_syvrel",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSyvrel"
   },
   {
     "name": "Spelljammer",
     "id": 11239,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Players draw 1 fewer card at the end of their turn.",
     "relatedCards": [],
     "resource": {
@@ -4576,14 +4898,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_spelljammer",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSpelljammer"
   },
   {
     "name": "Dioltas",
     "id": 11240,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Dying Wish: Summon a Tombstone on a random space nearby your General.",
     "relatedCards": [11241],
     "resource": {
@@ -4599,14 +4921,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_dilotas_attack",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDilotas"
   },
   {
     "name": "Tombstone",
     "id": 11241,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Provoke",
     "relatedCards": [],
     "resource": {
@@ -4622,13 +4944,14 @@
     "health": 10,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDilotasTombstone"
   },
   {
     "name": "Hailstone Golem",
     "id": 11242,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "",
     "relatedCards": [],
     "resource": {
@@ -4644,15 +4967,15 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "spriteName": "neutral_golemice",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGolemIce"
   },
   {
     "name": "Maw",
     "id": 11243,
     "faction": "neutral",
-    "rarity": "common",
-    "description": "Opening Gambit: Deal 2 damage to a nearby ally. This gains +2/+0.",
+    "rarity": "Common",
+    "description": "Opening Gambit: Deal 2 damage to a nearby ally to gain +2/+0.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralMawBreathing.gif",
@@ -4667,14 +4990,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_maw",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMaw"
   },
   {
     "name": "Deathblighter",
     "id": 11244,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Prevent all healing.",
     "relatedCards": [],
     "resource": {
@@ -4690,14 +5013,14 @@
     "health": 8,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_deathblighter",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDeathblighter"
   },
   {
     "name": "Healing Mystic",
     "id": 11245,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Heal another unit for 2.",
     "relatedCards": [],
     "resource": {
@@ -4713,14 +5036,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_healingmystic",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralHealingMystic"
   },
   {
     "name": "Void Hunter",
     "id": 11246,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Dying Wish: Draw 2 cards.",
     "relatedCards": [],
     "resource": {
@@ -4736,14 +5059,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_voidhunter",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralVoidHunter"
   },
   {
     "name": "Ash Mephyt",
     "id": 11247,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Airdrop\nOpening Gambit: Summon two exact copies of this on any two spaces.",
     "relatedCards": [],
     "resource": {
@@ -4759,14 +5082,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_ashmephyt",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralAshMephyt"
   },
   {
     "name": "First Sword of Akrane",
     "id": 11248,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Other allies have +1/+0.",
     "relatedCards": [],
     "resource": {
@@ -4782,14 +5105,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_swordofakrane",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralFirstSwordAkrane"
   },
   {
     "name": "The High Hand",
     "id": 11249,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: This gains +1/+1 for each card in your opponent's action bar.",
     "relatedCards": [],
     "resource": {
@@ -4805,14 +5128,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_highhand",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralHighHand"
   },
   {
     "name": "Eclipse",
     "id": 11250,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "When this takes damage, deal that much damage to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -4828,15 +5151,15 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_eclipse",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralEclipse"
   },
   {
     "name": "Lady Locke",
     "id": 11251,
     "faction": "neutral",
-    "rarity": "epic",
-    "description": "Provoke\nOpening Gambit: Give other non-token minions you summon this turn +1/+1 and Provoke.",
+    "rarity": "Epic",
+    "description": "Provoke\nOpening Gambit: Other minions you summon this turn gain +1/+1. Other minions you play this turn gain Provoke.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralLadyLockeBreathing.gif",
@@ -4851,14 +5174,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_ladylocke",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralLadyLocke"
   },
   {
     "name": "Moebius",
     "id": 11252,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Airdrop\nOpening Gambit: Spend your remaining mana. This gains +1/+1 for each mana spent.",
     "relatedCards": [],
     "resource": {
@@ -4874,14 +5197,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_moebius",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMoebius"
   },
   {
     "name": "Captain Hank Hart",
     "id": 11253,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Ranged\nWhen this deals damage, it heals for the amount dealt.",
     "relatedCards": [],
     "resource": {
@@ -4897,14 +5220,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_captainhankheart",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralCaptainHart"
   },
   {
     "name": "Rook",
     "id": 11254,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Opening Gambit: This moves forward until a unit is in front of it. Deal damage equal to the number of spaces moved to that unit.",
     "relatedCards": [],
     "resource": {
@@ -4920,14 +5243,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_rook",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralRook"
   },
   {
     "name": "Purgatos, The Realmkeeper",
     "id": 11255,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "When this attacks, heal your General for 2. When this counterattacks, deal 2 damage to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -4943,14 +5266,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_purgatos",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPurgatos"
   },
   {
     "name": "Songweaver",
     "id": 11256,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "After you play a minion, spell, and artifact in the same turn, draw 3 cards.",
     "relatedCards": [],
     "resource": {
@@ -4966,14 +5289,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mercsongweaver",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSongweaver"
   },
   {
     "name": "Aethermaster",
     "id": 11257,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "You can replace an additional card each turn.",
     "relatedCards": [],
     "resource": {
@@ -4989,15 +5312,15 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_aethermaster",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralAethermaster"
   },
   {
     "name": "Zen'Rui, the Blightspawned",
     "id": 11258,
     "faction": "neutral",
-    "rarity": "legendary",
-    "description": "Opening Gambit: Take control of a nearby enemy minion with 2 or less Attack.",
+    "rarity": "Legendary",
+    "description": "Opening Gambit: Destroy a nearby enemy minion with 2 or less attack and summon a 2/2 copy of it on its space.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralZenRuiBreathing.gif",
@@ -5012,14 +5335,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_zenrui",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralZenRui"
   },
   {
     "name": "Emerald Rejuvenator",
     "id": 11259,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Heal your General for 4.",
     "relatedCards": [],
     "resource": {
@@ -5035,14 +5358,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_rejuvenator",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralEmeraldRejuvenator"
   },
   {
     "name": "Zurael, the Lifegiver",
     "id": 11260,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Airdrop, Flying\nOpening Gambit: Summon other allied minions that were destroyed since your last turn on random spaces.",
     "relatedCards": [],
     "resource": {
@@ -5055,17 +5378,17 @@
     },
     "mana": 9,
     "attack": 9,
-    "health": 7,
+    "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_zurael",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralZurael"
   },
   {
     "name": "Paddo",
     "id": 11261,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Airdrop\nOpening Gambit: Teleport nearby units to random spaces.",
     "relatedCards": [],
     "resource": {
@@ -5081,14 +5404,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_paddo",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralPaddo"
   },
   {
     "name": "Black Locust",
     "id": 11262,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Flying\nAt the end of your turn, summon a copy of this on a random nearby space.",
     "relatedCards": [],
     "resource": {
@@ -5104,14 +5427,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_blacklocust",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBlackLocust"
   },
   {
     "name": "Wind Runner",
     "id": 11263,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "After this moves, give nearby allied minions +1/+1.",
     "relatedCards": [],
     "resource": {
@@ -5127,14 +5450,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_windrunner",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralWindRunner"
   },
   {
     "name": "Mogwai",
     "id": 11264,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Opening Gambit: This gains Attack equal to the highest Attack among allies.",
     "relatedCards": [],
     "resource": {
@@ -5150,14 +5473,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_mogwai",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMogwai"
   },
   {
     "name": "Ghost Lynx",
     "id": 11265,
     "faction": "neutral",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Opening Gambit: Draw a card at the end of your turn.",
     "relatedCards": [],
     "resource": {
@@ -5173,14 +5496,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_ghostlynx",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGhostLynx"
   },
   {
     "name": "Grailmaster",
     "id": 11266,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When you summon a minion, this gains a new random keyword from Celerity, Flying, Frenzy, Provoke, and Ranged.",
     "relatedCards": [],
     "resource": {
@@ -5196,14 +5519,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_spiritscribe",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSpiritscribe"
   },
   {
     "name": "Flame Acolyte",
     "id": 11267,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When you play a spell, summon a Spellspark on a random nearby space.",
     "relatedCards": [11268],
     "resource": {
@@ -5219,14 +5542,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "spriteName": "neutral_firestarter",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralFirestarter"
   },
   {
     "name": "Spellspark",
     "id": 11268,
     "faction": "neutral",
-    "rarity": "token",
+    "rarity": "Token",
     "description": "Rush",
     "relatedCards": [],
     "resource": {
@@ -5242,13 +5565,14 @@
     "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSpellspark"
   },
   {
     "name": "Khymera",
     "id": 11269,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "When this takes damage, summon a random token minion on a random nearby space.",
     "relatedCards": [],
     "resource": {
@@ -5264,14 +5588,14 @@
     "health": 12,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_khymera",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralKhymera"
   },
   {
     "name": "Jaxi",
     "id": 11270,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Dying Wish: Summon a Mini-Jax on this space.",
     "relatedCards": [11236],
     "resource": {
@@ -5287,14 +5611,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_jaxi",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralJaxi"
   },
   {
     "name": "Sun Elemental",
     "id": 11271,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "At the end of your turn, this gains +2/-1.",
     "relatedCards": [],
     "resource": {
@@ -5310,14 +5634,14 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_sunelemental",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralSunElemental"
   },
   {
     "name": "Prophet of the White Palm",
     "id": 11272,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Give all units \"This takes no damage from spells.\" until your next turn.",
     "relatedCards": [],
     "resource": {
@@ -5333,14 +5657,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_prophetwhitepalm",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralProphetWhitePalm"
   },
   {
     "name": "Araki Headhunter",
     "id": 11273,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "When you play a minion with Opening Gambit, this gains +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -5356,14 +5680,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_arakiheadhunter",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralArakiHeadhunter"
   },
   {
     "name": "Keeper of the Vale",
     "id": 11274,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Opening Gambit: Put a 1 cost 1/1 copy of another allied minion into your action bar.",
     "relatedCards": [],
     "resource": {
@@ -5379,14 +5703,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_keeperofthevale",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralKeeperOfTheVale"
   },
   {
     "name": "White Widow",
     "id": 11275,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When you replace a card, deal 1 damage to the enemy General and 1 damage to a random enemy minion.",
     "relatedCards": [],
     "resource": {
@@ -5402,14 +5726,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_whitewidow",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralWhiteWidow"
   },
   {
     "name": "Wings of Paradise",
     "id": 11276,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Flying\nWhen you replace a card, this gains +2/+0 this turn.",
     "relatedCards": [],
     "resource": {
@@ -5425,14 +5749,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_wingsofparadise",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralWingsOfParadise"
   },
   {
     "name": "Astral Crusader",
     "id": 11277,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "At the start of each turn, switch the positions of both Generals.",
     "relatedCards": [],
     "resource": {
@@ -5448,14 +5772,14 @@
     "health": 12,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_astralcrusader",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralAstralCrusader"
   },
   {
     "name": "Dreamgazer",
     "id": 11278,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When you replace this card, summon it on the space directly behind your General and deal 2 damage to your General.",
     "relatedCards": [],
     "resource": {
@@ -5471,14 +5795,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_dreamgazer",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDreamgazer"
   },
   {
     "name": "Bonereaper",
     "id": 11279,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Provoke\nAt the end of your turn, deal 2 damage to nearby enemy minions.",
     "relatedCards": [],
     "resource": {
@@ -5494,14 +5818,14 @@
     "health": 10,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_bonereaper",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBonereaper"
   },
   {
     "name": "Hollow Grovekeeper",
     "id": 11280,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Frenzy\nOpening Gambit: Give nearby allied minions Provoke.",
     "relatedCards": [],
     "resource": {
@@ -5517,14 +5841,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_hollowgrovekeeper",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralHollowGrovekeeper"
   },
   {
     "name": "Tethermancer",
     "id": 11281,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Opening Gambit: Refresh all Mana Spring tiles.",
     "relatedCards": [40001],
     "resource": {
@@ -5540,14 +5864,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_d2_tethermancer",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralD2Tethermancer"
   },
   {
     "name": "War Talon",
     "id": 11282,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When this attacks or counterattacks an enemy minion, deal excess damage dealt to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -5563,14 +5887,14 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "spriteName": "neutral_wartalon",
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralWarTalon"
   },
   {
     "name": "Owlbeast Adept",
     "id": 11283,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When you play a spell, this gains +0/+1. When your opponent plays a spell, this gains +1/+0.",
     "relatedCards": [],
     "resource": {
@@ -5586,13 +5910,37 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": ["Arcanyst"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralAer"
+  },
+  {
+    "name": "Chew-e",
+    "id": 11284,
+    "faction": "neutral",
+    "rarity": "Legendary",
+    "description": "After this destroys a minion, it fully heals, gains Attack equal to the Attack that minion had, and gains the ability of that minion.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralAlterRexxBreathing.gif",
+      "idle": "resources/card_gifs/neutralAlterRexxIdle.gif",
+      "walk": "resources/card_gifs/neutralAlterRexxRun.gif",
+      "attack": "resources/card_gifs/neutralAlterRexxAttack.gif",
+      "damage": "resources/card_gifs/neutralAlterRexxHit.gif",
+      "death": "resources/card_gifs/neutralAlterRexxDeath.gif"
+    },
+    "mana": 3,
+    "attack": 1,
+    "health": 4,
+    "cardType": "Minion",
+    "tribes": ["Mech"],
+    "factionId": 100,
+    "spriteName": "neutralAlterRexx"
   },
   {
     "name": "Riftwalker",
     "id": 11285,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Airdrop\nOpening Gambit: Deal 2 damage to the nearest unit in front, behind, above, and below this.",
     "relatedCards": [],
     "resource": {
@@ -5604,17 +5952,18 @@
       "death": "resources/card_gifs/neutralVoidExploderDeath.gif"
     },
     "mana": 3,
-    "attack": 3,
-    "health": 2,
+    "attack": 2,
+    "health": 1,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralVoidExploder"
   },
   {
     "name": "Worldcore Golem",
     "id": 11286,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "This card costs 1 less for each enemy minion and 1 more for each allied minion.",
     "relatedCards": [],
     "resource": {
@@ -5630,13 +5979,14 @@
     "health": 12,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "d2NeutralMoltenGolem"
   },
   {
     "name": "Mana Artificer",
     "id": 11287,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Dying Wish: Create a Mana Spring tile on this space.",
     "relatedCards": [],
     "resource": {
@@ -5652,13 +6002,14 @@
     "health": 4,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralD2ArtifactShaper"
   },
   {
     "name": "Capricious Marauder",
     "id": 11288,
     "faction": "neutral",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "After this attacks an enemy, destroy enemy minions diagonal from that enemy.",
     "relatedCards": [],
     "resource": {
@@ -5674,13 +6025,14 @@
     "health": 3,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralCapriciousWarrior"
   },
   {
     "name": "Dezark",
     "id": 11290,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "At the end of your turn, draw an additional card.",
     "relatedCards": [],
     "resource": {
@@ -5696,13 +6048,14 @@
     "health": 9,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralShuffler"
   },
   {
     "name": "Boulder Breacher",
     "id": 11291,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Opening Gambit: Deal 3 damage to other allied Golems and all units nearby them.",
     "relatedCards": [],
     "resource": {
@@ -5718,13 +6071,37 @@
     "health": 7,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralBoulderBreacher"
+  },
+  {
+    "name": "Pummy the Stormchaser",
+    "id": 11292,
+    "faction": "neutral",
+    "rarity": "Epic",
+    "description": "Airdrop\nAfter this attacks, deal 2 damage to joined enemies and switch positions with the farthest joined enemy minion.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralRawrBreathing.gif",
+      "idle": "resources/card_gifs/neutralRawrIdle.gif",
+      "walk": "resources/card_gifs/neutralRawrRun.gif",
+      "attack": "resources/card_gifs/neutralRawrAttack.gif",
+      "damage": "resources/card_gifs/neutralRawrHit.gif",
+      "death": "resources/card_gifs/neutralRawrDeath.gif"
+    },
+    "mana": 4,
+    "attack": 3,
+    "health": 4,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100,
+    "spriteName": "neutralRawr"
   },
   {
     "name": "Metaltooth",
     "id": 11293,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Frenzy\nThis has Rush if you control another Mech.",
     "relatedCards": [],
     "resource": {
@@ -5740,14 +6117,15 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": ["Mech"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralMetaltooth"
   },
   {
     "name": "Decapotheosis",
     "id": 11294,
     "faction": "neutral",
-    "rarity": "epic",
-    "description": "Veil\nAfter this takes damage, summon an exact copy of it nearby.",
+    "rarity": "Epic",
+    "description": "Veil\nAfter this takes damage, summon an exact copy of it on a random nearby space.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/neutralGiantCrabBreathing.gif",
@@ -5762,13 +6140,60 @@
     "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralGiantCrab"
+  },
+  {
+    "name": "Owlbeast Prophet",
+    "id": 11295,
+    "faction": "neutral",
+    "rarity": "Rare",
+    "description": "Opening Gambit: If you have played a spell this turn, deal 1 damage to a unit.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralOwlScholarBreathing.gif",
+      "idle": "resources/card_gifs/neutralOwlScholarIdle.gif",
+      "walk": "resources/card_gifs/neutralOwlScholarRun.gif",
+      "attack": "resources/card_gifs/neutralOwlScholarAttack.gif",
+      "damage": "resources/card_gifs/neutralOwlScholarHit.gif",
+      "death": "resources/card_gifs/neutralOwlScholarDeath.gif"
+    },
+    "mana": 3,
+    "attack": 3,
+    "health": 3,
+    "cardType": "Minion",
+    "tribes": ["Arcanyst"],
+    "factionId": 100,
+    "spriteName": "neutralOwlScholar"
+  },
+  {
+    "name": "Psionic Resonator",
+    "id": 11296,
+    "faction": "neutral",
+    "rarity": "Epic",
+    "description": "When you replace a card or play a spell, deal 1 damage to enemies in the same column as this.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralCalculatorBreathing.gif",
+      "idle": "resources/card_gifs/neutralCalculatorIdle.gif",
+      "walk": "resources/card_gifs/neutralCalculatorRun.gif",
+      "attack": "resources/card_gifs/neutralCalculatorAttack.gif",
+      "damage": "resources/card_gifs/neutralCalculatorHit.gif",
+      "death": "resources/card_gifs/neutralCalculatorDeath.gif"
+    },
+    "mana": 5,
+    "attack": 3,
+    "health": 5,
+    "cardType": "Minion",
+    "tribes": ["Arcanyst"],
+    "factionId": 100,
+    "spriteName": "neutralCalculator"
   },
   {
     "name": "Nebula",
     "id": 11297,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Airdrop\nThis has Rush if you control another Golem.",
     "relatedCards": [],
     "resource": {
@@ -5781,17 +6206,18 @@
     },
     "mana": 7,
     "attack": 4,
-    "health": 7,
+    "health": 8,
     "cardType": "Minion",
     "tribes": ["Golem"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "neutralDiamondGolem"
   },
   {
     "name": "Double Agent",
     "id": 11298,
     "faction": "neutral",
-    "rarity": "rare",
-    "description": "Opening Gambit: Draw a card from your opponent's deck and reveal it.\nDying Wish: Shuffle this into your opponent's deck.",
+    "rarity": "Rare",
+    "description": "Opening Gambit: Draw a copy of a card from your opponent's deck and reveal it.\nDying Wish: Shuffle this into your opponent's deck.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/doubleAgentBreathing.gif",
@@ -5806,13 +6232,14 @@
     "health": 2,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "doubleAgent"
   },
   {
     "name": "Isbee's Monument",
     "id": 11299,
     "faction": "neutral",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "At the end of each turn, this gains -0/-2 and heals both Generals for 2.",
     "relatedCards": [],
     "resource": {
@@ -5828,14 +6255,38 @@
     "health": 12,
     "cardType": "Minion",
     "tribes": ["Structure"],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "isbeesMonument"
+  },
+  {
+    "name": "Temporal Sage, Lily",
+    "id": 11300,
+    "faction": "neutral",
+    "rarity": "Legendary",
+    "description": "Opening Gambit: Teleport the minion directly in front of this backward 1 space. If a unit occupies that space, deal 2 damage to both instead.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/temporalSageLilyBreathing.gif",
+      "idle": "resources/card_gifs/temporalSageLilyIdle.gif",
+      "walk": "resources/card_gifs/temporalSageLilyRun.gif",
+      "attack": "resources/card_gifs/temporalSageLilyAttack.gif",
+      "damage": "resources/card_gifs/temporalSageLilyHit.gif",
+      "death": "resources/card_gifs/temporalSageLilyDeath.gif"
+    },
+    "mana": 4,
+    "attack": 4,
+    "health": 5,
+    "cardType": "Minion",
+    "tribes": ["Arcanyst"],
+    "factionId": 100,
+    "spriteName": "temporalSageLily"
   },
   {
     "name": "Krazed",
     "id": 11302,
     "faction": "neutral",
-    "rarity": "epic",
-    "description": "This has Veil and Frenzy if you have 9 mana crystals.",
+    "rarity": "Epic",
+    "description": "This has Veil and Frenzy if you have 9+ mana crystals.",
     "relatedCards": [],
     "resource": {
       "breathing": "resources/card_gifs/krazedBreathing.gif",
@@ -5852,13 +6303,14 @@
     "health": 5,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "krazed"
   },
   {
     "name": "Slothguard Letharus",
     "id": 11303,
     "faction": "neutral",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Provoke\nOpening Gambit: Create a Ruby Aura, Emerald Aura, and Sapphire Aura nearby.",
     "relatedCards": [40016, 40018, 40017],
     "resource": {
@@ -5869,18 +6321,88 @@
       "damage": "resources/card_gifs/letharusHit.gif",
       "death": "resources/card_gifs/letharusDeath.gif"
     },
-    "mana": 4,
+    "mana": 5,
     "attack": 1,
-    "health": 4,
+    "health": 6,
     "cardType": "Minion",
     "tribes": [],
-    "factionId": 100
+    "factionId": 100,
+    "spriteName": "letharus"
+  },
+  {
+    "name": "Synchronic Abomination",
+    "id": 11304,
+    "faction": "neutral",
+    "rarity": "Legendary",
+    "description": "Whenever there are 8 units nearby this, destroy them.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralMeltdownBreathing.gif",
+      "idle": "resources/card_gifs/neutralMeltdownIdle.gif",
+      "walk": "resources/card_gifs/neutralMeltdownRun.gif",
+      "attack": "resources/card_gifs/neutralMeltdownAttack.gif",
+      "damage": "resources/card_gifs/neutralMeltdownHit.gif",
+      "death": "resources/card_gifs/neutralMeltdownDeath.gif"
+    },
+    "mana": 8,
+    "attack": 8,
+    "health": 8,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100,
+    "spriteName": "neutralMeltdown"
+  },
+  {
+    "name": "Deja-Vu Engineer",
+    "id": 11307,
+    "faction": "neutral",
+    "rarity": "Rare",
+    "description": "Opening Gambit: Destroy a nearby allied minion, then resummon it on that space and give it +1/+1.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralTimekeeperBreathing.gif",
+      "idle": "resources/card_gifs/neutralTimekeeperIdle.gif",
+      "walk": "resources/card_gifs/neutralTimekeeperRun.gif",
+      "attack": "resources/card_gifs/neutralTimekeeperAttack.gif",
+      "damage": "resources/card_gifs/neutralTimekeeperHit.gif",
+      "death": "resources/card_gifs/neutralTimekeeperDeath.gif"
+    },
+    "mana": 4,
+    "attack": 3,
+    "health": 5,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100,
+    "spriteName": "neutralTimekeeper"
+  },
+  {
+    "name": "Arcane Amplifier",
+    "id": 11309,
+    "faction": "neutral",
+    "rarity": "Common",
+    "description": "Spells you play that deal damage deal +1 damage.",
+    "relatedCards": [],
+    "resource": {
+      "breathing": "resources/card_gifs/neutralIonBreathing.gif",
+      "idle": "resources/card_gifs/neutralIonIdle.gif",
+      "walk": "resources/card_gifs/neutralIonRun.gif",
+      "attack": "resources/card_gifs/neutralIonAttack.gif",
+      "damage": "resources/card_gifs/neutralIonHit.gif",
+      "death": "resources/card_gifs/neutralIonDeath.gif"
+    },
+    "mana": 3,
+    "attack": 3,
+    "health": 3,
+    "cardType": "Minion",
+    "tribes": [],
+    "factionId": 100,
+    "spriteName": "neutralIon"
   },
   {
     "name": "Sundrop Elixir",
     "id": 20404,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Heal a unit for 4.",
     "relatedCards": [],
     "resource": {
@@ -5890,14 +6412,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_sundropelixir",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2SundropElixir"
   },
   {
     "name": "Tempest",
     "id": 20405,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 2 damage to all units.",
     "relatedCards": [],
     "resource": {
@@ -5907,14 +6429,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_tempest",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2Tempest"
   },
   {
     "name": "Auryn Nexus",
     "id": 20406,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion +0/+4.",
     "relatedCards": [],
     "resource": {
@@ -5924,14 +6446,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_aurynnexus",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2AurynNexus"
   },
   {
     "name": "Lasting Judgement",
     "id": 20407,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion +3/-3.",
     "relatedCards": [],
     "resource": {
@@ -5941,14 +6463,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_lastingjudgement",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2LastingJudgement"
   },
   {
     "name": "War Surge",
     "id": 20408,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give allied minions +1/+1.",
     "relatedCards": [],
     "resource": {
@@ -5958,14 +6480,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_warsurge",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2WarSurge"
   },
   {
     "name": "Martyrdom",
     "id": 20409,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Destroy a minion and heal its owner's General for the amount of Health that minion had.",
     "relatedCards": [],
     "resource": {
@@ -5975,14 +6497,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_martydom",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2Martyrdom"
   },
   {
     "name": "Lionheart Blessing",
     "id": 20410,
     "faction": "lyonar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Give an allied minion \"Zeal: When this deals damage, draw a card\".",
     "relatedCards": [],
     "resource": {
@@ -5992,14 +6514,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_lionheartblessing",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2LionheartBlessing"
   },
   {
     "name": "Sun Bloom",
     "id": 20411,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Dispel spaces in a 2x2 area.",
     "relatedCards": [],
     "resource": {
@@ -6009,14 +6531,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_sunbloom",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2SunBloom"
   },
   {
     "name": "True Strike",
     "id": 20412,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 2 damage to a minion.",
     "relatedCards": [],
     "resource": {
@@ -6026,14 +6548,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_truestrike",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2TrueStrike"
   },
   {
     "name": "Circle of Life",
     "id": 20413,
     "faction": "lyonar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Deal 5 damage to a minion and heal your General for 5.",
     "relatedCards": [],
     "resource": {
@@ -6043,14 +6565,14 @@
     "mana": 5,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_circleoflife",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2CircleofLife"
   },
   {
     "name": "Beam Shock",
     "id": 20414,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Stun a unit.",
     "relatedCards": [],
     "resource": {
@@ -6060,14 +6582,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_beamshock",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2BeamShock"
   },
   {
     "name": "Holy Immolation",
     "id": 20415,
     "faction": "lyonar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Heal an allied minion for 4 and deal 4 damage to enemies nearby it.",
     "relatedCards": [],
     "resource": {
@@ -6077,14 +6599,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_holyimmolation",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2HolyImmolation"
   },
   {
     "name": "Divine Bond",
     "id": 20416,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Set a minion's Attack equal to its Health.",
     "relatedCards": [],
     "resource": {
@@ -6094,14 +6616,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_divinebond",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2DivineBond"
   },
   {
     "name": "Aegis Barrier",
     "id": 20417,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Give an allied minion \"This has Veil during your opponent's turn\".",
     "relatedCards": [],
     "resource": {
@@ -6111,14 +6633,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_aegisbarrier",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2AegisBarrier"
   },
   {
     "name": "Aerial Rift",
     "id": 20418,
     "faction": "lyonar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Shuffle a copy of the last spell you played into your deck. Draw a card.",
     "relatedCards": [],
     "resource": {
@@ -6128,14 +6650,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_aerial_rift",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2AerialRift"
   },
   {
     "name": "Magnetize",
     "id": 20419,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Teleport a minion to the space directly in front of your General.",
     "relatedCards": [],
     "resource": {
@@ -6145,14 +6667,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_magnetize",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2Magnetize"
   },
   {
     "name": "Decimate",
     "id": 20420,
     "faction": "lyonar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Destroy minions that are not nearby a General.",
     "relatedCards": [],
     "resource": {
@@ -6162,14 +6684,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f1_d2_decimate",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2Decimate"
   },
   {
     "name": "Saberspine Seal",
     "id": 20421,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a unit +3/+0 this turn.",
     "relatedCards": [],
     "resource": {
@@ -6179,14 +6701,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_saberspineseal",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2SaberspineSeal"
   },
   {
     "name": "Mist Dragon Seal",
     "id": 20422,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Give an allied minion +1/+1 and teleport it to any space.",
     "relatedCards": [],
     "resource": {
@@ -6196,14 +6718,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_mistdragonseal",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2MistdragonSeal"
   },
   {
     "name": "Phoenix Fire",
     "id": 20423,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 3 damage to a unit.",
     "relatedCards": [],
     "resource": {
@@ -6213,14 +6735,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_phoenixfire02",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2PhoenixFire2"
   },
   {
     "name": "Kage Lightning",
     "id": 20424,
     "faction": "songhai",
-    "rarity": "basic",
+    "rarity": "Basic",
     "description": "Deal 6 damage to a minion.",
     "relatedCards": [],
     "resource": {
@@ -6230,13 +6752,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2KageLightning"
   },
   {
     "name": "Twin Strike",
     "id": 20425,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 2 damage to exactly two enemy minions. Draw a card at the end of your turn.",
     "relatedCards": [],
     "resource": {
@@ -6246,14 +6769,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_twin_strike",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2TwinStrike"
   },
   {
     "name": "Eight Gates",
     "id": 20426,
     "faction": "songhai",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Spells you play this turn that deal damage deal +2 damage.",
     "relatedCards": [],
     "resource": {
@@ -6263,14 +6786,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_eightgates",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2EightGates"
   },
   {
     "name": "Spiral Technique",
     "id": 20427,
     "faction": "songhai",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Deal 8 damage to a unit.",
     "relatedCards": [],
     "resource": {
@@ -6280,14 +6803,14 @@
     "mana": 7,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_spiraltechnique",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2SpiralTechnique"
   },
   {
     "name": "Mana Vortex",
     "id": 20428,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "The next spell you play this turn costs 1 less. Draw a card at the end of your turn.",
     "relatedCards": [],
     "resource": {
@@ -6297,14 +6820,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_mana_vortex",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2ManaVortex"
   },
   {
     "name": "Inner Focus",
     "id": 20429,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Activate an allied minion with 3 or less Attack.",
     "relatedCards": [],
     "resource": {
@@ -6314,14 +6837,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_inner_focus",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2InnerFocus"
   },
   {
     "name": "Onyx Bear Seal",
     "id": 20430,
     "faction": "songhai",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Transform a minion into a Panddo.",
     "relatedCards": [167],
     "resource": {
@@ -6331,14 +6854,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_onyxbearseal",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2OnyxbearSeal"
   },
   {
     "name": "Ghost Lightning",
     "id": 20431,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 1 damage to enemy minions.",
     "relatedCards": [],
     "resource": {
@@ -6348,14 +6871,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_ghost_lightning",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2GhostLightning"
   },
   {
     "name": "Deathstrike Seal",
     "id": 20432,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Give an allied minion \"After this damages an enemy minion, destroy that minion\".",
     "relatedCards": [],
     "resource": {
@@ -6365,14 +6888,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_deathstrikeseal",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2DeathstrikeSeal"
   },
   {
     "name": "Ancestral Divination",
     "id": 20433,
     "faction": "songhai",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "When you play a minion this turn, draw a card.",
     "relatedCards": [],
     "resource": {
@@ -6382,14 +6905,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_ancestralpact",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2AncestralPact"
   },
   {
     "name": "Juxtaposition",
     "id": 20434,
     "faction": "songhai",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Switch the positions of two minions.",
     "relatedCards": [],
     "resource": {
@@ -6399,31 +6922,31 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_juxtaposition",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2Juxtaposition"
   },
   {
-    "name": "Artifact Defiler",
+    "name": "Gotatsu",
     "id": 20435,
     "faction": "songhai",
-    "rarity": "common",
-    "description": "Destroy all artifacts equipped to the enemy General.",
+    "rarity": "Common",
+    "description": "Deal 1 damage to a minion. Draw a card at the end of your turn.",
     "relatedCards": [],
     "resource": {
-      "idle": "resources/card_gifs/iconD2ArtifactDefilerIdle.gif",
-      "active": "resources/card_gifs/iconD2ArtifactDefilerActive.gif"
+      "idle": "resources/card_gifs/iconD2GotatsuIdle.gif",
+      "active": "resources/card_gifs/iconD2GotatsuActive.gif"
     },
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_artifact_defiler",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2Gotatsu"
   },
   {
     "name": "Heaven's Eclipse",
     "id": 20436,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Draw three spells.",
     "relatedCards": [],
     "resource": {
@@ -6433,14 +6956,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_heavens_eclipse",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2HeavensEclipse"
   },
   {
     "name": "Mist Walking",
     "id": 20437,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Teleport your General up to 2 spaces.",
     "relatedCards": [],
     "resource": {
@@ -6450,14 +6973,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_mistwalking",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2MistWalking"
   },
   {
     "name": "Killing Edge",
     "id": 20438,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Give an allied minion +4/+2. If it has Backstab, draw a card at the end of your turn.",
     "relatedCards": [],
     "resource": {
@@ -6467,14 +6990,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f2_d2_killingedge",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2KillingEdge"
   },
   {
     "name": "Dominate Will",
     "id": 20439,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Take control of an enemy minion nearby your General.",
     "relatedCards": [],
     "resource": {
@@ -6484,14 +7007,14 @@
     "mana": 7,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_enslave",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2Enslave"
   },
   {
     "name": "Siphon Energy",
     "id": 20440,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Dispel a minion.",
     "relatedCards": [],
     "resource": {
@@ -6501,31 +7024,31 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_syphonenergy",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2SiphonEnergy"
   },
   {
     "name": "Syzygy",
     "id": 20441,
     "faction": "vetruvian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Give an allied minion +3/+0, another +0/+3, and another Blast this turn.",
     "relatedCards": [],
     "resource": {
-      "idle": "resources/card_gifs/iconD2CosmicFleshIdle.gif",
-      "active": "resources/card_gifs/iconD2CosmicFleshActive.gif"
+      "idle": "resources/card_gifs/iconD2SyzygyIdle.gif",
+      "active": "resources/card_gifs/iconD2SyzygyActive.gif"
     },
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_cosmicflesh",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2Syzygy"
   },
   {
     "name": "Blindscorch",
     "id": 20442,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Set a minion's Attack to 0 until your next turn.",
     "relatedCards": [],
     "resource": {
@@ -6535,31 +7058,31 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_blindscorch",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2BlindScorch"
   },
   {
-    "name": "Astral Phasing",
+    "name": "Cosmic Flesh",
     "id": 20443,
     "faction": "vetruvian",
-    "rarity": "common",
-    "description": "Give a minion +0/+6 and Flying.",
+    "rarity": "Common",
+    "description": "Give a minion +1/+3 and Provoke.",
     "relatedCards": [],
     "resource": {
-      "idle": "resources/card_gifs/iconD2AstralPhasingIdle.gif",
-      "active": "resources/card_gifs/iconD2AstralPhasingActive.gif"
+      "idle": "resources/card_gifs/iconD2CosmicFleshIdle.gif",
+      "active": "resources/card_gifs/iconD2CosmicFleshActive.gif"
     },
-    "mana": 3,
+    "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_astralphasing",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2CosmicFlesh"
   },
   {
     "name": "Aurora's Tears",
     "id": 20444,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "For each artifact equipped to your General, give your General +2/+0 this turn.",
     "relatedCards": [],
     "resource": {
@@ -6569,14 +7092,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_aurorastear",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2AurorasTear"
   },
   {
     "name": "Entropic Decay",
     "id": 20445,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Destroy all minions on the same row as your General.",
     "relatedCards": [],
     "resource": {
@@ -6586,14 +7109,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_entropicdecay",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2EntropicDecay"
   },
   {
     "name": "Time Maelstrom",
     "id": 20446,
     "faction": "vetruvian",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Take another turn after this one.",
     "relatedCards": [],
     "resource": {
@@ -6603,14 +7126,14 @@
     "mana": 9,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_maelstrom",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2Maelstrom"
   },
   {
     "name": "Sand Trap",
     "id": 20447,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion \"This cannot move\". Draw a card.",
     "relatedCards": [],
     "resource": {
@@ -6620,14 +7143,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_sandtrap",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2SandTrap"
   },
   {
     "name": "Scion's First Wish",
     "id": 20448,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion +1/+1. Draw a card.",
     "relatedCards": [],
     "resource": {
@@ -6637,14 +7160,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_scionsfirstwish",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2ScionsFirstWish"
   },
   {
     "name": "Scion's Second Wish",
     "id": 20449,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Heal your General for 2. Draw two cards.",
     "relatedCards": [],
     "resource": {
@@ -6654,14 +7177,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_scionssecondwish",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2ScionsSecondWish"
   },
   {
     "name": "Scion's Third Wish",
     "id": 20450,
     "faction": "vetruvian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "This turn, give your General +3/+0 and \"This can move up to 3 spaces. Reduce damage this takes by 3\".",
     "relatedCards": [],
     "resource": {
@@ -6671,14 +7194,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_scionsthirdwish",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2ScionsThirdWish"
   },
   {
     "name": "Rasha's Curse",
     "id": 20451,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Destroy a random artifact equipped to the enemy General. Summon a Wind Dervish nearby them.",
     "relatedCards": [274],
     "resource": {
@@ -6688,14 +7211,31 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_rashascurse",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2RashasCurse"
+  },
+  {
+    "name": "Rasha's Curse",
+    "id": 20452,
+    "faction": "vetruvian",
+    "rarity": "Rare",
+    "description": "Destroy a random artifact equipped to the enemy General. Summon a Wind Dervish nearby them.",
+    "relatedCards": [],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2RashasCurseIdle.gif",
+      "active": "resources/card_gifs/iconD2RashasCurseActive.gif"
+    },
+    "mana": 0,
+    "cardType": "Spell",
+    "tribes": [],
+    "factionId": 3,
+    "spriteName": "iconD2RashasCurse"
   },
   {
     "name": "Star's Fury",
     "id": 20453,
     "faction": "vetruvian",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Summon a Wind Dervish on the space in front of each enemy.",
     "relatedCards": [274],
     "resource": {
@@ -6705,14 +7245,14 @@
     "mana": 5,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_starsfury",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2StarsFury"
   },
   {
     "name": "Bone Swarm",
     "id": 20454,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 2 damage to the enemy General and enemy minions nearby them.",
     "relatedCards": [],
     "resource": {
@@ -6722,14 +7262,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_boneswarm",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2BoneSwarm"
   },
   {
     "name": "Fountain of Youth",
     "id": 20455,
     "faction": "vetruvian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Transform a minion into a copy of itself.",
     "relatedCards": [],
     "resource": {
@@ -6739,14 +7279,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_fountainofyouth",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2FountainYouth"
   },
   {
     "name": "Inner Oasis",
     "id": 20456,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Give allied minions +0/+3. Draw a Card.",
     "relatedCards": [],
     "resource": {
@@ -6756,14 +7296,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f3_d2_inneroasis",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2InnerOasis"
   },
   {
     "name": "Wraithling Fury",
     "id": 20457,
     "faction": "abyssian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Give a Wraithling +4/+4 and Flying.",
     "relatedCards": [372],
     "resource": {
@@ -6773,14 +7313,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_wraithlingfury",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2WraithlingFury"
   },
   {
     "name": "Daemonic Lure",
     "id": 20458,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 1 damage to an enemy minion and teleport it to any space.",
     "relatedCards": [],
     "resource": {
@@ -6790,14 +7330,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_daemoniclure",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2DaemonicLure"
   },
   {
     "name": "Nether Summoning",
     "id": 20459,
     "faction": "abyssian",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Summon non-token minions that were destroyed this turn on random spaces nearby your General.",
     "relatedCards": [],
     "resource": {
@@ -6807,14 +7347,14 @@
     "mana": 5,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_nethersummoning",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2NetherSummoning"
   },
   {
     "name": "Shadow Nova",
     "id": 20460,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Create Shadow Creep tiles on a 2x2 area.",
     "relatedCards": [40011],
     "resource": {
@@ -6824,14 +7364,14 @@
     "mana": 7,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_shadownova",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2ShadowNova"
   },
   {
     "name": "Void Pulse",
     "id": 20461,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 1 damage to a unit and heal your General for 2.",
     "relatedCards": [],
     "resource": {
@@ -6841,14 +7381,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_voidpulse",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2VoidPulse"
   },
   {
     "name": "Deathfire Crescendo",
     "id": 20462,
     "faction": "abyssian",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Give a minion \"Deathwatch: This gains +2/+2\".",
     "relatedCards": [],
     "resource": {
@@ -6858,14 +7398,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_deathfirecrescendo",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2DeathfireCrescendo"
   },
   {
     "name": "Breath Of The Unborn",
     "id": 20463,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Deal 2 damage to enemy minions and fully heal allied minions.",
     "relatedCards": [],
     "resource": {
@@ -6875,14 +7415,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_breathoftheunborn",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2BreathUnborn"
   },
   {
     "name": "Rite Of The Undervault",
     "id": 20464,
     "faction": "abyssian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Draw until you have 6 cards in your action bar.",
     "relatedCards": [],
     "resource": {
@@ -6892,14 +7432,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_riteoftheundervault",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2RiteUndervault"
   },
   {
     "name": "Darkfire Sacrifice",
     "id": 20465,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Destroy an allied minion. The next minion you play costs 2 less.",
     "relatedCards": [],
     "resource": {
@@ -6909,15 +7449,15 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_darkfiresacrifice",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2DarkfireSacrifice"
   },
   {
     "name": "Ritual Banishing",
     "id": 20466,
     "faction": "abyssian",
-    "rarity": "rare",
-    "description": "Destroy an allied minion. Destroy an enemy minion.",
+    "rarity": "Rare",
+    "description": "Destroy an allied minion to destroy an enemy minion.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2RitualBanishingIdle.gif",
@@ -6926,14 +7466,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_ritualbanishing",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2RitualBanishing"
   },
   {
     "name": "Dark Terminus",
     "id": 20467,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Destroy a minion and summon a Wraithling on that space.",
     "relatedCards": [372],
     "resource": {
@@ -6943,14 +7483,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_darktransformation",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2DarkTransformation"
   },
   {
     "name": "Dark Seed",
     "id": 20468,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal damage to the enemy General equal to the number of cards in the opponent's action bar.",
     "relatedCards": [],
     "resource": {
@@ -6960,14 +7500,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_darkseed",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2DarkSeed"
   },
   {
     "name": "Grasp of Agony",
     "id": 20469,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Give a minion \"Dying Wish: Deal 3 damage to nearby allies\".",
     "relatedCards": [],
     "resource": {
@@ -6977,14 +7517,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_curseofagony",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2CurseOfAgony"
   },
   {
     "name": "Shadow Reflection",
     "id": 20470,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion +5/+0.",
     "relatedCards": [],
     "resource": {
@@ -6994,14 +7534,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_shadowreflection",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2ShadowReflection"
   },
   {
     "name": "Soulshatter Pact",
     "id": 20471,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give an enemy minion -2/-0. Give allied minions nearby it +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -7011,14 +7551,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_soulshatterpact",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2SoulShatterPact"
   },
   {
     "name": "Wraithling Swarm",
     "id": 20472,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Summon three joined Wraithlings.",
     "relatedCards": [372],
     "resource": {
@@ -7028,14 +7568,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_wraithlingswarm",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2WraithlingSwarm"
   },
   {
     "name": "Consuming Rebirth",
     "id": 20473,
     "faction": "abyssian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "This turn, when a unit is destroyed, gain +1 mana.",
     "relatedCards": [],
     "resource": {
@@ -7045,14 +7585,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f4_d2_consumingrebirth",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2ConsumingRebirth"
   },
   {
     "name": "Fractal Replication",
     "id": 20474,
     "faction": "magmar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Summon two exact copies of an allied minion nearby it.",
     "relatedCards": [],
     "resource": {
@@ -7062,14 +7602,14 @@
     "mana": 6,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_fractalreplication",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2FractalReplication"
   },
   {
     "name": "Dampening Wave",
     "id": 20475,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion \"This cannot counterattack\".",
     "relatedCards": [],
     "resource": {
@@ -7079,14 +7619,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_dampeningwave",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2DampeningWave"
   },
   {
     "name": "Flash Reincarnation",
     "id": 20476,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "The next minion you play this turn costs 2 less. Deal 2 damage to it when played.",
     "relatedCards": [],
     "resource": {
@@ -7096,14 +7636,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_flashreincarnation",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2FlashReincarnation"
   },
   {
     "name": "Diretide Frenzy",
     "id": 20477,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion +1/+0 and Frenzy.",
     "relatedCards": [],
     "resource": {
@@ -7113,14 +7653,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_diretidefrenzy",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2DiretideFrenzy"
   },
   {
     "name": "Tremor",
     "id": 20478,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Stun enemies in a 2x2 area.",
     "relatedCards": [],
     "resource": {
@@ -7130,14 +7670,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_tremor",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2Tremor"
   },
   {
     "name": "Mana Burn",
     "id": 20479,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Dispel spaces nearby your General.",
     "relatedCards": [],
     "resource": {
@@ -7147,14 +7687,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_manaburn",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2ManaBurn"
   },
   {
     "name": "Greater Fortitude",
     "id": 20480,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion +2/+1.",
     "relatedCards": [],
     "resource": {
@@ -7164,14 +7704,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_greaterfortitude",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2GreaterFortitude"
   },
   {
     "name": "Earth Sphere",
     "id": 20481,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Heal your General for 9.",
     "relatedCards": [],
     "resource": {
@@ -7181,14 +7721,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_earthsphere",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2EarthSphere"
   },
   {
     "name": "Bounded Lifeforce",
     "id": 20482,
     "faction": "magmar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Your General becomes 10/10.",
     "relatedCards": [],
     "resource": {
@@ -7198,14 +7738,14 @@
     "mana": 7,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_boundedlifeforce",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2BoundedLifeforce"
   },
   {
     "name": "Amplification",
     "id": 20483,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion \"Grow: +2/+2\".\nGrow allies with Grow.",
     "relatedCards": [],
     "resource": {
@@ -7215,14 +7755,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_amplification",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2Amplification"
   },
   {
     "name": "Metamorphosis",
     "id": 20484,
     "faction": "magmar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Transform enemy minions into Magma until your next turn.",
     "relatedCards": [474],
     "resource": {
@@ -7232,14 +7772,14 @@
     "mana": 5,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_metamorphosis",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2Metamorphosis"
   },
   {
     "name": "Plasma Storm",
     "id": 20485,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Destroy minions with 3 or less Attack in a 3x3 area.",
     "relatedCards": [],
     "resource": {
@@ -7249,31 +7789,31 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_plasmastorm",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2PlasmaStorm"
   },
   {
     "name": "Chrysalis Burst",
     "id": 20486,
     "faction": "magmar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Summon an Egg of each allied minion on the space directly behind that minion.",
     "relatedCards": [469],
     "resource": {
       "idle": "resources/card_gifs/iconD2ChrysalisBurstIdle.gif",
       "active": "resources/card_gifs/iconD2ChrysalisBurstActive.gif"
     },
-    "mana": 3,
+    "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_chrysalisburn",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2ChrysalisBurst"
   },
   {
     "name": "Natural Selection",
     "id": 20487,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Destroy a minion with the lowest Attack.",
     "relatedCards": [],
     "resource": {
@@ -7283,14 +7823,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_naturalselection",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2NaturalSelection"
   },
   {
     "name": "Mind Steal",
     "id": 20488,
     "faction": "magmar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Your action bar becomes a copy of your opponent's action bar.",
     "relatedCards": [],
     "resource": {
@@ -7300,14 +7840,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_mindsteal",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2MindSteal"
   },
   {
     "name": "Egg Morph",
     "id": 20489,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Transform a minion into an Egg of itself. If it is already an Egg, hatch it instead.",
     "relatedCards": [469],
     "resource": {
@@ -7317,14 +7857,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_eggmorph",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2EggMorph"
   },
   {
     "name": "Kinetic Equilibrium",
     "id": 20490,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Deal 2 damage to minions in a 3x3 area and give allied minions in that area +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -7334,14 +7874,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f5_d2_kineticequilibrium",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2KineticEquilibrium"
   },
   {
     "name": "Bonechill Barrier",
     "id": 20491,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Summon three joined Ice Barriers.",
     "relatedCards": [591],
     "resource": {
@@ -7351,14 +7891,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_bonechillbarrier",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2BonechillBarrier"
   },
   {
     "name": "Gravity Well",
     "id": 20492,
     "faction": "vanar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Summon four joined Frost Wells.",
     "relatedCards": [589],
     "resource": {
@@ -7368,14 +7908,14 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_gravitywell",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2GravityWell"
   },
   {
     "name": "Blazing Spines",
     "id": 20493,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Summon two joined Frigid Spines.",
     "relatedCards": [590],
     "resource": {
@@ -7385,14 +7925,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_blazingspines",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2BlazingSpines"
   },
   {
     "name": "Chromatic Cold",
     "id": 20494,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Dispel a space. If there is an enemy on that space, deal 2 damage to it.",
     "relatedCards": [],
     "resource": {
@@ -7402,14 +7942,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_chromaticcold",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2ChromaticCold"
   },
   {
     "name": "Flash Freeze",
     "id": 20495,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 1 damage to a minion and Stun it.",
     "relatedCards": [],
     "resource": {
@@ -7419,14 +7959,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_flashfreeze",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2FlashFreeze"
   },
   {
     "name": "Frostfire",
     "id": 20496,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Give a minion +3/+0. If it is Vespyr, give it +3/+3 instead.",
     "relatedCards": [],
     "resource": {
@@ -7436,14 +7976,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_frostfire",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2Frostfire"
   },
   {
     "name": "Avalanche",
     "id": 20497,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Deal 4 damage to units on your starting side of the battlefield and Stun them.",
     "relatedCards": [],
     "resource": {
@@ -7453,14 +7993,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_avalanche",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2Avalanche"
   },
   {
     "name": "Boundless Courage",
     "id": 20498,
     "faction": "vanar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Give an allied minion +2/+0. This turn, give it \"This takes no damage\".",
     "relatedCards": [],
     "resource": {
@@ -7470,14 +8010,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_unstoppableforce",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2UnstoppableForce"
   },
   {
     "name": "Mesmerize",
     "id": 20499,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Deal 3 damage to enemy minions on a column and Stun them.",
     "relatedCards": [],
     "resource": {
@@ -7487,14 +8027,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_mesmerize",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2Mesmerize"
   },
   {
     "name": "Mark of Solitude",
     "id": 20500,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Give a minion \"This cannot attack Generals\". It becomes 6/6.",
     "relatedCards": [],
     "resource": {
@@ -7504,14 +8044,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_markofsolitude",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2MarkOfSolitude"
   },
   {
     "name": "Aspect of the Fox",
     "id": 20501,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Transform a minion into a Fox Ravager.",
     "relatedCards": [586],
     "resource": {
@@ -7521,14 +8061,14 @@
     "mana": 1,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_aspectofthefox",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2AspectFox"
   },
   {
     "name": "Aspect of the Wyrm",
     "id": 20502,
     "faction": "vanar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Put a copy of a minion into its owner's action bar and transform that minion into a Whyte Wyrm.",
     "relatedCards": [587],
     "resource": {
@@ -7538,14 +8078,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_aspectofthedrake",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2AspectDrake"
   },
   {
     "name": "Aspect of the Mountains",
     "id": 20503,
     "faction": "vanar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Transform a minion into a Seismic Elemental and deal 5 damage to enemy minions nearby it.",
     "relatedCards": [588],
     "resource": {
@@ -7555,14 +8095,14 @@
     "mana": 6,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_aspectofthemountains",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2AspectMountains"
   },
   {
     "name": "Polarity",
     "id": 20504,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Swap a minion's Attack and Health.",
     "relatedCards": [],
     "resource": {
@@ -7572,14 +8112,14 @@
     "mana": 0,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_polarity",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2Polarity"
   },
   {
     "name": "Hailstone Prison",
     "id": 20505,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Return a minion to its owner's action bar.",
     "relatedCards": [],
     "resource": {
@@ -7589,14 +8129,14 @@
     "mana": 2,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_hailstoneprison",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2HailstonePrison"
   },
   {
     "name": "Spirit of the Wild",
     "id": 20506,
     "faction": "vanar",
-    "rarity": "legendary",
+    "rarity": "Legendary",
     "description": "Activate allied units on your opponent's starting side of the battlefield.",
     "relatedCards": [],
     "resource": {
@@ -7606,14 +8146,14 @@
     "mana": 4,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_spiritofthewild",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2SpiritOfTheWild"
   },
   {
     "name": "Cryogenesis",
     "id": 20507,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Deal 4 damage to a minion. Draw a Vespyr.",
     "relatedCards": [],
     "resource": {
@@ -7623,14 +8163,133 @@
     "mana": 3,
     "cardType": "Spell",
     "tribes": [],
-    "spriteName": "icon_f6_d2_cryogenesis",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2Cryogenesis"
+  },
+  {
+    "name": "Blink",
+    "id": 20521,
+    "faction": "songhai",
+    "rarity": "Common",
+    "description": "This card cannot be replaced and disappears at the end of your turn.\nTeleport an allied minion up to 2 spaces.",
+    "relatedCards": [],
+    "resource": {
+      "idle": "resources/card_gifs/iconBlinkIdle.gif",
+      "active": "resources/card_gifs/iconBlinkActive.gif"
+    },
+    "mana": 0,
+    "cardType": "Spell",
+    "tribes": [],
+    "factionId": 2,
+    "spriteName": "iconBlink"
+  },
+  {
+    "name": "Backstep",
+    "id": 20522,
+    "faction": "songhai",
+    "rarity": "Common",
+    "description": "Teleport an allied minion to the space directly behind your General. Put a Blink into your action bar.",
+    "relatedCards": [20521],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2ShadowWaltzIdle.gif",
+      "active": "resources/card_gifs/iconD2ShadowWaltzActive.gif"
+    },
+    "mana": 1,
+    "cardType": "Spell",
+    "tribes": [],
+    "factionId": 2,
+    "spriteName": "iconD2ShadowWaltz"
+  },
+  {
+    "name": "Augury",
+    "id": 20527,
+    "faction": "lyonar",
+    "rarity": "Common",
+    "description": "Draw a card. You can replace two additional cards this turn.",
+    "relatedCards": [],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2InvincibleIdle.gif",
+      "active": "resources/card_gifs/iconD2InvincibleActive.gif"
+    },
+    "mana": 1,
+    "cardType": "Spell",
+    "tribes": [],
+    "factionId": 1,
+    "spriteName": "iconD2Invincible"
+  },
+  {
+    "name": "Cataclysm",
+    "id": 20529,
+    "faction": "lyonar",
+    "rarity": "Epic",
+    "description": "You can only play this card if you've played at least three other cards this turn. Deal 5 damage to all minions.",
+    "relatedCards": [],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2CataclysmIdle.gif",
+      "active": "resources/card_gifs/iconD2CataclysmActive.gif"
+    },
+    "mana": 1,
+    "cardType": "Spell",
+    "tribes": [],
+    "factionId": 1,
+    "spriteName": "iconD2Cataclysm"
+  },
+  {
+    "name": "Anachronize",
+    "id": 20531,
+    "faction": "magmar",
+    "rarity": "Epic",
+    "description": "Destroy minions that were summoned since your last turn.",
+    "relatedCards": [],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2SaurianFinality2Idle.gif",
+      "active": "resources/card_gifs/iconD2SaurianFinality2Active.gif"
+    },
+    "mana": 4,
+    "cardType": "Spell",
+    "tribes": [],
+    "factionId": 5,
+    "spriteName": "iconD2SaurianFinality2"
+  },
+  {
+    "name": "Drain Morale",
+    "id": 20534,
+    "faction": "vetruvian",
+    "rarity": "Common",
+    "description": "Give all minions -1/-0.",
+    "relatedCards": [],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2DrainMoraleTimelessIdle.gif",
+      "active": "resources/card_gifs/iconD2DrainMoraleTimelessActive.gif"
+    },
+    "mana": 1,
+    "cardType": "Spell",
+    "tribes": [],
+    "factionId": 3,
+    "spriteName": "iconD2DrainMoraleTimeless"
+  },
+  {
+    "name": "Mementos",
+    "id": 20536,
+    "faction": "vanar",
+    "rarity": "Common",
+    "description": "Summon two joined Mementos.",
+    "relatedCards": [600],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2LuminousChargeIdle.gif",
+      "active": "resources/card_gifs/iconD2LuminousChargeActive.gif"
+    },
+    "mana": 1,
+    "cardType": "Spell",
+    "tribes": [],
+    "factionId": 6,
+    "spriteName": "iconD2LuminousCharge"
   },
   {
     "name": "Skywind Glaives",
     "id": 30101,
     "faction": "lyonar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Your General has +1/+0.\nAllied minions nearby your General have +2/+0.",
     "relatedCards": [],
     "resource": {
@@ -7640,14 +8299,14 @@
     "mana": 3,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f1_d2_skywindglaives",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2SkywindGlaives"
   },
   {
     "name": "Sunstone Bracers",
     "id": 30102,
     "faction": "lyonar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Your General has +1/+0.",
     "relatedCards": [],
     "resource": {
@@ -7657,14 +8316,14 @@
     "mana": 0,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f1_d2_sunstonebracers",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2SunstoneBracers"
   },
   {
     "name": "Arclyte Regalia",
     "id": 30103,
     "faction": "lyonar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Your General has +2/+0.\nThe first time your General takes damage with this equipped each turn, reduce that damage by 2.",
     "relatedCards": [],
     "resource": {
@@ -7674,14 +8333,14 @@
     "mana": 4,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f1_d2_arclyteregalia",
-    "factionId": 1
+    "factionId": 1,
+    "spriteName": "iconD2ArclyteRegalia"
   },
   {
     "name": "Mask of Shadows",
     "id": 30104,
     "faction": "songhai",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Your General has +1/+0 and Backstab: 3.",
     "relatedCards": [],
     "resource": {
@@ -7691,14 +8350,14 @@
     "mana": 1,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f2_d2_maskofshadows",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2MaskofShadows"
   },
   {
     "name": "Cyclone Mask",
     "id": 30105,
     "faction": "songhai",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Your General has Ranged.",
     "relatedCards": [],
     "resource": {
@@ -7708,14 +8367,14 @@
     "mana": 3,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f2_d2_cyclonemask",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2CycloneMask"
   },
   {
     "name": "Bloodrage Mask",
     "id": 30106,
     "faction": "songhai",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "When you play a spell, your General deals 1 damage to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -7725,14 +8384,14 @@
     "mana": 2,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f2_d2_bloodleechmask",
-    "factionId": 2
+    "factionId": 2,
+    "spriteName": "iconD2BloodLeechMask"
   },
   {
     "name": "Staff Of Y'kir",
     "id": 30107,
     "faction": "vetruvian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Your General has +2/+0.\nWhen this is destroyed, shuffle a copy of it into your deck.",
     "relatedCards": [],
     "resource": {
@@ -7742,14 +8401,14 @@
     "mana": 2,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f3_d2_staffofykir",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2StaffYkir"
   },
   {
     "name": "Wildfire Ankh",
     "id": 30108,
     "faction": "vetruvian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Your General has Blast.",
     "relatedCards": [],
     "resource": {
@@ -7759,15 +8418,15 @@
     "mana": 3,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f3_d2_wildfireankh",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2WildfireAnkh"
   },
   {
     "name": "Hexblade",
     "id": 30109,
     "faction": "vetruvian",
-    "rarity": "epic",
-    "description": "Your General has +3/+0.\nWhen your General damages an enemy, set that enemy's Attack to 1 until your next turn.",
+    "rarity": "Epic",
+    "description": "Your General has +3/+0.\nWhen your General damages an enemy, set that enemy's Attack to 1 until the end of the next turn.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2HexBladeIdle.gif",
@@ -7776,14 +8435,14 @@
     "mana": 4,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f3_d2_hexblade",
-    "factionId": 3
+    "factionId": 3,
+    "spriteName": "iconD2HexBlade"
   },
   {
     "name": "Soul Grimoire",
     "id": 30110,
     "faction": "abyssian",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Your General has an additional +2/+0 for each unit that is destroyed.",
     "relatedCards": [],
     "resource": {
@@ -7793,14 +8452,14 @@
     "mana": 3,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f4_d2_soulgrimwar",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2SoulGrimwar"
   },
   {
     "name": "Horn of the Forsaken",
     "id": 30111,
     "faction": "abyssian",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "When your General deals damage, summon a Wraithling on a random space nearby them.",
     "relatedCards": [372],
     "resource": {
@@ -7810,14 +8469,14 @@
     "mana": 1,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f4_d2_hornofforsaken",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2HornForsaken"
   },
   {
     "name": "Spectral Blade",
     "id": 30112,
     "faction": "abyssian",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Your General has +2/+0.\nWhen your General destroys a minion, heal your General for 1.",
     "relatedCards": [],
     "resource": {
@@ -7827,14 +8486,14 @@
     "mana": 2,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f4_d2_spectralblade",
-    "factionId": 4
+    "factionId": 4,
+    "spriteName": "iconD2SpectralBlade"
   },
   {
     "name": "Adamantite Claws",
     "id": 30113,
     "faction": "magmar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Your General has +3/+0.\nThis cannot lose durability during your turn.",
     "relatedCards": [],
     "resource": {
@@ -7844,31 +8503,31 @@
     "mana": 4,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f5_d2_adamantineclaws",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2AdamantineClaws"
   },
   {
     "name": "Twin Fang",
     "id": 30114,
     "faction": "magmar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Your General has an additional +1/+0 for each time an ally takes damage.",
     "relatedCards": [],
     "resource": {
       "idle": "resources/card_gifs/iconD2TwinFangIdle.gif",
       "active": "resources/card_gifs/iconD2TwinFangActive.gif"
     },
-    "mana": 2,
+    "mana": 1,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f5_d2_twinfang",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2TwinFang"
   },
   {
     "name": "Iridium Scale",
     "id": 30115,
     "faction": "magmar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "Your General has Frenzy.",
     "relatedCards": [],
     "resource": {
@@ -7878,14 +8537,14 @@
     "mana": 1,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f5_d2_irridiumscale",
-    "factionId": 5
+    "factionId": 5,
+    "spriteName": "iconD2IrridiumScale"
   },
   {
     "name": "Snowpiercer",
     "id": 30116,
     "faction": "vanar",
-    "rarity": "common",
+    "rarity": "Common",
     "description": "Your General has +3/+0.\nWhen your General attacks a minion, deal 1 damage to the enemy General.",
     "relatedCards": [],
     "resource": {
@@ -7895,14 +8554,14 @@
     "mana": 3,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f6_d2_snowpiercer",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2Snowpiercer"
   },
   {
     "name": "Coldbiter",
     "id": 30117,
     "faction": "vanar",
-    "rarity": "rare",
+    "rarity": "Rare",
     "description": "At the end of your turn, your General deals 2 damage to nearby enemy minions.",
     "relatedCards": [],
     "resource": {
@@ -7912,14 +8571,14 @@
     "mana": 2,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f6_d2_frostbiter",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2Coldbiter"
   },
   {
     "name": "Winterblade",
     "id": 30118,
     "faction": "vanar",
-    "rarity": "epic",
+    "rarity": "Epic",
     "description": "Your General has +1/+0.\nWhen this is destroyed, give your General \"This takes no damage\" until your next turn.",
     "relatedCards": [],
     "resource": {
@@ -7929,7 +8588,24 @@
     "mana": 1,
     "cardType": "Artifact",
     "tribes": [],
-    "spriteName": "artifact_f6_d2_winterblade",
-    "factionId": 6
+    "factionId": 6,
+    "spriteName": "iconD2Winterblade"
+  },
+  {
+    "name": "Mercurian Pendant",
+    "id": 30119,
+    "faction": "vetruvian",
+    "rarity": "Epic",
+    "description": "3 durability: Provoke\n2 durability: Flying\n1 durability: Celerity",
+    "relatedCards": [],
+    "resource": {
+      "idle": "resources/card_gifs/iconD2IrisBarrierIdle.gif",
+      "active": "resources/card_gifs/iconD2IrisBarrierActive.gif"
+    },
+    "mana": 1,
+    "cardType": "Artifact",
+    "tribes": [],
+    "factionId": 3,
+    "spriteName": "iconD2IrisBarrier"
   }
 ]
